@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import MySlider from "../Slider/Slider";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
+import LeftSideBar from "../LeftSideBar/LeftSideBar";
+import RightSideBar from "../RightSideBar/RightSideBar";
+import Carousel from "../Carousel/Carousel";
 
 const Home = () => {
   const { products } = useSelector((state) => state.products);
@@ -21,6 +24,20 @@ const Home = () => {
   return (
     <>
       <div className="container">
+        <div className="flex justify-center ">
+          <div className="z-10 w-1/5">
+            {" "}
+            <LeftSideBar />
+          </div>
+
+          <div className="z-0 w-1/2 ">
+            {" "}
+            <Carousel />
+          </div>
+          <div className="z-10 w-1/5">
+            <RightSideBar />
+          </div>
+        </div>
         <MySlider />
 
         {/* Products */}
