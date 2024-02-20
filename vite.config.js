@@ -10,4 +10,8 @@ export default defineConfig({
   "files.associations": {
     "*.css": "tailwindcss",
   },
+  base: "/",
+  build: {
+    outDir: "dist", // Default output directory
+  },
 });
