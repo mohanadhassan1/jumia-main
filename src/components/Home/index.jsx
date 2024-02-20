@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import MySlider from "../Slider/Slider";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
-import CurrencyFormat from 'react-currency-format';
 
 const Home = () => {
   const { products } = useSelector((state) => state.products);
@@ -28,8 +27,8 @@ const Home = () => {
         {/* Products */}
         <div className="gap-4 p-3 mb-3 rounded bg-white mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8">
           {products.map((product) => (
-            <div key={product.id} to={product.id} >
-              <div className="hover:scale-[1.01] group relative" >
+            <div key={product.id} to={product.id}>
+              <div className="hover:scale-[1.01] group relative">
                 <div className="w-52 h-52 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
                   <img
                     src={product.images}
@@ -38,10 +37,12 @@ const Home = () => {
                   />
                 </div>
                 <div className="mt-4 justify-between">
-                  <h3 className="text-lg  leading-6 font-medium text-gray-900">{product.name}</h3>
+                  <h3 className="text-lg  leading-6 font-medium text-gray-900">
+                    {product.name}
+                  </h3>
                   {/* <button onClick={(e) => { e.stopPropagation(); e.preventDefault(); handleFavourites(product) }} className="bg-transparent" >aaa</button> */}
                   {/* <p className="mt-1 text-sm font-bold  text-gray-900">{product.price}</p> */}
-                  <CurrencyFormat className="font-bold text-gray-900" value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                  {/* <CurrencyFormat className="font-bold text-gray-900" value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} /> */}
                   {/* <p className="mt-1 text-sm font-medium text-gray-500">Rating : {product.rating}</p> */}
                 </div>
               </div>
