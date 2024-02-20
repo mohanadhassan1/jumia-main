@@ -37,7 +37,7 @@ const MySlider = () => {
       <Swiper
         ref={swiperElRef}
         modules={[Navigation]}
-        slidesPerView={7}
+        slidesPerView={8}
         navigation={true}
         pagination={true}
       >
