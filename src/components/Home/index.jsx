@@ -18,7 +18,6 @@ const Home = () => {
   //   console.log(element.name);
   // });
   // let text = num.toLocaleString("en-US", {style:"currency", currency:"USD"});
-
   return (
     <>
       <div className="container">
