@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+// Eman comment
 
 const MySlider = () => {
   const swiperElRef = useRef(null);
@@ -36,7 +37,7 @@ const MySlider = () => {
       <Swiper
         ref={swiperElRef}
         modules={[Navigation]}
-        slidesPerView={8}
+        slidesPerView={7}
         navigation={true}
         pagination={true}
       >
