@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://jumia-apis-37e7643eb63e.herokuapp.com",
 });
 
 export default instance;
