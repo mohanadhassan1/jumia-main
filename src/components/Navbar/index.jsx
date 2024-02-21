@@ -28,15 +28,21 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between px-20 py-5 rounded items-center bg-white sticky top-0 z-50">
       <div className="container flex mx-auto justify-between">
-        <img src={logo} width={150} alt="" />
+        <img
+          src={logo}
+          width={150}
+          alt=""
+          className="cursor-pointer"
+          onClick={() => (window.location.href = "/")}
+        />
 
         <div className="flex items-center gap-2 ">
           <div className="flex items-center">
             <div className="relative">
               <FaSearch className="absolute top-1/2 left-10 transform -translate-y-1/2 text-gray-400" />
               <input
-                className="ml-8 pl-10 outline rounded w-96 h-10 "
-                type="text"
+                className="ml-8 pl-10 pr-2 outline rounded w-96 h-10 "
+                type="search"
                 name="search"
                 id="search"
                 placeholder="Search product, brands, and categories"
@@ -81,8 +87,9 @@ const Navbar = () => {
 
                 {/* Account Dropdown menu */}
                 <div
-                  className={`absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ${isAccountMenuOpen ? "block" : "hidden"
-                    }`}
+                  className={`absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ${
+                    isAccountMenuOpen ? "block" : "hidden"
+                  }`}
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="account-menu-button"
@@ -114,7 +121,7 @@ const Navbar = () => {
                         My Account
                       </div>
                     </a>
-{/* check */}
+                    {/* check */}
                     <a
                       href="#"
                       className="text-gray-700 block px-4 py-2 text-sm  hover:bg-gray-300 hover:font-bold"
@@ -178,8 +185,9 @@ const Navbar = () => {
 
                 {/* Help Dropdown menu */}
                 <div
-                  className={`absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ${isHelpMenuOpen ? "block" : "hidden"
-                    }`}
+                  className={`absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ${
+                    isHelpMenuOpen ? "block" : "hidden"
+                  }`}
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="help-menu-button"
@@ -188,7 +196,7 @@ const Navbar = () => {
                   <div className="py-1" role="none">
                     {/* Help Menu items */}
                     <a
-                      href="#"
+                      href="/help"
                       className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-300 hover:font-bold"
                       role="menuitem"
                       tabIndex="-1"
