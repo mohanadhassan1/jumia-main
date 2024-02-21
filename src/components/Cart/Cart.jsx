@@ -107,7 +107,7 @@ const Cart = () => {
                     </div>
                     <div className="m-2 w-1/4 text-right ">
                       <p
-                        className="text-sm text-black-600 text-2xl "
+                        className="text-sm text-black-600  "
                         style={{ fontSize: "20px" }}
                       >
                         {" "}
@@ -138,7 +138,7 @@ const Cart = () => {
           </div>
           {/* cart summary */}
           <div
-            className="w-1/4 p-4 m-2 bg-white  font-bold  sticky top-20  absolute  shadow-lg rounded-lg"
+            className="w-1/4 p-4 m-2 bg-white  font-bold  sticky top-20    shadow-lg rounded-lg"
             style={{ height: "fit-content" }}
           >
             <h2 className="text-lg font-bold ">CART SUMMARY</h2>
