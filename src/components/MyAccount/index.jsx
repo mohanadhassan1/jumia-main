@@ -11,7 +11,7 @@ import { FaClockRotateLeft } from "react-icons/fa6";
 export default function index() {
     return (
         <>
-            <div className='flex'>
+            <div className='container flex my-3'>
 
                 <div className="gap-4 mb-3 mr-2 w-1/4 h-full rounded bg-white">
 

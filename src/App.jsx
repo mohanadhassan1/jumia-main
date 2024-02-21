@@ -13,7 +13,8 @@ import store from "./store/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
 import AppLayout from "./AppLayout";
-import Home from "./components/Home/index"
+import Home from "./components/Home/index";
+import MyAccount from "./components/MyAccount/index";
 
 const routes=createBrowserRouter([
   {path:"/",element:<AppLayout/>,
@@ -29,18 +30,9 @@ function App() {
   return (
     <>
       <Provider store={store}>
-// <<<<<<< mohanad
-//         <Header />
-//         <Navbar />
-//         <div className="h-full flex items-center justify-center">
 
-//           <Home />
-//         </div>
-//         <Footer />
-// =======
         <RouterProvider router={routes}/> 
 
-// >>>>>>> main
       </Provider>
     </>
   );

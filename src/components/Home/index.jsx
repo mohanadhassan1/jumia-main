@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import MySlider from "../Slider/Slider";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
-import MyAccount from "../MyAccount/index";
 
 const Home = () => {
   const { products } = useSelector((state) => state.products);
@@ -24,8 +23,6 @@ const Home = () => {
     <>
       <div className="container">
         <MySlider />
-
-        <MyAccount/>
 
         {/* Products */}
         <div className="gap-4 p-3 mb-3 rounded bg-white mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8">
