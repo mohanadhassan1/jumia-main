@@ -33,7 +33,7 @@ export default function LeftSideBar() {
 
   return (
     <>
-      <div className="bg-gray-100 ">
+      <div className="bg-white ">
         {" "}
         <div className="flex ">
           {/* <!-- Sidebar --> */}
