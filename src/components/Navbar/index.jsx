@@ -56,13 +56,19 @@ const Navbar = () => {
             className="text-gray-500 hover:text-orange-600 focus:outline-none"
             onClick={toggleAccountMenu}
           >
-            <BsPerson size={20} />
+            <BsPerson
+              size={20}
+              onClick={() => (window.location.href = "/myaccount")}
+            />
           </button>
           <button
             className="text-gray-500 hover:text-orange-600 focus:outline-none ml-4"
             onClick={toggleHelpMenu}
           >
-            <FaRegQuestionCircle size={20} />
+            <FaRegQuestionCircle
+              size={20}
+              onClick={() => (window.location.href = "/help")}
+            />
           </button>
         </div>
         <ul className="hidden lg:flex items-center gap-2">
