@@ -37,12 +37,12 @@ export default function LeftSideBar() {
         {" "}
         <div className="flex ">
           {/* <!-- Sidebar --> */}
-          <aside className="bg-white-800 text-black ">
+          <aside className="bg-white h-full	">
             <div className="p-4">
               <div className="mt-4">
                 <ul>
                   <li
-                    className="mb-2 relative"
+                    className="mb-3 relative"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                   >
@@ -50,7 +50,7 @@ export default function LeftSideBar() {
                       href="#"
                       className="flex items-center text-black hover:text-gray-400"
                     >
-                      <CiApple />
+                      <CiApple className="me-1" />
                       Supermarket
                     </a>
                     {isHovered && (
@@ -60,7 +60,7 @@ export default function LeftSideBar() {
                     )}
                   </li>
                   <li
-                    className="mb-2 relative"
+                    className="mb-3 relative"
                     onMouseEnter={() => setIsFashion(true)}
                     onMouseLeave={() => setIsFashion(false)}
                   >
@@ -68,7 +68,7 @@ export default function LeftSideBar() {
                       href="#"
                       className="flex items-center text-black hover:text-gray-400"
                     >
-                      <GiClothes />
+                      <GiClothes className="me-1"/>
                       Fashion
                     </a>
                     {isFashion && (
@@ -78,7 +78,7 @@ export default function LeftSideBar() {
                     )}
                   </li>
                   <li
-                    className="mb-2 relative"
+                    className="mb-3 relative"
                     onMouseEnter={() => setIsBeauty(true)}
                     onMouseLeave={() => setIsBeauty(false)}
                   >
@@ -86,7 +86,7 @@ export default function LeftSideBar() {
                       href="#"
                       className="flex items-center text-black hover:text-gray-400"
                     >
-                      <MdOutlineHealthAndSafety />
+                      <MdOutlineHealthAndSafety className="me-1"/>
                       Health & Beauty
                     </a>
                     {isBeauty && (
@@ -96,7 +96,7 @@ export default function LeftSideBar() {
                     )}
                   </li>
                   <li
-                    className="mb-2 relative"
+                    className="mb-3 relative"
                     onMouseEnter={() => setIsBaby(true)}
                     onMouseLeave={() => setIsBaby(false)}
                   >
@@ -104,7 +104,7 @@ export default function LeftSideBar() {
                       href="#"
                       className="flex items-center text-black hover:text-gray-400"
                     >
-                      <PiBaby />
+                      <PiBaby className="me-1"/>
                       Baby Products
                     </a>
                     {isBaby && (
@@ -114,7 +114,7 @@ export default function LeftSideBar() {
                     )}
                   </li>
                   <li
-                    className="mb-2 relative"
+                    className="mb-3 relative"
                     onMouseEnter={() => setIsFurniture(true)}
                     onMouseLeave={() => setIsFurniture(false)}
                   >
@@ -122,17 +122,17 @@ export default function LeftSideBar() {
                       href="#"
                       className="flex items-center text-black hover:text-gray-400"
                     >
-                      <IoHomeOutline />
+                      <IoHomeOutline className="me-1"/>
                       Home & Furniture
                     </a>
                     {isFurniture && (
                       <div className="absolute top-0 left-full ml-1 bg-gray-500">
-                        {<Fashion />}
+                        {<Fashion className="me-1"/>}
                       </div>
                     )}
                   </li>
                   <li
-                    className="mb-2 relative"
+                    className="mb-3 relative"
                     onMouseEnter={() => setIsAppliances(true)}
                     onMouseLeave={() => setIsAppliances(false)}
                   >
@@ -140,7 +140,7 @@ export default function LeftSideBar() {
                       href="#"
                       className="flex items-center text-black hover:text-gray-400"
                     >
-                      <BiSolidDrink />
+                      <BiSolidDrink className="me-1"/>
                       Appliances
                     </a>
                     {isAppliances && (
@@ -150,7 +150,7 @@ export default function LeftSideBar() {
                     )}
                   </li>
                   <li
-                    className="mb-2 relative"
+                    className="mb-3 relative"
                     onMouseEnter={() => setIsTV(true)}
                     onMouseLeave={() => setIsTV(false)}
                   >
@@ -158,7 +158,7 @@ export default function LeftSideBar() {
                       href="#"
                       className="flex items-center text-black hover:text-gray-400"
                     >
-                      <PiTelevisionBold />
+                      <PiTelevisionBold className="me-1"/>
                       Televisions & Audio
                     </a>
                     {isTV && (
@@ -168,7 +168,7 @@ export default function LeftSideBar() {
                     )}
                   </li>
                   <li
-                    className="mb-2 relative"
+                    className="mb-3 relative"
                     onMouseEnter={() => setIsComputing(true)}
                     onMouseLeave={() => setIsComputing(false)}
                   >
@@ -176,7 +176,7 @@ export default function LeftSideBar() {
                       href="#"
                       className="flex items-center text-black hover:text-gray-400"
                     >
-                      <MdOutlineComputer />
+                      <MdOutlineComputer className="me-1"/>
                       Computing
                     </a>
                     {isComputing && (
@@ -186,7 +186,7 @@ export default function LeftSideBar() {
                     )}
                   </li>
                   <li
-                    className="mb-2 relative"
+                    className="mb-3 relative"
                     onMouseEnter={() => setIsSport(true)}
                     onMouseLeave={() => setIsSport(false)}
                   >
@@ -194,7 +194,7 @@ export default function LeftSideBar() {
                       href="#"
                       className="flex items-center text-black hover:text-gray-400"
                     >
-                      <FaDumbbell />
+                      <FaDumbbell className="me-1"/>
                       Sporting Goods
                     </a>
                     {isSport && (
@@ -204,7 +204,7 @@ export default function LeftSideBar() {
                     )}
                   </li>
                   <li
-                    className="mb-2 relative"
+                    className="mb-3 relative"
                     onMouseEnter={() => setIsGame(true)}
                     onMouseLeave={() => setIsGame(false)}
                   >
@@ -212,7 +212,7 @@ export default function LeftSideBar() {
                       href="#"
                       className="flex items-center text-black hover:text-gray-400"
                     >
-                      <IoGameControllerOutline />
+                      <IoGameControllerOutline className="me-1"/>
                       Gaming
                     </a>
                     {isGame && (
@@ -222,7 +222,7 @@ export default function LeftSideBar() {
                     )}
                   </li>
                   <li
-                    className="mb-2 relative"
+                    className="mb-3 relative"
                     onMouseEnter={() => setIsOther(true)}
                     onMouseLeave={() => setIsOther(false)}
                   >
@@ -230,7 +230,7 @@ export default function LeftSideBar() {
                       href="#"
                       className="flex items-center text-black hover:text-gray-400"
                     >
-                      <CgMoreO />
+                      <CgMoreO className="me-1"/>
                       Other categories
                     </a>
                     {isOther && (

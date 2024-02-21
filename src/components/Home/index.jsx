@@ -24,8 +24,8 @@ const Home = () => {
   return (
     <>
       <div className="container">
-        <div className="flex justify-center ">
-          <div className="z-10 w-1/5">
+        <div className="flex justify-center mb-7 mt-5 ">
+          <div className="z-10 w-1/5 h-full">
             {" "}
             <LeftSideBar />
           </div>
