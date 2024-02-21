@@ -1,11 +1,14 @@
+import Carousel from "react-multi-carousel";
 import React, { useEffect } from "react";
 import MySlider from "../Slider/Slider";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
+  const navigate=useNavigate()
 
   useEffect(() => {
     console.log("Dispatching fetchProducts...");
@@ -13,6 +16,26 @@ const Home = () => {
   }, []);
 
   console.log("Products:", products);
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 8
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 6
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 3
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 2
+    }
+  }
+ 
 
   // products.forEach((element) => {
   //   console.log(element.name);
@@ -22,17 +45,18 @@ const Home = () => {
   return (
     <>
       <div className="container">
-        <MySlider />
+       
 
         {/* Products */}
-        <div className="gap-4 p-3 mb-3 rounded bg-white mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8">
+        <Carousel responsive={responsive} className="gap-4 p-2 mb-2 rounded bg-white mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center">
           {products.map((product) => (
             <div key={product.id} to={product.id}>
-              <div className="hover:scale-[1.01] group relative">
+              <div className="hover:scale-[1.01] group relative" >
                 <div className="w-52 h-52 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
                   <img
                     src={product.images}
                     alt={product.name}
+                    onClick={()=>{navigate(`/product/${product.product_id}`)}}
                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                   />
                 </div>
@@ -40,15 +64,12 @@ const Home = () => {
                   <h3 className="text-lg  leading-6 font-medium text-gray-900">
                     {product.name}
                   </h3>
-                  {/* <button onClick={(e) => { e.stopPropagation(); e.preventDefault(); handleFavourites(product) }} className="bg-transparent" >aaa</button> */}
-                  {/* <p className="mt-1 text-sm font-bold  text-gray-900">{product.price}</p> */}
-                  {/* <CurrencyFormat className="font-bold text-gray-900" value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} /> */}
-                  {/* <p className="mt-1 text-sm font-medium text-gray-500">Rating : {product.rating}</p> */}
+  
                 </div>
               </div>
             </div>
           ))}
-        </div>
+        </Carousel>
 
         {/* Ramadan Careem */}
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
