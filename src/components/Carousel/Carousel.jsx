@@ -3,7 +3,15 @@ import React, { useState, useEffect } from 'react';
 export default function Carousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [autoplayPaused, setAutoplayPaused] = useState(false);
-
+  const images = [
+    { src: "https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Fashion/Shein/DesktopEN.png",alt :"1"},
+    { src: "https://eg.jumia.is/cms/Week7-8-2024/ADS/Aman/DesktopENc.png",alt :"2" },
+    { src: 'https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Fashion/Defacto/DesktopEN.png',alt :"3" },
+    { src: 'https://eg.jumia.is/cms/Week2-2024/Clearance/DesktopENClearance.jpg',alt :"4" },
+    { src: 'https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Appliances-TVs/DesktopEN.gif',alt :"5" },
+    { src: 'https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Home/DesktopEN.png',alt :"6" },
+    { src: 'https://eg.jumia.is/cms/Week2-2024/OPT/22-01/KitchenEssential/DesktopEN.png',alt :"7" },
+  ];
   // Function to switch to the next slide
   const nextSlide = () => {
     setActiveIndex((prevIndex) => (prevIndex === 4 ? 0 : prevIndex + 1));
@@ -20,7 +28,7 @@ export default function Carousel() {
     if (!autoplayPaused) {
       intervalId = setInterval(() => {
         nextSlide();
-      }, 1000); // Change slide every 3 seconds (adjust as needed)
+      }, 2000); 
     }
 
     // Cleanup function to clear the interval when component unmounts
@@ -39,7 +47,7 @@ export default function Carousel() {
         {/* Carousel wrapper */}
         <div className="relative h-full overflow-hidden rounded-lg">
           {/* Carousel items */}
-          {Array.from({ length: 5 }).map((_, index) => (
+          {images.map((image, index) => (
             <div
               key={index}
               className={`${
@@ -48,9 +56,9 @@ export default function Carousel() {
               data-carousel-item={index === activeIndex ? 'active' : null}
             >
               <img
-                src={`https://via.placeholder.com/400x250?text=Slide${index + 1}`}
+                src={image.src}
                 className="absolute block h-full w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                alt={`Slide ${index + 1}`}
+                alt={image.alt}
               />
             </div>
           ))}
