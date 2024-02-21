@@ -190,7 +190,7 @@ const Navbar = () => {
                   <div className="py-1" role="none">
                     {/* Help Menu items */}
                     <a
-                      href="#"
+                      href="/help"
                       className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-300 hover:font-bold"
                       role="menuitem"
                       tabIndex="-1"

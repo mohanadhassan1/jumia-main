@@ -19,13 +19,13 @@ const Home = () => {
   //   console.log(element.name);
   // });
   // let text = num.toLocaleString("en-US", {style:"currency", currency:"USD"});
-// mohanad
+  // mohanad
   return (
     <>
       <div className="container">
-        <MySlider />
+        {/* <MySlider /> */}
 
-        <MyAccount/>
+        {/* <MyAccount /> */}
 
         {/* Products */}
         <div className="gap-4 p-3 mb-3 rounded bg-white mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8">
