@@ -104,7 +104,7 @@ const Navbar = () => {
                   <div className="py-1" role="none">
                     {/* Account Menu items */}
                     <a
-                      href="#"
+                      href="/myaccount"
                       className="text-gray-700 block px-4 py-2 text-sm  hover:bg-gray-300 hover:font-bold "
                       role="menuitem"
                       tabIndex="-1"
@@ -115,7 +115,7 @@ const Navbar = () => {
                         My Account
                       </div>
                     </a>
-
+{/* check */}
                     <a
                       href="#"
                       className="text-gray-700 block px-4 py-2 text-sm  hover:bg-gray-300 hover:font-bold"
