@@ -41,7 +41,7 @@ const Home = () => {
   //   console.log(element.name);
   // });
   // let text = num.toLocaleString("en-US", {style:"currency", currency:"USD"});
-
+// mohanad
   return (
     <>
       <div className="container">
