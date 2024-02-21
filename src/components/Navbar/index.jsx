@@ -257,7 +257,7 @@ const Navbar = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/cart"
                 className="inline-flex w-full justify-center  rounded-md bg-white  p-2 text-sm font-bold text-black shadow-sm  hover:text-orange-600 focus:bg-gray-300 mx-4"
               >
                 <div className="flex justify-center items-center">
