@@ -28,7 +28,13 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between px-20 py-5 rounded items-center bg-white sticky top-0 z-50">
       <div className="container flex mx-auto justify-between">
-        <img src={logo} width={150} alt="" />
+        <img
+          src={logo}
+          width={150}
+          alt=""
+          className="cursor-pointer"
+          onClick={() => (window.location.href = "/")}
+        />
 
         <div className="flex items-center gap-2 ">
           <div className="flex items-center">
@@ -115,7 +121,7 @@ const Navbar = () => {
                         My Account
                       </div>
                     </a>
-{/* check */}
+                    {/* check */}
                     <a
                       href="#"
                       className="text-gray-700 block px-4 py-2 text-sm  hover:bg-gray-300 hover:font-bold"
