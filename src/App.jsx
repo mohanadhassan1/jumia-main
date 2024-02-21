@@ -6,6 +6,7 @@ import Home from "./components/Home/index";
 // import MySlider from "./components/Slider/Slider";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import Help from "./components/Help";
 
 function App() {
   return (
@@ -13,9 +14,10 @@ function App() {
       <Provider store={store}>
         <Header />
         <Navbar />
-        <div className="h-full flex items-center justify-center">
+        <Help />
+        {/* <div className="h-full flex items-center justify-center">
           <Home />
-        </div>
+        </div> */}
         <Footer />
       </Provider>
     </>
