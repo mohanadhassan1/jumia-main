@@ -53,7 +53,11 @@ const Home = () => {
         >
           {products.map((product) => (
             <div key={product.id} to={product.id}>
+
+              <div className="hover:scale-[1.01] group relative mx-2" >
+
               <div className="hover:scale-[1.01] group relative">
+
                 <div className="w-52 h-52 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
                   <img
                     src={product.images}
