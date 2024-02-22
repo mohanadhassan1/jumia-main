@@ -51,7 +51,7 @@ const Home = () => {
         <Carousel responsive={responsive} className="gap-4 p-2 mb-2 rounded bg-white mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center">
           {products.map((product) => (
             <div key={product.id} to={product.id}>
-              <div className="hover:scale-[1.01] group relative" >
+              <div className="hover:scale-[1.01] group relative mx-2" >
                 <div className="w-52 h-52 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
                   <img
                     src={product.images}
