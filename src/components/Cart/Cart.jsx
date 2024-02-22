@@ -164,56 +164,70 @@ const Cart = () => {
             SEE ALL <IoIosArrowForward />
           </a>
         </div>
-
-    <div className="flex gap-2 p-3 mb-3 rounded bg-white text-orange-600 ">
-    {recommendedForYou.map((product, index) => (
-<div key={index} className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-<img src={product.image} className="w-full "></img>
-
-</div>
-    ))}
-    </div>
-
-    {/* recommended for you  */}
-    <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+        <div className="flex gap-2 p-3 mb-3 rounded bg-white text-orange-600 ">
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full "></img>
+            </div>
+          ))}
+        </div>
+        {/* recommended for you  */}
+        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
           <h2 className="font-medium text-xl">Recommende For You</h2>
         </div>
-    <Carousel responsive={responsive} className="flex gap-4 p-3 mb-3 rounded bg-white ">
-      {recommendedForYou.map((product, index) => (
-<div key={index} className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg m-x-3 ">
-<img src={product.image} className="w-full mx-2"></img>
-
-</div>
-      ))}
-    
-</Carousel>;
-<div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+        <Carousel
+          responsive={responsive}
+          className="flex gap-4 p-3 mb-3 rounded bg-white "
+        >
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg m-x-3 "
+            >
+              <img src={product.image} className="w-full mx-2"></img>
+            </div>
+          ))}
+        </Carousel>
+        ;
+        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
           <h2 className="font-medium text-xl"> You May Also Like</h2>
         </div>
-    <Carousel responsive={responsive} className="flex gap-4 p-3 mb-3 rounded bg-white">
-      {recommendedForYou.map((product, index) => (
-<div key={index} className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-<img src={product.image} className="w-full mx-2"></img>
-
-</div>
-      ))}
-    
-</Carousel>;
-<div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
-          <h2 className="font-medium text-xl">Customers who viewed this also viewed</h2>
+        <Carousel
+          responsive={responsive}
+          className="flex gap-4 p-3 mb-3 rounded bg-white"
+        >
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full mx-2"></img>
+            </div>
+          ))}
+        </Carousel>
+        ;
+        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+          <h2 className="font-medium text-xl">
+            Customers who viewed this also viewed
+          </h2>
         </div>
-    <Carousel responsive={responsive} className="flex gap-4 p-3 mb-3 rounded bg-white">
-      {recommendedForYou.map((product, index) => (
-<div key={index} className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-<img src={product.image} className="w-full mx-2"></img>
-
-</div>
-      ))}
-    
-</Carousel>;
-   
-   
-
+        <Carousel
+          responsive={responsive}
+          className="flex gap-4 p-3 mb-3 rounded bg-white"
+        >
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full mx-2"></img>
+            </div>
+          ))}
+        </Carousel>
+        ;
         <div className="flex gap-4 p-3 mb-3 rounded bg-white text-orange-600">
           {recommendedForYou.map((product, index) => (
             <div
@@ -263,7 +277,6 @@ const Cart = () => {
           <h2 className="font-medium text-xl">
             Customers who viewed this also viewed
           </h2>
-
         </div>
         <Carousel
           responsive={responsive}

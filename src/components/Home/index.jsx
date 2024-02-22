@@ -53,25 +53,23 @@ const Home = () => {
         >
           {products.map((product) => (
             <div key={product.id} to={product.id}>
-
-              <div className="hover:scale-[1.01] group relative mx-2" >
-
-              <div className="hover:scale-[1.01] group relative">
-
-                <div className="w-52 h-52 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
-                  <img
-                    src={product.images}
-                    alt={product.name}
-                    onClick={() => {
-                      navigate(`/product/${product.product_id}`);
-                    }}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  />
-                </div>
-                <div className="mt-4 justify-between">
-                  <h3 className="text-lg  leading-6 font-medium text-gray-900">
-                    {product.name}
-                  </h3>
+              <div className="hover:scale-[1.01] group relative mx-2">
+                <div className="hover:scale-[1.01] group relative">
+                  <div className="w-52 h-52 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
+                    <img
+                      src={product.images}
+                      alt={product.name}
+                      onClick={() => {
+                        navigate(`/product/${product.product_id}`);
+                      }}
+                      className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                    />
+                  </div>
+                  <div className="mt-4 justify-between">
+                    <h3 className="text-lg  leading-6 font-medium text-gray-900">
+                      {product.name}
+                    </h3>
+                  </div>
                 </div>
               </div>
             </div>
