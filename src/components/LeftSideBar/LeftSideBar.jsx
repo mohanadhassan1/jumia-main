@@ -17,7 +17,8 @@ import Computing from "../Computing/Computing";
 import Sport from "../Sport/Sport";
 import Game from "../Game/Game";
 import OtherCategories from "../OtherCategories/OtherCategories";
-import Furniture from '../Furniture/Furniture';
+import Furniture from "../Furniture/Furniture";
+import Phone from "../Phone/Phone";
 
 export default function LeftSideBar() {
   const [isHovered, setIsHovered] = useState(false);
@@ -31,6 +32,7 @@ export default function LeftSideBar() {
   const [isSport, setIsSport] = useState(false);
   const [isGame, setIsGame] = useState(false);
   const [isOther, setIsOther] = useState(false);
+  const [isphone, setIsphone] = useState(false);
 
   return (
     <>
@@ -56,7 +58,7 @@ export default function LeftSideBar() {
                     </a>
                     {isHovered && (
                       <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                      {<Supermarket />}
+                        {<Supermarket />}
                       </div>
                     )}
                   </li>
@@ -92,7 +94,7 @@ export default function LeftSideBar() {
                     </a>
                     {isBeauty && (
                       <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                      {<Beauty />}
+                        {<Beauty />}
                       </div>
                     )}
                   </li>
@@ -114,6 +116,26 @@ export default function LeftSideBar() {
                       </div>
                     )}
                   </li>
+
+                  <li
+                    className="mb-3 "
+                    onMouseEnter={() => setIsphone(true)}
+                    onMouseLeave={() => setIsphone(false)}
+                  >
+                    <a
+                      href="#"
+                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                    >
+                      <PiBaby className="me-1" />
+                      Baby Products
+                    </a>
+                    {isphone && (
+                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                        {<Phone className="me-1" />}
+                      </div>
+                    )}
+                  </li>
+
                   <li
                     className="mb-3 "
                     onMouseEnter={() => setIsFurniture(true)}
