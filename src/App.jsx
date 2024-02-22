@@ -11,7 +11,7 @@ import store from "./store/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
 import AppLayout from "./AppLayout";
-import ProductDetails from "./components/product/productDetails";
+// import ProductDetails from "./components/product/productDetails";
 import Home from "./components/Home/index";
 import ProductDetails from "./components/product/productDetails";
 // import Home from "./components/Home/index";
@@ -27,7 +27,8 @@ const routes = createBrowserRouter([
       { path: "/home", element: <Home /> },
       { path: "/cart", element: <Cart /> },
       { path: "/myaccount", element: <MyAccount /> },
-      
+      { path: "/product/:id", element: <ProductDetails /> },
+
       { path: "/help", element: <HelpMain /> },
     ],
   },
