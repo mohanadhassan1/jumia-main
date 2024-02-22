@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
 import LeftSideBar from "../LeftSideBar/LeftSideBar";
 import RightSideBar from "../RightSideBar/RightSideBar";
-import Carousel from "../Carousel/Carousel";
+// import Carousel from "../Carousel/Carousel";
 import { useNavigate } from "react-router";
+import CarouselMain from "../Carousel/Carousel";
 
 const Home = () => {
   const { products } = useSelector((state) => state.products);
@@ -54,7 +55,7 @@ const Home = () => {
 
           <div className="z-0 w-1/2 ">
             {" "}
-            <Carousel />
+            <CarouselMain />
           </div>
           <div className="z-10 w-1/5">
             <RightSideBar />
