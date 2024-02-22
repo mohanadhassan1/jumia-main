@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("Dispatching fetchProducts...");
@@ -20,51 +20,56 @@ const Home = () => {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 8
+      items: 8,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 6
+      items: 6,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 3
+      items: 3,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 2
-    }
-  }
- 
+      items: 2,
+    },
+  };
 
   // products.forEach((element) => {
   //   console.log(element.name);
   // });
   // let text = num.toLocaleString("en-US", {style:"currency", currency:"USD"});
-// mohanad
+  // mohanad
   return (
-    <>
+    <div className="h-full flex items-center justify-center">
       <div className="container">
-       
+        {/* <MySlider /> */}
 
         {/* Products */}
-        <Carousel responsive={responsive} className="gap-4 p-2 mb-2 rounded bg-white mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center">
+        <Carousel
+          responsive={responsive}
+          className="gap-4 p-2 mb-2 rounded bg-white mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center"
+        >
           {products.map((product) => (
             <div key={product.id} to={product.id}>
-              <div className="hover:scale-[1.01] group relative mx-2" >
-                <div className="w-52 h-52 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
-                  <img
-                    src={product.images}
-                    alt={product.name}
-                    onClick={()=>{navigate(`/product/${product.product_id}`)}}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  />
-                </div>
-                <div className="mt-4 justify-between">
-                  <h3 className="text-lg  leading-6 font-medium text-gray-900">
-                    {product.name}
-                  </h3>
-  
+              <div className="hover:scale-[1.01] group relative mx-2">
+                <div className="hover:scale-[1.01] group relative">
+                  <div className="w-52 h-52 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
+                    <img
+                      src={product.images}
+                      alt={product.name}
+                      onClick={() => {
+                        navigate(`/product/${product.product_id}`);
+                      }}
+                      className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                    />
+                  </div>
+                  <div className="mt-4 justify-between">
+                    <h3 className="text-lg  leading-6 font-medium text-gray-900">
+                      {product.name}
+                    </h3>
+                  </div>
                 </div>
               </div>
             </div>
@@ -300,7 +305,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

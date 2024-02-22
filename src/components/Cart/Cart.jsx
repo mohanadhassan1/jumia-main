@@ -1,12 +1,8 @@
-import MySlider from "../Slider/Slider"; 
+import MySlider from "../Slider/Slider";
 import { MdOutlineDelete } from "react-icons/md";
-  import Carousel from "react-multi-carousel";
+import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { IoIosArrowForward } from "react-icons/io";
-import { useSelector,useDispatch } from "react-redux";
-import { updateItemQuantity,removeItemFromCart } from "../../store/slices/cart";
-import { useState,useEffect } from "react";
-
 
 const Cart = () => {
   let recommendedForYou=[{name:"Starter Men Walking Lightwight"
@@ -58,20 +54,20 @@ const handleRemoveItem = (itemId) => {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 8
+      items: 8,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 6
+      items: 6,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 3
+      items: 3,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 2
-    }
+      items: 2,
+    },
   };
   document.addEventListener('DOMContentLoaded', function() {
     // Your JavaScript code here
@@ -188,6 +184,15 @@ const handleRemoveItem = (itemId) => {
           <h2 className="font-medium text-xl">Recently Viewed</h2>
           <a href="#" className="flex items-center text-orange-600"> SEE ALL <IoIosArrowForward /></a>
         </div>
+        {/* recently viewed */}
+        <div className="h-16 flex justify-between items-center gap-4 p-3 rounded-t bg-white">
+          <h2 className="font-medium text-xl">Recently Viewed</h2>
+          <a href="#" className="flex items-center text-orange-600">
+            {" "}
+            SEE ALL <IoIosArrowForward />
+          </a>
+        </div>
+
     <div className="flex gap-2 p-3 mb-3 rounded bg-white text-orange-600 ">
     {recommendedForYou.map((product, index) => (
 <div key={index} className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
@@ -236,10 +241,75 @@ const handleRemoveItem = (itemId) => {
 </Carousel>;
    
    
-        </div>
-        </>
 
-    );
-}
- 
+        <div className="flex gap-4 p-3 mb-3 rounded bg-white text-orange-600">
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full"></img>
+            </div>
+          ))}
+        </div>
+        {/* recommended for you  */}
+        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+          <h2 className="font-medium text-xl">Recommende For You</h2>
+        </div>
+        <Carousel
+          responsive={responsive}
+          className="flex gap-4 p-3 mb-3 rounded bg-white"
+        >
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full"></img>
+            </div>
+          ))}
+        </Carousel>
+        
+        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+          <h2 className="font-medium text-xl"> You May Also Like</h2>
+        </div>
+        <Carousel
+          responsive={responsive}
+          className="flex gap-4 p-3 mb-3 rounded bg-white"
+        >
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full"></img>
+            </div>
+          ))}
+        </Carousel>
+        ;
+        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+          <h2 className="font-medium text-xl">
+            Customers who viewed this also viewed
+          </h2>
+
+        </div>
+        <Carousel
+          responsive={responsive}
+          className="flex gap-4 p-3 mb-3 rounded bg-white"
+        >
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full"></img>
+            </div>
+          ))}
+        </Carousel>
+        
+      </div>
+    </>
+  );
+};
+
 export default Cart;

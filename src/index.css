@@ -3,5 +3,13 @@
 @tailwind utilities;
 
 body {
-    font-family: "Roboto"
+  font-family: "Roboto";
+}
+
+.button {
+  /* Add or adjust styles as needed */
+  max-width: 100%; /* Ensure button doesn't exceed container width */
+  white-space: nowrap; /* Prevent button from wrapping to new lines */
+  overflow: hidden; /* Hide any overflowing content */
+  text-overflow: ellipsis; /* Display ellipsis (...) for any overflowing text */
 }
