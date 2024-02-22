@@ -128,7 +128,7 @@ const Cart = () => {
     <>
       {/* Eman */}
 
-      <div className="container">
+      <div className="container mx-auto">
         <div
           id="emptyCartMessage"
           style={{ display: cartEmpty ? "block" : "none", textAlign: "center" }}
