@@ -193,6 +193,9 @@ const HelpMain = () => {
 
             {/* Conditionally render Vouchers component based on showPayments state */}
             {showVouchers ? <Vouchers /> : null}
+
+            {/* Conditionally render Vouchers component based on showPayments state */}
+            {showVouchers ? <Vouchers /> : null}
           </div>
         </div>
       </div>
