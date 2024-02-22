@@ -17,6 +17,7 @@ import Computing from "../Computing/Computing";
 import Sport from "../Sport/Sport";
 import Game from "../Game/Game";
 import OtherCategories from "../OtherCategories/OtherCategories";
+import Furniture from '../Furniture/Furniture';
 
 export default function LeftSideBar() {
   const [isHovered, setIsHovered] = useState(false);
@@ -55,7 +56,7 @@ export default function LeftSideBar() {
                     </a>
                     {isHovered && (
                       <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Supermarket />}
+                      {<Supermarket />}
                       </div>
                     )}
                   </li>
@@ -91,7 +92,7 @@ export default function LeftSideBar() {
                     </a>
                     {isBeauty && (
                       <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Beauty />}
+                      {<Beauty />}
                       </div>
                     )}
                   </li>
@@ -127,7 +128,7 @@ export default function LeftSideBar() {
                     </a>
                     {isFurniture && (
                       <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Fashion className="me-1" />}
+                        {<Furniture className="me-1" />}
                       </div>
                     )}
                   </li>

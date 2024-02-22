@@ -4,7 +4,7 @@ export default function Fashion() {
   return (
     <>
       <div className="flex h-[27rem] w-[41rem] justify-around	bg-gray-100">
-        <div className="flex flex-col">
+      <div className="flex flex-col mx-3">
           <a href="" >
             {" "}
             Women's Fashion
@@ -26,7 +26,7 @@ export default function Fashion() {
           <a href=""> Sports Wear</a>
           <a href=""> Swimsuits Coverups</a>
         </div>
-        <div className="flex flex-col">
+      <div className="flex flex-col mx-3">
           <a href="" className="	">
             {" "}
             Men's Fashion{" "}
@@ -57,7 +57,7 @@ export default function Fashion() {
           <a href=""> Girl's Clothes & Shoes</a>
          
         </div>
-        <div className="flex flex-col">
+      <div className="flex flex-col mx-3">
         <a href="" className="	">
             {" "}
             Women's Shoes{" "}
