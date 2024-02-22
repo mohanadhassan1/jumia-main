@@ -48,7 +48,7 @@ const Home = () => {
     <div className="h-full flex items-center justify-center">
       <div className="container">
         <div className="flex justify-center mb-7 mt-5 ">
-          <div className="z-10 w-1/5 h-full">
+          <div className="z-10 w-1/5 h-full me-3">
             {" "}
             <LeftSideBar />
           </div>
