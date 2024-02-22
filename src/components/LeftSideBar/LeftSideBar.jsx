@@ -3,6 +3,7 @@ import { CiApple } from "react-icons/ci";
 import { GiClothes } from "react-icons/gi";
 import { MdOutlineHealthAndSafety, MdOutlineComputer } from "react-icons/md";
 import { PiBaby, PiTelevisionBold } from "react-icons/pi";
+import { IoIosPhonePortrait } from "react-icons/io";
 import { IoHomeOutline, IoGameControllerOutline } from "react-icons/io5";
 import { BiSolidDrink } from "react-icons/bi";
 import { FaDumbbell } from "react-icons/fa6";
@@ -126,9 +127,9 @@ export default function LeftSideBar() {
                       href="#"
                       className="flex items-center text-black pe-[9rem] hover:text-gray-400"
                     >
-                      <PiBaby className="me-1" />
-                      Baby Products
-                    </a>
+                      <IoIosPhonePortrait className="me-1" />
+                      Phones & Tablets 
+                                         </a>
                     {isphone && (
                       <div className="absolute top-2 left-full ml-1 bg-gray-500">
                         {<Phone className="me-1" />}
