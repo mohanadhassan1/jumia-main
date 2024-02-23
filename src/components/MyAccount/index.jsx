@@ -19,9 +19,10 @@ export default function index() {
 
   return (
     <>
-      <div className="flex container mx-auto mt-3 mb-3">
+      <div className="md:flex container mx-auto mt-3 mb-3 sm:flex-none">
 
-        <div className="mr-2 w-1/4 h-full rounded bg-white">
+        {/* <div className="mr-2  md:w-full h-full rounded bg-white"> */}
+        <div className="mr-2 lg:w-1/4 md:w-2/4 h-full rounded bg-white">
           <div onClick={() => handleButtonClick("My Jumia Account")} className="hover:bg-gray-200 hover:font-medium h-10 my-2 border-b rounded-t overflow-hidden">
             <button className="flex items-center w-full h-full focus:bg-gray-300 focus:font-medium pl-6">
               <IoPersonOutline className="mr-4" size={25} />
@@ -110,7 +111,8 @@ export default function index() {
         </div>
 
 
-        <div className="gap-4 p-4 ml-2 w-3/4 rounded bg-white">
+        {/* <div className="gap-4 p-4 ml-2 lg:w-3/4 md:w-full rounded bg-white"> */}
+        <div className="gap-4 p-4  md:ml-2 sm:mr-2 lg:w-3/4 md:w-2/4 rounded bg-white">
 
           <div className="h-full">
 
@@ -118,9 +120,9 @@ export default function index() {
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">Account Overview</h1>
 
-                <div className="flex">
+                <div className="lg:flex md:flex-none">
 
-                  <div className="border border-gray-300 w-3/6 mt-6 rounded mr-2">
+                  <div className="border border-gray-300 lg:w-3/6 md:w-full mt-6 rounded lg:mr-2 ">
 
                     <div className="border-b p-3">
                       <h2>ACCOUNT DETAILS</h2>
@@ -133,7 +135,7 @@ export default function index() {
 
                   </div>
 
-                  <div className="border border-gray-300 w-3/6 mt-6 rounded ml-2">
+                  <div className="border border-gray-300 lg:w-3/6 md:w-full mt-6 rounded lg:ml-2">
 
                     <div className="border-b p-3">
                       <h2>ADDRESS BOOK</h2>
@@ -148,9 +150,9 @@ export default function index() {
 
                 </div>
 
-                <div className="flex">
+                <div className="lg:flex md:flex-none">
 
-                  <div className="border border-gray-300 w-3/6 mt-6 rounded mr-2">
+                  <div className="border border-gray-300 lg:w-3/6 md:w-full mt-6 rounded lg:mr-2">
 
                     <div className="border-b p-3">
                       <h2>JUMIA STORE CREDIT</h2>
@@ -162,7 +164,7 @@ export default function index() {
 
                   </div>
 
-                  <div className="border border-gray-300 w-3/6 mt-6 rounded ml-2">
+                  <div className="border border-gray-300 lg:w-3/6 md:w-full mt-6 rounded lg:ml-2">
 
                     <div className="border-b p-3">
                       <h3>NEWSLETTER PREFERENCES</h3>
@@ -184,9 +186,9 @@ export default function index() {
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">Orders</h1>
 
-                <div className="flex border-b ">
-                  <button className="p-4 border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">OPEN ORDERS (0)</button>
-                  <button className="p-4 border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">CLOSED ORDERS</button>
+                <div className="flex border-b">
+                  <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">OPEN ORDERS (0)</button>
+                  <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">CLOSED ORDERS</button>
                 </div>
               </div>
             )}
@@ -228,8 +230,8 @@ export default function index() {
                 <h1 className="font-medium text-xl border-b-2 pb-3">Vouchers</h1>
 
                 <div className="flex border-b ">
-                  <button className="p-4 border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">ACTIVE</button>
-                  <button className="p-4 border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">INACTIVE</button>
+                  <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">ACTIVE</button>
+                  <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">INACTIVE</button>
                 </div>
 
               </div>
@@ -240,12 +242,12 @@ export default function index() {
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">Saved Items</h1>
 
-                <div className="flex justify-between border border-gray-300 w-full mt-6 rounded p-3">
+                <div className="lg:flex md:flex-none justify-between border border-gray-300 w-full mt-6 rounded p-3">
 
-                  <div className="flex mx-8">
+                  <div className="flex justify-around lg:mx-4">
                     <img src="#" alt="title" />
 
-                    <div className="mx-10">
+                    <div className="lg:mx-10">
                       <h3>Title</h3>
                       <p>size</p>
                       <p>price</p>
@@ -253,9 +255,9 @@ export default function index() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col justify-between">
+                  <div className="flex flex-col justify-between lg:mt-0 sm:mt-4">
                     <button className="bg-orange-600 text-white p-2 rounded hover:bg-orange-700 shadow">BUY NOW</button>
-                    <button className="text-orange-700 hover:bg-orange-100 rounded flex items-center "><HiOutlineTrash className="mr-2" />REMOVE</button>
+                    <button className="text-orange-700 hover:bg-orange-100 rounded flex items-center"><HiOutlineTrash className="mr-2" />REMOVE</button>
                   </div>
 
                 </div>
@@ -287,7 +289,7 @@ export default function index() {
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">Address Book</h1>
 
-                <div className="border border-gray-300 w-1/2 mt-6 rounded mr-2">
+                <div className="border border-gray-300 lg:w-1/2 mt-6 rounded mr-2">
 
                   <div className="border-b p-3">
                     <h2>Name</h2>
