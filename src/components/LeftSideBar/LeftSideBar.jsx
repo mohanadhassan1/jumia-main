@@ -37,9 +37,9 @@ export default function LeftSideBar() {
 
   return (
     <>
-      <div className="bg-white relative  ">
+      <div className=" md:bg-white relative  ">
         {" "}
-        <div className="flex w-[25rem]">
+        <div className="flex w-[21rem]">
           {/* <!-- Sidebar --> */}
           <aside className=" h-full ">
             <div className="p-4">
@@ -52,7 +52,7 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
                     >
                       <CiApple className="me-1" />
                       Supermarket
@@ -70,7 +70,7 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
                     >
                       <GiClothes className="me-1" />
                       Fashion
@@ -88,7 +88,7 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
                     >
                       <MdOutlineHealthAndSafety className="me-1" />
                       Health & Beauty
@@ -106,7 +106,7 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
                     >
                       <PiBaby className="me-1" />
                       Baby Products
@@ -125,7 +125,7 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
                     >
                       <IoIosPhonePortrait className="me-1" />
                       Phones & Tablets 
@@ -144,7 +144,7 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
                     >
                       <IoHomeOutline className="me-1" />
                       Home & Furniture
@@ -162,7 +162,7 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
                     >
                       <BiSolidDrink className="me-1" />
                       Appliances
@@ -180,7 +180,7 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
                     >
                       <PiTelevisionBold className="me-1" />
                       Televisions & Audio
@@ -198,7 +198,7 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
                     >
                       <MdOutlineComputer className="me-1" />
                       Computing
@@ -216,7 +216,7 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
                     >
                       <FaDumbbell className="me-1" />
                       Sporting Goods
@@ -234,7 +234,7 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
                     >
                       <IoGameControllerOutline className="me-1" />
                       Gaming
@@ -252,7 +252,7 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
                     >
                       <CgMoreO className="me-1" />
                       Other categories

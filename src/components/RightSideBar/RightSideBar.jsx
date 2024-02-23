@@ -6,7 +6,7 @@ import { FiSettings } from "react-icons/fi";
 export default function RightSideBar() {
   return (
     <>
-      <aside className="bg-white ms-3  flex-shrink-0">
+      <aside className="md:bg-white ms-3  flex-shrink-0">
         <div className="p-4">
           <div className="mt-4">
             <ul>
