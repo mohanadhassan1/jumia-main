@@ -3,6 +3,7 @@ import { CiApple } from "react-icons/ci";
 import { GiClothes } from "react-icons/gi";
 import { MdOutlineHealthAndSafety, MdOutlineComputer } from "react-icons/md";
 import { PiBaby, PiTelevisionBold } from "react-icons/pi";
+import { IoIosPhonePortrait } from "react-icons/io";
 import { IoHomeOutline, IoGameControllerOutline } from "react-icons/io5";
 import { BiSolidDrink } from "react-icons/bi";
 import { FaDumbbell } from "react-icons/fa6";
@@ -36,13 +37,12 @@ export default function LeftSideBar() {
 
   return (
     <>
-      <div className="bg-white relative  ">
+      <div className="bg-white relative">
         {" "}
         <div className="flex w-[25rem]">
           {/* <!-- Sidebar --> */}
-          <aside className=" h-full ">
+          <aside className=" h-full">
             <div className="p-4">
-              <div className="mt-4">
                 <ul>
                   <li
                     className="mb-3 "
@@ -51,13 +51,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <CiApple className="me-1" />
                       Supermarket
                     </a>
                     {isHovered && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Supermarket />}
                       </div>
                     )}
@@ -69,13 +69,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <GiClothes className="me-1" />
                       Fashion
                     </a>
                     {isFashion && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Fashion />}
                       </div>
                     )}
@@ -87,13 +87,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <MdOutlineHealthAndSafety className="me-1" />
                       Health & Beauty
                     </a>
                     {isBeauty && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Beauty />}
                       </div>
                     )}
@@ -105,13 +105,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <PiBaby className="me-1" />
                       Baby Products
                     </a>
                     {isBaby && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Baby />}
                       </div>
                     )}
@@ -124,13 +124,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
-                      <PiBaby className="me-1" />
-                      Baby Products
-                    </a>
+                      <IoIosPhonePortrait className="me-1" />
+                      Phones & Tablets 
+                                         </a>
                     {isphone && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Phone className="me-1" />}
                       </div>
                     )}
@@ -143,13 +143,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <IoHomeOutline className="me-1" />
                       Home & Furniture
                     </a>
                     {isFurniture && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Furniture className="me-1" />}
                       </div>
                     )}
@@ -161,13 +161,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <BiSolidDrink className="me-1" />
                       Appliances
                     </a>
                     {isAppliances && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Appliances />}
                       </div>
                     )}
@@ -179,13 +179,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <PiTelevisionBold className="me-1" />
                       Televisions & Audio
                     </a>
                     {isTV && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Televisions />}
                       </div>
                     )}
@@ -197,13 +197,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <MdOutlineComputer className="me-1" />
                       Computing
                     </a>
                     {isComputing && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Computing />}
                       </div>
                     )}
@@ -215,13 +215,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <FaDumbbell className="me-1" />
                       Sporting Goods
                     </a>
                     {isSport && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Sport />}
                       </div>
                     )}
@@ -233,37 +233,36 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <IoGameControllerOutline className="me-1" />
                       Gaming
                     </a>
                     {isGame && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Game />}
                       </div>
                     )}
                   </li>
                   <li
-                    className="mb-3 "
+                    className="mb-0 "
                     onMouseEnter={() => setIsOther(true)}
                     onMouseLeave={() => setIsOther(false)}
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[9rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <CgMoreO className="me-1" />
                       Other categories
                     </a>
                     {isOther && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<OtherCategories />}
                       </div>
                     )}
                   </li>
                 </ul>
-              </div>
             </div>
           </aside>
         </div>
