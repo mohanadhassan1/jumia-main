@@ -47,26 +47,28 @@ const Home = () => {
   return (
     <div className="h-full flex items-center justify-center">
       <div className="container">
-        <div className="flex justify-center mb-7 mt-5 ">
-          <div className="z-10 w-1/5 h-full me-3">
+        
+        <div className="flex justify-center mb-3 mt-3">
+          <div className="z-10 w-1/6 h-full me-3">
             {" "}
             <LeftSideBar />
           </div>
 
-          <div className="z-0 w-1/2 ">
+          <div className="z-0 w-4/6 ">
             {" "}
             <CarouselMain />
           </div>
-          <div className="z-10 w-1/5">
+          <div className="z-10 w-1/6">
             <RightSideBar />
           </div>
         </div>
+        
         <MySlider />
 
         {/* Products */}
         <Carousel
           responsive={responsive}
-          className="gap-4  p-2 mb-2 rounded bg-white mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center"
+          className="gap-4 p-2 mb-3 rounded bg-white mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center"
         >
           {products.map((product) => (
             <div key={product.id} to={product.id}>

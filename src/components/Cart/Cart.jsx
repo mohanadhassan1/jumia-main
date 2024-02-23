@@ -132,13 +132,13 @@ const Cart = () => {
         <div
           id="emptyCartMessage"
           style={{ display: cartEmpty ? "block" : "none", textAlign: "center" }}
-          className="w-3/4 p-4 bg-white m-2 "
+          className="w-full p-4 bg-white my-2 "
         >
           <img
-            style={{ textAlign: "center", marginLeft: "400px" }}
+            style={{ margin: "auto" }}
             src="https://www.jumia.com.eg/assets_he/images/cart.668e6453.svg"
           ></img>
-          <h3>Your cart is emptey!</h3>
+          <h3>Your cart is empty!</h3>
           <p>Browse our categories and discover our best deals!</p>
           <button className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white m-4 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline">
             <a href="/home">Start Shopping</a>
@@ -148,7 +148,7 @@ const Cart = () => {
           id="cartContainer"
           style={{ display: cartEmpty ? "none" : "block" }}
         >
-          <div className="flex  mx-20 my-3  parent-container justify-center  ">
+          <div className="flex my-3  parent-container justify-center  ">
             <div className="w-3/4 p-2 bg-white relative">
               {/* header */}
               <h2 className="text-lg font-bold mb-4">
@@ -227,7 +227,7 @@ const Cart = () => {
             </div>
             {/* cart summary */}
             <div
-              className="w-1/4 p-2 m-2 bg-white  font-bold  sticky top-20   shadow-lg rounded-lg"
+              className="w-1/4 p-2 ml-2 bg-white  font-bold  sticky top-20 shadow-lg rounded-lg"
               style={{ height: "fit-content" }}
             >
               <h2 className="text-lg font-bold ">CART SUMMARY</h2>
@@ -282,7 +282,7 @@ const Cart = () => {
             </div>
           ))}
         </Carousel>
-        ;
+        
         <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
           <h2 className="font-medium text-xl"> You May Also Like</h2>
         </div>
@@ -299,7 +299,7 @@ const Cart = () => {
             </div>
           ))}
         </Carousel>
-        ;
+        
         <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
           <h2 className="font-medium text-xl">
             Customers who viewed this also viewed
@@ -318,7 +318,7 @@ const Cart = () => {
             </div>
           ))}
         </Carousel>
-        ;
+        
       </div>
     </>
   );

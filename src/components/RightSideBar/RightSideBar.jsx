@@ -6,11 +6,11 @@ import { FiSettings } from "react-icons/fi";
 export default function RightSideBar() {
   return (
     <>
-      <aside className="bg-white ms-3  flex-shrink-0">
+      <aside className="bg-white ms-3 flex-shrink-0">
         <div className="p-4">
-          <div className="mt-4">
+          <div className="mt-2">
             <ul>
-              <li className="mb-3 ">
+              <li className="mb-6 ">
                 <a
                   href="#"
                   className="flex items-center text-2xl text-black hover:text-gray-400"
@@ -22,7 +22,7 @@ export default function RightSideBar() {
                   </div>
                 </a>
               </li>
-              <li className="mb-3 ">
+              <li className="mb-6 ">
                 <a
                   href="#"
                   className="flex items-center text-2xl text-black hover:text-gray-400"
@@ -34,7 +34,7 @@ export default function RightSideBar() {
                   </div>
                 </a>
               </li>
-              <li className="mb-3 ">
+              <li className="mb-2 ">
                 <a
                   href="#"
                   className="flex items-center text-2xl text-black hover:text-gray-400"
