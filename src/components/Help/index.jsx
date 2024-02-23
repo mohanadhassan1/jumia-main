@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBox, FaSearch, FaTelegramPlane } from "react-icons/fa";
 import { MdCardGiftcard, MdOutlinePerson, MdPayment } from "react-icons/md";
 import { PiTruck } from "react-icons/pi";
@@ -9,6 +9,8 @@ import Vouchers from "./HelpContents/Vouchers";
 import Products from "./HelpContents/Products";
 import Delivery from "./HelpContents/Delivery";
 import Orders from "./HelpContents/Orders";
+import ReturnsRefunds from "./HelpContents/ReturnsRefunds";
+import Account from "./HelpContents/Account";
 
 const HelpMain = () => {
   const [showPayments, setShowPayments] = useState(false);
@@ -16,12 +18,20 @@ const HelpMain = () => {
   const [showProducts, setShowProducts] = useState(false);
   const [showDelivery, setShowDelivery] = useState(false);
   const [showOrders, setShowOrders] = useState(false);
+  const [showReturnsRefunds, setShowReturnsRefunds] = useState(false);
+  const [showAccount, setShowAccount] = useState(false);
+
+  useEffect(() => {
+    setShowPayments(true);
+  }, []);
 
   const displayPayments = () => {
     setShowPayments(true);
     setshowVouchers(false);
     setShowProducts(false);
     setShowDelivery(false);
+    setShowReturnsRefunds(false);
+    setShowAccount(false);
   };
 
   const displayVouchers = () => {
@@ -29,6 +39,8 @@ const HelpMain = () => {
     setShowPayments(false);
     setShowProducts(false);
     setShowDelivery(false);
+    setShowReturnsRefunds(false);
+    setShowAccount(false);
   };
 
   const displayProducts = () => {
@@ -36,6 +48,8 @@ const HelpMain = () => {
     setShowPayments(false);
     setshowVouchers(false);
     setShowDelivery(false);
+    setShowReturnsRefunds(false);
+    setShowAccount(false);
   };
 
   const displayDelivery = () => {
@@ -43,6 +57,8 @@ const HelpMain = () => {
     setShowPayments(false);
     setshowVouchers(false);
     setShowProducts(false);
+    setShowReturnsRefunds(false);
+    setShowAccount(false);
   };
 
   const displayOrders = () => {
@@ -51,6 +67,28 @@ const HelpMain = () => {
     setshowVouchers(false);
     setShowProducts(false);
     setShowDelivery(false);
+    setShowReturnsRefunds(false);
+    setShowAccount(false);
+  };
+
+  const displayReturnsRefunds = () => {
+    setShowReturnsRefunds(true);
+    setShowPayments(false);
+    setshowVouchers(false);
+    setShowProducts(false);
+    setShowDelivery(false);
+    setShowOrders(false);
+    setShowAccount(false);
+  };
+
+  const displayAccount = () => {
+    setShowAccount(true);
+    setShowReturnsRefunds(false);
+    setShowPayments(false);
+    setshowVouchers(false);
+    setShowProducts(false);
+    setShowDelivery(false);
+    setShowOrders(false);
   };
   return (
     <>
@@ -198,6 +236,7 @@ const HelpMain = () => {
               <button
                 type="button"
                 className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b rounded-b-lg hover:bg-gray-100 hover:text-orange-700 focus:z-10 focus:ring-2 focus:ring-orange-700 focus:text-orange-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+                onClick={displayReturnsRefunds}
               >
                 <MdOutlinePerson size={25} className="mr-2" />
                 Returns & Refunds
@@ -206,6 +245,7 @@ const HelpMain = () => {
               <button
                 type="button"
                 className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b rounded-b-lg hover:bg-gray-100 hover:text-orange-700 focus:z-10 focus:ring-2 focus:ring-orange-700 focus:text-orange-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+                onClick={displayAccount}
               >
                 <FaTelegramPlane size={25} className="mr-2" />
                 Account
@@ -226,22 +266,23 @@ const HelpMain = () => {
             {/* Conditionally render Payments component based on showPayments state */}
             {showPayments ? <Payments /> : null}
 
-            {/* Conditionally render Vouchers component based on showPayments state */}
+            {/* Conditionally render Vouchers component based on showVouchers state */}
             {showVouchers ? <Vouchers /> : null}
 
-
-            {/* Conditionally render Products component based on showPayments state */}
+            {/* Conditionally render Products component based on showProducts state */}
             {showProducts ? <Products /> : null}
 
-            {/* Conditionally render Delivery component based on showPayments state */}
+            {/* Conditionally render Delivery component based on showDelivery state */}
             {showDelivery ? <Delivery /> : null}
 
-            {/* Conditionally render Delivery component based on showPayments state */}
+            {/* Conditionally render Orders component based on showOrders state */}
             {showOrders ? <Orders /> : null}
 
-            {/* Conditionally render Vouchers component based on showPayments state */}
-            {showVouchers ? <Vouchers /> : null}
+            {/* Conditionally render ReturnsRefunds component based on showReturnsRefunds state */}
+            {showReturnsRefunds ? <ReturnsRefunds /> : null}
 
+            {/* Conditionally render ReturnsRefunds component based on showReturnsRefunds state */}
+            {showAccount ? <Account /> : null}
           </div>
         </div>
       </div>

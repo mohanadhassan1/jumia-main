@@ -47,9 +47,8 @@ const Home = () => {
   return (
     <div className="h-full flex items-center justify-center">
       <div className="container">
-        
-        <div className="flex justify-center mb-3 mt-3">
-          <div className="z-10 w-1/6 h-full me-3">
+        <div className="flex justify-center mb-7 mt-5 ">
+          <div className="z-10 w-1/5 h-full">
             {" "}
             <LeftSideBar />
           </div>
@@ -62,8 +61,7 @@ const Home = () => {
             <RightSideBar />
           </div>
         </div>
-        
-        <MySlider />
+        {/* <MySlider /> */}
 
         {/* Products */}
         <Carousel
