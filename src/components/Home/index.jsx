@@ -61,7 +61,7 @@ const Home = () => {
             <RightSideBar />
           </div>
         </div>
-        <MySlider />
+        {/* <MySlider /> */}
 
         {/* Products */}
         <Carousel
