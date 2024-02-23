@@ -8,9 +8,9 @@ export default function RightSideBar() {
     <>
       <aside className="md:bg-white ms-3  flex-shrink-0">
         <div className="p-4">
-          <div className="mt-4">
+          <div className="mt-2">
             <ul>
-              <li className="mb-3 ">
+              <li className="mb-6 ">
                 <a
                   href="#"
                   className="flex items-center text-2xl text-black hover:text-gray-400"
@@ -22,7 +22,7 @@ export default function RightSideBar() {
                   </div>
                 </a>
               </li>
-              <li className="mb-3 ">
+              <li className="mb-6 ">
                 <a
                   href="#"
                   className="flex items-center text-2xl text-black hover:text-gray-400"
@@ -34,7 +34,7 @@ export default function RightSideBar() {
                   </div>
                 </a>
               </li>
-              <li className="mb-3 ">
+              <li className="mb-2 ">
                 <a
                   href="#"
                   className="flex items-center text-2xl text-black hover:text-gray-400"
@@ -52,12 +52,13 @@ export default function RightSideBar() {
       </aside>
       <div className="mt-3 ms-3">
         <a href="#">
-        <img
-          src="https://eg.jumia.is/cms/Week7-8-2024/Installments/INSTALLMENTSEN.png"
-          alt=""
-          srcset=""
-          className="w-full"
-        /></a>
+          <img
+            src="https://eg.jumia.is/cms/Week7-8-2024/Installments/INSTALLMENTSEN.png"
+            alt=""
+            srcset=""
+            className="w-full"
+          />
+        </a>
       </div>
     </>
   );

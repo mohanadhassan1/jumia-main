@@ -37,13 +37,10 @@ export default function LeftSideBar() {
 
   return (
     <>
-      <div className=" md:bg-white relative  ">
-        {" "}
+      <div className="bg-white relative">
         <div className="flex w-[21rem]">
-          {/* <!-- Sidebar --> */}
-          <aside className=" h-full ">
+          <aside className=" h-full">
             <div className="p-4">
-              <div className="mt-4">
                 <ul>
                   <li
                     className="mb-3 "
@@ -52,13 +49,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <CiApple className="me-1" />
                       Supermarket
                     </a>
                     {isHovered && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Supermarket />}
                       </div>
                     )}
@@ -70,201 +67,19 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
+                      className="flex items-center text-black pe-[9rem] hover:text-orange-500"
                     >
                       <GiClothes className="me-1" />
                       Fashion
                     </a>
                     {isFashion && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute top-0 left-full ml-1 bg-gray-500">
                         {<Fashion />}
                       </div>
                     )}
                   </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsBeauty(true)}
-                    onMouseLeave={() => setIsBeauty(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
-                    >
-                      <MdOutlineHealthAndSafety className="me-1" />
-                      Health & Beauty
-                    </a>
-                    {isBeauty && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Beauty />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsBaby(true)}
-                    onMouseLeave={() => setIsBaby(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
-                    >
-                      <PiBaby className="me-1" />
-                      Baby Products
-                    </a>
-                    {isBaby && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Baby />}
-                      </div>
-                    )}
-                  </li>
-
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsphone(true)}
-                    onMouseLeave={() => setIsphone(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
-                    >
-                      <IoIosPhonePortrait className="me-1" />
-                      Phones & Tablets 
-                                         </a>
-                    {isphone && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Phone className="me-1" />}
-                      </div>
-                    )}
-                  </li>
-
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsFurniture(true)}
-                    onMouseLeave={() => setIsFurniture(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
-                    >
-                      <IoHomeOutline className="me-1" />
-                      Home & Furniture
-                    </a>
-                    {isFurniture && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Furniture className="me-1" />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsAppliances(true)}
-                    onMouseLeave={() => setIsAppliances(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
-                    >
-                      <BiSolidDrink className="me-1" />
-                      Appliances
-                    </a>
-                    {isAppliances && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Appliances />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsTV(true)}
-                    onMouseLeave={() => setIsTV(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
-                    >
-                      <PiTelevisionBold className="me-1" />
-                      Televisions & Audio
-                    </a>
-                    {isTV && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Televisions />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsComputing(true)}
-                    onMouseLeave={() => setIsComputing(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
-                    >
-                      <MdOutlineComputer className="me-1" />
-                      Computing
-                    </a>
-                    {isComputing && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Computing />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsSport(true)}
-                    onMouseLeave={() => setIsSport(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
-                    >
-                      <FaDumbbell className="me-1" />
-                      Sporting Goods
-                    </a>
-                    {isSport && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Sport />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsGame(true)}
-                    onMouseLeave={() => setIsGame(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
-                    >
-                      <IoGameControllerOutline className="me-1" />
-                      Gaming
-                    </a>
-                    {isGame && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Game />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsOther(true)}
-                    onMouseLeave={() => setIsOther(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[6rem] hover:text-gray-400"
-                    >
-                      <CgMoreO className="me-1" />
-                      Other categories
-                    </a>
-                    {isOther && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<OtherCategories />}
-                      </div>
-                    )}
-                  </li>
+                  {/* Other list items */}
                 </ul>
-              </div>
             </div>
           </aside>
         </div>
