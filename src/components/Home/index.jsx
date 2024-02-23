@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
 import LeftSideBar from "../LeftSideBar/LeftSideBar";
 import RightSideBar from "../RightSideBar/RightSideBar";
-// import Carousel from "../Carousel/Carousel";
 import { useNavigate } from "react-router";
 import CarouselMain from "../Carousel/Carousel";
 
