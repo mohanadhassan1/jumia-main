@@ -11,6 +11,7 @@ import Delivery from "./HelpContents/Delivery";
 import Orders from "./HelpContents/Orders";
 import ReturnsRefunds from "./HelpContents/ReturnsRefunds";
 import Account from "./HelpContents/Account";
+import SellOnJumia from "./HelpContents/SellOnJumia";
 
 const HelpMain = () => {
   const [showPayments, setShowPayments] = useState(false);
@@ -20,6 +21,7 @@ const HelpMain = () => {
   const [showOrders, setShowOrders] = useState(false);
   const [showReturnsRefunds, setShowReturnsRefunds] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
+  const [showSellOnJumia, setShowSellOnJumia] = useState(false);
 
   useEffect(() => {
     setShowPayments(true);
@@ -32,6 +34,7 @@ const HelpMain = () => {
     setShowDelivery(false);
     setShowReturnsRefunds(false);
     setShowAccount(false);
+    setShowSellOnJumia(false);
   };
 
   const displayVouchers = () => {
@@ -41,6 +44,7 @@ const HelpMain = () => {
     setShowDelivery(false);
     setShowReturnsRefunds(false);
     setShowAccount(false);
+    setShowSellOnJumia(false);
   };
 
   const displayProducts = () => {
@@ -50,6 +54,7 @@ const HelpMain = () => {
     setShowDelivery(false);
     setShowReturnsRefunds(false);
     setShowAccount(false);
+    setShowSellOnJumia(false);
   };
 
   const displayDelivery = () => {
@@ -59,6 +64,7 @@ const HelpMain = () => {
     setShowProducts(false);
     setShowReturnsRefunds(false);
     setShowAccount(false);
+    setShowSellOnJumia(false);
   };
 
   const displayOrders = () => {
@@ -69,6 +75,7 @@ const HelpMain = () => {
     setShowDelivery(false);
     setShowReturnsRefunds(false);
     setShowAccount(false);
+    setShowSellOnJumia(false);
   };
 
   const displayReturnsRefunds = () => {
@@ -79,6 +86,7 @@ const HelpMain = () => {
     setShowDelivery(false);
     setShowOrders(false);
     setShowAccount(false);
+    setShowSellOnJumia(false);
   };
 
   const displayAccount = () => {
@@ -89,6 +97,18 @@ const HelpMain = () => {
     setShowProducts(false);
     setShowDelivery(false);
     setShowOrders(false);
+    setShowSellOnJumia(false);
+  };
+
+  const displaySellOnJumia = () => {
+    setShowSellOnJumia(true);
+    setShowPayments(false);
+    setshowVouchers(false);
+    setShowProducts(false);
+    setShowDelivery(false);
+    setShowOrders(false);
+    setShowReturnsRefunds(false);
+    setShowAccount(false);
   };
   return (
     <>
@@ -254,6 +274,7 @@ const HelpMain = () => {
               <button
                 type="button"
                 className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold rounded-b-lg hover:bg-gray-100 hover:text-orange-700 focus:z-10 focus:ring-2 focus:ring-orange-700 focus:text-orange-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+                onClick={displaySellOnJumia}
               >
                 <LiaBoxSolid size={25} className="mr-2" />
                 Sell on Jumia
@@ -283,6 +304,9 @@ const HelpMain = () => {
 
             {/* Conditionally render ReturnsRefunds component based on showReturnsRefunds state */}
             {showAccount ? <Account /> : null}
+
+            {/* Render content for "Sell on Jumia" based on the state */}
+            {showSellOnJumia ? <SellOnJumia /> : null}
           </div>
         </div>
       </div>
