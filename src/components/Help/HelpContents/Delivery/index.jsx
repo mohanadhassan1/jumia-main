@@ -36,9 +36,9 @@ const Delivery = () => {
     setIsProblemVisible(!isProblemVisible);
   };
 
-  const toggleContactVisibility = () => {
-    setIsContactVisible(!isContactVisible);
-  };
+  // const toggleContactVisibility = () => {
+  //   setIsContactVisible(!isContactVisible);
+  // };
 
   const toggleDamagedVisibility = () => {
     setIsDamagedVisible(!isDamagedVisible);
@@ -375,3 +375,134 @@ const Delivery = () => {
 };
 
 export default Delivery;
+
+// import React, { useState } from "react";
+
+// const FaqItem = ({ question, answer }) => {
+//   const [isVisible, setIsVisible] = useState(false);
+
+//   const toggleVisibility = () => {
+//     setIsVisible(!isVisible);
+//   };
+
+//   return (
+//     <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+//       <p className="pt-2 pl-2 underline">Delivery</p>
+//       <button
+//         type="button"
+//         className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+//         onClick={toggleVisibility}
+//       >
+//         <h3 className="font-bold">
+//           {question}
+//           <span className="absolute right-4 top-2 font-bold">
+//             {isVisible ? "-" : "+"}
+//           </span>
+//         </h3>
+//       </button>
+//       {isVisible && (
+//         <div className="p-4 dark:bg-gray-800">
+//           <p
+//             className="font-normal"
+//             dangerouslySetInnerHTML={{ __html: answer }}
+//           ></p>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// const Delivery = () => {
+//   return (
+//     <>
+//       <FaqItem
+//         question="How can I track my delivery?"
+//         answer={`
+//           To track your delivery on Jumia, you can follow these steps:
+//           <ol className="list-decimal list-inside font-normal">
+//             <li>
+//               <span className="font-bold"> Step 1: </span>Log in to your account.
+//             </li>
+//             <li>
+//               <span className="font-bold"> Step 2: </span>Click on the "My Account" button and select "Orders" from the dropdown menu.
+//             </li>
+//             <li>
+//               <span className="font-bold"> Step 3: </span>Locate the order for which you want to track the delivery and click on the "View Details" button.
+//             </li>
+//             <li>
+//               <span className="font-bold"> Step 4: </span>On the order details page, look for the delivery status under the "Order Information" section.
+//             </li>
+//           </ol>
+//           If you have any concerns about the delivery status, you can contact Jumia's customer service team by clicking on the "Help" button at the top right of the page and selecting "Live Chat" from the dropdown menu.
+//         `}
+//       />
+//       <FaqItem
+//         question="What if I am not available to receive my delivery?"
+//         answer={`
+//           If you are not available to receive your delivery, you have the following options:
+//           <ul className="list-disc list-inside font-normal">
+//             <li>
+//               You can arrange for someone else to receive it on your behalf by providing their name and contact information to the delivery agent. It is important to ensure that this person is available at the same address that was provided when placing your order.
+//             </li>
+//             <li>
+//               Contact the delivery agent to reschedule the delivery for a more convenient time.
+//             </li>
+//           </ul>
+//           Note: It is not possible to change the delivery address once an order is placed. Jumia will make a total of 2 attempts to deliver the package before canceling your order. You will be notified before they make the second attempt, so it's important to remain available to avoid order cancellation.
+//         `}
+//       />
+//       <FaqItem
+//         question="How can I track my delivery?"
+//         answer={`
+//           <p class="font-normal">
+//             To track your delivery on Jumia, you can follow these steps:
+//             <ol class="list-decimal list-inside font-normal">
+//               <li>
+//                 <span class="font-bold"> Step 1: </span>Log in to your account.
+//               </li>
+//               <li>
+//                 <span class="font-bold"> Step 2: </span>Click on the "My Account" button and select "Orders" from the dropdown menu.
+//               </li>
+//               <li>
+//                 <span class="font-bold"> Step 3: </span>Locate the order for which you want to track the delivery and click on the "View Details" button.
+//               </li>
+//               <li>
+//                 <span class="font-bold"> Step 4: </span>On the order details page, look for the delivery status under the "Order Information" section.
+//               </li>
+//             </ol>
+//             If you have any concerns about the delivery status, you can contact Jumia's customer service team by clicking on the "Help" button at the top right of the page and selecting "Live Chat" from the dropdown menu.
+//           </p>
+//         `}
+//       />
+//       <FaqItem
+//         question="What if I am not available to receive my delivery?"
+//         answer={`
+//           <p class="font-normal">
+//             If you are not available to receive your delivery, you have the following options:
+//             <ul class="list-disc list-inside font-normal">
+//               <li>
+//                 You can arrange for someone else to receive it on your behalf by providing their name and contact information to the delivery agent. It is important to ensure that this person is available at the same address that was provided when placing your order.
+//               </li>
+//               <li>
+//                 Contact the delivery agent to reschedule the delivery for a more convenient time.
+//               </li>
+//             </ul>
+//             Note: It is not possible to change the delivery address once an order is placed. Jumia will make a total of 2 attempts to deliver the package before canceling your order. You will be notified before they make the second attempt, so it's important to remain available to avoid order cancellation.
+//           </p>
+//         `}
+//       />
+//       <FaqItem
+//         question="Can I change my delivery address after placing an order?"
+//         answer={`
+//           <p class="font-normal">
+//             It is important to carefully review and confirm the accuracy of your delivery information, such as your address and phone number, before placing an order on Jumia. Once the order has been placed, it is not possible to make changes to the delivery information. To make sure that your order is delivered properly, please double-check your delivery information on the checkout page.
+//           </p>
+//         `}
+//       />
+
+//       {/* Add more FAQ items as needed */}
+//     </>
+//   );
+// };
+
+// export default Delivery;
