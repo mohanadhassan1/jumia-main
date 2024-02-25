@@ -46,17 +46,17 @@ const Home = () => {
   return (
     <div className="h-full flex items-center justify-center">
       <div className="container">
-        <div className="flex justify-center mb-7 mt-5 ">
-          <div className="z-10 w-1/5 h-full">
+        <div className="md:flex mb-7 mt-5 ">
+          <div className="z-10 w-1/5 h-full me-3">
             {" "}
             <LeftSideBar />
           </div>
 
-          <div className="z-0 w-4/6 ">
+          <div className=" w-4/6 mx-auto ">
             {" "}
             <CarouselMain />
           </div>
-          <div className="z-10 w-1/6">
+          <div className=" w-1/6">
             <RightSideBar />
           </div>
         </div>
