@@ -7,7 +7,7 @@ import { LiaBoxSolid } from "react-icons/lia";
 import Payments from "./HelpContents/Payments";
 import Vouchers from "./HelpContents/Vouchers";
 import Products from "./HelpContents/Products";
- import Delivery from "./HelpContents/Delivery";
+import Delivery from "./HelpContents/Delivery";
 import Orders from "./HelpContents/Orders";
 import ReturnsRefunds from "./HelpContents/ReturnsRefunds";
 import Account from "./HelpContents/Account";
