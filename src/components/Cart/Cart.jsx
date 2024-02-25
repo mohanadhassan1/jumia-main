@@ -237,12 +237,14 @@ const Cart = () => {
                 <h3> EGY {subtotal.toFixed(4)}</h3>
               </div>
               <hr></hr>
+              <a href="/checkout">
               <button
-                className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white m-4 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+                className="button bg-orange-600 w-full hover:bg-orange-700 text-white mx-auto font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline"
                 type="button"
               >
                 CHECKOUT (EGY {subtotal})
               </button>{" "}
+              </a>
             </div>
           </div>
         </div>
@@ -266,8 +268,12 @@ const Cart = () => {
           ))}
         </div>
         {/* recommended for you  */}
-        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+        <div className="h-16 flex justify-between items-center gap-4 p-3 rounded-t bg-white">
           <h2 className="font-medium text-xl">Recommende For You</h2>
+          <a href="#" className="flex items-center text-orange-600">
+            {" "}
+            SEE ALL <IoIosArrowForward />
+          </a>
         </div>
         <Carousel
           responsive={responsive}
@@ -283,10 +289,12 @@ const Cart = () => {
           ))}
         </Carousel>
         
-        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+        <div style={{ display: cartEmpty ? "none" : "block"}}
+        className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
           <h2 className="font-medium text-xl"> You May Also Like</h2>
         </div>
-        <Carousel
+        <div style={{ display: cartEmpty ? "none" : "block"}}>
+        <Carousel 
           responsive={responsive}
           className="flex gap-4 p-3 mb-3 rounded bg-white"
         >
@@ -299,26 +307,32 @@ const Cart = () => {
             </div>
           ))}
         </Carousel>
+        </div>
+        {/* customers  */}
         
-        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white"
+         style={{ display: cartEmpty ? "none" : "block"}}>
           <h2 className="font-medium text-xl">
             Customers who viewed this also viewed
           </h2>
         </div>
-        <Carousel
-          responsive={responsive}
-          className="flex gap-4 p-3 mb-3 rounded bg-white"
-        >
-          {recommendedForYou.map((product, index) => (
-            <div
-              key={index}
-              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
-            >
-              <img src={product.image} className="w-full mx-2"></img>
-            </div>
-          ))}
-        </Carousel>
-        
+       <div style={{ display: cartEmpty ? "none" : "block"}}>
+       <Carousel
+       
+       responsive={responsive}
+       className="flex gap-4 p-3 mb-3 rounded bg-white"
+     >
+       {recommendedForYou.map((product, index) => (
+         <div
+           key={index}
+           className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+         >
+           <img src={product.image} className="w-full mx-2"></img>
+         </div>
+       ))}
+     </Carousel>
+     
+       </div>
       </div>
     </>
   );

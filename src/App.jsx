@@ -17,6 +17,7 @@ import ProductDetails from "./components/product/productDetails";
 
 import MyAccount from "./components/MyAccount";
 import HelpMain from "./components/Help";
+ import Checkout from "./components/checkout/checkout";
 
 const routes = createBrowserRouter([
   {
@@ -30,8 +31,11 @@ const routes = createBrowserRouter([
       { path: "/product/:id", element: <ProductDetails /> },
 
       { path: "/help", element: <HelpMain /> },
+
     ],
   },
+  { path: "/checkout", element: <Checkout /> },
+
 ]);
 
 function App() {
