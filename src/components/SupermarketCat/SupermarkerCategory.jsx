@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
+import SmallCart from "../Small Cart/SmallCart";
 
 export default function SupermarkerCategory() {
   const { products } = useSelector((state) => state.products);
@@ -115,6 +116,18 @@ export default function SupermarkerCategory() {
         <h2 className=" text-xl font-medium uppercase text-center py-4 px-6 bg-teal-200">
           HOUSEHOLD SUPPLIES
         </h2>
+        <div className="md:flex flex-wrap  gap-4 p-4 mb-3 rounded bg-white">
+          {products.map((product) => (
+            <div
+              className="md:w-1/2 lg:w-[30%] xl:w-[15%] mb-4"
+              onClick={() => {
+                navigate(`/product/${product.product_id}`);
+              }}
+            >
+              <SmallCart Image={product.images} title={product.name} />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

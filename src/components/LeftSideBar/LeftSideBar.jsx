@@ -52,14 +52,14 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="/Supremarket"
-                      className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
+                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
                     >
                       <CiApple className="me-1" />
                       Supermarket
                     </a>
                     {isHovered && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
-                        {<Supermarket />}
+                      <div className="absolute z-50 top-2 left-full ml-1 bg-gray-500">
+                        {<Supermarket  />}
                       </div>
                     )}
                   </li>
@@ -70,13 +70,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
+                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
                     >
                       <GiClothes className="me-1" />
                       Fashion
                     </a>
                     {isFashion && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
                         {<Fashion />}
                       </div>
                     )}
@@ -88,13 +88,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
+                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
                     >
                       <MdOutlineHealthAndSafety className="me-1" />
                       Health & Beauty
                     </a>
                     {isBeauty && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
                         {<Beauty />}
                       </div>
                     )}
@@ -106,13 +106,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
+                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
                     >
                       <PiBaby className="me-1" />
                       Baby Products
                     </a>
                     {isBaby && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
                         {<Baby />}
                       </div>
                     )}
@@ -125,13 +125,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
+                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
                     >
                       <IoIosPhonePortrait className="me-1" />
                       Phones & Tablets 
                                          </a>
                     {isphone && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
                         {<Phone className="me-1" />}
                       </div>
                     )}
@@ -144,13 +144,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
+                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
                     >
                       <IoHomeOutline className="me-1" />
                       Home & Furniture
                     </a>
                     {isFurniture && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
                         {<Furniture className="me-1" />}
                       </div>
                     )}
@@ -162,13 +162,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
+                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
                     >
                       <BiSolidDrink className="me-1" />
                       Appliances
                     </a>
                     {isAppliances && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
                         {<Appliances />}
                       </div>
                     )}
@@ -180,13 +180,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
+                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
                     >
                       <PiTelevisionBold className="me-1" />
                       Televisions & Audio
                     </a>
                     {isTV && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
                         {<Televisions />}
                       </div>
                     )}
@@ -198,13 +198,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
+                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
                     >
                       <MdOutlineComputer className="me-1" />
                       Computing
                     </a>
                     {isComputing && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
                         {<Computing />}
                       </div>
                     )}
@@ -216,13 +216,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
+                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
                     >
                       <FaDumbbell className="me-1" />
                       Sporting Goods
                     </a>
                     {isSport && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
                         {<Sport />}
                       </div>
                     )}
@@ -234,13 +234,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
+                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
                     >
                       <IoGameControllerOutline className="me-1" />
                       Gaming
                     </a>
                     {isGame && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
                         {<Game />}
                       </div>
                     )}
@@ -252,13 +252,13 @@ export default function LeftSideBar() {
                   >
                     <a
                       href="#"
-                      className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
+                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
                     >
                       <CgMoreO className="me-1" />
                       Other categories
                     </a>
                     {isOther && (
-                      <div className="absolute top-2 left-full ml-1 bg-gray-500">
+                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
                         {<OtherCategories />}
                       </div>
                     )}
