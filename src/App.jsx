@@ -22,13 +22,18 @@ const routes = createBrowserRouter([
       { path: "/home", element: <Home /> },
       { path: "/cart", element: <Cart /> },
       { path: "/myaccount", element: <MyAccount /> },
-      { path: "/login", element: <Login /> },
+      
       { path: "/product/:id", element: <ProductDetails /> },
 
       { path: "/help", element: <HelpMain /> },
       { path: "/Supremarket", element: <SupermarkerCategory /> },
     ],
+
   },
+  {
+    path: "/login", 
+    element: <Login /> 
+  }
 ]);
 
 function App() {
