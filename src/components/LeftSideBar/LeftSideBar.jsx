@@ -51,7 +51,7 @@ export default function LeftSideBar() {
                     onMouseLeave={() => setIsHovered(false)}
                   >
                     <a
-                      href="#"
+                      href="/Supremarket"
                       className="flex items-center text-black pe-[5rem]  hover:text-gray-400"
                     >
                       <CiApple className="me-1" />

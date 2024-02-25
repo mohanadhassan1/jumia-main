@@ -17,6 +17,7 @@ import ProductDetails from "./components/product/productDetails";
 
 import MyAccount from "./components/MyAccount";
 import HelpMain from "./components/Help";
+import SupermarkerCategory from "./components/SupermarketCat/SupermarkerCategory";
 
 const routes = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const routes = createBrowserRouter([
       { path: "/product/:id", element: <ProductDetails /> },
 
       { path: "/help", element: <HelpMain /> },
+      { path: "/Supremarket", element: <SupermarkerCategory /> },
     ],
   },
 ]);
