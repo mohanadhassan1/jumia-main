@@ -21,8 +21,8 @@ export default function index() {
     <>
       <div className="md:flex container mx-auto mt-3 mb-3 sm:flex-none">
 
-        {/* <div className="mr-2  md:w-full h-full rounded bg-white"> */}
         <div className="mr-2 lg:w-1/4 md:w-2/4 h-full rounded bg-white">
+
           <div onClick={() => handleButtonClick("My Jumia Account")} className="hover:bg-gray-200 hover:font-medium h-10 my-2 border-b rounded-t overflow-hidden">
             <button className="flex items-center w-full h-full focus:bg-gray-300 focus:font-medium pl-6">
               <IoPersonOutline className="mr-4" size={25} />
@@ -108,10 +108,10 @@ export default function index() {
               LOGOUT
             </button>
           </div>
+
         </div>
 
 
-        {/* <div className="gap-4 p-4 ml-2 lg:w-3/4 md:w-full rounded bg-white"> */}
         <div className="gap-4 p-4  md:ml-2 sm:mr-2 lg:w-3/4 md:w-2/4 rounded bg-white">
 
           <div className="h-full">
@@ -322,6 +322,7 @@ export default function index() {
           </div>
 
         </div>
+        
       </div>
     </>
   );

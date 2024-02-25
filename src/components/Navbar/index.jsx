@@ -109,7 +109,7 @@ const Navbar = () => {
                 >
                   <div className="py-1" role="none">
                     <a
-                      href="#"
+                      href="/login"
                       className="flex justify-center bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-16 m-2 rounded focus:outline-none focus:shadow-outline"
                       role="menuitem"
                       tabIndex="-1"
@@ -132,7 +132,7 @@ const Navbar = () => {
                       </div>
                     </a>
                     <a
-                      href="#"
+                      href="/myaccount"
                       className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-300 hover:font-bold"
                       role="menuitem"
                       tabIndex="-1"
