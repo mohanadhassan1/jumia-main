@@ -3,7 +3,7 @@ import React from "react";
 export default function Supermarket() {
   return (
     <>
-      <div className="flex h-[27rem] w-[41rem] justify-around	bg-gray-100">
+      <div className="md: flex h-[27rem] w-[41rem] justify-around	bg-gray-100">
       <div className="flex flex-col">
           <a href="" >
             {" "}
