@@ -93,7 +93,9 @@ const PlaceOrder = () => {
         location.
       </p>
 
-      <p>We hope this guide has been helpful. Happy shopping!</p>
+      <p className="font-bold">
+        We hope this guide has been helpful. Happy shopping!
+      </p>
     </div>
   );
 };
