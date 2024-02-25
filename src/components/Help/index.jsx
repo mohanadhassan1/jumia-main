@@ -12,6 +12,11 @@ import Orders from "./HelpContents/Orders";
 import ReturnsRefunds from "./HelpContents/ReturnsRefunds";
 import Account from "./HelpContents/Account";
 import SellOnJumia from "./HelpContents/SellOnJumia";
+import PlaceOrder from "./HelpContents/PlaceOrder";
+import PayForOrder from "./HelpContents/PayForOrder";
+import TrackOrder from "./HelpContents/TrackOrder";
+import CancelOrder from "./HelpContents/CancelOrder";
+import CreateReturn from "./HelpContents/CreateReturn";
 
 const HelpMain = () => {
   const [showPayments, setShowPayments] = useState(false);
@@ -22,6 +27,11 @@ const HelpMain = () => {
   const [showReturnsRefunds, setShowReturnsRefunds] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
   const [showSellOnJumia, setShowSellOnJumia] = useState(false);
+  const [isPlaceAnOrderClicked, setIsPlaceAnOrderClicked] = useState(false);
+  const [isPayForOurOrderClicked, setIsPayForOurOrderClicked] = useState(false);
+  const [isTrackYourOrderClicked, setIsTrackYourOrderClicked] = useState(false);
+  const [isCancelAnOrderClicked, setIsCancelAnOrderClicked] = useState(false);
+  const [isCreateReturnClicked, setIsCreateReturnClicked] = useState(false);
 
   useEffect(() => {
     setShowPayments(true);
@@ -35,6 +45,11 @@ const HelpMain = () => {
     setShowReturnsRefunds(false);
     setShowAccount(false);
     setShowSellOnJumia(false);
+    setIsPlaceAnOrderClicked(false);
+    setIsPayForOurOrderClicked(false);
+    setIsTrackYourOrderClicked(false);
+    setIsCancelAnOrderClicked(false);
+    setIsCreateReturnClicked(false);
   };
 
   const displayVouchers = () => {
@@ -45,6 +60,11 @@ const HelpMain = () => {
     setShowReturnsRefunds(false);
     setShowAccount(false);
     setShowSellOnJumia(false);
+    setIsPlaceAnOrderClicked(false);
+    setIsPayForOurOrderClicked(false);
+    setIsTrackYourOrderClicked(false);
+    setIsCancelAnOrderClicked(false);
+    setIsCreateReturnClicked(false);
   };
 
   const displayProducts = () => {
@@ -55,6 +75,11 @@ const HelpMain = () => {
     setShowReturnsRefunds(false);
     setShowAccount(false);
     setShowSellOnJumia(false);
+    setIsPlaceAnOrderClicked(false);
+    setIsPayForOurOrderClicked(false);
+    setIsTrackYourOrderClicked(false);
+    setIsCancelAnOrderClicked(false);
+    setIsCreateReturnClicked(false);
   };
 
   const displayDelivery = () => {
@@ -65,6 +90,11 @@ const HelpMain = () => {
     setShowReturnsRefunds(false);
     setShowAccount(false);
     setShowSellOnJumia(false);
+    setIsPlaceAnOrderClicked(false);
+    setIsPayForOurOrderClicked(false);
+    setIsTrackYourOrderClicked(false);
+    setIsCancelAnOrderClicked(false);
+    setIsCreateReturnClicked(false);
   };
 
   const displayOrders = () => {
@@ -76,6 +106,11 @@ const HelpMain = () => {
     setShowReturnsRefunds(false);
     setShowAccount(false);
     setShowSellOnJumia(false);
+    setIsPlaceAnOrderClicked(false);
+    setIsPayForOurOrderClicked(false);
+    setIsTrackYourOrderClicked(false);
+    setIsCancelAnOrderClicked(false);
+    setIsCreateReturnClicked(false);
   };
 
   const displayReturnsRefunds = () => {
@@ -87,6 +122,11 @@ const HelpMain = () => {
     setShowOrders(false);
     setShowAccount(false);
     setShowSellOnJumia(false);
+    setIsPlaceAnOrderClicked(false);
+    setIsPayForOurOrderClicked(false);
+    setIsTrackYourOrderClicked(false);
+    setIsCancelAnOrderClicked(false);
+    setIsCreateReturnClicked(false);
   };
 
   const displayAccount = () => {
@@ -98,6 +138,11 @@ const HelpMain = () => {
     setShowDelivery(false);
     setShowOrders(false);
     setShowSellOnJumia(false);
+    setIsPlaceAnOrderClicked(false);
+    setIsPayForOurOrderClicked(false);
+    setIsTrackYourOrderClicked(false);
+    setIsCancelAnOrderClicked(false);
+    setIsCreateReturnClicked(false);
   };
 
   const displaySellOnJumia = () => {
@@ -109,6 +154,89 @@ const HelpMain = () => {
     setShowOrders(false);
     setShowReturnsRefunds(false);
     setShowAccount(false);
+    setIsPlaceAnOrderClicked(false);
+    setIsPlaceAnOrderClicked(false);
+    setIsPayForOurOrderClicked(false);
+    setIsTrackYourOrderClicked(false);
+    setIsCancelAnOrderClicked(false);
+    setIsCreateReturnClicked(false);
+  };
+
+  const displayPlaceAnOrder = () => {
+    setIsPlaceAnOrderClicked(true);
+    setIsPayForOurOrderClicked(false);
+    setIsTrackYourOrderClicked(false);
+    setIsCancelAnOrderClicked(false);
+    setIsCreateReturnClicked(false);
+    setShowAccount(false);
+    setShowReturnsRefunds(false);
+    setShowPayments(false);
+    setshowVouchers(false);
+    setShowProducts(false);
+    setShowDelivery(false);
+    setShowOrders(false);
+    setShowSellOnJumia(false);
+  };
+
+  const displayPayForOurOrder = () => {
+    setIsPayForOurOrderClicked(true);
+    setIsPlaceAnOrderClicked(false);
+    setIsTrackYourOrderClicked(false);
+    setIsCancelAnOrderClicked(false);
+    setIsCreateReturnClicked(false);
+    setShowAccount(false);
+    setShowReturnsRefunds(false);
+    setShowPayments(false);
+    setshowVouchers(false);
+    setShowProducts(false);
+    setShowDelivery(false);
+    setShowOrders(false);
+    setShowSellOnJumia(false);
+  };
+  const displayTrackYourOrder = () => {
+    setIsTrackYourOrderClicked(true);
+    setIsPlaceAnOrderClicked(false);
+    setIsPayForOurOrderClicked(false);
+    setIsCancelAnOrderClicked(false);
+    setIsCreateReturnClicked(false);
+    setShowAccount(false);
+    setShowReturnsRefunds(false);
+    setShowPayments(false);
+    setshowVouchers(false);
+    setShowProducts(false);
+    setShowDelivery(false);
+    setShowOrders(false);
+    setShowSellOnJumia(false);
+  };
+  const displayCancelAnOrder = () => {
+    setIsCancelAnOrderClicked(true);
+    setIsPlaceAnOrderClicked(false);
+    setIsPayForOurOrderClicked(false);
+    setIsTrackYourOrderClicked(false);
+    setIsCreateReturnClicked(false);
+    setShowAccount(false);
+    setShowReturnsRefunds(false);
+    setShowPayments(false);
+    setshowVouchers(false);
+    setShowProducts(false);
+    setShowDelivery(false);
+    setShowOrders(false);
+    setShowSellOnJumia(false);
+  };
+  const displayCreateReturn = () => {
+    setIsCreateReturnClicked(true);
+    setIsPlaceAnOrderClicked(false);
+    setIsPayForOurOrderClicked(false);
+    setIsTrackYourOrderClicked(false);
+    setIsCancelAnOrderClicked(false);
+    setShowAccount(false);
+    setShowReturnsRefunds(false);
+    setShowPayments(false);
+    setshowVouchers(false);
+    setShowProducts(false);
+    setShowDelivery(false);
+    setShowOrders(false);
+    setShowSellOnJumia(false);
   };
   return (
     <>
@@ -124,7 +252,12 @@ const HelpMain = () => {
       <div className="container mx-auto lg:-translate-y-10">
         {/*  div images */}
         <div className="flex flex-wrap gap-4 md:gap-10">
-          <div className="flex w-full md:w-1/2 lg:w-1/6 bg-white rounded shadow pl-4 pt-2 active:border-t-4 active: border-orange-500">
+          <div
+            className={`flex w-full md:w-1/2 lg:w-1/6 bg-white rounded shadow pl-4 pt-2 ${
+              isPlaceAnOrderClicked ? "border-t-4 border-orange-500" : ""
+            }`}
+            onClick={displayPlaceAnOrder}
+          >
             <p className="flex justify-start items-center font-bold">
               Place an Order
             </p>
@@ -137,7 +270,12 @@ const HelpMain = () => {
             </div>
           </div>
 
-          <div className="flex w-full md:w-1/2 lg:w-1/6 bg-white rounded shadow pl-4 pt-2 active:border-t-4 active: border-orange-500">
+          <div
+            className={`flex w-full md:w-1/2 lg:w-1/6 bg-white rounded shadow pl-4 pt-2 ${
+              isPayForOurOrderClicked ? "border-t-4 border-orange-500" : ""
+            }`}
+            onClick={displayPayForOurOrder}
+          >
             <p className="flex justify-start items-center font-bold">
               Pay for Your Order
             </p>
@@ -150,7 +288,12 @@ const HelpMain = () => {
             </div>
           </div>
 
-          <div className="flex w-full md:w-1/2 lg:w-1/6 bg-white rounded shadow pl-4 pt-2 active:border-t-4 active: border-orange-500">
+          <div
+            className={`flex w-full md:w-1/2 lg:w-1/6 bg-white rounded shadow pl-4 pt-2 ${
+              isTrackYourOrderClicked ? "border-t-4 border-orange-500" : ""
+            }`}
+            onClick={displayTrackYourOrder}
+          >
             <p className="flex justify-start items-center font-bold">
               Track Your Order
             </p>
@@ -163,7 +306,12 @@ const HelpMain = () => {
             </div>
           </div>
 
-          <div className="flex w-full md:w-1/2 lg:w-1/6 bg-white rounded shadow pl-4 pt-2 active:border-t-4 active: border-orange-500">
+          <div
+            className={`flex w-full md:w-1/2 lg:w-1/6 bg-white rounded shadow pl-4 pt-2 ${
+              isCancelAnOrderClicked ? "border-t-4 border-orange-500" : ""
+            }`}
+            onClick={displayCancelAnOrder}
+          >
             <p className="flex justify-start items-center font-bold">
               Cancel an Order
             </p>
@@ -176,7 +324,12 @@ const HelpMain = () => {
             </div>
           </div>
 
-          <div className="flex w-full md:w-1/2 lg:w-1/6 bg-white rounded shadow pl-4 pt-2 active:border-t-4 active: border-orange-500">
+          <div
+            className={`flex w-full md:w-1/2 lg:w-1/6 bg-white rounded shadow pl-4 pt-2 ${
+              isCreateReturnClicked ? "border-t-4 border-orange-500" : ""
+            }`}
+            onClick={displayCreateReturn}
+          >
             <p className="flex justify-start items-center font-bold">
               Create a Return
             </p>
@@ -307,6 +460,21 @@ const HelpMain = () => {
 
             {/* Render content for "Sell on Jumia" based on the state */}
             {showSellOnJumia ? <SellOnJumia /> : null}
+
+            {/* Render content for Place an  Order based on the state */}
+            {isPlaceAnOrderClicked ? <PlaceOrder /> : null}
+
+            {/* Render content for Pay For A Order based on the state */}
+            {isPayForOurOrderClicked ? <PayForOrder /> : null}
+
+            {/* Render content for Track Your Order based on the state */}
+            {isTrackYourOrderClicked ? <TrackOrder /> : null}
+
+            {/* Render content for Cancel Your Order based on the state */}
+            {isCancelAnOrderClicked ? <CancelOrder /> : null}
+
+            {/* Render content for Create A Return based on the state */}
+            {isCreateReturnClicked ? <CreateReturn /> : null}
           </div>
         </div>
       </div>
