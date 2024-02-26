@@ -6,7 +6,7 @@ import { FiSettings } from "react-icons/fi";
 export default function RightSideBar() {
   return (
     <>
-      <aside className="bg-white ms-3 flex-shrink-0">
+      <aside className="md:bg-white ms-3  flex-shrink-0">
         <div className="p-4">
           <div className="mt-2">
             <ul>
@@ -52,12 +52,13 @@ export default function RightSideBar() {
       </aside>
       <div className="mt-3 ms-3">
         <a href="#">
-        <img
-          src="https://eg.jumia.is/cms/Week7-8-2024/Installments/INSTALLMENTSEN.png"
-          alt=""
-          srcset=""
-          className="w-full"
-        /></a>
+          <img
+            src="https://eg.jumia.is/cms/Week7-8-2024/Installments/INSTALLMENTSEN.png"
+            alt=""
+            srcset=""
+            className="w-full"
+          />
+        </a>
       </div>
     </>
   );

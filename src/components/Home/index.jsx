@@ -46,17 +46,17 @@ const Home = () => {
   return (
     <div className="h-full flex items-center justify-center">
       <div className="container">
-        <div className="flex justify-center mb-7 mt-5 ">
-          <div className="z-10 w-1/5 h-full">
+        <div className="md:flex mb-7 mt-5 ">
+          <div className=" w-1/5 h-full me-3">
             {" "}
             <LeftSideBar />
           </div>
 
-          <div className="z-0 w-4/6 ">
+          <div className=" w-4/6 mx-auto ">
             {" "}
             <CarouselMain />
           </div>
-          <div className="z-10 w-1/6">
+          <div className=" w-1/6">
             <RightSideBar />
           </div>
         </div>
@@ -68,7 +68,7 @@ const Home = () => {
           className="gap-4 p-2 mb-3 rounded bg-white mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center"
         >
           {products.map((product) => (
-            <div key={product.id} to={product.id}>
+            <div key={product._id} to={product._id}>
               <div className="hover:scale-[1.01] group relative mx-2">
                 <div className="hover:scale-[1.01] group relative">
                   <div className="w-52 h-52 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">

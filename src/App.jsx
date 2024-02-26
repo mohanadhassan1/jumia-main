@@ -1,11 +1,3 @@
-// <<<<<<< mohanad
-// import { useState } from "react";
-// import Footer from "./components/Footer/Footer";
-// import Navbar from "./components/Navbar/index";
-// import Header from "./components/Header/index";
-// import Home from "./components/Home/index";
-// // import MySlider from "./components/Slider/Slider";
-
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
@@ -17,8 +9,10 @@ import Home from "./components/Home/index";
 import ProductDetails from "./components/product/productDetails";
 
 import MyAccount from "./components/MyAccount";
+import Login from "./components/Login/index";
 import HelpMain from "./components/Help";
- import Checkout from "./components/checkout/checkout";
+import Checkout from "./components/checkout/checkout";
+import SupermarkerCategory from "./components/SupermarketCat/SupermarkerCategory";
 
 const routes = createBrowserRouter([
   {
@@ -29,30 +23,21 @@ const routes = createBrowserRouter([
       { path: "/home", element: <Home /> },
       { path: "/cart", element: <Cart /> },
       { path: "/myaccount", element: <MyAccount /> },
+
       { path: "/product/:id", element: <ProductDetails /> },
 
       { path: "/help", element: <HelpMain /> },
-
+      { path: "/Supremarket", element: <SupermarkerCategory /> },
     ],
   },
   { path: "/checkout", element: <Checkout /> },
-
 ]);
 
 function App() {
   return (
     <>
       <Provider store={store}>
-        {/* // <Header />
-        // <Navbar />
-        //{" "} */}
-        {/* <div className="h-full flex items-center justify-center"> */}
         <RouterProvider router={routes} />
-        {/* // <Home />
-          //{" "} */}
-        {/* </div> */}
-        {/* // <Footer />
-        // ======= */}
       </Provider>
     </>
   );
