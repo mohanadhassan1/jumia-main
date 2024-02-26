@@ -2,11 +2,11 @@ import { FaSearch } from "react-icons/fa";
 import React, { useState } from "react";
 import logo from "../../assets/logo.svg";
 import { BsPerson } from "react-icons/bs";
+import { FaRegQuestionCircle } from "react-icons/fa";
 import { FiInbox } from "react-icons/fi";
 import { CiHeart } from "react-icons/ci";
 import { AiOutlineMessage } from "react-icons/ai";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { FaRegQuestionCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
@@ -35,9 +35,9 @@ const Navbar = () => {
 
         <div className="flex items-center mt-4 lg:mt-0">
           <div className="relative">
-            <FaSearch className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-400" />
+            <FaSearch className="absolute hidden lg:block top-1/2 left-4 transform -translate-y-1/2 text-gray-400" />
             <input
-              className="ml-8 lg:ml-0 lg:pl-10 pr-2 outline rounded w-48 lg:w-96 h-10"
+              className="ml-8 lg:ml-0 lg:pl-10 pr-2 outline-none shadow-xl rounded w-48 lg:w-96 h-10"
               type="search"
               name="search"
               id="search"
@@ -51,7 +51,7 @@ const Navbar = () => {
       </div>
 
       <div className="flex justify-between items-center w-full lg:w-auto mt-4 lg:mt-0">
-        <div className="flex lg:hidden">
+        <div className="flex  lg:hidden">
           <button
             className="text-gray-500 hover:text-orange-600 focus:outline-none"
             onClick={toggleAccountMenu}
