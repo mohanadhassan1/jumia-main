@@ -125,20 +125,20 @@ const Cart = () => {
   });
 
   return (
-    <>
+    <div className="container mx-auto h-full flex items-center justify-center">
       {/* Eman */}
 
-      <div className="container mx-auto">
+      <div className="container">
         <div
           id="emptyCartMessage"
           style={{ display: cartEmpty ? "block" : "none", textAlign: "center" }}
-          className="w-full p-4 bg-white my-2 "
+          className="w-3/4 p-4 bg-white m-2 "
         >
           <img
-            style={{ margin: "auto" }}
+            style={{ textAlign: "center", marginLeft: "400px" }}
             src="https://www.jumia.com.eg/assets_he/images/cart.668e6453.svg"
           ></img>
-          <h3>Your cart is empty!</h3>
+          <h3>Your cart is emptey!</h3>
           <p>Browse our categories and discover our best deals!</p>
           <button className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white m-4 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline">
             <a href="/home">Start Shopping</a>
@@ -148,7 +148,7 @@ const Cart = () => {
           id="cartContainer"
           style={{ display: cartEmpty ? "none" : "block" }}
         >
-          <div className="flex my-3  parent-container justify-center  ">
+          <div className="flex  mx-20 my-3  parent-container justify-center  ">
             <div className="w-3/4 p-2 bg-white relative">
               {/* header */}
               <h2 className="text-lg font-bold mb-4">
@@ -175,7 +175,7 @@ const Cart = () => {
                         <div className="  justify-between flex text-white">
                           <button
                             className=" text-orange-600 flex justify-center text-xl items-center	"
-                            onClick={() => handleRemoveItem(product.product_id)}
+                            onClick={() => handleRemoveItem(product._id)}
                           >
                             {" "}
                             <MdOutlineDelete /> Remove
@@ -194,7 +194,7 @@ const Cart = () => {
                           <button
                             onClick={() =>
                               handleDecreaseQuantity(
-                                product.product_id,
+                                product._id,
                                 product.quantity
                               )
                             }
@@ -207,7 +207,7 @@ const Cart = () => {
                             className=" bg-orange-600 w-10 m-2 rounded-md text-2xl"
                             onClick={() =>
                               handleIncreaseQuantity(
-                                product.product_id,
+                                product._id,
                                 product.quantity
                               )
                             }
@@ -227,7 +227,7 @@ const Cart = () => {
             </div>
             {/* cart summary */}
             <div
-              className="w-1/4 p-2 ml-2 bg-white  font-bold  sticky top-20 shadow-lg rounded-lg"
+              className="w-1/4 p-2 m-2 bg-white  font-bold  sticky top-20  absolute  shadow-lg rounded-lg"
               style={{ height: "fit-content" }}
             >
               <h2 className="text-lg font-bold ">CART SUMMARY</h2>
@@ -247,6 +247,14 @@ const Cart = () => {
           </div>
         </div>
         {/* cart products */}
+        {/* recently viewed */}
+        <div className="h-16 flex justify-between items-center gap-4 p-3 rounded-t bg-white">
+          <h2 className="font-medium text-xl">Recently Viewed</h2>
+          <a href="#" className="flex items-center text-orange-600">
+            {" "}
+            SEE ALL <IoIosArrowForward />
+          </a>
+        </div>
         {/* recently viewed */}
         <div className="h-16 flex justify-between items-center gap-4 p-3 rounded-t bg-white">
           <h2 className="font-medium text-xl">Recently Viewed</h2>
@@ -282,7 +290,7 @@ const Cart = () => {
             </div>
           ))}
         </Carousel>
-        
+        ;
         <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
           <h2 className="font-medium text-xl"> You May Also Like</h2>
         </div>
@@ -299,7 +307,7 @@ const Cart = () => {
             </div>
           ))}
         </Carousel>
-        
+        ;
         <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
           <h2 className="font-medium text-xl">
             Customers who viewed this also viewed
@@ -318,9 +326,80 @@ const Cart = () => {
             </div>
           ))}
         </Carousel>
-        
+        ;
+        <div className="flex gap-4 p-3 mb-3 rounded bg-white text-orange-600">
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full "></img>
+            </div>
+          ))}
+        </div>
+        {/* recommended for you  */}
+        <div className="h-16 flex justify-between items-center gap-4 p-3 rounded-t bg-white">
+          <h2 className="font-medium text-xl">Recommende For You</h2>
+          <a href="#" className="flex items-center text-orange-600">
+            {" "}
+            SEE ALL <IoIosArrowForward />
+          </a>
+        </div>
+        <Carousel
+          responsive={responsive}
+          className="flex gap-4 p-3 mb-3 rounded bg-white "
+        >
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg m-x-3 "
+            >
+              <img src={product.image} className="w-full mx-2"></img>
+            </div>
+          ))}
+        </Carousel>
+        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+          <h2 className="font-medium text-xl"> You May Also Like</h2>
+        </div>
+        <div style={{ display: cartEmpty ? "none" : "block" }}>
+          <Carousel
+            responsive={responsive}
+            className="flex gap-4 p-3 mb-3 rounded bg-white"
+          >
+            {recommendedForYou.map((product, index) => (
+              <div
+                key={index}
+                className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+              >
+                <img src={product.image} className="w-full mx-2"></img>
+              </div>
+            ))}
+          </Carousel>
+        </div>
+        {/* customers  */}
+        <div
+          className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white"
+          style={{ display: cartEmpty ? "none" : "block" }}
+        >
+          <h2 className="font-medium text-xl">
+            Customers who viewed this also viewed
+          </h2>
+        </div>
+        <Carousel
+          responsive={responsive}
+          className="flex gap-4 p-3 mb-3 rounded bg-white"
+        >
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full"></img>
+            </div>
+          ))}
+        </Carousel>
       </div>
-    </>
+    </div>
   );
 };
 

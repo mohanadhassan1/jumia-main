@@ -1,9 +1,9 @@
-
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
 import AppLayout from "./AppLayout";
+// import ProductDetails from "./components/product/productDetails";
 
 import Home from "./components/Home/index";
 import ProductDetails from "./components/product/productDetails";
@@ -11,6 +11,7 @@ import ProductDetails from "./components/product/productDetails";
 import MyAccount from "./components/MyAccount";
 import Login from "./components/Login/index";
 import HelpMain from "./components/Help";
+import Checkout from "./components/checkout/checkout";
 import SupermarkerCategory from "./components/SupermarketCat/SupermarkerCategory";
 
 const routes = createBrowserRouter([
@@ -22,27 +23,21 @@ const routes = createBrowserRouter([
       { path: "/home", element: <Home /> },
       { path: "/cart", element: <Cart /> },
       { path: "/myaccount", element: <MyAccount /> },
-      
+
       { path: "/product/:id", element: <ProductDetails /> },
 
       { path: "/help", element: <HelpMain /> },
       { path: "/Supremarket", element: <SupermarkerCategory /> },
     ],
-
   },
-  {
-    path: "/login", 
-    element: <Login /> 
-  }
+  { path: "/checkout", element: <Checkout /> },
 ]);
 
 function App() {
   return (
     <>
       <Provider store={store}>
-
         <RouterProvider router={routes} />
-
       </Provider>
     </>
   );
