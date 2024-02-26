@@ -3,12 +3,17 @@ import { MdOutlineDelete } from "react-icons/md";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { IoIosArrowForward } from "react-icons/io";
+<<<<<<< HEAD
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+=======
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateItemQuantity,
   removeItemFromCart,
 } from "../../store/slices/cart";
 import { useState, useEffect } from "react";
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
 
 const Cart = () => {
   let recommendedForYou = [
@@ -125,6 +130,22 @@ const Cart = () => {
   });
 
   return (
+<<<<<<< HEAD
+    <div className="container mx-auto h-full flex items-center justify-center">
+      {/* Eman */}
+
+      <div className="container">
+        <div
+          id="emptyCartMessage"
+          style={{ display: cartEmpty ? "block" : "none", textAlign: "center" }}
+          className="w-3/4 p-4 bg-white m-2 "
+        >
+          <img
+            style={{ textAlign: "center", marginLeft: "400px" }}
+            src="https://www.jumia.com.eg/assets_he/images/cart.668e6453.svg"
+          ></img>
+          <h3>Your cart is emptey!</h3>
+=======
     <>
       {/* Eman */}
 
@@ -139,6 +160,7 @@ const Cart = () => {
             src="https://www.jumia.com.eg/assets_he/images/cart.668e6453.svg"
           ></img>
           <h3>Your cart is empty!</h3>
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
           <p>Browse our categories and discover our best deals!</p>
           <button className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white m-4 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline">
             <a href="/home">Start Shopping</a>
@@ -148,7 +170,11 @@ const Cart = () => {
           id="cartContainer"
           style={{ display: cartEmpty ? "none" : "block" }}
         >
+<<<<<<< HEAD
+          <div className="flex  mx-20 my-3  parent-container justify-center  ">
+=======
           <div className="flex my-3  parent-container justify-center  ">
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
             <div className="w-3/4 p-2 bg-white relative">
               {/* header */}
               <h2 className="text-lg font-bold mb-4">
@@ -184,13 +210,21 @@ const Cart = () => {
                       </div>
                       <div className="m-2 w-1/4 text-right ">
                         <p
+<<<<<<< HEAD
+                          className="text-sm text-black-600 text-2xl "
+=======
                           className="text-sm text-black-600  "
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
                           style={{ fontSize: "20px" }}
                         >
                           {" "}
                           EGY {product.price}
                         </p>
+<<<<<<< HEAD
+                        <div className="flex items-center text-sm text-black-600 text-2xl justify-center">
+=======
                         <div className="flex items-center text-sm text-black-600 justify-center">
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
                           <button
                             onClick={() =>
                               handleDecreaseQuantity(
@@ -227,7 +261,11 @@ const Cart = () => {
             </div>
             {/* cart summary */}
             <div
+<<<<<<< HEAD
+              className="w-1/4 p-2 m-2 bg-white  font-bold  sticky top-20  absolute  shadow-lg rounded-lg"
+=======
               className="w-1/4 p-2 ml-2 bg-white  font-bold  sticky top-20 shadow-lg rounded-lg"
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
               style={{ height: "fit-content" }}
             >
               <h2 className="text-lg font-bold ">CART SUMMARY</h2>
@@ -237,18 +275,37 @@ const Cart = () => {
                 <h3> EGY {subtotal.toFixed(4)}</h3>
               </div>
               <hr></hr>
+<<<<<<< HEAD
+              <button
+                className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white m-4 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+=======
               <a href="/checkout">
               <button
                 className="button bg-orange-600 w-full hover:bg-orange-700 text-white mx-auto font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline"
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
                 type="button"
               >
                 CHECKOUT (EGY {subtotal})
               </button>{" "}
+<<<<<<< HEAD
+=======
               </a>
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
             </div>
           </div>
         </div>
         {/* cart products */}
+<<<<<<< HEAD
+        {/* recently viewed */}
+        <div className="h-16 flex justify-between items-center gap-4 p-3 rounded-t bg-white">
+          <h2 className="font-medium text-xl">Recently Viewed</h2>
+          <a href="#" className="flex items-center text-orange-600">
+            {" "}
+            SEE ALL <IoIosArrowForward />
+          </a>
+        </div>
+=======
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
         {/* recently viewed */}
         <div className="h-16 flex justify-between items-center gap-4 p-3 rounded-t bg-white">
           <h2 className="font-medium text-xl">Recently Viewed</h2>
@@ -258,6 +315,73 @@ const Cart = () => {
           </a>
         </div>
         <div className="flex gap-2 p-3 mb-3 rounded bg-white text-orange-600 ">
+<<<<<<< HEAD
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full "></img>
+            </div>
+          ))}
+        </div>
+        {/* recommended for you  */}
+        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+          <h2 className="font-medium text-xl">Recommende For You</h2>
+        </div>
+        <Carousel
+          responsive={responsive}
+          className="flex gap-4 p-3 mb-3 rounded bg-white "
+        >
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg m-x-3 "
+            >
+              <img src={product.image} className="w-full mx-2"></img>
+            </div>
+          ))}
+        </Carousel>
+        ;
+        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+          <h2 className="font-medium text-xl"> You May Also Like</h2>
+        </div>
+        <Carousel
+          responsive={responsive}
+          className="flex gap-4 p-3 mb-3 rounded bg-white"
+        >
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full mx-2"></img>
+            </div>
+          ))}
+        </Carousel>
+        ;
+        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+          <h2 className="font-medium text-xl">
+            Customers who viewed this also viewed
+          </h2>
+        </div>
+        <Carousel
+          responsive={responsive}
+          className="flex gap-4 p-3 mb-3 rounded bg-white"
+        >
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full mx-2"></img>
+            </div>
+          ))}
+        </Carousel>
+        ;
+        <div className="flex gap-4 p-3 mb-3 rounded bg-white text-orange-600">
+=======
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
           {recommendedForYou.map((product, index) => (
             <div
               key={index}
@@ -288,9 +412,13 @@ const Cart = () => {
             </div>
           ))}
         </Carousel>
+<<<<<<< HEAD
+        <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+=======
         
         <div style={{ display: cartEmpty ? "none" : "block"}}
         className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
           <h2 className="font-medium text-xl"> You May Also Like</h2>
         </div>
         <div style={{ display: cartEmpty ? "none" : "block"}}>
@@ -316,6 +444,21 @@ const Cart = () => {
             Customers who viewed this also viewed
           </h2>
         </div>
+<<<<<<< HEAD
+        <Carousel
+          responsive={responsive}
+          className="flex gap-4 p-3 mb-3 rounded bg-white"
+        >
+          {recommendedForYou.map((product, index) => (
+            <div
+              key={index}
+              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
+            >
+              <img src={product.image} className="w-full"></img>
+            </div>
+          ))}
+        </Carousel>
+=======
        <div style={{ display: cartEmpty ? "none" : "block"}}>
        <Carousel
        
@@ -333,6 +476,7 @@ const Cart = () => {
      </Carousel>
      
        </div>
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
       </div>
     </>
   );
