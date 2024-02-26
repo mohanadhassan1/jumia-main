@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BigCart from "../Big Cart/BigCart";
 import Carousel from "react-multi-carousel";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
 import SmallCart from "../Small Cart/SmallCart";
+import {Dropdown} from "flowbite"; 
+
 
 export default function SupermarkerCategory() {
   const { products } = useSelector((state) => state.products);
@@ -37,6 +39,19 @@ export default function SupermarkerCategory() {
       items: 2,
     },
   };
+
+  const [name, setName] = useState("Supermarket");
+
+
+
+  function changeCategories(newName, event) {
+    event.preventDefault();
+    setName(newName);
+  }
+
+   
+
+  
   return (
     <>
       <div className="md:container h-full mx-auto items-center justify-center">
@@ -134,117 +149,202 @@ export default function SupermarkerCategory() {
             <h4 className="uppercase text-base py-5 px-5">Category</h4>
             <ul className="list-none ">
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1 ">
+                <a
+                  href=""
+                  className="pb-1 "
+                  onClick={() => changeCategories("Supermarket", event)}
+                >
                   Supermarket
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories("Air Fresheners", event)}
+                >
                   Air Fresheners
                 </a>
               </li>
 
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories("Beverages", event)}
+                >
                   Beverages
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories("Candy & Chocolate", event)}
+                >
                   Candy & Chocolate
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories("Cleaning Tools", event)}
+                >
                   Cleaning Tools
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories(" Cooking & Baking", event)}
+                >
                   Cooking & Baking
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() =>
+                    changeCategories(" Dairy, Cheese & Eggs", event)
+                  }
+                >
                   Dairy, Cheese & Eggs
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories("Dishwashing", event)}
+                >
                   Dishwashing
                 </a>
               </li>
 
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories("Drinks", event)}
+                >
                   Drinks
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories(" Food Cupboard", event)}
+                >
                   Food Cupboard
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() =>
+                    changeCategories("Herbs, Spices & Seasonings", event)
+                  }
+                >
                   Herbs, Spices & Seasonings
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories("Household Batteries", event)}
+                >
                   Household Batteries
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories("Household Cleaning", event)}
+                >
                   Household Cleaning
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories(" Household Supplies", event)}
+                >
                   Household Supplies
                 </a>
               </li>
 
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories("Laundry", event)}
+                >
                   Laundry
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="w-[15rem] pb-1"  >
+                <a
+                  href=""
+                  className="w-[15rem] pb-1"
+                  onClick={() => changeCategories(" Lighters & Matches", event)}
+                >
                   Lighters & Matches
                 </a>
-                </li>
-                <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() => changeCategories("Paper & Plastic", event)}
+                >
                   Paper & Plastic
                 </a>
               </li>
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
-                <a href="" className="pb-1">
+                <a
+                  href=""
+                  className="pb-1"
+                  onClick={() =>
+                    changeCategories("Tobacco-Related Products", event)
+                  }
+                >
                   Tobacco-Related Products
                 </a>
               </li>
             </ul>
 
-            <hr className="h-0.5 bg-gray-300"/>
+            <hr className="h-0.5 bg-gray-300" />
           </div>
 
           <div className="md:flex flex-wrap  gap-4 p-4 mb-3 rounded bg-white">
+            <div className=" w-full">
+              <h2>{name}</h2>
+       </div>
             {products.map((product) => (
               <div
-                className="md:w-1/2 lg:w-[30%] xl:w-[15%] mb-4"
+                className="md:w-1/2 lg:w-[30%] xl:w-[15%] mb-4 "
                 onClick={() => {
                   navigate(`/product/${product.product_id}`);
                 }}
               >
                 <SmallCart Image={product.images} title={product.name} />
               </div>
+
             ))}
+                        </div>
+
           </div>
         </div>
-      </div>
+     
+       
     </>
   );
 }
