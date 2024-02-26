@@ -16,14 +16,12 @@ import AppLayout from "./AppLayout";
 =======
 
 >>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
-
 import Home from "./components/Home/index";
 import ProductDetails from "./components/product/productDetails";
 
-
 import MyAccount from "./components/MyAccount";
 import HelpMain from "./components/Help";
-import Checkout from "./components/checkout/checkout";
+ import Checkout from "./components/checkout/checkout";
 
 const routes = createBrowserRouter([
   {
@@ -34,13 +32,17 @@ const routes = createBrowserRouter([
       { path: "/home", element: <Home /> },
       { path: "/cart", element: <Cart /> },
       { path: "/myaccount", element: <MyAccount /> },
+      { path: "/product/:id", element: <ProductDetails /> },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 69f02242518796f2cb7a6bb427f3d282a02dd1f3
       { path: "/help", element: <HelpMain /> },
-
 
     ],
   },
   { path: "/checkout", element: <Checkout /> },
+
 ]);
 
 function App() {
