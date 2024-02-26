@@ -175,7 +175,7 @@ const Cart = () => {
                         <div className="  justify-between flex text-white">
                           <button
                             className=" text-orange-600 flex justify-center text-xl items-center	"
-                            onClick={() => handleRemoveItem(product.product_id)}
+                            onClick={() => handleRemoveItem(product._id)}
                           >
                             {" "}
                             <MdOutlineDelete /> Remove
@@ -194,7 +194,7 @@ const Cart = () => {
                           <button
                             onClick={() =>
                               handleDecreaseQuantity(
-                                product.product_id,
+                                product._id,
                                 product.quantity
                               )
                             }
@@ -207,7 +207,7 @@ const Cart = () => {
                             className=" bg-orange-600 w-10 m-2 rounded-md text-2xl"
                             onClick={() =>
                               handleIncreaseQuantity(
-                                product.product_id,
+                                product._id,
                                 product.quantity
                               )
                             }

@@ -77,7 +77,7 @@ const Home = () => {
                       src={product.images}
                       alt={product.name}
                       onClick={() => {
-                        navigate(`/product/${product.product_id}`);
+                        navigate(`/product/${product._id}`);
                       }}
                       className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                     />
