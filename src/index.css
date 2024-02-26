@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+* {
   font-family: "Roboto";
+  /* font-size: 18px; */
 }
 
 .button {

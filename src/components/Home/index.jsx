@@ -3,7 +3,10 @@ import React, { useEffect } from "react";
 import MySlider from "../Slider/Slider";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
-import { useNavigate } from "react-router-dom";
+import LeftSideBar from "../LeftSideBar/LeftSideBar";
+import RightSideBar from "../RightSideBar/RightSideBar";
+import { useNavigate } from "react-router";
+import CarouselMain from "../Carousel/Carousel";
 
 const Home = () => {
   const { products } = useSelector((state) => state.products);
@@ -40,16 +43,29 @@ const Home = () => {
   //   console.log(element.name);
   // });
   // let text = num.toLocaleString("en-US", {style:"currency", currency:"USD"});
-  // mohanad
   return (
     <div className="h-full flex items-center justify-center">
       <div className="container">
+        <div className="flex justify-center mb-7 mt-5 ">
+          <div className="z-10 w-1/5 h-full">
+            {" "}
+            <LeftSideBar />
+          </div>
+
+          <div className="z-0 w-4/6 ">
+            {" "}
+            <CarouselMain />
+          </div>
+          <div className="z-10 w-1/6">
+            <RightSideBar />
+          </div>
+        </div>
         {/* <MySlider /> */}
 
         {/* Products */}
         <Carousel
           responsive={responsive}
-          className="gap-4 p-2 mb-2 rounded bg-white mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center"
+          className="gap-4 p-2 mb-3 rounded bg-white mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center"
         >
           {products.map((product) => (
             <div key={product.id} to={product.id}>
@@ -60,7 +76,7 @@ const Home = () => {
                       src={product.images}
                       alt={product.name}
                       onClick={() => {
-                        navigate(`/product/${product.product_id}`);
+                        navigate(`/product/${product._id}`);
                       }}
                       className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                     />
