@@ -128,6 +128,122 @@ export default function SupermarkerCategory() {
             </div>
           ))}
         </div>
+
+        <div className="md:flex  p-3 mb-3 ">
+          <div className="md:me-1 w-full bg-white">
+            <h4 className="uppercase text-base py-5 px-5">Category</h4>
+            <ul className="list-none ">
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1 ">
+                  Supermarket
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Air Fresheners
+                </a>
+              </li>
+
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Beverages
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Candy & Chocolate
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Cleaning Tools
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Cooking & Baking
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Dairy, Cheese & Eggs
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Dishwashing
+                </a>
+              </li>
+
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Drinks
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Food Cupboard
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Herbs, Spices & Seasonings
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Household Batteries
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Household Cleaning
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Household Supplies
+                </a>
+              </li>
+
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Laundry
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="w-[15rem] pb-1"  >
+                  Lighters & Matches
+                </a>
+                </li>
+                <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Paper & Plastic
+                </a>
+              </li>
+              <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+                <a href="" className="pb-1">
+                  Tobacco-Related Products
+                </a>
+              </li>
+            </ul>
+
+            <hr className="h-0.5 bg-gray-300"/>
+          </div>
+
+          <div className="md:flex flex-wrap  gap-4 p-4 mb-3 rounded bg-white">
+            {products.map((product) => (
+              <div
+                className="md:w-1/2 lg:w-[30%] xl:w-[15%] mb-4"
+                onClick={() => {
+                  navigate(`/product/${product.product_id}`);
+                }}
+              >
+                <SmallCart Image={product.images} title={product.name} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );
