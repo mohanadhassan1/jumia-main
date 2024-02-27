@@ -436,7 +436,7 @@ const HelpMain = () => {
           </div>
 
           {/* right side content */}
-          <div className="w-9/12 text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          <div className="w-9/12 mb-10 text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             {/* Conditionally render Payments component based on showPayments state */}
             {showPayments ? <Payments /> : null}
 
