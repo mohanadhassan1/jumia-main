@@ -35,7 +35,7 @@ const Navbar = () => {
 
         <div className="flex items-center mt-4 lg:mt-0">
           <div className="relative flex flex-col lg:flex-row items-center">
-            <FaSearch className="absolute top-0 left-0 ml-4 lg:hidden text-gray-400" />
+            <FaSearch className="absolute top-3 left-3 ml-4 hidden lg:block text-gray-400" />
             <input
               className="ml-0 lg:ml-4 lg:pl-10 pr-2 outline-none shadow-xl rounded lg:w-96 h-10"
               type="search"
