@@ -240,6 +240,7 @@ const Cart = () => {
               <button
                 className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white m-4 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
                 type="button"
+                onClick={() => { window.location.href = '/checkout'; }}
               >
                 CHECKOUT (EGY {subtotal})
               </button>{" "}
