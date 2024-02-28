@@ -43,6 +43,7 @@ const Home = () => {
   //   console.log(element.name);
   // });
   // let text = num.toLocaleString("en-US", {style:"currency", currency:"USD"});
+
   return (
     <div className="h-full flex items-center justify-center">
       <div className="container">
@@ -54,7 +55,38 @@ const Home = () => {
 
           <div className=" w-4/6 mx-auto ">
             {" "}
-            <CarouselMain />
+            <CarouselMain
+              images={[
+                {
+                  src: "https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Fashion/Shein/DesktopEN.png",
+                  alt: "1",
+                },
+                {
+                  src: "https://eg.jumia.is/cms/Week7-8-2024/ADS/Aman/DesktopENc.png",
+                  alt: "2",
+                },
+                {
+                  src: "https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Fashion/Defacto/DesktopEN.png",
+                  alt: "3",
+                },
+                {
+                  src: "https://eg.jumia.is/cms/Week2-2024/Clearance/DesktopENClearance.jpg",
+                  alt: "4",
+                },
+                {
+                  src: "https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Appliances-TVs/DesktopEN.gif",
+                  alt: "5",
+                },
+                {
+                  src: "https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Home/DesktopEN.png",
+                  alt: "6",
+                },
+                {
+                  src: "https://eg.jumia.is/cms/Week2-2024/OPT/22-01/KitchenEssential/DesktopEN.png",
+                  alt: "7",
+                },
+              ]}
+            />
           </div>
           <div className=" w-1/6">
             <RightSideBar />

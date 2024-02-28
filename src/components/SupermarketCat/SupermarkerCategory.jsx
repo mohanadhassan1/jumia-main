@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
 import SmallCart from "../Small Cart/SmallCart";
+import CarouselMain from "../Carousel/Carousel";
+import CarouselProducts from "../Carousel/Carousel for category/CarouselProduct";
 
 export default function SupermarkerCategory() {
   const { products } = useSelector((state) => state.products);
@@ -77,7 +79,7 @@ export default function SupermarkerCategory() {
             }
           />
         </div>
-        <Carousel
+        {/* <Carousel
           responsive={responsive}
           className="gap-4 p-2 mb-3 rounded bg-white mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center"
         >
@@ -104,7 +106,8 @@ export default function SupermarkerCategory() {
               </div>
             </div>
           ))}
-        </Carousel>
+        </Carousel> */}
+        <CarouselProducts products={products}/>
         <h2 className=" text-xl font-medium uppercase text-center py-4 px-6 bg-teal-200">
           Check More Deals
         </h2>
@@ -440,6 +443,8 @@ export default function SupermarkerCategory() {
             ))}
           </div>
         </div>
+
+
       </div>
     </>
   );
