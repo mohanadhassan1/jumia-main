@@ -1,241 +1,145 @@
 import React, { useState } from "react";
 
-const Orders = () => {
-  const [isPlaceOrderVisible, setIsPlaceOrderVisible] = useState(false);
-  const [isPaymentMethodsVisible, setIsPaymentMethodsVisible] = useState(false);
-  const [isTrackOrderVisible, setIsTrackOrderVisible] = useState(false);
-  const [isCancelOrderVisible, setIsCancelOrderVisible] = useState(false);
-  const [isReturnRefundPolicyVisible, setIsReturnRefundPolicyVisible] =
-    useState(false);
-  const [isReportIssueVisible, setIsReportIssueVisible] = useState(false);
-  const [isAddPhoneNumberVisible, setIsAddPhoneNumberVisible] = useState(false);
+const CollapsibleSection = ({ title, content, isOpen, toggleVisibility }) => {
+  return (
+    <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <p className="pt-2 pl-2 underline">Orders</p>
+      <button
+        type="button"
+        className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+        onClick={toggleVisibility}
+      >
+        <h3 className="font-bold">
+          {title}
+          <span className="absolute right-4 top-2 font-bold">
+            {isOpen ? "-" : "+"}
+          </span>
+        </h3>
+      </button>
+      {isOpen && (
+        <div className="p-4 dark:bg-gray-800">
+          <p className="font-normal">{content}</p>
+        </div>
+      )}
+    </div>
+  );
+};
 
-  const togglePlaceOrderVisibility = () => {
-    setIsPlaceOrderVisible(!isPlaceOrderVisible);
-  };
-  const togglePaymentMethodsVisibility = () => {
-    setIsPaymentMethodsVisible(!isPaymentMethodsVisible);
-  };
-  const toggleTrackOrderVisibility = () => {
-    setIsTrackOrderVisible(!isTrackOrderVisible);
-  };
-  const toggleCancelOrderVisibility = () => {
-    setIsCancelOrderVisible(!isCancelOrderVisible);
-  };
-  const toggleReturnRefundPolicyVisibility = () => {
-    setIsReturnRefundPolicyVisible(!isReturnRefundPolicyVisible);
-  };
-  const toggleReportIssueVisibility = () => {
-    setIsReportIssueVisible(!isReportIssueVisible);
-  };
-  const toggleAddPhoneNumberVisibility = () => {
-    setIsAddPhoneNumberVisible(!isAddPhoneNumberVisible);
+const Orders = () => {
+  const [openSection, setOpenSection] = useState(null);
+
+  const toggleVisibility = (section) => {
+    setOpenSection(section === openSection ? null : section);
   };
 
   return (
     <>
-      {/* Place an Order */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-        <p className="pt-2 pl-2 underline">Orders</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={togglePlaceOrderVisibility}
-        >
-          <h3 className="font-bold">
-            How to place an order on Jumia?
-            <span className="absolute right-4 top-2 font-bold">
-              {isPlaceOrderVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-        {isPlaceOrderVisible && (
-          <div className="p-4 dark:bg-gray-800">
-            <p className="font-normal">
+      <CollapsibleSection
+        title="How to place an order on Jumia?"
+        content={
+          <>
+            <p>
               To place an order on Jumia:
               <ol className="list-decimal list-inside font-normal">
+                <li>Browse and select the desired product(s).</li>
+                <li>Click on "Add to Cart".</li>
                 <li>
-                  <span className="font-bold"> Step 1: </span>Browse and select
-                  the desired product(s).
+                  Proceed to checkout and enter your delivery information.
                 </li>
                 <li>
-                  <span className="font-bold"> Step 2: </span>Click on "Add to
-                  Cart".
+                  Select a payment method and complete the payment process
+                  (Prepaid).
                 </li>
-                <li>
-                  <span className="font-bold"> Step 3: </span> Proceed to
-                  checkout and enter your delivery information.
-                </li>
-                <li>
-                  <span className="font-bold"> Step 4: </span>Select a payment
-                  method and complete the payment process (Prepaid).
-                </li>
-                <li>
-                  <span className="font-bold"> Step 5: </span>Confirm your order
-                  and wait for delivery.
-                </li>
+                <li>Confirm your order and wait for delivery.</li>
               </ol>
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "placeOrder"}
+        toggleVisibility={() => toggleVisibility("placeOrder")}
+      />
 
-      {/* Payment Methods */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-        <p className="pt-2 pl-2 underline">Orders</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={togglePaymentMethodsVisibility}
-        >
-          <h3 className="font-bold">
-            What payment methods are accepted?
-            <span className="absolute right-4 top-2 font-bold">
-              {isPaymentMethodsVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-        {isPaymentMethodsVisible && (
-          <div className="p-4 dark:bg-gray-800">
-            <p className="font-normal">
+      <CollapsibleSection
+        title="What payment methods are accepted?"
+        content={
+          <>
+            <p>
               Jumia offers multiple payment options, including:
               <ol className="list-decimal list-inside font-normal">
                 <li>
-                  <span className="font-bold"> Pay on Delivery:</span> You can
-                  pay in cash when the courier delivers your order.
+                  Pay on Delivery: You can pay in cash when the courier delivers
+                  your order.
                 </li>
                 <li>
-                  <span className="font-bold">JumiaPay:</span> Secure payment
-                  using Bank cards, Installment, Smart wallets, or Fawry.
+                  JumiaPay: Secure payment using Bank cards, Installment, Smart
+                  wallets, or Fawry.
                 </li>
-                <li>
-                  <span className="font-bold">Vouchers:</span> Pay using a
-                  voucher code.
-                </li>
+                <li> Vouchers: Pay using a voucher code.</li>
               </ol>
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "paymentMethods"}
+        toggleVisibility={() => toggleVisibility("paymentMethods")}
+      />
 
-      {/* Track Order */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-        <p className="pt-2 pl-2 underline">Orders</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleTrackOrderVisibility}
-        >
-          <h3 className="font-bold">
-            How to track my order?
-            <span className="absolute right-4 top-2 font-bold">
-              {isTrackOrderVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-        {isTrackOrderVisible && (
-          <div className="p-4 dark:bg-gray-800">
-            <p className="font-normal">
+      <CollapsibleSection
+        title="How to track my order?"
+        content={
+          <>
+            <p>
               To track your order on Jumia:
               <ol className="list-decimal list-inside font-normal">
+                <li>Log in to your Jumia account.</li>
+                <li>Go to the "My Orders" section.</li>
                 <li>
-                  <span className="font-bold"> Step 1: </span>Log in to your
-                  Jumia account.
+                  Find your order and click on "See Details", then click on
+                  “Status History”.
                 </li>
                 <li>
-                  <span className="font-bold"> Step 2: </span>Go to the "My
-                  Orders" section.
-                </li>
-                <li>
-                  <span className="font-bold"> Step 3: </span>Find your order
-                  and click on "See Details", then click on “Status History”.
-                </li>
-                <li>
-                  <span className="font-bold"> Step 4: </span>You will see the
-                  current status of your order, including the estimated delivery
-                  time.
+                  You will see the current status of your order, including the
+                  estimated delivery time.
                 </li>
               </ol>
-              We are also sending order updates Via Email. If you have any
-              questions about your order status, you can contact Jumia customer
-              support for assistance.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "trackOrder"}
+        toggleVisibility={() => toggleVisibility("trackOrder")}
+      />
 
-      {/* Cancel Order */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-        <p className="pt-2 pl-2 underline">Orders</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleCancelOrderVisibility}
-        >
-          <h3 className="font-bold">
-            How to cancel items or orders?
-            <span className="absolute right-4 top-2 font-bold">
-              {isCancelOrderVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-        {isCancelOrderVisible && (
-          <div className="p-4 dark:bg-gray-800">
-            <p className="font-normal">
+      <CollapsibleSection
+        title="How to cancel items or orders?"
+        content={
+          <>
+            <p>
               To cancel items or orders on Jumia:
               <ol className="list-decimal list-inside font-normal">
+                <li>Log in to your Jumia account.</li>
+                <li>Go to your "Orders" page.</li>
+                <li>Find the order or item you want to cancel.</li>
+                <li>Click on "See Details" for that order.</li>
+                <li>Select the item you want to cancel.</li>
                 <li>
-                  <span className="font-bold"> Step 1: </span>Log in to your
-                  Jumia account.
-                </li>
-                <li>
-                  <span className="font-bold"> Step 2: </span>Go to your
-                  "Orders" page.
-                </li>
-                <li>
-                  <span className="font-bold"> Step 3: </span>Find the order or
-                  item you want to cancel.
-                </li>
-                <li>
-                  <span className="font-bold"> Step 4: </span>Click on "See
-                  Details" for that order.
-                </li>
-                <li>
-                  <span className="font-bold"> Step 5: </span>Select the item
-                  you want to cancel.
-                </li>
-                <li>
-                  <span className="font-bold"> Step 6: </span> Click the "Cancel
-                  Item" button and follow the prompts to complete the
-                  cancellation process.
+                  Click the "Cancel Item" button and follow the prompts to
+                  complete the cancellation process.
                 </li>
               </ol>
               Note: Please be aware that some items/orders may not be eligible
               for cancelation, or there may be fees associated with canceling an
               item/order.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "cancelOrder"}
+        toggleVisibility={() => toggleVisibility("cancelOrder")}
+      />
 
-      {/* Return and Refund Policy */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-        <p className="pt-2 pl-2 underline">Orders</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleReturnRefundPolicyVisibility}
-        >
-          <h3 className="font-bold">
-            What is the return and refund policy?
-            <span className="absolute right-4 top-2 font-bold">
-              {isReturnRefundPolicyVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-        {isReturnRefundPolicyVisible && (
-          <div className="p-4 dark:bg-gray-800">
-            <p className="font-normal">
+      <CollapsibleSection
+        title="What is the return and refund policy?"
+        content={
+          <>
+            <p>
               <ul className="list-disc list-inside font-normal">
                 <li>
                   <span className="font-bold">Return: </span> You can request a
@@ -267,28 +171,17 @@ const Orders = () => {
                 </li>
               </ul>
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "returnRefundPolicy"}
+        toggleVisibility={() => toggleVisibility("returnRefundPolicy")}
+      />
 
-      {/* Report Issue */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-        <p className="pt-2 pl-2 underline">Orders</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleReportIssueVisibility}
-        >
-          <h3 className="font-bold">
-            How to report an issue or contact customer support?
-            <span className="absolute right-4 top-2 font-bold">
-              {isReportIssueVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-        {isReportIssueVisible && (
-          <div className="p-4 dark:bg-gray-800">
-            <p className="font-normal">
+      <CollapsibleSection
+        title="How to report an issue or contact customer support?"
+        content={
+          <>
+            <p>
               If you need to report an issue with your Jumia order or contact
               customer support, you can do so through several methods:
               <ul className="list-disc list-inside font-normal">
@@ -299,59 +192,39 @@ const Orders = () => {
                 </li>
               </ul>
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "reportIssue"}
+        toggleVisibility={() => toggleVisibility("reportIssue")}
+      />
 
-      {/* Add Phone Number */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-        <p className="pt-2 pl-2 underline">Orders</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleAddPhoneNumberVisibility}
-        >
-          <h3 className="font-bold">
-            How do I add my phone number and address to my account?
-            <span className="absolute right-4 top-2 font-bold">
-              {isAddPhoneNumberVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-        {isAddPhoneNumberVisible && (
-          <div className="p-4 dark:bg-gray-800">
-            <p className="font-normal">
+      <CollapsibleSection
+        title="How do I add my phone number and address to my account?"
+        content={
+          <>
+            <p>
               You can easily add your phone number and address to your account
               by following these steps:
               <ol className="list-decimal list-inside font-normal">
+                <li>Log in to your account.</li>
+                <li>Go to “My Account”.</li>
                 <li>
-                  <span className="font-bold"> Step 1: </span>Log in to your
-                  account.
+                  In the "My Jumia Account" section, click on the "Add/Edit"
+                  button in the “Address Book”.
                 </li>
                 <li>
-                  <span className="font-bold"> Step 2: </span>Go to “My
-                  Account”.
+                  Enter your phone number and address in the fields provided.
                 </li>
-                <li>
-                  <span className="font-bold"> Step 3: </span>In the "My Jumia
-                  Account" section, click on the "Add/Edit" button in the
-                  “Address Book”.
-                </li>
-                <li>
-                  <span className="font-bold"> Step 4: </span> Enter your phone
-                  number and address in the fields provided.
-                </li>
-                <li>
-                  <span className="font-bold"> Step 5: </span>Click "Save" to
-                  save your changes.
-                </li>
+                <li>Click "Save" to save your changes.</li>
               </ol>
               Your phone number and address will now be associated with your
               account.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "addPhoneNumber"}
+        toggleVisibility={() => toggleVisibility("addPhoneNumber")}
+      />
     </>
   );
 };
