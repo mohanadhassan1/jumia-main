@@ -31,8 +31,6 @@ import CreateReturn from "./HelpContents/CreateReturn";
 const HelpMain = () => {
   const [activeTab, setActiveTab] = useState("Payments");
 
-  
-
   const displayContent = (tabName) => {
     setActiveTab(tabName);
   };
@@ -134,7 +132,6 @@ const HelpMain = () => {
 
         {/* List group and content */}
         <div className="h-auto w-full gap-2 flex">
-          
           {/* Left side list group */}
           <div className="w-3/12">
             <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -151,7 +148,7 @@ const HelpMain = () => {
                 <button
                   key={index}
                   type="button"
-                  className={`relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b ${
+                  className={`relative h-auto inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b ${
                     activeTab === tab.name
                       ? "border-gray-200"
                       : "border-transparent"

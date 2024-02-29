@@ -6,12 +6,12 @@ const CollapsibleSection = ({ title, content, isOpen, toggleVisibility }) => {
       <p className="pt-2 pl-2 underline">Payments</p>
       <button
         type="button"
-        className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+        className="relative h-auto inline-flex items-center w-full px-4 pr-10 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
         onClick={toggleVisibility}
       >
         <h3 className="font-bold">
           {title}
-          <span className="absolute right-4 top-2 font-bold">
+          <span className="absolute  right-4 top-0 font-bold">
             {isOpen ? "-" : "+"}
           </span>
         </h3>
