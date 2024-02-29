@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 const CreateReturn = () => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  const handleVideoLoaded = () => {
+    setVideoLoaded(true);
+  };
   return (
     <div className="p-10">
       <h2 className="font-bold">How to Create a Return</h2>
@@ -52,6 +57,11 @@ const CreateReturn = () => {
       </div>
 
       <div className="my-5">
+        {!videoLoaded && (
+          <div class=" flex justify-center items-center">
+            <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+          </div>
+        )}
         <iframe
           width="700"
           height="400"
@@ -60,6 +70,8 @@ const CreateReturn = () => {
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
+          onLoad={handleVideoLoaded}
+          style={{ display: videoLoaded ? "block" : "none" }}
         ></iframe>
       </div>
 
