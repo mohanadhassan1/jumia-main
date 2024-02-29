@@ -6,6 +6,7 @@ import { BsPerson } from "react-icons/bs";
 import { FiInbox } from "react-icons/fi";
 import { CiHeart } from "react-icons/ci";
 import { AiOutlineMessage } from "react-icons/ai";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Navbar = () => {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
@@ -84,6 +85,7 @@ const Navbar = () => {
                 >
                   <BsPerson size={20} className="mr-2" />
                   Account
+                  <IoIosArrowDown className="absolute right-0 " />
                 </button>
 
                 {/* Account Dropdown menu */}
@@ -161,6 +163,7 @@ const Navbar = () => {
                 >
                   <FaRegQuestionCircle size={20} className="mr-2" />
                   HELP
+                  <IoIosArrowDown className="absolute right-0 " />
                 </button>
 
                 {/* Help Dropdown menu */}
