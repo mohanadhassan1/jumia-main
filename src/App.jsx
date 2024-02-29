@@ -6,8 +6,7 @@ import AppLayout from "./AppLayout";
 // import ProductDetails from "./components/product/productDetails";
 
 import Home from "./components/Home/index";
-import ProductDetails from "./components/product/ProductDetails";
-import Trash from "./components/product/Trash";
+import ProductDetails from "./components/product/productDetails";
 import MyAccount from "./components/MyAccount";
 import Login from "./components/Login/index";
 import HelpMain from "./components/Help";
@@ -26,13 +25,13 @@ const routes = createBrowserRouter([
       { path: "/myaccount", element: <MyAccount /> },
 
       { path: "/product/:id", element: <ProductDetails /> },
-      { path: "/trash", element: <Trash /> },
 
       { path: "/help", element: <HelpMain /> },
       { path: "/Supremarket", element: <SupermarkerCategory /> },
     ],
   },
   { path: "/checkout", element: <Checkout /> },
+  { path: "/login", element: <Login /> },
 ]);
 
 function App() {
