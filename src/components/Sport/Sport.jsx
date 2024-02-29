@@ -1,68 +1,56 @@
 import React from "react";
 
+const sportCategories = [
+  {
+    title: "Cardio Training",
+    subcategories: [
+      "Treadmills",
+      "Exercise Bike",
+      "Elliptical Trainers",
+    ],
+  },
+  {
+    title: "Strength Training Equipment",
+    subcategories: ["Dumbbells", "Bars", "Core & Abdominal Trainers"],
+  },
+  {
+    title: "Outdoor & Adventure",
+    subcategories: ["Cycling", "Running"],
+  },
+  {
+    title: "Sports Wear",
+    subcategories: ["Men Sports Wear", "Women Sports Wear"],
+  },
+  {
+    title: "Sports & Fitness",
+    subcategories: ["Accessories", "Swimming", "Team Sports", "Hunting & Fishing"],
+  },
+  {
+    title: "Accessories",
+    subcategories: ["Exercise Bands", "Jump Ropes", "Exercise Mats", "Gym Bags"],
+  },
+];
+
+
+
+const renderCategory = (category) => (
+  <div key={category.title} className="flex flex-col mx-3">
+    <a href="" className="font-bold ">
+      {category.title}
+    </a>
+    <hr className="h-0.5 bg-black" />
+    {category.subcategories && (
+          <a href="" className="">{category.subcategories}</a>
+
+    )}
+  </div>
+);
+
 export default function Sport() {
   return (
     <>
-      <div className="flex h-[27rem] w-[41rem] justify-around	bg-gray-100">
-        <div className="flex flex-col mx-3">
-          <a href="">Cardio Training</a>
-          <hr className="h-0.5 bg-black" />
-          <a href="">Treadmills</a>
-          <a href="">Exercise Bike</a>
-          <a href="">Elliptical Trainers</a>
-
-          <a href="" className="mt-5">
-            {" "}
-            Strength Training Equipment
-          </a>
-          <hr className="h-0.5 bg-black" />
-          <a href="">Dumbbells</a>
-          <a href="">Bars</a>
-          <a href="">Core & Abdominal Trainers</a>
-
-          <a href="" className="mt-5">
-            {" "}
-            Outdoor & Adventure
-          </a>
-          <hr className="h-0.5 bg-black" />
-
-          <a href="">Cycling</a>
-          <a href="">Running</a>
-        </div>
-
-        <div className="flex flex-col mx-3">
-          <a href="" className="	">
-            {" "}
-            Sports Wear
-          </a>
-          <hr className="h-0.5 bg-black" />
-
-          <a href="">Men Sports Wear</a>
-          <a href="">Women Sports Wear</a>
-
-          <a href="" className="	mt-5">
-            Sports & Fitness
-          </a>
-          <hr className="h-0.5 bg-black" />
-
-          <a href="">Accessories</a>
-          <a href="">Swimming</a>
-          <a href="">Team Sports</a>
-          <a href="">Hunting & Fishing</a>
-          <a href="">Leisure Sports & Game Room</a>
-        </div>
-        <div className="flex flex-col mx-3">
-          <a href="" className="	">
-            {" "}
-            Accessories
-          </a>
-          <hr className="h-0.5 bg-black" />
-
-          <a href="">Exercise Bands</a>
-          <a href="">Jump Ropes</a>
-          <a href="">Exercise Mats</a>
-          <a href="">Gym Bags</a>
-        </div>
+      <div className="md:grid grid-cols-3 gap-4 mx-auto w-[47rem] min-h-[29rem] bg-gray-300">
+        {sportCategories.map(renderCategory)}
       </div>
     </>
   );
