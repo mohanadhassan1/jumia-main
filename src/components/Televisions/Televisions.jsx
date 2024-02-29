@@ -1,37 +1,36 @@
-import React from 'react'
+import React from "react";
+
+const televisionCategories = [
+  {
+    title: "Televisions & Receivers",
+    subcategories: ["Televisions", "Receivers", "Remote Controls"],
+  },
+  {
+    title: "Audio",
+    subcategories: ["Radios", "Audio Speakers", "Home Theater Systems", "Headphones"],
+  },
+];
+
+
+
+const renderCategory = (category) => (
+  <div key={category.title} className="flex flex-col mx-3">
+    <a href="" className=" ">
+      {category.title}
+    </a>
+    <hr className="h-0.5 bg-black" />
+    {category.subcategories && (
+    <a>{category.subcategories}</a>
+    )}
+  </div>
+);
 
 export default function Televisions() {
   return (
     <>
-    <div className="flex h-[27rem] w-[41rem] justify-around	bg-gray-100">
-    <div className="flex flex-col mx-3">
-        <a href="" >
-          {" "}
-          Televisions & Receivers
-        </a>
-        <hr className="h-0.5 bg-black"/>
-        <a href="">Televisions</a>
-        <a href="">Receivers</a>
-        <a href=""> Remote Controls</a>
-
+      <div className="md:grid grid-cols-3 gap-4 mx-auto w-[47rem] min-h-[29rem] bg-gray-300">
+        {televisionCategories.map(renderCategory)}
       </div>
-    <div className="flex flex-col mx-3">
-        <a href="" className="	">
-          {" "}
-          Audio {" "}
-        </a>
-        <hr className="h-0.5 bg-black"/>
-
-        <a href=""> Radios</a>
-        <a href="">Audio Speakers</a>
-        <a href="">Home Theater Systems</a>
-        <a href="">Headphones</a>
-  
-   
-               
-      </div>
-    
-    </div>
-  </> 
-    )
+    </>
+  );
 }

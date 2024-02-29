@@ -1,87 +1,85 @@
-import React from 'react'
+import React from "react";
+
+const otherCategories = [
+  {
+    title: "Jumia Global",
+  },
+  {
+    title: "Electronics",
+    subcategories: [
+      "Television & Video",
+      "Cameras",
+      "Audio",
+    ],
+  },
+  {
+    title: "Automobile",
+    subcategories: [
+      "Car Care",
+      "Car Electronics & Lights",
+      "Oils & Fluids",
+      "Exterior Accessories",
+      "Interior Accessories",
+    ],
+  },
+  {
+    title: "Books, Movies & Music",
+    subcategories: [
+      "Art & Humanities",
+      "Bestselling Books",
+      "Biography & Autobiography Books",
+      "Business & Finance Books",
+      "Education & Learning",
+      "Entertainment Books",
+      "Family & Lifestyle Books",
+      "Fiction Books",
+      "Journals & Planners",
+      "Magazines",
+      "Motivational & Self-Help Books",
+      "Religion Books",
+      "Science & Technology Books",
+    ],
+  },
+  {
+    title: "Industrial & Scientific",
+    subcategories: ["Packaging & Shipping Supplies"],
+  },
+  {
+    title: "Hand Crafted",
+    subcategories: [
+      "Women's Accessories",
+      "Baby Products",
+      "Bags",
+      "Bedding",
+      "Home Décor",
+      "Jewelry & Accessories",
+    ],
+  },
+
+];
+
+
+
+const renderCategory = (category) => (
+  <div key={category.title} className="flex flex-col mx-3">
+    <a href="" className="font-bold">
+      {category.title}
+    </a>
+    <hr className="h-0.5 bg-black" />
+    {category.subcategories && (
+     <a href="" className="">
+      {category.subcategories}
+     </a>
+    )}
+  </div>
+);
 
 export default function OtherCategories() {
   return (
-<>
-    <div className="flex h-[27rem] w-[41rem] justify-around	bg-gray-100">
-      <div className="flex flex-col mx-3">
-        <a href="">Jumia Global</a>
-        <hr className="h-0.5 bg-black" />
-      
-  
-
-        <a href="" className="mt-5">
-          {" "}
-          Electronics
-       </a>
-        <hr className="h-0.5 bg-black" />
-        <a href="">Television & Video</a>
-        <a href="">Cameras</a>
-        <a href="">Audio </a>
-
-
-
-        <a href="" className="mt-5">
-          {" "}
-          Automobile
-       </a>
-        <hr className="h-0.5 bg-black" />
-        <a href="">Car Care</a>
-        <a href="">Car Electronics & Lights</a>
-        <a href="">Oils & Fluids</a>
-        <a href="">Exterior Accessories</a>
-        <a href="">Interior Accessories</a>
-
-  <a href="" className="mt-5">
-          {" "}
-          Industrial & Scientific
-       </a>
-        <hr className="h-0.5 bg-black" />
-        <a href="">Packaging & Shipping Supplies</a>
-      
-
+    <>
+      <div className="md:grid grid-cols-3 gap-4 mx-auto w-[47rem] min-h-[29rem] bg-gray-300">
+        {otherCategories.map(renderCategory)}
       </div>
-
-      <div className="flex flex-col mx-3">
-        <a href="" className="	">
-          {" "}
-          Hand Crafted 
-        </a>
-        <hr className="h-0.5 bg-black" />
-
-        <a href="">Women Accessories</a>
-        <a href="">Baby Products</a>
-        <a href="">Bags</a>
-        <a href="">Bedding</a>
-        <a href="">Home Décor</a>
-        <a href="">Jewelry & Accessories</a>
-
-              
-      </div>
-      <div className="flex flex-col mx-3">
-        <a href="" className="	">
-          {" "}
-          Books, Movies and Music
-        </a>
-        <hr className="h-0.5 bg-black" />
-
-        <a href="">Art & Humanities</a>
-        <a href="">Bestselling Books</a>
-        <a href="">Biography & Autobiography Books</a>
-        <a href="">Business & Finance Books</a>
-        <a href="">Education & Learning</a>
-        <a href="">Entertainment Books</a>
-        <a href="">Family & Lifestyle Books</a>
-        <a href="">Fiction Books</a>
-        <a href="">Journals & Planners</a>
-        <a href="">Magazines</a>
-        <a href="">Motivational & Self-Help Books</a>
-        <a href="">Religion Books</a>
-        <a href="">Science & Technology Books</a>
-       
-       
-      </div>
-    </div>
-  </>
-    )
+    </>
+  );
 }
