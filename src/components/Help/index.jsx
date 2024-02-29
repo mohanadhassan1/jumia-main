@@ -31,9 +31,9 @@ import CreateReturn from "./HelpContents/CreateReturn";
 const HelpMain = () => {
   const [activeTab, setActiveTab] = useState("Payments");
 
-  useEffect(() => {
-    setActiveTab("Payments");
-  }, []);
+  // useEffect(() => {
+  //   setActiveTab("Payments");
+  // }, []);
 
   const displayContent = (tabName) => {
     setActiveTab(tabName);

@@ -138,7 +138,7 @@ const Payments = () => {
 
       {/* JumiaPay How It Works Section */}
       <CollapsibleSection
-        title="How does JumiaPay on Delivery work? 🤔"
+        title="How does JumiaPay on Delivery work?"
         content={
           <>
             <p className="font-normal">
