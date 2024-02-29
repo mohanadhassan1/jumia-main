@@ -21,254 +21,68 @@ import OtherCategories from "../OtherCategories/OtherCategories";
 import Furniture from "../Furniture/Furniture";
 import Phone from "../Phone/Phone";
 
+
+const categories = [
+  { name: "Supermarket", icon: CiApple, component: Supermarket ,category:"/Supremarket"},
+  { name: "Fashion", icon: GiClothes, component: Fashion ,category:"#"},
+  { name: "Health & Beauty", icon: MdOutlineHealthAndSafety, component: Beauty,category:"#" },
+  { name: "Baby Products", icon: PiBaby, component: Baby ,category:"#"},
+  { name: "Phones & Tablets", icon: IoIosPhonePortrait, component: Phone ,category:"#" },
+  { name: "Home & Furniture", icon: IoHomeOutline, component: Furniture ,category:"#" },
+  { name: "Appliances", icon: BiSolidDrink, component: Appliances ,category:"#" },
+  { name: "Televisions & Audio", icon: PiTelevisionBold, component: Televisions ,category:"#" },
+  { name: "Computing", icon: MdOutlineComputer, component: Computing ,category:"#" },
+  { name: "Sporting Goods", icon: FaDumbbell, component: Sport ,category:"#" },
+  { name: "Gaming", icon: IoGameControllerOutline, component: Game ,category:"#" },
+  { name: "Other categories", icon: CgMoreO, component: OtherCategories ,category:"#" },
+];
 export default function LeftSideBar() {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isFashion, setIsFashion] = useState(false);
-  const [isBeauty, setIsBeauty] = useState(false);
-  const [isBaby, setIsBaby] = useState(false);
-  const [isFurniture, setIsFurniture] = useState(false);
-  const [isAppliances, setIsAppliances] = useState(false);
-  const [isTV, setIsTV] = useState(false);
-  const [isComputing, setIsComputing] = useState(false);
-  const [isSport, setIsSport] = useState(false);
-  const [isGame, setIsGame] = useState(false);
-  const [isOther, setIsOther] = useState(false);
-  const [isphone, setIsphone] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   return (
-    <>
-      <div className="md:bg-white relative  ">
-        {" "}
-        <div className="flex w-[21rem]">
-          {/* <!-- Sidebar --> */}
-          <aside className=" h-full">
-            <div className="p-3" >
-              <div className="mt-4">
-                <ul>
+    <div className="md:bg-white relative">
+      <button
+        className="md:hidden absolute top-3 right-3 z-50 "
+        onClick={toggleSidebar}
+      >
+        {isSidebarOpen ? "Close" : "Open"}
+      </button>
+      <div className={`md:flex  ${isSidebarOpen ? '' : 'hidden'}`}>
+        <aside className="h-full">
+          <div className="p-3">
+            <div className="mt-4">
+              <ul>
+                {categories.map((category, index) => (
                   <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
+                    key={index}
+                    className="mb-3"
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
                   >
                     <a
-                      href="/Supremarket"
-                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
+                      href={category.category}
+                      className="flex items-center text-black ps-[2rem]   pe-full hover:text-gray-400"
                     >
-                      <CiApple className="me-1" />
-                      Supermarket
+                      <category.icon className="me-1" />
+                      {category.name}
                     </a>
-                    {isHovered && (
-                      <div className="absolute z-50 top-2 left-full ml-1 bg-gray-500">
-                        {<Supermarket  />}
+                    {hoveredIndex === index && (
+                      <div className="absolute z-50 top-2 left-48 ps-8 ml-1 ">
+                        <category.component />
                       </div>
                     )}
                   </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsFashion(true)}
-                    onMouseLeave={() => setIsFashion(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
-                    >
-                      <GiClothes className="me-1" />
-                      Fashion
-                    </a>
-                    {isFashion && (
-                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
-                        {<Fashion />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsBeauty(true)}
-                    onMouseLeave={() => setIsBeauty(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
-                    >
-                      <MdOutlineHealthAndSafety className="me-1" />
-                      Health & Beauty
-                    </a>
-                    {isBeauty && (
-                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
-                        {<Beauty />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsBaby(true)}
-                    onMouseLeave={() => setIsBaby(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
-                    >
-                      <PiBaby className="me-1" />
-                      Baby Products
-                    </a>
-                    {isBaby && (
-                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
-                        {<Baby />}
-                      </div>
-                    )}
-                  </li>
-
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsphone(true)}
-                    onMouseLeave={() => setIsphone(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
-                    >
-                      <IoIosPhonePortrait className="me-1" />
-                      Phones & Tablets 
-                                         </a>
-                    {isphone && (
-                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
-                        {<Phone className="me-1" />}
-                      </div>
-                    )}
-                  </li>
-
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsFurniture(true)}
-                    onMouseLeave={() => setIsFurniture(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
-                    >
-                      <IoHomeOutline className="me-1" />
-                      Home & Furniture
-                    </a>
-                    {isFurniture && (
-                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
-                        {<Furniture className="me-1" />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsAppliances(true)}
-                    onMouseLeave={() => setIsAppliances(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
-                    >
-                      <BiSolidDrink className="me-1" />
-                      Appliances
-                    </a>
-                    {isAppliances && (
-                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
-                        {<Appliances />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsTV(true)}
-                    onMouseLeave={() => setIsTV(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
-                    >
-                      <PiTelevisionBold className="me-1" />
-                      Televisions & Audio
-                    </a>
-                    {isTV && (
-                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
-                        {<Televisions />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsComputing(true)}
-                    onMouseLeave={() => setIsComputing(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
-                    >
-                      <MdOutlineComputer className="me-1" />
-                      Computing
-                    </a>
-                    {isComputing && (
-                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
-                        {<Computing />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsSport(true)}
-                    onMouseLeave={() => setIsSport(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
-                    >
-                      <FaDumbbell className="me-1" />
-                      Sporting Goods
-                    </a>
-                    {isSport && (
-                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
-                        {<Sport />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsGame(true)}
-                    onMouseLeave={() => setIsGame(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
-                    >
-                      <IoGameControllerOutline className="me-1" />
-                      Gaming
-                    </a>
-                    {isGame && (
-                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
-                        {<Game />}
-                      </div>
-                    )}
-                  </li>
-                  <li
-                    className="mb-3 "
-                    onMouseEnter={() => setIsOther(true)}
-                    onMouseLeave={() => setIsOther(false)}
-                  >
-                    <a
-                      href="#"
-                      className="flex items-center text-black pe-[7rem]  hover:text-gray-400"
-                    >
-                      <CgMoreO className="me-1" />
-                      Other categories
-                    </a>
-                    {isOther && (
-                      <div className="absolute z-50  top-2 left-full ml-1 bg-gray-500">
-                        {<OtherCategories />}
-                      </div>
-                    )}
-                  </li>
-                </ul>
-              </div>
+                ))}
+              </ul>
             </div>
-          </aside>
-        </div>
+          </div>
+        </aside>
       </div>
-    </>
+    </div>
   );
 }
