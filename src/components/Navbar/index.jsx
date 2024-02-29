@@ -34,24 +34,24 @@ const Navbar = () => {
         />
 
         <div className="flex items-center mt-4 lg:mt-0">
-          <div className="relative">
-            <FaSearch className="absolute hidden lg:block top-1/2 left-4 transform -translate-y-1/2 text-gray-400" />
+          <div className="relative flex flex-col lg:flex-row items-center">
+            <FaSearch className="absolute top-3 left-3 ml-4 hidden lg:block text-gray-400" />
             <input
-              className="ml-8 lg:ml-0 lg:pl-10 pr-2 outline-none shadow-xl rounded w-48 lg:w-96 h-10"
+              className="ml-0 lg:ml-4 lg:pl-10 pr-2 outline-none shadow-xl rounded lg:w-96 h-10"
               type="search"
               name="search"
               id="search"
               placeholder="Search product, brands, and categories"
             />
+            <button className="button bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 lg:mt-0">
+              SEARCH
+            </button>
           </div>
-          <button className="button bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline ml-2 lg:ml-4">
-            SEARCH
-          </button>
         </div>
       </div>
 
       <div className="flex justify-between items-center w-full lg:w-auto mt-4 lg:mt-0">
-        <div className="flex  lg:hidden">
+        <div className="flex lg:hidden">
           <button
             className="text-gray-500 hover:text-orange-600 focus:outline-none"
             onClick={toggleAccountMenu}
@@ -72,17 +72,18 @@ const Navbar = () => {
           </button>
         </div>
         <ul className="hidden lg:flex items-center gap-2">
+          {/* Account Menu */}
           <li>
-            <div className="relative inline-block text-left">
+            <div className="relative">
               <button
                 type="button"
-                className="inline-flex w-full justify-center rounded-md bg-white py-2 text-sm font-bold text-black shadow-sm hover:text-orange-600 focus:bg-gray-300 mx-4"
+                className="inline-flex justify-center items-center w-full rounded-md bg-white py-2 text-sm font-bold text-black shadow-sm hover:text-orange-600 focus:bg-gray-300 mx-4"
                 id="account-menu-button"
                 aria-expanded={isAccountMenuOpen}
                 aria-haspopup="true"
                 onClick={toggleAccountMenu}
               >
-                <BsPerson size={20} className="mx-2" />
+                <BsPerson size={20} className="mr-2" />
                 Account
                 <svg
                   className="-mr-1 h-5 w-5 text-gray-400"
@@ -160,11 +161,12 @@ const Navbar = () => {
               )}
             </div>
           </li>
+          {/* Help Menu */}
           <li>
-            <div className="relative inline-block text-left">
+            <div className="relative">
               <button
                 type="button"
-                className="inline-flex w-full justify-center rounded-md bg-white py-2 text-sm font-bold text-black shadow-sm hover:text-orange-600 focus:bg-gray-300 mx-4"
+                className="inline-flex justify-center items-center w-full rounded-md bg-white py-2 text-sm font-bold text-black shadow-sm hover:text-orange-600 focus:bg-gray-300 mx-4"
                 id="help-menu-button"
                 aria-expanded={isHelpMenuOpen}
                 aria-haspopup="true"
@@ -262,10 +264,11 @@ const Navbar = () => {
               )}
             </div>
           </li>
+          {/* Cart Button */}
           <li>
             <a
               href="/cart"
-              className="inline-flex w-full justify-center rounded-md bg-white p-2 text-sm font-bold text-black shadow-sm hover:text-orange-600 focus:bg-gray-300 mx-4"
+              className="inline-flex justify-center items-center w-full rounded-md bg-white p-2 text-sm font-bold text-black shadow-sm hover:text-orange-600 focus:bg-gray-300 mx-4"
             >
               <MdOutlineShoppingCart size={25} className="mr-2" />
               Cart
