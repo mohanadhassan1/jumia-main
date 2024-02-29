@@ -93,17 +93,16 @@ export default function Login() {
 
   return (
     <>
+      <div className='mx-auto pt-10'>
+        <a href="/"><img className="mx-auto h-16 w-auto" src="./tab.png" alt="Jumia Logo"/></a>
+      </div>
+
       {/* ============================================= Add your email to check if it exists or not in Database ============================================= */}
       {formVisible && (
         <div className="mx-auto pt-10">
           {/* ============================================= Only logo and h1 ============================================= */}
           <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
-            <img
-              className="mx-auto h-16 w-auto"
-              src="./tab.png"
-              alt="Jumia Logo"
-            />
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Welcome To Jumia
             </h2>
             <p className='text-center mt-2'>Type your e-mail or phone number to log in or create a Jumia account.</p>
@@ -161,13 +160,8 @@ export default function Login() {
 
               {/* =================================================== Login Header =================================================== */}
               <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
-                <img
-                  className="mx-auto h-16 w-auto"
-                  src="./tab.png"
-                  alt="Jumia Logo"
-                />
-                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                  Welcome To Jumia
+                <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                  Welcome Back
                 </h2>
                 <p className='text-center mt-2'>Log back into your Jumia account.</p>
               </div>
@@ -258,12 +252,7 @@ export default function Login() {
 
               {/* =================================================== Signup Header =================================================== */}
               <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <img
-                  className="mx-auto h-16 w-auto"
-                  src="./tab.png"
-                  alt="Jumia Logo"
-                />
-                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                   Create your account
                 </h2>
                 <p className='text-center mt-2 text-sm'>Let's get started by creating your account.</p>
