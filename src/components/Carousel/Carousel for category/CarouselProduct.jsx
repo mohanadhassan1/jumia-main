@@ -6,15 +6,16 @@ export default function CarouselProducts({ products, navigate }) {
 
   const nextSlide = () => {
     setActiveIndex((prevIndex) =>
-      prevIndex === 12 - 1 ? 0 : prevIndex + 1
+      prevIndex === Math.floor(products.length / 5) - 1 ? 0 : prevIndex + 1
     );
   };
-
+  
   const prevSlide = () => {
     setActiveIndex((prevIndex) =>
-      prevIndex === 0 ? 12 - 1 : prevIndex - 1
+      prevIndex === 0 ? Math.floor(products.length / 5) - 1 : prevIndex - 1
     );
   };
+  
 
  
 
