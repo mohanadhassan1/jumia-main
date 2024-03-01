@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import BigCart from "../Big Cart/BigCart";
-import Carousel from "react-multi-carousel";
+// import Carousel from "react-multi-carousel";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
 import SmallCart from "../Small Cart/SmallCart";
-import CarouselMain from "../Carousel/Carousel";
+// import CarouselMain from "../Carousel/Carousel";
 import CarouselProducts from "../Carousel/Carousel for category/CarouselProduct";
 
 export default function SupermarkerCategory() {
@@ -60,6 +60,11 @@ export default function SupermarkerCategory() {
     setselectSort(newSelect);
     setIsOpen(!isOpen);
   }
+  const filteredProducts = products.filter(
+    (product) => product.subcategory_id.category_id === "65db6f61b5f61a0c49bde663"
+  );
+  console.log("Filtered Products:", filteredProducts); // Add this line to log filtered products
+
   return (
     <>
       <div className="md:container h-full mx-auto items-center justify-center">
@@ -107,7 +112,7 @@ export default function SupermarkerCategory() {
             </div>
           ))}
         </Carousel> */}
-        <CarouselProducts products={products}/>
+        <CarouselProducts products={filteredProducts}/>
         <h2 className=" text-xl font-medium uppercase text-center py-4 px-6 bg-teal-200">
           Check More Deals
         </h2>
@@ -140,8 +145,8 @@ export default function SupermarkerCategory() {
         <h2 className=" text-xl font-medium uppercase text-center py-4 px-6 bg-teal-200">
           HOUSEHOLD SUPPLIES
         </h2>
-        <div className="md:flex flex-wrap  gap-4 p-4 mb-3 rounded bg-white">
-          {products.map((product) => (
+        {/* <div className="md:flex flex-wrap  gap-4 p-4 mb-3 rounded bg-white">
+          {filteredProducts.map((product) => (
             <div
               className="md:w-1/2 lg:w-[30%] xl:w-[15%] mb-4"
               onClick={() => {
@@ -151,7 +156,7 @@ export default function SupermarkerCategory() {
               <SmallCart Image={product.images} title={product.name} />
             </div>
           ))}
-        </div>
+        </div> */}
 
         <div className="md:flex  p-3 mb-3 ">
           <div className="md:me-1 w-full bg-white">
@@ -431,7 +436,7 @@ export default function SupermarkerCategory() {
                 )}
               </div>
             </div>
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <div
                 className="md:w-1/2 lg:w-[30%] xl:w-[15%] mb-4 "
                 onClick={() => {
