@@ -180,100 +180,103 @@ const ReturnsRefunds = () => {
               Jumia offers you the following refund methods as shown in the
               table below:
             </p>
-            <table className="mt-4 w-full border-collapse">
-              <thead>
-                <tr className="bg-orange-200 dark:bg-gray-600">
-                  <th className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Payment methods
-                  </th>
-                  <th className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Refund method
-                  </th>
-                  <th className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Refund timeline
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="bg-white dark:bg-gray-700">
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Cash
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Refund voucher
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Same day
-                  </td>
-                </tr>
-                <tr className="bg-orange-100 dark:bg-gray-600">
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Cash
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Postal
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    3 Working days
-                  </td>
-                </tr>
-                <tr className="bg-white dark:bg-gray-700">
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Cash
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Bank transfer
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    6 Working days
-                  </td>
-                </tr>
-                <tr className="bg-orange-100 dark:bg-gray-600">
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Bank Card
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Bank Card
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    7 to 14 Working days
-                  </td>
-                </tr>
-                <tr className="bg-white dark:bg-gray-700">
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Installment
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Credit card
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    7 to 14 Working days
-                  </td>
-                </tr>
-                <tr className="bg-orange-100 dark:bg-gray-600">
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Smart wallet
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Smart wallet
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    7 to 14 Working days
-                  </td>
-                </tr>
-                <tr className="bg-white dark:bg-gray-700">
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Fawry
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Refund Voucher
-                  </td>
-                  <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
-                    Same day
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="overflow-x-auto">
+              <table className="mt-4 w-full border-collapse">
+                <thead>
+                  <tr className="bg-orange-200 dark:bg-gray-600">
+                    <th className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Payment methods
+                    </th>
+                    <th className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Refund method
+                    </th>
+                    <th className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Refund timeline
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="bg-white dark:bg-gray-700">
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Cash
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Refund voucher
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Same day
+                    </td>
+                  </tr>
+                  <tr className="bg-orange-100 dark:bg-gray-600">
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Cash
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Postal
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      3 Working days
+                    </td>
+                  </tr>
+                  <tr className="bg-white dark:bg-gray-700">
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Cash
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Bank transfer
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      6 Working days
+                    </td>
+                  </tr>
+                  <tr className="bg-orange-100 dark:bg-gray-600">
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Bank Card
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Bank Card
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      7 to 14 Working days
+                    </td>
+                  </tr>
+                  <tr className="bg-white dark:bg-gray-700">
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Installment
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Credit card
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      7 to 14 Working days
+                    </td>
+                  </tr>
+                  <tr className="bg-orange-100 dark:bg-gray-600">
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Smart wallet
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Smart wallet
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      7 to 14 Working days
+                    </td>
+                  </tr>
+                  <tr className="bg-white dark:bg-gray-700">
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Fawry
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Refund Voucher
+                    </td>
+                    <td className="border border-orange-300 dark:border-gray-700 px-4 py-2">
+                      Same day
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
             <p className="mt-4 font-normal">
               Note that refund methods availability is based on the payment
               method used to pay for the order being returned, in case of
