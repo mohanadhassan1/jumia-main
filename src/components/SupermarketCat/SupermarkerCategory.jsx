@@ -146,7 +146,7 @@ export default function SupermarkerCategory() {
           
 
         <div className="md:flex  p-3 mb-3 ">
-          <div className="md:me-1 w-full bg-white">
+          <div className="md:me-1 w-full bg-white h-full">
             <h4 className="uppercase text-base py-5 px-5">Category</h4>
             <ul className="list-none ">
               <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">

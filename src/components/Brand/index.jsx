@@ -38,6 +38,14 @@ const PRODUCT_RATING = [
 
 ];
 
+
+const CAMPAIGNS = [
+'Free Shipping Eligible',
+'Made in Egypt',
+'Non-Returnable',
+'Verified by JUMIA',
+];
+
 export default function BRAND({ brands }) {
   return (
     <>
@@ -166,7 +174,6 @@ export default function BRAND({ brands }) {
         </ul>
       </div>
       <hr className="h-0.5 bg-gray-300" />
-      <hr className="h-0.5 bg-gray-300" />
       {/* <!-- EXPRESS DELIVERY --> */}
 
       <p className="ps-2 py-2">DISCOUNT</p>
@@ -177,6 +184,19 @@ export default function BRAND({ brands }) {
             name={"Jumia Express"}
             checked={this}
           />
+        </ul>
+      </div>
+      <hr className="h-0.5 bg-gray-300" />
+      {/* <!-- CAMPAIGNS --> */}
+
+      <p className="ps-2 py-2">CAMPAIGNS
+</p>
+
+<div>
+      <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
+          {CAMPAIGNS.map((CAMPAIGNS) => (
+            <DropdownSearchUser key={CAMPAIGNS} name={CAMPAIGNS} checked={this} />
+          ))}
         </ul>
       </div>
     </>
