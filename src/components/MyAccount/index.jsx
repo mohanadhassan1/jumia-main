@@ -19,7 +19,7 @@ export default function index() {
 
   return (
     <>
-      <div className="md:flex container mx-auto mt-3 mb-3 sm:flex-none">
+      <div className="md:flex container mx-auto mt-3 mb-3">
 
         <div className="mr-2 lg:w-1/4 md:w-2/4 h-full rounded bg-white">
 

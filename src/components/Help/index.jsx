@@ -3,6 +3,7 @@ import {
   FaBox,
   FaSearch,
   FaTelegramPlane,
+  // FaUserOutline,
 } from "react-icons/fa";
 import {
   MdCardGiftcard,
@@ -11,7 +12,7 @@ import {
   MdLocalShipping,
 } from "react-icons/md";
 import { PiTruck } from "react-icons/pi";
-import { GiReturnArrow } from "react-icons/gi";
+// import { GiReturnArrow } from "react-icons/gi";
 import { LiaBoxSolid } from "react-icons/lia";
 import Payments from "./HelpContents/Payments";
 import Vouchers from "./HelpContents/Vouchers";
@@ -29,10 +30,6 @@ import CreateReturn from "./HelpContents/CreateReturn";
 
 const HelpMain = () => {
   const [activeTab, setActiveTab] = useState("Payments");
-
-  useEffect(() => {
-    setActiveTab("Payments");
-  }, []);
 
   const displayContent = (tabName) => {
     setActiveTab(tabName);
@@ -56,28 +53,53 @@ const HelpMain = () => {
           {[
             {
               name: "Place an Order",
-              icon: <PiTruck />,
-              content: <PlaceOrder />,
+              img: (
+                <img
+                  src="https://cxp-desktop.netlify.app/jpg/how-to-place-order-d.png"
+                  alt=""
+                  className="rounded"
+                />
+              ),
             },
             {
               name: "Pay for Your Order",
-              icon: <MdPayment />,
-              content: <PayForOrder />,
+              img: (
+                <img
+                  src="https://cxp-desktop.netlify.app/jpg/how-to-pay-for-order-d.png"
+                  alt=""
+                  className="rounded"
+                />
+              ),
             },
             {
               name: "Track Your Order",
-              icon: <FaSearch />,
-              content: <TrackOrder />,
+              img: (
+                <img
+                  src="https://cxp-desktop.netlify.app/jpg/how-to-track-order-d.png"
+                  alt=""
+                  className="rounded"
+                />
+              ),
             },
             {
               name: "Cancel an Order",
-              icon: <GiReturnArrow />,
-              content: <CancelOrder />,
+              img: (
+                <img
+                  src="https://cxp-desktop.netlify.app/jpg/how-to-cancel-order-d.png"
+                  alt=""
+                  className="rounded"
+                />
+              ),
             },
             {
               name: "Create a Return",
-              icon: <MdOutlinePerson />,
-              content: <CreateReturn />,
+              img: (
+                <img
+                  src="https://cxp-desktop.netlify.app/jpg/how-to-request-return-d.png"
+                  alt=""
+                  className="rounded"
+                />
+              ),
             },
           ].map((tab, index) => (
             <div
@@ -90,7 +112,7 @@ const HelpMain = () => {
               <p className="flex justify-start items-center font-bold">
                 {tab.name}
               </p>
-              <div className="ml-auto mt-auto">{tab.icon}</div>
+              <div className="ml-auto mt-auto">{tab.img}</div>
             </div>
           ))}
         </div>
@@ -126,7 +148,7 @@ const HelpMain = () => {
                 <button
                   key={index}
                   type="button"
-                  className={`relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b ${
+                  className={`relative h-auto inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b ${
                     activeTab === tab.name
                       ? "border-gray-200"
                       : "border-transparent"
@@ -152,6 +174,11 @@ const HelpMain = () => {
               { name: "Returns & Refunds", content: <ReturnsRefunds /> },
               { name: "Account", content: <Account /> },
               { name: "Sell on Jumia", content: <SellOnJumia /> },
+              { name: "Place an Order", content: <PlaceOrder /> },
+              { name: "Pay for Your Order", content: <PayForOrder /> },
+              { name: "Track Your Order", content: <TrackOrder /> },
+              { name: "Cancel an Order", content: <CancelOrder /> },
+              { name: "Create a Return", content: <CreateReturn /> },
             ].map(
               (tab, index) =>
                 activeTab === tab.name && <div key={index}>{tab.content}</div>

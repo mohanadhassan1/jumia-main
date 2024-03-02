@@ -1,109 +1,44 @@
 import React, { useState } from "react";
 
+const CollapsibleSection = ({ title, content, isOpen, toggleVisibility }) => {
+  return (
+    <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <p className="pt-2 pl-2 underline">Payments</p>
+      <button
+        type="button"
+        className="relative h-auto inline-flex items-center w-full px-4 pr-10 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+        onClick={toggleVisibility}
+      >
+        <h3 className="font-bold">
+          {title}
+          <span className="absolute  right-4 top-0 font-bold">
+            {isOpen ? "-" : "+"}
+          </span>
+        </h3>
+      </button>
+      {isOpen && (
+        <div className="p-4 dark:bg-gray-800">
+          <p className="font-normal">{content}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Payments = () => {
-  const [isPaymentMethodVisible, setIsPaymentMethodVisible] = useState(false);
-  const [isSecurePaymentVisible, setIsSecurePaymentVisible] = useState(false);
-  const [isPaymentDeclinedVisible, setIsPaymentDeclinedVisible] =
-    useState(false);
-  const [isJumiaPayOnDeliveryVisible, setIsJumiaPayOnDeliveryVisible] =
-    useState(false);
-  const [isJumiaPayHowItWorksVisible, setIsJumiaPayHowItWorksVisible] =
-    useState(false);
-  const [
-    isJumiaPayIssueEncounteredVisible,
-    setIsJumiaPayIssueEncounteredVisible,
-  ] = useState(false);
-  const [
-    isJumiaPayMultiplePackagesVisible,
-    setIsJumiaPayMultiplePackagesVisible,
-  ] = useState(false);
-  const [isJumiaPayRefundVisible, setIsJumiaPayRefundVisible] = useState(false);
-  const [isJumiaPayOnBehalfVisible, setIsJumiaPayOnBehalfVisible] =
-    useState(false);
-  const [isCashOnDeliveryReasonVisible, setIsCashOnDeliveryReasonVisible] =
-    useState(false);
-  const [isPaymentStatusVisible, setIsPaymentStatusVisible] = useState(false);
-  const [isPaymentProcessingTimeVisible, setIsPaymentProcessingTimeVisible] =
-    useState(false);
-  const [isCancelOrderVisible, setIsCancelOrderVisible] = useState(false);
-  const [isPaymentFailedVisible, setIsPaymentFailedVisible] = useState(false);
+  const [openSection, setOpenSection] = useState(null);
 
-  const togglePaymentMethodVisibility = () => {
-    setIsPaymentMethodVisible(!isPaymentMethodVisible);
-  };
-
-  const toggleSecurePaymentVisibility = () => {
-    setIsSecurePaymentVisible(!isSecurePaymentVisible);
-  };
-
-  const togglePaymentDeclinedVisibility = () => {
-    setIsPaymentDeclinedVisible(!isPaymentDeclinedVisible);
-  };
-
-  const toggleJumiaPayOnDeliveryVisibility = () => {
-    setIsJumiaPayOnDeliveryVisible(!isJumiaPayOnDeliveryVisible);
-  };
-
-  const toggleJumiaPayHowItWorksVisibility = () => {
-    setIsJumiaPayHowItWorksVisible(!isJumiaPayHowItWorksVisible);
-  };
-
-  const toggleJumiaPayIssueEncounteredVisibility = () => {
-    setIsJumiaPayIssueEncounteredVisible(!isJumiaPayIssueEncounteredVisible);
-  };
-
-  const toggleJumiaPayMultiplePackagesVisibility = () => {
-    setIsJumiaPayMultiplePackagesVisible(!isJumiaPayMultiplePackagesVisible);
-  };
-
-  const toggleJumiaPayRefundVisibility = () => {
-    setIsJumiaPayRefundVisible(!isJumiaPayRefundVisible);
-  };
-
-  const toggleJumiaPayOnBehalfVisibility = () => {
-    setIsJumiaPayOnBehalfVisible(!isJumiaPayOnBehalfVisible);
-  };
-
-  const toggleCashOnDeliveryReasonVisibility = () => {
-    setIsCashOnDeliveryReasonVisible(!isCashOnDeliveryReasonVisible);
-  };
-
-  const togglePaymentStatusVisibility = () => {
-    setIsPaymentStatusVisible(!isPaymentStatusVisible);
-  };
-
-  const togglePaymentProcessingTimeVisibility = () => {
-    setIsPaymentProcessingTimeVisible(!isPaymentProcessingTimeVisible);
-  };
-
-  const toggleCancelOrderVisibility = () => {
-    setIsCancelOrderVisible(!isCancelOrderVisible);
-  };
-
-  const togglePaymentFailedVisibility = () => {
-    setIsPaymentFailedVisible(!isPaymentFailedVisible);
+  const toggleVisibility = (section) => {
+    setOpenSection(section === openSection ? null : section);
   };
 
   return (
     <>
       {/* Payment Method Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={togglePaymentMethodVisibility}
-        >
-          <h3 className="font-bold">
-            What payment methods are accepted on Jumia?
-            <span className="absolute right-4 top-2 font-bold">
-              {isPaymentMethodVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-        {isPaymentMethodVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* Payment Method Content */}
+      <CollapsibleSection
+        title="What payment methods are accepted on Jumia?"
+        content={
+          <>
             <p className="font-normal">
               Jumia offers multiple payment options, including:
             </p>
@@ -122,58 +57,33 @@ const Payments = () => {
               <span className="font-bold">3. Vouchers: </span> Pay using a
               voucher code.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "paymentMethod"}
+        toggleVisibility={() => toggleVisibility("paymentMethod")}
+      />
 
       {/* Secure Payment Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleSecurePaymentVisibility}
-        >
-          <h3 className="font-bold">
-            How secure is my payment information on Jumia?
-            <span className="absolute right-4 top-2 font-bold">
-              {isSecurePaymentVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isSecurePaymentVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* Secure Payment Content */}
-
+      <CollapsibleSection
+        title="How secure is my payment information on Jumia?"
+        content={
+          <>
             <p className="font-normal">
               Jumia prioritizes customer payment security with encryption, and
               secure servers. Regular monitoring and auditing are also performed
               to maintain a secure environment for transactions.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "securePayment"}
+        toggleVisibility={() => toggleVisibility("securePayment")}
+      />
 
       {/* Payment Declined Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={togglePaymentDeclinedVisibility}
-        >
-          <h3 className="font-bold">
-            What do I do if my payment is declined?
-            <span className="absolute right-4 top-2 font-bold">
-              {isPaymentDeclinedVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isPaymentDeclinedVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* Payment Declined Content */}
+      <CollapsibleSection
+        title="What do I do if my payment is declined?"
+        content={
+          <>
             <p className="font-normal">
               If your payment is declined, you can check the following to
               resolve the issue:
@@ -204,57 +114,33 @@ const Payments = () => {
               transaction to provide it to Jumia customer service for a faster
               resolution.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "paymentDeclined"}
+        toggleVisibility={() => toggleVisibility("paymentDeclined")}
+      />
 
       {/* JumiaPay on Delivery Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleJumiaPayOnDeliveryVisibility}
-        >
-          <h3 className="font-bold">
-            What is JumiaPay on Delivery?
-            <span className="absolute right-4 top-2 font-bold">
-              {isJumiaPayOnDeliveryVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isJumiaPayOnDeliveryVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* JumiaPay on Delivery Content */}
+      <CollapsibleSection
+        title="What is JumiaPay on Delivery?"
+        content={
+          <>
             <p className="font-normal">
               JumiaPay on delivery is an easy, quick method of payment which
               allows you to pay by card or smart wallet at the time of delivery,
               instead of cash.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "jumiaPayOnDelivery"}
+        toggleVisibility={() => toggleVisibility("jumiaPayOnDelivery")}
+      />
 
       {/* JumiaPay How It Works Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleJumiaPayHowItWorksVisibility}
-        >
-          <h3 className="font-bold">
-            How does JumiaPay on Delivery work?
-            <span className="absolute right-4 top-2 font-bold">
-              {isJumiaPayHowItWorksVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isJumiaPayHowItWorksVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* JumiaPay How It Works Content */}
+      <CollapsibleSection
+        title="How does JumiaPay on Delivery work?"
+        content={
+          <>
             <p className="font-normal">
               You simply have to follow the steps below:
             </p>
@@ -279,29 +165,17 @@ const Payments = () => {
                 confirmation message, and will hand you your package.
               </li>
             </ol>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "jumiaPayHowItWorks"}
+        toggleVisibility={() => toggleVisibility("jumiaPayHowItWorks")}
+      />
 
       {/* JumiaPay Issue Encountered Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleJumiaPayIssueEncounteredVisibility}
-        >
-          <h3 className="font-bold">
-            I encountered an issue with JumiaPay on Delivery. What should I do?
-            <span className="absolute right-4 top-2 font-bold">
-              {isJumiaPayIssueEncounteredVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isJumiaPayIssueEncounteredVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* JumiaPay Issue Encountered Content */}
+      <CollapsibleSection
+        title=" I encountered an issue with JumiaPay on Delivery. What should I do?"
+        content={
+          <>
             <p className="font-normal">
               On rare occasions, your payment may not be successful. Please
               ensure you input the correct payment information (card number,
@@ -318,115 +192,67 @@ const Payments = () => {
                 Contact Us.
               </a>
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "jumiaPayIssueEncountered"}
+        toggleVisibility={() => toggleVisibility("jumiaPayIssueEncountered")}
+      />
 
       {/* JumiaPay Multiple Packages Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleJumiaPayMultiplePackagesVisibility}
-        >
-          <h3 className="font-bold">
-            Can I pay for multiple packages at once using JumiaPay on Delivery?
-            <span className="absolute right-4 top-2 font-bold">
-              {isJumiaPayMultiplePackagesVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isJumiaPayMultiplePackagesVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* JumiaPay Multiple Packages Content */}
+      <CollapsibleSection
+        title="Can I pay for multiple packages at once using JumiaPay on Delivery?"
+        content={
+          <>
             <p className="font-normal">
               Yes, you may pay for all packages being delivered by the same
               agent in one instance, using JumiaPay on Delivery.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "jumiaPayMultiplePackages"}
+        toggleVisibility={() => toggleVisibility("jumiaPayMultiplePackages")}
+      />
 
       {/* JumiaPay Refund Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleJumiaPayRefundVisibility}
-        >
-          <h3 className="font-bold">
-            I paid for my order using my card at the time of delivery through
+      <CollapsibleSection
+        title=" I paid for my order using my card at the time of delivery through
             (JumiaPay on Delivery), and wish to return my item, how will I be
-            refunded?
-            <span className="absolute right-4 top-2 font-bold">
-              {isJumiaPayRefundVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isJumiaPayRefundVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* JumiaPay Refund Content */}
+            refunded?"
+        content={
+          <>
             <p className="font-normal">
               You will be refunded through the same payment method, which means
               that orders paid via card will be refunded back to your bank card.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "jumiaPayRefund"}
+        toggleVisibility={() => toggleVisibility("jumiaPayRefund")}
+      />
 
       {/* JumiaPay on Behalf Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleJumiaPayOnBehalfVisibility}
-        >
-          <h3 className="font-bold">
-            Can someone else pay for the package on my behalf using JumiaPay on
-            Delivery?
-            <span className="absolute right-4 top-2 font-bold">
-              {isJumiaPayOnBehalfVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isJumiaPayOnBehalfVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* JumiaPay on Behalf Content */}
+      <CollapsibleSection
+        title=" Can someone else pay for the package on my behalf using JumiaPay on
+            Delivery?"
+        content={
+          <>
             <p className="font-normal">
               Yes, the person receiving the package may scan the QR code shown
               by the delivery. Alternatively, the agent can send the link to the
               JumiaPay checkout platform to the person who will pay for the
               order.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "jumiaPayOnBehalf"}
+        toggleVisibility={() => toggleVisibility("jumiaPayOnBehalf")}
+      />
 
       {/* Cash on Delivery Reason Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleCashOnDeliveryReasonVisibility}
-        >
-          <h3 className="font-bold">
-            Why is Cash on Delivery not available?
-            <span className="absolute right-4 top-2 font-bold">
-              {isCashOnDeliveryReasonVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isCashOnDeliveryReasonVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* Cash on Delivery Reason Content */}
+      <CollapsibleSection
+        title=" Why is Cash on Delivery not available?"
+        content={
+          <>
             <ul className="list-disc pl-8">
               <li>Your cart has a product shipped from overseas.</li>
               <li>
@@ -445,29 +271,17 @@ const Payments = () => {
                 your past orders experience.
               </li>
             </ul>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "cashOnDeliveryReason"}
+        toggleVisibility={() => toggleVisibility("cashOnDeliveryReason")}
+      />
 
       {/* Payment Status Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={togglePaymentStatusVisibility}
-        >
-          <h3 className="font-bold">
-            How do I know if my payment has been processed successfully?
-            <span className="absolute right-4 top-2 font-bold">
-              {isPaymentStatusVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isPaymentStatusVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* Payment Status Content */}
+      <CollapsibleSection
+        title="How do I know if my payment has been processed successfully?"
+        content={
+          <>
             <p className="font-normal">
               You can check the status of your payment by following these steps:
             </p>
@@ -490,29 +304,17 @@ const Payments = () => {
               if you have any concerns about your payment, you can contact Jumia
               customer service via Live Chat for assistance.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "paymentStatus"}
+        toggleVisibility={() => toggleVisibility("paymentStatus")}
+      />
 
       {/* Payment Processing Time Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={togglePaymentProcessingTimeVisibility}
-        >
-          <h3 className="font-bold">
-            How long does it take for my payment to be processed?
-            <span className="absolute right-4 top-2 font-bold">
-              {isPaymentProcessingTimeVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isPaymentProcessingTimeVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* Payment Processing Time Content */}
+      <CollapsibleSection
+        title="How long does it take for my payment to be processed?"
+        content={
+          <>
             <p className="font-normal">
               Most payments on Jumia are processed immediately when completed.
               However, specific processing times may vary depending on the
@@ -522,29 +324,17 @@ const Payments = () => {
               your payment, please contact Jumia's customer service team for
               assistance.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "paymentProcessingTime"}
+        toggleVisibility={() => toggleVisibility("paymentProcessingTime")}
+      />
 
       {/* Cancel Order and Refund Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={toggleCancelOrderVisibility}
-        >
-          <h3 className="font-bold">
-            Can I cancel my order and get a refund after payment has been made?
-            <span className="absolute right-4 top-2 font-bold">
-              {isCancelOrderVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isCancelOrderVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* Cancel Order and Refund Content */}
+      <CollapsibleSection
+        title="Can I cancel my order and get a refund after payment has been made?"
+        content={
+          <>
             <p className="font-normal">
               If the order has not been shipped, you can cancel the order and
               get a refund. The refund processing time varies depending on the
@@ -554,31 +344,19 @@ const Payments = () => {
               </a>
               .
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "cancelOrder"}
+        toggleVisibility={() => toggleVisibility("cancelOrder")}
+      />
 
       {/* Payment Failed Section */}
-      <div className="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
-        <p className="pt-2 pl-2 underline ">Payments</p>
-        <button
-          type="button"
-          className="relative h-16 inline-flex items-center w-full px-4 py-2 text-sm font-bold border-b border-gray-200 rounded-t-lg  dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-          onClick={togglePaymentFailedVisibility}
-        >
-          <h3 className="font-bold text-justify pr-6">
-            I tried to pay for my order using my card / mobile money. The funds
+      <CollapsibleSection
+        title="I tried to pay for my order using my card / mobile money. The funds
             were debited, but it says my order did not go through. What
-            happened, and how can I get my money back?
-            <span className="absolute right-4 top-2 font-bold ">
-              {isPaymentFailedVisible ? "-" : "+"}
-            </span>
-          </h3>
-        </button>
-
-        {isPaymentFailedVisible && (
-          <div className="p-4  dark:bg-gray-800">
-            {/* Payment Failed Content */}
+            happened, and how can I get my money back?"
+        content={
+          <>
             <p className="font-normal">
               On rare occasions, technical issues may occur preventing us from
               confirming the transaction although your account may have been
@@ -589,9 +367,11 @@ const Payments = () => {
               </a>
               to request a refund back to your account.
             </p>
-          </div>
-        )}
-      </div>
+          </>
+        }
+        isOpen={openSection === "paymentFailed"}
+        toggleVisibility={() => toggleVisibility("paymentFailed")}
+      />
     </>
   );
 };

@@ -27,7 +27,7 @@ export default function Footer() {
                                         type="email"
                                         id="UserEmail"
                                         placeholder="john@rhcp.com"
-                                        className="w-full h-10 border-none focus-within:ring focus:border-orange-500 focus:ring-orange-500 sm:text-sm"
+                                        className="w-full p-2 h-10 border-none focus-within:ring focus:border-orange-500 focus:ring-orange-500 sm:text-sm"
                                     />
 
                                     <button
