@@ -6,13 +6,13 @@ export default function CarouselProducts({ products, navigate }) {
 
   const nextSlide = () => {
     setActiveIndex((prevIndex) =>
-      prevIndex === Math.floor(products.length / 5) - 1 ? 0 : prevIndex + 1
+      prevIndex === Math.floor(products.length / 4) - 1 ? 0 : prevIndex + 1
     );
   };
   
   const prevSlide = () => {
     setActiveIndex((prevIndex) =>
-      prevIndex === 0 ? Math.floor(products.length / 5) - 1 : prevIndex - 1
+      prevIndex === 0 ? Math.floor(products.length / 4) - 1 : prevIndex - 1
     );
   };
   
@@ -30,23 +30,6 @@ export default function CarouselProducts({ products, navigate }) {
     return () => clearInterval(intervalId);
   }, [autoplayPaused, activeIndex]);
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.keyCode === 37) {
-        // Left arrow key
-        prevSlide();
-      } else if (event.keyCode === 39) {
-        // Right arrow key
-        nextSlide();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
 
   return (
     <div

@@ -7,6 +7,7 @@ import { fetchProducts } from "../../store/slices/products";
 import SmallCart from "../Small Cart/SmallCart";
 // import CarouselMain from "../Carousel/Carousel";
 import CarouselProducts from "../Carousel/Carousel for category/CarouselProduct";
+import BRAND from "../Brand/index";
 
 export default function SupermarkerCategory() {
   const { products } = useSelector((state) => state.products);
@@ -142,21 +143,7 @@ export default function SupermarkerCategory() {
             }
           />
         </div>
-        <h2 className=" text-xl font-medium uppercase text-center py-4 px-6 bg-teal-200">
-          HOUSEHOLD SUPPLIES
-        </h2>
-        {/* <div className="md:flex flex-wrap  gap-4 p-4 mb-3 rounded bg-white">
-          {filteredProducts.map((product) => (
-            <div
-              className="md:w-1/2 lg:w-[30%] xl:w-[15%] mb-4"
-              onClick={() => {
-                navigate(`/product/${product.product_id}`);
-              }}
-            >
-              <SmallCart Image={product.images} title={product.name} />
-            </div>
-          ))}
-        </div> */}
+          
 
         <div className="md:flex  p-3 mb-3 ">
           <div className="md:me-1 w-full bg-white">
@@ -336,6 +323,83 @@ export default function SupermarkerCategory() {
             </ul>
 
             <hr className="h-0.5 bg-gray-300" />
+            <BRAND className="w-full"  brands = {['915 Generation','ABC','Abu Auf',
+          'Afilar',
+          'Al Qahawi',
+          'AL Ramalah',
+          'AlRehab',
+          'Ariel',
+          'Arrow',
+          'As Seen On Tv',
+          'Banafa',
+          'Beuotat Foods',
+          'Bras Cafe',
+          'Brix',
+          'Bubbles',
+          'California Egmont',
+          'Camelion',
+          'Cif',
+          'Clorox',
+          'Dandy',
+          'Dettol',
+          'Divatoll',
+          'Dora',
+          'Drinks',
+          'Duracell',
+          'Eco',
+          'El Helal W El Negma',
+          'Energizer',
+          'Eveready',
+          'Fairy',
+          'Familia',
+          'Farida',
+          'Farouk Pasha',
+          'Fine',
+          'Fogg',
+          'Free',
+          'General',
+          'Generic',
+          'Glade',
+          'Glory',
+          'Golden Air',
+          'Gp',
+          'Green Oases',
+          'Hama',
+          'Handmade',
+          'Happy Valley',
+          'Harpic',
+          'Harraz',
+          'Helal & Golden Star',
+          'Helwan',
+          "Johnson's",
+          'Karimed',
+          'Ketolicious',
+          "L'Oreal Paris",
+          'Lavida',
+          'Ludwik',
+          'Lugano Cafeé',
+          'Luster',
+          'Madar',
+          'Maxell',
+          'Mora',
+          'Mozn',
+          'MP',
+          'My Way',
+          'Nabtah',
+          'NIVEA',
+          'Osterberg',
+          'Panasonic',
+          'Parex',
+          'Power One',
+          'Rayovac',
+          'Rehana',
+          'Renata',
+          'ROSERAIE',
+          'Rubex',
+          'Sanita',
+          'Saquella',
+          ]}/>
+
           </div>
 
           <div className="md:flex flex-wrap  gap-4 p-4 mb-3 rounded bg-white">
