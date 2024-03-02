@@ -3,7 +3,7 @@ import {
   FaBox,
   FaSearch,
   FaTelegramPlane,
-  // FaUserOutline,
+  FaUserOutline,
 } from "react-icons/fa";
 import {
   MdCardGiftcard,

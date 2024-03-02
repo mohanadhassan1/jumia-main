@@ -3,6 +3,7 @@ import store from "./store/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
 import AppLayout from "./AppLayout";
+import { Toaster } from "react-hot-toast";
 // import ProductDetails from "./components/product/productDetails";
 
 import Home from "./components/Home/index";
@@ -38,6 +39,23 @@ function App() {
   return (
     <>
       <Provider store={store}>
+        <Toaster
+         containerStyle={{
+          width: '100%', // Make the container full width
+          position: 'fixed', // Ensure the container stays fixed in the viewport
+          zIndex: 9999, //
+
+        }}
+        toastOptions={{
+          className: 'bg-blue-400 w-full',
+          style: {
+            border: '1px solid #713200',
+            padding: '10px',
+            color: 'white',
+            backgroundColor:"green"
+          },
+        }}
+        />
         <RouterProvider router={routes} />
       </Provider>
     </>

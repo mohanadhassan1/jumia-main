@@ -1,8 +1,13 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import instance from "../../axois/instance";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart } from '../../store/slices/cart';
+import { selectIsLoggedIn } from "../../store/slices/authSlice";
+import toast, { Toaster } from 'react-hot-toast';
+
+
 
 export default function ProductDetails() {
     const { id } = useParams();
@@ -10,7 +15,10 @@ export default function ProductDetails() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const isLoggedIn = useSelector(selectIsLoggedIn);
+
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         async function getData() {
@@ -28,10 +36,12 @@ export default function ProductDetails() {
     }, [id]);
 
     const handleAddToCart = () => {
-        dispatch(addItemToCart(product));
-        alert(`${product.name}product added successfully`)
-        navigate(`/cart`)
+       
+        dispatch(addItemToCart({...product ,isLoggedIn}));
 
+        // alert(`${product.name} product added successfully`);
+         toast.success(`${product.name} product added successfully`);
+        // navigate(`/cart`);
     };
 
     if (loading) {
@@ -174,3 +184,4 @@ export default function ProductDetails() {
         </>
     );
 }
+

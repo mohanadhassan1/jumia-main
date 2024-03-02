@@ -4,63 +4,39 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { IoIosArrowForward } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
+import {recommendedForYou,responsive} from "./dataStatic";
 import {
   updateItemQuantity,
   removeItemFromCart,
+  addItemToCart,
 } from "../../store/slices/cart";
 import { useState, useEffect } from "react";
 
 const Cart = () => {
-  let recommendedForYou = [
-    {
-      name: "Starter Men Walking Lightwight",
-      price: "952",
-      image:
-        "https://eg.jumia.is/cms/Week7-8-2024/New-On-Jumia/Trending/300x400EN_copy_2.png",
-    },
-    {
-      name: "Starter Men Walking Lightwight Lace Up Shoes ",
-      image:
-        "https://eg.jumia.is/cms/Week7-8-2024/New-On-Jumia/Trending/300x400EN_copy_4.png",
-      price: "865",
-    },
-    {
-      image:
-        "https://eg.jumia.is/cms/Week7-8-2024/New-On-Jumia/Trending/300x400EN_copy_4.png",
-    },
-    {
-      image:
-        "https://eg.jumia.is/cms/Week7-8-2024/New-On-Jumia/Trending/300x400EN.png",
-    },
-    {
-      image:
-        "https://eg.jumia.is/cms/Week7-8-2024/New-On-Jumia/Trending/300x400EN_copy.png",
-    },
-    {
-      image:
-        "https://eg.jumia.is/cms/Week7-8-2024/New-On-Jumia/Trending/300x400EN_copy_6.png",
-    },
-    {
-      image:
-        "https://eg.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/85/257032/1.jpg?1417",
-    },
-    {
-      image:
-        "https://eg.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/63/329502/1.jpg?4229",
-    },
-  ];
+  
 
-  const cartItems = useSelector((state) => state.cart.items);
+
+  const [cartItems, setCartItems] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(true);
-
-  console.log(cartItems);
-  const dispatch = useDispatch();
-
   const [subtotal, setSubtotal] = useState(0);
+
+  useEffect(() => {
+    // Retrieve cart data from local storage
+    const cartData = localStorage.getItem('cart');
+    if (cartData) {
+      const parsedCartData = JSON.parse(cartData);
+      setCartItems( parsedCartData.items);
+      console.log (parsedCartData.items)
+    }
+  }, []);
+
   useEffect(() => {
     calculateSubtotal();
     setCartEmpty(cartItems.length === 0);
   }, [cartItems]);
+
+  const dispatch = useDispatch();
+
   const calculateSubtotal = () => {
     let total = 0;
     cartItems.forEach((item) => {
@@ -68,37 +44,32 @@ const Cart = () => {
     });
     setSubtotal(total);
   };
+
   const handleIncreaseQuantity = (itemId, quantity) => {
-    dispatch(updateItemQuantity({ itemId, quantity: quantity + 1 }));
-  };
-  const handleDecreaseQuantity = (itemId, quantity) => {
-    if (quantity > 1) {
-      dispatch(updateItemQuantity({ itemId, quantity: quantity - 1 }));
-    }
-  };
-  const handleRemoveItem = (itemId) => {
-    dispatch(removeItemFromCart(itemId));
+    const updatedCartItems = cartItems.map((item) =>
+      item._id === itemId ? { ...item, quantity: quantity + 1 } : item
+    );
+    setCartItems(updatedCartItems);
+    localStorage.setItem('cart', JSON.stringify({ items: updatedCartItems }));
   };
 
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 8,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 6,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 3,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 2,
-    },
+  const handleDecreaseQuantity = (itemId, quantity) => {
+    if (quantity > 1) {
+      const updatedCartItems = cartItems.map((item) =>
+        item._id === itemId ? { ...item, quantity: quantity - 1 } : item
+      );
+      setCartItems(updatedCartItems);
+      localStorage.setItem('cart', JSON.stringify({ items: updatedCartItems }));
+    }
   };
+
+  const handleRemoveItem = (itemId) => {
+    const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
+    setCartItems(updatedCartItems);
+    localStorage.setItem('cart', JSON.stringify({ items: updatedCartItems }));
+  };
+
+ 
   document.addEventListener("DOMContentLoaded", function () {
     // Your JavaScript code here
     var cartItems = []; // Example array of cart items
@@ -112,7 +83,7 @@ const Cart = () => {
         return;
       }
 
-      if (cartItems.length === 0) {
+      if (cartItems?.length === 0) {
         cartContainer.style = { display: "none" };
         emptyCartMessage.style = { display: block };
       } else {
@@ -157,11 +128,15 @@ const Cart = () => {
               <hr></hr>
               {/* products */}
               <div>
-                {cartItems.map((product, index) => (
-                  <div key={index}>
-                    <div className=" bg-white flex my-2">
-                      <img src={product.images} className="w-20 m-2"></img>
-                      <div className="m-2  w-3/4 ">
+              {cartItems.length > 0 && cartItems.map((product, index) => (
+  <div key={index}>
+    <div className="bg-white flex my-2">
+      {product.images && product.images.length > 0 ? (
+        <img src={product.images[0]} className="w-20 m-2" alt="Product Image" />
+      ) : (
+        <div>No image available</div>
+      )}
+   <div className="m-2  w-3/4 ">
                         <h6 className="text-lg font-semibold">
                           {product.name}
                         </h6>
@@ -200,7 +175,7 @@ const Cart = () => {
                             }
                             className=" bg-orange-600 w-10 m-2 rounded-md font-bold text-2xl"
                           >
-                            -
+                                -
                           </button>
                           <p>{product.quantity}</p>
                           <button
@@ -227,7 +202,7 @@ const Cart = () => {
             </div>
             {/* cart summary */}
             <div
-              className="w-1/4 p-2 m-2 bg-white  font-bold  sticky top-20  absolute  shadow-lg rounded-lg"
+              className="w-1/4 p-2 m-2 bg-white  font-bold  sticky top-20    shadow-lg rounded-lg"
               style={{ height: "fit-content" }}
             >
               <h2 className="text-lg font-bold ">CART SUMMARY</h2>
