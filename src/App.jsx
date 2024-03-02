@@ -7,12 +7,12 @@ import AppLayout from "./AppLayout";
 
 import Home from "./components/Home/index";
 import ProductDetails from "./components/product/productDetails";
-
 import MyAccount from "./components/MyAccount";
 import Login from "./components/Login/index";
 import HelpMain from "./components/Help";
 import Checkout from "./components/checkout/checkout";
 import SupermarkerCategory from "./components/SupermarketCat/SupermarkerCategory";
+import { BiTrash } from "react-icons/bi";
 
 const routes = createBrowserRouter([
   {
@@ -31,6 +31,7 @@ const routes = createBrowserRouter([
     ],
   },
   { path: "/checkout", element: <Checkout /> },
+  { path: "/login", element: <Login /> },
 ]);
 
 function App() {
