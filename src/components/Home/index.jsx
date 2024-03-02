@@ -24,10 +24,12 @@ const Home = () => {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 8,
+      slidesToSlide:6
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: 6,
+      slidesToSlide:3
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -97,7 +99,7 @@ const Home = () => {
         {/* Products */}
         <Carousel
           responsive={responsive}
-          className="gap-4 p-2 mb-3 rounded bg-white mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center"
+          className="gap-4 p-2 mb-3 rounded bg-white mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center transition duration-1000"
         >
           {products.map((product) => (
             <div key={product._id} to={product._id}>
