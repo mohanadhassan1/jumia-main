@@ -13,11 +13,18 @@ export const fetchProducts = createAsyncThunk(
     }
   }
 );
+// export const selectFilteredProducts = (state) => {
+//   const { products, searchTerm } = state.products;
+//   return products.filter((product) =>
+//     product.name.toLowerCase().includes(searchTerm.toLowerCase())
+//   );
+// };
 
 const initialState = {
   products: [],
   loading: false,
   error: null,
+  // searchTerm: "",
 };
 
 const productsSlice = createSlice({

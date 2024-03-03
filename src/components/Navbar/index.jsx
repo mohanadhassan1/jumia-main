@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch, FaRegQuestionCircle } from "react-icons/fa";
 import logo from "../../assets/logo.svg";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -7,10 +7,41 @@ import { FiInbox } from "react-icons/fi";
 import { CiHeart } from "react-icons/ci";
 import { AiOutlineMessage } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { fetchProducts } from "../../store/slices/products";
 
 const Navbar = () => {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const [isHelpMenuOpen, setIsHelpMenuOpen] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [query, setQuery] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { products } = useSelector((state) => state.products);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
+  useEffect(() => {
+    // Filter products when query changes
+    const filtered =
+      query === ""
+        ? products
+        : products.filter((product) =>
+            product.name
+              .toLowerCase()
+              .replace(/\s+/g, "")
+              .includes(query.toLowerCase().replace(/\s+/g, ""))
+          );
+    setFilteredProducts(filtered);
+  }, [products, query]);
+
+  const handleInputChange = (e) => {
+    setQuery(e.target.value); // Update query state with input value
+  };
 
   const toggleAccountMenu = () => {
     setIsAccountMenuOpen(!isAccountMenuOpen);
@@ -43,10 +74,27 @@ const Navbar = () => {
             name="search"
             id="search"
             placeholder="Search product, brands, and categories"
+            onChange={handleInputChange}
           />
           <button className="button bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 lg:mt-0">
             SEARCH
           </button>
+          {query && (
+            <div className="absolute left-0 top-0 mt-12 w-full bg-white rounded-lg shadow-lg border border-gray-200">
+              {filteredProducts.map((product) => (
+                <span
+                  key={product.id}
+                  className="block px-4 py-2 hover:bg-gray-200"
+                  onClick={() => {
+                    navigate(`/product/${product._id}`);
+                    setQuery(""); // Clear the input field
+                  }}
+                >
+                  {product.name}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="flex justify-between items-center w-full lg:w-auto mt-4 lg:mt-0">
