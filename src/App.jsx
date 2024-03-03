@@ -39,7 +39,7 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <Toaster className="w-full"
+        <Toaster
          containerStyle={{
           top:0,
           width: '100%', // Make the container full width
@@ -48,7 +48,7 @@ function App() {
 
         }}
         toastOptions={{
-          className: 'bg-blue-400 ',
+          className: 'bg-blue-400 w-full',
           style: {
             border: '1px solid #713200',
             padding: '10px',

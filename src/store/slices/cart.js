@@ -27,18 +27,7 @@ const cartSlice = createSlice({
 
       state.total += newItem?.price;
 
-      // Update local storage only if user is not logged in
-      // if (!isLoggedIn) {
-      //   // Retrieve existing cart data from local storage
-      //   const existingCartData = JSON.parse(localStorage.getItem("cart")) || { items: [], total: 0 };
-
-      //   // Push the new item into the existing array
-      //   existingCartData.items.push(newItem);
-
-      //   // Store the updated array back into local storage
-      //   localStorage.setItem("cart", JSON.stringify(existingCartData));
-      // }
-      // Update local storage only if user is not logged in
+      
 if (!isLoggedIn) {
   // Retrieve existing cart data from local storage
   const existingCartData = JSON.parse(localStorage.getItem("cart")) || { items: [], total: 0 };
