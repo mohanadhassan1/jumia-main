@@ -40,20 +40,22 @@ function App() {
     <>
       <Provider store={store}>
         <Toaster
-          containerStyle={{
-            width: "100%", // Make the container full width
-            position: "fixed", // Ensure the container stays fixed in the viewport
-            zIndex: 9999, //
-          }}
-          toastOptions={{
-            className: "bg-blue-400 w-full",
-            style: {
-              border: "1px solid #713200",
-              padding: "10px",
-              color: "white",
-              backgroundColor: "green",
-            },
-          }}
+         containerStyle={{
+          top:0,
+          width: '100%', // Make the container full width
+          position: 'fixed', // Ensure the container stays fixed in the viewport
+          zIndex: 9999, //
+
+        }}
+        toastOptions={{
+          className: 'bg-blue-400 w-full',
+          style: {
+            border: '1px solid #713200',
+            padding: '10px',
+            color: 'white',
+            backgroundColor:"green"
+          },
+        }}
         />
         <RouterProvider router={routes} />
       </Provider>
