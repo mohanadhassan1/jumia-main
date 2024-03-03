@@ -41,37 +41,6 @@ const Cart = () => {
     });
     setSubtotal(total);
   };
-
-  // const handleIncreaseQuantity = (itemId) => {
-  //   const updatedCartItems = cartItems.map((item) => {
-  //     if (item._id === itemId && item.quantity < item.quantity_in_stock) {
-  //       // Increase the quantity in stock by 1 for each item added to the cart
-  //       const updatedQuantityInStock = item.quantity_in_stock - 1;
-  //       return {
-  //         ...item,
-  //         quantity: item.quantity + 1,
-  //         quantity_in_stock: updatedQuantityInStock,
-  //       };
-  //     }
-  //     return item;
-  //   });
-
-  //   // Calculate the updated total price
-  //   const updatedTotal = updatedCartItems.reduce((total, item) => {
-  //     return total + item.price * item.quantity;
-  //   }, 0);
-
-  //   // Update the state with the updated cart items and total price
-  //   setCartItems(updatedCartItems);
-  //   setTotal(updatedTotal);
-
-  //   // Update local storage with the updated cart items
-  //   localStorage.setItem(
-  //     "cart",
-  //     JSON.stringify({ items: updatedCartItems, total: updatedTotal })
-  //   );
-  // };
-
   const handleIncreaseQuantity = (itemId) => {
     const cartItem = cartItems.find((item) => item._id === itemId);
     if (!cartItem) return;
