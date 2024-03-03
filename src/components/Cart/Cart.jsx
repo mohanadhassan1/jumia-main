@@ -4,7 +4,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { IoIosArrowForward } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
-import {recommendedForYou,responsive} from "./dataStatic";
+import { recommendedForYou, responsive } from "./dataStatic";
 import {
   updateItemQuantity,
   removeItemFromCart,
@@ -13,20 +13,17 @@ import {
 import { useState, useEffect } from "react";
 
 const Cart = () => {
-  
-
-
   const [cartItems, setCartItems] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(true);
   const [subtotal, setSubtotal] = useState(0);
 
   useEffect(() => {
     // Retrieve cart data from local storage
-    const cartData = localStorage.getItem('cart');
+    const cartData = localStorage.getItem("cart");
     if (cartData) {
       const parsedCartData = JSON.parse(cartData);
-      setCartItems( parsedCartData.items);
-      console.log (parsedCartData.items)
+      setCartItems(parsedCartData.items);
+      console.log(parsedCartData.items);
     }
   }, []);
 
@@ -44,32 +41,86 @@ const Cart = () => {
     });
     setSubtotal(total);
   };
+  const handleIncreaseQuantity = (itemId) => {
+    const cartItem = cartItems.find((item) => item._id === itemId);
+    if (!cartItem) return;
 
-  const handleIncreaseQuantity = (itemId, quantity) => {
-    const updatedCartItems = cartItems.map((item) =>
-      item._id === itemId ? { ...item, quantity: quantity + 1 } : item
-    );
-    setCartItems(updatedCartItems);
-    localStorage.setItem('cart', JSON.stringify({ items: updatedCartItems }));
+    const { quantity_in_stock } = cartItem;
+
+    // Check if there's enough quantity in stock and quantity is less than quantity in stock
+    if (quantity_in_stock > 0) {
+      const updatedCartItems = cartItems.map((item) => {
+        if (item._id === itemId) {
+          return {
+            ...item,
+            quantity: item.quantity + 1,
+            quantity_in_stock: quantity_in_stock - 1, // Decrease quantity_in_stock by 1
+          };
+        }
+        return item;
+      });
+
+      // Calculate the updated total price
+      const updatedTotal = updatedCartItems.reduce((total, item) => {
+        return total + item.price * item.quantity;
+      }, 0);
+
+      // Update the state with the updated cart items and total price
+      setCartItems(updatedCartItems);
+      setTotal(updatedTotal);
+
+      // Update local storage with the updated cart items
+      localStorage.setItem(
+        "cart",
+        JSON.stringify({ items: updatedCartItems, total: updatedTotal })
+      );
+    }
   };
 
-  const handleDecreaseQuantity = (itemId, quantity) => {
-    if (quantity > 1) {
-      const updatedCartItems = cartItems.map((item) =>
-        item._id === itemId ? { ...item, quantity: quantity - 1 } : item
-      );
+  const handleDecreaseQuantity = (itemId) => {
+    // Find the cart item by itemId
+    const cartItemIndex = cartItems.findIndex((item) => item._id === itemId);
+    if (cartItemIndex === -1) return; // Item not found
+
+    // Get the cart item and its quantity_in_stock
+    const cartItem = cartItems[cartItemIndex];
+    const { quantity_in_stock } = cartItem;
+
+    // Check if the current quantity is greater than 1 (minimum quantity)
+    if (cartItem.quantity > 1) {
+      // Create a copy of the cartItems array to avoid mutating the original array
+      const updatedCartItems = [...cartItems];
+
+      // Update the quantity and quantity_in_stock of the cart item
+      updatedCartItems[cartItemIndex] = {
+        ...cartItem,
+        quantity: cartItem.quantity - 1,
+        quantity_in_stock: quantity_in_stock + 1, // Increase quantity_in_stock by 1
+      };
+
+      // Calculate the updated total price
+      const updatedTotal = updatedCartItems.reduce((total, item) => {
+        return total + item.price * item.quantity;
+      }, 0);
+
+      // Update the state with the updated cart items and total price
       setCartItems(updatedCartItems);
-      localStorage.setItem('cart', JSON.stringify({ items: updatedCartItems }));
+      setTotal(updatedTotal);
+
+      // Update local storage with the updated cart items
+      localStorage.setItem(
+        "cart",
+        JSON.stringify({ items: updatedCartItems, total: updatedTotal })
+      );
     }
   };
 
   const handleRemoveItem = (itemId) => {
     const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
     setCartItems(updatedCartItems);
-    localStorage.setItem('cart', JSON.stringify({ items: updatedCartItems }));
+    localStorage.setItem("cart", JSON.stringify({ items: updatedCartItems }));
   };
 
- 
   document.addEventListener("DOMContentLoaded", function () {
     // Your JavaScript code here
     var cartItems = []; // Example array of cart items
@@ -103,16 +154,16 @@ const Cart = () => {
         <div
           id="emptyCartMessage"
           style={{ display: cartEmpty ? "block" : "none", textAlign: "center" }}
-          className="w-3/4 p-4 bg-white m-2 "
+          className="w-full p-4 bg-white  mx-auto my-2 text-lg font-normal"
         >
           <img
-            style={{ textAlign: "center", marginLeft: "400px" }}
+            className="mx-auto m-6 size-28"
             src="https://www.jumia.com.eg/assets_he/images/cart.668e6453.svg"
           ></img>
           <h3>Your cart is emptey!</h3>
-          <p>Browse our categories and discover our best deals!</p>
-          <button className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white m-4 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline">
-            <a href="/home">Start Shopping</a>
+          <p className="text-gray-800 text-md m-2 font-normal">Browse our categories and discover our best deals!</p>
+          <button className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white m-6 font-bold p-3 rounded focus:outline-none focus:shadow-outline">
+            <a href="/home">START SHOPPING</a>
           </button>
         </div>
         <div
@@ -128,74 +179,85 @@ const Cart = () => {
               <hr></hr>
               {/* products */}
               <div>
-              {cartItems.length > 0 && cartItems.map((product, index) => (
-  <div key={index}>
-    <div className="bg-white flex my-2">
-      {product.images && product.images.length > 0 ? (
-        <img src={product.images[0]} className="w-20 m-2" alt="Product Image" />
-      ) : (
-        <div>No image available</div>
-      )}
-   <div className="m-2  w-3/4 ">
-                        <h6 className="text-lg font-semibold">
-                          {product.name}
-                        </h6>
-                        <p className="text-sm text-gray-900 ">
-                          {product.description}
-                        </p>
-                        <p className="text-sm text-gray-900 ">
-                          {" "}
-                          Quantity: {product.quantity_in_stock}
-                        </p>
-                        <div className="  justify-between flex text-white">
-                          <button
-                            className=" text-orange-600 flex justify-center text-xl items-center	"
-                            onClick={() => handleRemoveItem(product._id)}
+                {cartItems.length > 0 &&
+                  cartItems.map((product, index) => (
+                    <div key={index}>
+                      <div className="bg-white flex my-2">
+                        {product.images && product.images.length > 0 ? (
+                          <img
+                            src={product.images[0]}
+                            className="w-20 m-2"
+                            alt="Product Image"
+                          />
+                        ) : (
+                          <div>No image available</div>
+                        )}
+                        <div className="m-2  w-3/4 ">
+                          <h6 className="text-lg font-semibold">
+                            {product.name}
+                          </h6>
+                          <p className="text-sm text-gray-900 mb-2">
+                            {product.description}
+                          </p>
+                          <p className="text-sm text-gray-900 mb-2">
+                            {product.quantity_in_stock === 0
+                              ? "Out of stock"
+                              : product.quantity_in_stock === 1
+                              ? "Last one in stock"
+                              : product.quantity_in_stock === 2
+                              ? "Last two in stock"
+                              : "Available in stock"}
+                          </p>
+
+                          <div className="  justify-between flex text-white">
+                            <button
+                              className=" text-orange-600 flex justify-center text-xl items-center	"
+                              onClick={() => handleRemoveItem(product._id)}
+                            >
+                              {" "}
+                              <MdOutlineDelete /> Remove
+                            </button>
+                          </div>
+                        </div>
+                        <div className="m-2 w-1/4 text-right ">
+                          <p
+                            className="text-sm text-black-600  "
+                            style={{ fontSize: "20px" }}
                           >
                             {" "}
-                            <MdOutlineDelete /> Remove
-                          </button>
+                            EGY {product.price}
+                          </p>
+                          <div className="flex items-center text-sm text-black-600 justify-center">
+                            <button
+                              onClick={() =>
+                                handleDecreaseQuantity(
+                                  product._id,
+                                  product.quantity
+                                )
+                              }
+                              className=" bg-orange-600 w-10 m-2 rounded-md font-bold text-2xl"
+                            >
+                              -
+                            </button>
+                            <p>{product.quantity}</p>
+                            <button
+                              className=" bg-orange-600 w-10 m-2 rounded-md text-2xl"
+                              onClick={() =>
+                                handleIncreaseQuantity(
+                                  product._id,
+                                  product.quantity
+                                )
+                              }
+                            >
+                              +
+                            </button>
+                          </div>
                         </div>
                       </div>
-                      <div className="m-2 w-1/4 text-right ">
-                        <p
-                          className="text-sm text-black-600  "
-                          style={{ fontSize: "20px" }}
-                        >
-                          {" "}
-                          EGY {product.price}
-                        </p>
-                        <div className="flex items-center text-sm text-black-600 justify-center">
-                          <button
-                            onClick={() =>
-                              handleDecreaseQuantity(
-                                product._id,
-                                product.quantity
-                              )
-                            }
-                            className=" bg-orange-600 w-10 m-2 rounded-md font-bold text-2xl"
-                          >
-                                -
-                          </button>
-                          <p>{product.quantity}</p>
-                          <button
-                            className=" bg-orange-600 w-10 m-2 rounded-md text-2xl"
-                            onClick={() =>
-                              handleIncreaseQuantity(
-                                product._id,
-                                product.quantity
-                              )
-                            }
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                    </div>
 
-                    <hr></hr>
-                  </div>
-                ))}
+                      <hr></hr>
+                    </div>
+                  ))}
               </div>
 
               <hr></hr>
@@ -215,7 +277,9 @@ const Cart = () => {
               <button
                 className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white m-4 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
                 type="button"
-                onClick={() => { window.location.href = '/checkout'; }}
+                onClick={() => {
+                  window.location.href = "/checkout";
+                }}
               >
                 CHECKOUT (EGY {subtotal})
               </button>{" "}

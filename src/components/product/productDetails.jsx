@@ -40,7 +40,7 @@ export default function ProductDetails() {
         dispatch(addItemToCart({...product ,isLoggedIn}));
 
         // alert(`${product.name} product added successfully`);
-         toast.success(`${product.name} product added successfully`);
+         toast.success(` product added successfully`);
         // navigate(`/cart`);
     };
 

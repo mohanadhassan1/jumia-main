@@ -14,12 +14,13 @@ const cartSlice = createSlice({
     addItemToCart(state, action) {
       const { payload, isLoggedIn } = action;
       const newItem = payload;
+      console.log(newItem)
+      console.log(state.items)
 
       // Check if the item already exists in the cart
       const existingItem = state.items.find(
         (item) => item?._id === newItem?._id
       );
-      console.log(item);
 
       if (existingItem) {
         existingItem.quantity++;
@@ -29,21 +30,31 @@ const cartSlice = createSlice({
 
       state.total += newItem?.price;
 
-      // Update local storage only if user is not logged in
-      if (!isLoggedIn) {
-        // Retrieve existing cart data from local storage
-        const existingCartData = JSON.parse(localStorage.getItem("cart")) || {
-          items: [],
-          total: 0,
-        };
+      
+if (!isLoggedIn) {
+  // Retrieve existing cart data from local storage
+  const existingCartData = JSON.parse(localStorage.getItem("cart")) || { items: [], total: 0 };
 
-        // Push the new item into the existing array
-        existingCartData.items.push(newItem);
+  // Check if the item already exists in the existing cart data
+  const existingCartItem = existingCartData.items.find(item => item?._id === newItem?._id);
 
-        // Store the updated array back into local storage
-        localStorage.setItem("cart", JSON.stringify(existingCartData));
-      }
-    },
+  if (existingCartItem) {
+    // If the item exists, update its quantity
+    existingCartItem.quantity++;
+  } else {
+    // If the item doesn't exist, add it to the cart
+    existingCartData.items.push({ ...newItem, quantity: 1 });
+  }
+
+  // Update the total price
+  existingCartData.total += newItem?.price;
+
+  // Store the updated cart data back into local storage
+  localStorage.setItem("cart", JSON.stringify(existingCartData));
+}
+
+    }
+    ,
     removeItemFromCart(state, action) {
       const itemId = action.payload;
       const removedItemIndex = state.items.findIndex(
@@ -76,12 +87,32 @@ const cartSlice = createSlice({
         existingItem.quantity = newQuantity;
 
         // Update local storage if the user is not logged in
+        // if (!selectIsLoggedIn(store.getState())) {
+        //   localStorage.setItem("cart", JSON.stringify(state));
+        // }
         if (!selectIsLoggedIn(store.getState())) {
-          localStorage.setItem("cart", JSON.stringify(state));
-        }
+          // Retrieve existing cart data from local storage
+          const existingCartData = JSON.parse(localStorage.getItem("cart")) || { items: [], total: 0 };
+        
+          // Update the quantity of the item in the cart
+          const existingCartItem = existingCartData.items.find(item => item?._id === itemId);
+          if (existingCartItem) {
+            // Ensure the quantity doesn't exceed the available stock
+            existingCartItem.quantity = Math.min(quantity, existingCartItem.quantity);
+          }
+        
+          // Update the total price
+          existingCartData.total = existingCartData.items.reduce((total, item) => {
+            return total + (item.price * item.quantity);
+          }, 0);
+        
+          // Store the updated cart data back into local storage
+          localStorage.setItem("cart", JSON.stringify(existingCartData));
       }
-    },
+    }
+    
   },
+}
 });
 
 export const { addItemToCart, removeItemFromCart, updateItemQuantity } =
