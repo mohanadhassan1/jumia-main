@@ -105,7 +105,7 @@ const Home = () => {
             <div key={product._id} to={product._id}>
               <div className="hover:scale-[1.01] group relative mx-2">
                 <div className="hover:scale-[1.01] group relative">
-                  <div className="w-52 h-52 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
+                  <div className="w-52 h-50 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
                     <img
                       src={product.images}
                       alt={product.name}
