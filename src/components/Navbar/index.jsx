@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaSearch, FaRegQuestionCircle } from "react-icons/fa";
 import logo from "../../assets/logo.svg";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -16,6 +16,7 @@ const Navbar = () => {
   const [isHelpMenuOpen, setIsHelpMenuOpen] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [query, setQuery] = useState("");
+  const searchInputRef = useRef(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,7 +41,9 @@ const Navbar = () => {
   }, [products, query]);
 
   const handleInputChange = (e) => {
+    setQuery("");
     setQuery(e.target.value); // Update query state with input value
+    searchInputRef.current.value = ""; // Clear the input field
   };
 
   const toggleAccountMenu = () => {
@@ -69,6 +72,7 @@ const Navbar = () => {
         <div className="relative flex items-center mt-4 lg:mt-0 flex-grow ">
           <FaSearch className="absolute top-3 left-3 ml-4 hidden lg:block text-gray-400" />
           <input
+            ref={searchInputRef}
             className="ml-0 lg:ml-4 lg:pl-10 pr-2 pl-5 outline-none shadow-xl rounded w-5/7 lg:w-full lg:max-w-xl h-11"
             type="search"
             name="search"
