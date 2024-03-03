@@ -196,12 +196,10 @@ const Cart = () => {
                           <h6 className="text-lg font-semibold">
                             {product.name}
                           </h6>
-                          <p className="text-sm text-gray-900 ">
+                          <p className="text-sm text-gray-900 mb-2">
                             {product.description}
                           </p>
-                          <p className="text-sm text-gray-900">
-                            {`quantity:${product.quantity_in_stock}`}
-                            <br />
+                          <p className="text-sm text-gray-900 mb-2">
                             {product.quantity_in_stock === 0
                               ? "Out of stock"
                               : product.quantity_in_stock === 1

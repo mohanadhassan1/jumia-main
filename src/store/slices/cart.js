@@ -14,12 +14,13 @@ const cartSlice = createSlice({
     addItemToCart(state, action) {
       const { payload, isLoggedIn } = action;
       const newItem = payload;
+      console.log(newItem)
+      console.log(state.items)
 
       // Check if the item already exists in the cart
       const existingItem = state.items.find(
         (item) => item?._id === newItem?._id
       );
-      console.log(item);
 
       if (existingItem) {
         existingItem.quantity++;
