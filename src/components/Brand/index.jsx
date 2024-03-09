@@ -31,24 +31,54 @@ const DISCOUNT_PERCENTAGE = [
 ];
 
 const PRODUCT_RATING = [
-<span className="inline-flex"><FaStar className="text-yellow-500" /> <FaStar className="text-yellow-500" /> <FaStar className="text-yellow-500" /> <FaStar className="text-yellow-500" /> <FaStar /> & above</span>  ,
-<span className="inline-flex"><FaStar className="text-yellow-500" /> <FaStar className="text-yellow-500" /> <FaStar className="text-yellow-500" /> <FaStar /> <FaStar /> & above</span>  ,
-<span className="inline-flex"><FaStar className="text-yellow-500" /> <FaStar className="text-yellow-500" /> <FaStar  /> <FaStar  /> <FaStar /> & above</span>  ,
-<span className="inline-flex"><FaStar className="text-yellow-500" /> <FaStar  /> <FaStar  /> <FaStar  /> <FaStar /> & above</span>  ,
-
+  <span className="inline-flex">
+    <FaStar className="text-yellow-500" />{" "}
+    <FaStar className="text-yellow-500" />{" "}
+    <FaStar className="text-yellow-500" />{" "}
+    <FaStar className="text-yellow-500" /> <FaStar /> & above
+  </span>,
+  <span className="inline-flex">
+    <FaStar className="text-yellow-500" />{" "}
+    <FaStar className="text-yellow-500" />{" "}
+    <FaStar className="text-yellow-500" /> <FaStar /> <FaStar /> & above
+  </span>,
+  <span className="inline-flex">
+    <FaStar className="text-yellow-500" />{" "}
+    <FaStar className="text-yellow-500" /> <FaStar /> <FaStar /> <FaStar /> &
+    above
+  </span>,
+  <span className="inline-flex">
+    <FaStar className="text-yellow-500" /> <FaStar /> <FaStar /> <FaStar />{" "}
+    <FaStar /> & above
+  </span>,
 ];
-
 
 const CAMPAIGNS = [
-'Free Shipping Eligible',
-'Made in Egypt',
-'Non-Returnable',
-'Verified by JUMIA',
+  "Free Shipping Eligible",
+  "Made in Egypt",
+  "Non-Returnable",
+  "Verified by JUMIA",
 ];
 
-export default function BRAND({ brands }) {
+export default function BRAND({ brands, categories ,changeCategories }) {
   return (
     <>
+      <div className="md:me-1 w-full bg-white h-full">
+        <h4 className="uppercase text-base py-5 px-5">Category</h4>
+        <ul className="list-none ">
+          <li className="w-full flex items-center justify-between ps-2  hover:bg-gray-300 ">
+            <a
+              href=""
+              className="pb-1 "
+              onClick={() => changeCategories(categories, event)}
+            >
+              {categories}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <hr className="h-0.5 bg-gray-300" />
+
       {/* <!-- BRAND --> */}
 
       <p className="ps-2 py-2">BRAND</p>
@@ -166,7 +196,7 @@ export default function BRAND({ brands }) {
             name={"Shipped from Egypt"}
             checked={this}
           />
-           <DropdownSearchUser  
+          <DropdownSearchUser
             key={"Shipped from abroad"}
             name={"Shipped from abroad"}
             checked={this}
@@ -189,13 +219,16 @@ export default function BRAND({ brands }) {
       <hr className="h-0.5 bg-gray-300" />
       {/* <!-- CAMPAIGNS --> */}
 
-      <p className="ps-2 py-2">CAMPAIGNS
-</p>
+      <p className="ps-2 py-2">CAMPAIGNS</p>
 
-<div>
-      <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
+      <div>
+        <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
           {CAMPAIGNS.map((CAMPAIGNS) => (
-            <DropdownSearchUser key={CAMPAIGNS} name={CAMPAIGNS} checked={this} />
+            <DropdownSearchUser
+              key={CAMPAIGNS}
+              name={CAMPAIGNS}
+              checked={this}
+            />
           ))}
         </ul>
       </div>
