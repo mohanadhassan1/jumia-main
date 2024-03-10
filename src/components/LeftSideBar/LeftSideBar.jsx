@@ -24,7 +24,7 @@ import Phone from "../Phone/Phone";
 
 const categories = [
   { name: "Supermarket", icon: CiApple, component: Supermarket ,category:"/Supremarket"},
-  { name: "Fashion", icon: GiClothes, component: Fashion ,category:"#"},
+  { name: "Fashion", icon: GiClothes, component: Fashion ,category:"/Fashion"},
   { name: "Health & Beauty", icon: MdOutlineHealthAndSafety, component: Beauty,category:"#" },
   { name: "Baby Products", icon: PiBaby, component: Baby ,category:"#"},
   { name: "Phones & Tablets", icon: IoIosPhonePortrait, component: Phone ,category:"#" },
