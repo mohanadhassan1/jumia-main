@@ -1,21 +1,27 @@
 import React from "react";
 import { FaStar } from "react-icons/fa6";
 
-const DropdownSearchUser = ({ name, checked }) => {
+const DropdownSearchUser = ({ nameBrand, checked }) => {
+  const handleCheckboxChange = () => {
+    console.log(nameBrand);
+  };
+
   return (
-    <li key={name}>
+    <li key={nameBrand}>
       <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
         <input
           type="checkbox"
-          value=""
+          value={nameBrand}
           checked={checked}
           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-        />
+          onChange={handleCheckboxChange}
+
+       />
         <label
           htmlFor={`checkbox-item-${name}`}
           className="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"
         >
-          {name}
+          {nameBrand}
         </label>
       </div>
     </li>
@@ -119,7 +125,7 @@ export default function BRAND({ brands, categories ,changeCategories }) {
         </div>
         <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
           {brands.map((brand) => (
-            <DropdownSearchUser key={brand} name={brand} checked={this} />
+            <DropdownSearchUser key={brand} nameBrand={brand} checked={this} />
           ))}
         </ul>
       </div>
@@ -131,7 +137,7 @@ export default function BRAND({ brands, categories ,changeCategories }) {
         <ul className="h-full px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
           <DropdownSearchUser
             key={"Show only discounted items"}
-            name={"Show only discounted items"}
+            nameBrand={"Show only discounted items"}
             checked={this}
           />
         </ul>
@@ -151,7 +157,7 @@ export default function BRAND({ brands, categories ,changeCategories }) {
             id="default-radio-1"
             type="radio"
             value=""
-            name="default-radio"
+            nameBrand="default-radio"
             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
           <label
@@ -173,7 +179,7 @@ export default function BRAND({ brands, categories ,changeCategories }) {
             id="default-radio-1"
             type="radio"
             value=""
-            name="default-radio"
+            nameBrand="default-radio"
             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
           <label
@@ -193,12 +199,12 @@ export default function BRAND({ brands, categories ,changeCategories }) {
         <ul className="h-full px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
           <DropdownSearchUser
             key={"Shipped from Egypt"}
-            name={"Shipped from Egypt"}
+            nameBrand={"Shipped from Egypt"}
             checked={this}
           />
           <DropdownSearchUser
             key={"Shipped from abroad"}
-            name={"Shipped from abroad"}
+            nameBrand={"Shipped from abroad"}
             checked={this}
           />
         </ul>
@@ -211,7 +217,7 @@ export default function BRAND({ brands, categories ,changeCategories }) {
         <ul className="h-full px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
           <DropdownSearchUser
             key={"Jumia Express"}
-            name={"Jumia Express"}
+            nameBrand={"Jumia Express"}
             checked={this}
           />
         </ul>
@@ -226,7 +232,7 @@ export default function BRAND({ brands, categories ,changeCategories }) {
           {CAMPAIGNS.map((CAMPAIGNS) => (
             <DropdownSearchUser
               key={CAMPAIGNS}
-              name={CAMPAIGNS}
+              nameBrand={CAMPAIGNS}
               checked={this}
             />
           ))}

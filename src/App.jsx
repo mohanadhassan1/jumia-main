@@ -13,6 +13,7 @@ import Login from "./components/Login/index";
 import HelpMain from "./components/Help";
 import Checkout from "./components/checkout/checkout";
 import SupermarkerCategory from "./components/SupermarketCat/SupermarkerCategory";
+import FashionCategory from "./components/fashion catrgory/index";
 import { BiTrash } from "react-icons/bi";
 
 const routes = createBrowserRouter([
@@ -29,6 +30,7 @@ const routes = createBrowserRouter([
 
       { path: "/help", element: <HelpMain /> },
       { path: "/Supremarket", element: <SupermarkerCategory /> },
+      { path: "/Fashion", element: <FashionCategory /> },
     ],
   },
   { path: "/checkout", element: <Checkout /> },

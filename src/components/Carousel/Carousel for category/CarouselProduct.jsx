@@ -6,18 +6,15 @@ export default function CarouselProducts({ products, navigate }) {
 
   const nextSlide = () => {
     setActiveIndex((prevIndex) =>
-      prevIndex === Math.floor(products.length / 4) - 1 ? 0 : prevIndex + 1
+      prevIndex === Math.floor(products.length / 6) - 1 ? 0 : prevIndex + 1
     );
   };
-  
+
   const prevSlide = () => {
     setActiveIndex((prevIndex) =>
-      prevIndex === 0 ? Math.floor(products.length / 4) - 1 : prevIndex - 1
+      prevIndex === 0 ? Math.floor(products.length /6) - 1 : prevIndex - 1
     );
   };
-  
-
- 
 
   useEffect(() => {
     let intervalId;
@@ -29,7 +26,6 @@ export default function CarouselProducts({ products, navigate }) {
 
     return () => clearInterval(intervalId);
   }, [autoplayPaused, activeIndex]);
-
 
   return (
     <div
@@ -61,7 +57,7 @@ export default function CarouselProducts({ products, navigate }) {
           </div>
         ))}
       </div>
-      
+
       <button
         type="button"
         className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
