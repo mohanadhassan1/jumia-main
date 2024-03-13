@@ -27,6 +27,20 @@ export default function SupermarkerCategory() {
     console.log(`New Name: ${newName}`);
     setNewNameValue(newName); // Update the state with the new name value
   };
+  // Array filter by brand name
+
+  const [arrBrand, setArrBrand] = useState([]);
+
+  // Define the callback function to receive the arrBrandFilter value
+  const handleBrandFilterChange = (filter) => {
+    event.preventDefault();
+
+    console.log("Brand Filter:", filter);
+    console.log("Brand Filter:", arrBrand);
+    // Update the parent state with the new filter value
+    setArrBrand(filter);
+  };
+
   const [selectSort, setselectSort] = useState("Popularity");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -46,10 +60,12 @@ export default function SupermarkerCategory() {
   );
   console.log("Filtered Products:", filteredProducts); // Add this line to log filtered products
 
-
-  const uniqueBrands = Array.from(new Set(filteredProducts.map((product) => product.brand)));
-  const uniqueCategories = Array.from(new Set(filteredProducts.map((product) => product.subcategory_id.name)));
-
+  const uniqueBrands = Array.from(
+    new Set(filteredProducts.map((product) => product.brand))
+  );
+  const uniqueCategories = Array.from(
+    new Set(filteredProducts.map((product) => product.subcategory_id.name))
+  );
 
   return (
     <>
@@ -104,19 +120,18 @@ export default function SupermarkerCategory() {
 
         <div className="md:flex  p-3 mb-3 ">
           <div className="md:me-1 w-full bg-white h-full">
-        
-      
             <BRAND
-        className="w-full"
-        brands={uniqueBrands}
-        categories={uniqueCategories}
-        changeCategories={handleNewName} // Pass the handleNewName function as the callback
-      />
+              className="w-full"
+              brands={uniqueBrands}
+              categories={uniqueCategories}
+              changeCategories={handleNewName} // Pass the handleNewName function as the callback
+              filterBrand={handleBrandFilterChange}
+            />
           </div>
 
           <div className="md:flex flex-wrap  gap-4 p-4 mb-3 rounded bg-white">
             <div className="flex justify-between items-center w-full">
-            <p>{newNameValue}</p>
+              <p>{newNameValue}</p>
               <div className="relative">
                 <button
                   id="dropdownDefaultButton"
@@ -207,16 +222,21 @@ export default function SupermarkerCategory() {
               </div>
             </div>
 
-            {filteredProducts.map((product) => (
-              <div
-                className="md:w-1/2 lg:w-[30%] xl:w-[15%] mb-4 "
-                onClick={() => {
-                  navigate(`/product/${product._id}`);
-                }}
-              >
-                <SmallCart Image={product.images} title={product.name} />
-              </div>
-            ))}
+            {filteredProducts
+              .filter(
+                (product) =>
+                  arrBrand.length === 0 || arrBrand.includes(product.brand)
+              )
+              .map((product) => (
+                <div
+                  className="md:w-1/2 lg:w-[30%] xl:w-[15%] mb-4 "
+                  onClick={() => {
+                    navigate(`/product/${product._id}`);
+                  }}
+                >
+                  <SmallCart Image={product.images} title={product.name} />
+                </div>
+              ))}
           </div>
         </div>
       </div>
