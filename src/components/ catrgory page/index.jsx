@@ -17,6 +17,20 @@ export default function SupermarketCategory() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+    // Array filter by brand name
+
+    const [arrBrand, setArrBrand] = useState([]);
+
+    // Define the callback function to receive the arrBrandFilter value
+    const handleBrandFilterChange = (filter) => {
+      event.preventDefault();
+  
+      console.log("Brand Filter:", filter);
+      console.log("Brand Filter:", arrBrand);
+      // Update the parent state with the new filter value
+      setArrBrand(filter);
+    };
+
   const [newNameValue, setNewNameValue] = useState("Fashion");
   const [selectSort, setselectSort] = useState("Popularity");
   const [isOpen, setIsOpen] = useState(false);
@@ -65,11 +79,12 @@ console.log("in category: ",idCategory);
         {/* BigCart components */}
         <div className="md:flex p-3 mb-3">
           <div className="md:me-1 w-full bg-white h-full">
-            <BRAND
+          <BRAND
               className="w-full"
               brands={uniqueBrands}
               categories={uniqueCategories}
-              changeCategories={handleNewName}
+              changeCategories={handleNewName} // Pass the handleNewName function as the callback
+              filterBrand={handleBrandFilterChange}
             />
           </div>
 
@@ -125,14 +140,18 @@ console.log("in category: ",idCategory);
               </div>
             </div>
 
-            {filteredProducts.map((product) => (
-              <div
-                key={product._id}
-                className="md:w-1/2 lg:w-[30%] xl:w-[15%] mb-4"
-                onClick={() => {
-                  navigate(`/product/${product._id}`);
-                }}
-              >
+            {filteredProducts
+              .filter(
+                (product) =>
+                  arrBrand.length === 0 || arrBrand.includes(product.brand)
+              )
+              .map((product) => (
+                <div
+                  className="md:w-1/2 lg:w-[30%] xl:w-[15%] mb-4 "
+                  onClick={() => {
+                    navigate(`/product/${product._id}`);
+                  }}
+                >
                 <SmallCart Image={product.images} title={product.name} />
               </div>
             ))}
