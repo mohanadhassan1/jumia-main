@@ -31,9 +31,11 @@ export default function SupermarketCategory() {
     setIsOpen(!isOpen);
   };
 
+  const idCategory = useSelector ((state)=>state.idCategory.idCategory.id)
+console.log("in category: ",idCategory);
   const filteredProducts = products.filter(
     (product) =>
-      product.subcategory_id.category_id === "65db7332a10c2a6d45faae9e"
+      product.subcategory_id.category_id === idCategory
   );
 
   console.log("Filtered Products:", filteredProducts);
