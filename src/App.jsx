@@ -12,8 +12,7 @@ import MyAccount from "./components/MyAccount";
 import Login from "./components/Login/index";
 import HelpMain from "./components/Help";
 import Checkout from "./components/checkout/checkout";
-import SupermarkerCategory from "./components/SupermarketCat/SupermarkerCategory";
-import { BiTrash } from "react-icons/bi";
+import Category from "./components/ catrgory page/index";
 
 const routes = createBrowserRouter([
   {
@@ -28,7 +27,7 @@ const routes = createBrowserRouter([
       { path: "/product/:id", element: <ProductDetails /> },
 
       { path: "/help", element: <HelpMain /> },
-      { path: "/Supremarket", element: <SupermarkerCategory /> },
+      { path: "/category", element: <Category /> },
     ],
   },
   { path: "/checkout", element: <Checkout /> },
