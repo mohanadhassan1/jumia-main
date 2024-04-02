@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
-import BigCart from "../Big Cart/BigCart";
 import { useNavigate } from "react-router-dom";
 import SmallCart from "../Small Cart/SmallCart";
 import CarouselProducts from "../Carousel/Carousel for category/CarouselProduct";
 import BRAND from "../Brand/index";
 
 export default function SupermarketCategory() {
+
+
+  
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,6 +65,8 @@ console.log("in category: ",idCategory);
     console.log(`New Name: ${newName}`);
     setNewNameValue(newName);
   };
+
+  
 
   return (
     <>

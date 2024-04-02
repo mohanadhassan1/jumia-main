@@ -28,6 +28,7 @@ export default function CarouselMain({images}) {
     return () => clearInterval(intervalId);
   }, [autoplayPaused, activeIndex]);
 
+  
 
   return (
     <div

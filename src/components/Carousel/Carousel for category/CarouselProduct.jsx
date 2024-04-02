@@ -27,6 +27,13 @@ export default function CarouselProducts({ products, navigate }) {
     return () => clearInterval(intervalId);
   }, [autoplayPaused, activeIndex]);
 
+  const maxLength = 30; // Define the maximum length for the title
+
+  // Function to truncate the title if it exceeds the maximum length
+  const truncateTitle = (str, maxLength) => {
+    return str.length > maxLength ? str.substring(0, maxLength) + "..." : str;
+  };
+
   return (
     <div
       className="relative w-full overflow-hidden"
@@ -51,7 +58,7 @@ export default function CarouselProducts({ products, navigate }) {
             </div>
             <div className="mt-2 text-center">
               <h3 className="text-lg font-medium text-gray-900">
-                {product.name}
+               {truncateTitle(product.name, maxLength)}
               </h3>
             </div>
           </div>
