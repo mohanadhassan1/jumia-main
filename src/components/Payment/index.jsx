@@ -1,46 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom";
-const PayPalButton = paypal.Buttons.driver("react", { React, ReactDOM });
+
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
+const initialOptions = {
+  clientId:
+    "AUDO6Hf1BUIV79Dam6tVwkbh3aPPc9xEYoG3hkLHj3j74ObH9ZlvFrGyyooB-keqZgVjl-KqCVcakAoy",
+  currency: "USD",
+  intent: "capture",
+};
 
 const Payment = () => {
-  const createOrder = (data) => {
-    // Order is created on the server and the order id is returned
-    return fetch("/my-server/create-paypal-order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // use the "body" param to optionally pass additional order information
-      // like product skus and quantities
-      body: JSON.stringify({
-        cart: [
-          {
-            sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
-            quantity: "YOUR_PRODUCT_QUANTITY",
-          },
-        ],
-      }),
-    })
-      .then((response) => response.json())
-      .then((order) => order.id);
-  };
-  const onApprove = (data) => {
-    // Order is captured on the server and the response is returned to the browser
-    return fetch("/my-server/capture-paypal-order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        orderID: data.orderID,
-      }),
-    }).then((response) => response.json());
-  };
   return (
-    <PayPalButton
-      createOrder={(data) => createOrder(data, actions)}
-      onApprove={(data) => onApprove(data, actions)}
-    />
+    <div className="container flex justify-center items-center mx-auto m-5 h-screen">
+      <PayPalScriptProvider options={initialOptions}>
+        <PayPalButtons />
+      </PayPalScriptProvider>
+    </div>
   );
 };
 
