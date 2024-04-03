@@ -77,7 +77,7 @@ export default function Login() {
       const response = await instance.post('/customers/login', { email: data.email, password: data.password });
       console.log(response.status);
       if (response.status == 200) {
-        // console.log('logging in with:', email, password);
+        console.log('login success');
         const token = response.data.token;
         localStorage.setItem('token', token);
         navigate('/home');
