@@ -32,18 +32,17 @@ const Navbar = () => {
       query === ""
         ? products
         : products.filter((product) =>
-          product.name
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
-        );
+            product.name
+              .toLowerCase()
+              .replace(/\s+/g, "")
+              .includes(query.toLowerCase().replace(/\s+/g, ""))
+          );
     setFilteredProducts(filtered);
   }, [products, query]);
 
   const handleInputChange = (e) => {
     setQuery("");
     setQuery(e.target.value); // Update query state with input value
-    searchInputRef.current.value = ""; // Clear the input field
   };
 
   const toggleAccountMenu = () => {
@@ -57,7 +56,7 @@ const Navbar = () => {
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     // navigate('/');
   };
 
@@ -97,6 +96,7 @@ const Navbar = () => {
                   onClick={() => {
                     navigate(`/product/${product._id}`);
                     setQuery(""); // Clear the input field
+                    searchInputRef.current.value = ""; // Clear the input field
                   }}
                 >
                   {product.name}
