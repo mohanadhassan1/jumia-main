@@ -32,11 +32,11 @@ const Navbar = () => {
       query === ""
         ? products
         : products.filter((product) =>
-            product.name
-              .toLowerCase()
-              .replace(/\s+/g, "")
-              .includes(query.toLowerCase().replace(/\s+/g, ""))
-          );
+          product.name
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .includes(query.toLowerCase().replace(/\s+/g, ""))
+        );
     setFilteredProducts(filtered);
   }, [products, query]);
 
@@ -54,6 +54,11 @@ const Navbar = () => {
   const toggleHelpMenu = () => {
     setIsHelpMenuOpen(!isHelpMenuOpen);
     setIsAccountMenuOpen(false);
+  };
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    // navigate('/');
   };
 
   return (
@@ -196,6 +201,18 @@ const Navbar = () => {
                           <CiHeart size={20} className="mr-6" />
                           Saved Items
                         </div>
+                      </a>
+                    </div>
+                    <div className="py-2" role="none">
+                      <a
+                        href="/"
+                        onClick={logout}
+                        className="flex justify-center hover:bg-orange-100 text-orange-700 font-bold rounded focus:outline-none focus:shadow-outline"
+                        role="menuitem"
+                        tabIndex="-1"
+                        id="menu-item-0"
+                      >
+                        LOG OUT
                       </a>
                     </div>
                   </div>

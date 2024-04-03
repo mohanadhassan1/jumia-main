@@ -6,18 +6,15 @@ export default function CarouselProducts({ products, navigate }) {
 
   const nextSlide = () => {
     setActiveIndex((prevIndex) =>
-      prevIndex === Math.floor(products.length / 4) - 1 ? 0 : prevIndex + 1
+      prevIndex === Math.floor(products.length / 6) - 1 ? 0 : prevIndex + 1
     );
   };
-  
+
   const prevSlide = () => {
     setActiveIndex((prevIndex) =>
-      prevIndex === 0 ? Math.floor(products.length / 4) - 1 : prevIndex - 1
+      prevIndex === 0 ? Math.floor(products.length /6) - 1 : prevIndex - 1
     );
   };
-  
-
- 
 
   useEffect(() => {
     let intervalId;
@@ -30,6 +27,12 @@ export default function CarouselProducts({ products, navigate }) {
     return () => clearInterval(intervalId);
   }, [autoplayPaused, activeIndex]);
 
+  const maxLength = 30; // Define the maximum length for the title
+
+  // Function to truncate the title if it exceeds the maximum length
+  const truncateTitle = (str, maxLength) => {
+    return str.length > maxLength ? str.substring(0, maxLength) + "..." : str;
+  };
 
   return (
     <div
@@ -55,13 +58,13 @@ export default function CarouselProducts({ products, navigate }) {
             </div>
             <div className="mt-2 text-center">
               <h3 className="text-lg font-medium text-gray-900">
-                {product.name}
+               {truncateTitle(product.name, maxLength)}
               </h3>
             </div>
           </div>
         ))}
       </div>
-      
+
       <button
         type="button"
         className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
