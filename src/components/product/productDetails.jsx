@@ -4,7 +4,11 @@ import instance from "../../axois/instance";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../store/slices/cart";
 import { selectIsLoggedIn } from "../../store/slices/authSlice";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { FaFacebookF } from "react-icons/fa";
+import { TiSocialTwitter } from "react-icons/ti";
+import { TiSocialLinkedin } from "react-icons/ti";
+
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -18,8 +22,15 @@ export default function ProductDetails() {
 
   const [mainImage, setMainImage] = useState("");
 
+  const sizes = ["S", "M", "L", "XL"];
+  const [selectedSize, setSelectedSize] = useState("");
+
   const handleThumbnailClick = (image) => {
     setMainImage(image);
+  };
+
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size);
   };
 
   useEffect(() => {
@@ -28,7 +39,7 @@ export default function ProductDetails() {
         const res = await instance.get(`/product/${id}`);
         setProduct(res.data);
         if (res.data.images && res.data.images.length > 0) {
-          setMainImage(res.data.images[0]); // Set main image if images are available
+          setMainImage(res.data.images[0]);
         }
       } catch (err) {
         setError(err.message);
@@ -41,6 +52,11 @@ export default function ProductDetails() {
   }, [id]);
 
   const handleAddToCart = () => {
+    if (!selectedSize) {
+      toast.error("Please select a size");
+      return;
+    }
+
     dispatch(addItemToCart({ ...product, isLoggedIn }));
 
     // alert(`${product.name} product added successfully`);
@@ -74,7 +90,7 @@ export default function ProductDetails() {
                   {product.images.map((image, index) => (
                     <img
                       key={index}
-                      className="rounded m-1 border shadow-lg drop-shadow"
+                      className="rounded m-1 border shadow-lg drop-shadow border-gray-200 hover:border-orange-700 focus:border-orange-700 cursor-pointer"
                       src={image}
                       alt={product.name}
                       onClick={() => handleThumbnailClick(image)}
@@ -85,18 +101,37 @@ export default function ProductDetails() {
                 <hr />
                 <h2 className="">SHARE THIS PRODUCT</h2>
                 <div className="flex">
-                  <h1>icon</h1>
-                  <h1>icon</h1>
+                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800"><FaFacebookF /></button>
+                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800"><TiSocialTwitter /></button>
+                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800"><TiSocialLinkedin /></button>
+
+                  
                 </div>
               </div>
 
               <div className="w-3/5 p-5">
-                <h1>{product.name}</h1>
-                <p>Brand</p>
-                <hr />
-                <h1>EGY {product.price}</h1>
-                <p>Quantity: {product.quantity_in_stock}</p>
-                <p>{product.description}</p>
+                {/* <p>Quantity: {product.quantity_in_stock}</p> */}
+
+                <h1 className="text-2xl font-bold">{product.name}</h1>
+                <p className="text-gray-500 mt-2">Brand: {product.brand}</p>
+                <p className="text-orange-600 text-lg font-bold mt-2">
+                  EGY {product.price}
+                </p>
+                <p className="mt-2">{product.description}</p>
+
+                <div className="mt-3 flex">
+                  {sizes.map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => handleSizeSelect(size)}
+                      className={`mr-2 px-4 py-2 border border-gray-300 rounded ${selectedSize === size ? "bg-gray-200" : "bg-white"
+                        }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+
                 <button
                   onClick={handleAddToCart}
                   className="button bg-orange-600 w-full hover:bg-orange-700 text-white mt-5 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
@@ -108,8 +143,10 @@ export default function ProductDetails() {
           </div>
 
           {/* ================================ DELIVERY & RETURNS ================================ */}
-          <div className="bg-white md:w-1/4 md:mt-0 sm:mt-3">
-            <p>aaaaff</p>
+          <div className="bg-white md:w-1/4 md:mt-0 sm:mt-3 p-3">
+            <h4>DELIVERY & RETURNS</h4>
+            <hr />
+
           </div>
         </div>
 
@@ -144,6 +181,7 @@ export default function ProductDetails() {
               <div className="border w-2/4">
                 <h1 className="m-3">KEY FEATURES</h1>
                 <hr />
+                <p className="m-3">ID: {product._id}</p>
                 <p className="m-3">{product.description}</p>
               </div>
               <div className="border w-2/4">
