@@ -1,5 +1,5 @@
 import Carousel from "react-multi-carousel";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MySlider from "../Slider/Slider";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
@@ -12,9 +12,10 @@ const Home = () => {
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProducts()).then(() => setLoading(false));
   }, []);
 
   const responsive = {
@@ -95,34 +96,42 @@ const Home = () => {
         {/* <MySlider /> */}
 
         {/* Products */}
-        <Carousel
-          responsive={responsive}
-          className="gap-4 p-2 mb-3 rounded bg-white mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center transition duration-1000"
-        >
-          {products.map((product) => (
-            <div key={product._id} to={product._id}>
-              <div className="hover:scale-[1.01] group relative mx-2">
-                <div className="hover:scale-[1.01] group relative">
-                  <div className="w-52 h-50 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
-                    <img
-                      src={product.images}
-                      alt={product.name}
-                      onClick={() => {
-                        navigate(`/product/${product._id}`);
-                      }}
-                      className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                    />
-                  </div>
-                  <div className="mt-4 justify-between">
-                    <h3 className="text-lg  leading-6 font-medium text-gray-900">
-                      {product.name}
-                    </h3>
+        {loading ? (
+          // Display loader while products are being fetched
+          <div className="flex justify-center items-center m-10">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+          </div>
+        ) : (
+          // Display Carousel once products are fetched
+          <Carousel
+            responsive={responsive}
+            className="gap-4 p-2 mb-3 rounded bg-white mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8 items-center transition duration-1000"
+          >
+            {products.map((product) => (
+              <div key={product._id} to={product._id}>
+                <div className="hover:scale-[1.01] group relative mx-2">
+                  <div className="hover:scale-[1.01] group relative">
+                    <div className="w-52 h-50 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
+                      <img
+                        src={product.images}
+                        alt={product.name}
+                        onClick={() => {
+                          navigate(`/product/${product._id}`);
+                        }}
+                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                      />
+                    </div>
+                    <div className="mt-4 justify-between">
+                      <h3 className="text-lg  leading-6 font-medium text-gray-900">
+                        {product.name}
+                      </h3>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </Carousel>
+            ))}
+          </Carousel>
+        )}
 
         {/* Ramadan Careem */}
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
