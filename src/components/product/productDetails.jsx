@@ -64,13 +64,17 @@ export default function ProductDetails() {
           {/* ========================= Product Details Name, Img, Price ========================= */}
           <div className="bg-white md:w-3/4">
             <div className="flex">
-              <div className="w-2/5 h-1/4 p-5">
-                <img className="w-full" src={mainImage} alt={product.name} />
-                <div className="flex w-16 h-16 mb-5">
+              <div className="w-2/5 h-1/4 p-5 relative">
+                <img
+                  className="w-full rounded "
+                  src={mainImage}
+                  alt={product.name}
+                />
+                <div className="flex w-16 h-16 mb-5 z-20">
                   {product.images.map((image, index) => (
                     <img
                       key={index}
-                      className="m-1 border border-indigo-600 drop-shadow"
+                      className="rounded m-1 border shadow-lg drop-shadow"
                       src={image}
                       alt={product.name}
                       onClick={() => handleThumbnailClick(image)}
