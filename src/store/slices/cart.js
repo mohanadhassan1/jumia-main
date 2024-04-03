@@ -3,6 +3,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { selectIsLoggedIn } from "./authSlice";
 import instance from "../../axois/instance";
+import { isExpired, decodeToken } from "react-jwt";
+
+
+
+
 
 const initialState = {
   items: [],
@@ -54,7 +59,17 @@ const cartSlice = createSlice({
         const selctitema={...newItem}
         console.log(selctitema._id)
         alert(selctitema)
-        instance.post('cart/add',{customer_id:"660d63d123e02e0fd2b1ab22",product_id:selctitema._id});
+        const token = localStorage.getItem('token');
+        // const decoded=jwt_decode(token)
+        // console.log(decoded)
+        if (token) {
+          const myDecodedToken = decodeToken(token);
+          console.log(myDecodedToken);
+          instance.post('cart/add',{customer_id:myDecodedToken.id,product_id:selctitema._id});
+
+        } else {
+          console.log('No token found in local storage');
+        }
       }
     },
     removeItemFromCart(state, action) {
