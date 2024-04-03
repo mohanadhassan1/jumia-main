@@ -82,7 +82,7 @@ console.log("in category: ",idCategory);
         {/* BigCart components */}
         {/* BigCart components */}
         <div className="md:flex p-3 mb-3">
-          <div className="md:me-1 w-full bg-white h-full">
+          <div className="md:me-1 w-1/3 bg-white h-full">
           <BRAND
               className="w-full"
               brands={uniqueBrands}
@@ -92,8 +92,8 @@ console.log("in category: ",idCategory);
             />
           </div>
 
-          <div className="md:flex flex-wrap gap-4 p-4 mb-3 rounded bg-white">
-            <div className="flex justify-between items-center w-full">
+          <div className="md:flex flex-wrap gap-4 p-4 mb-3 w-full rounded bg-white">
+            <div className="flex justify-between  w-full">
               <p>{newNameValue}</p>
               <div className="relative">
                 <button
@@ -151,7 +151,7 @@ console.log("in category: ",idCategory);
               )
               .map((product) => (
                 <div
-                  className="md:w-1/2 lg:w-[30%] xl:w-[15%] mb-4 "
+                  className="md:w-1/2  lg:w-[30%]  xl:w-[15%] mb-4  "
                   onClick={() => {
                     navigate(`/product/${product._id}`);
                   }}

@@ -11,7 +11,7 @@ export default function SmallCart({ Image, title }) {
 
   return (
     <>
-      <div className="hover:scale-[1.01] h-full w-full m-1 p-2 pb-2 rounded-xl overflow-hidden shadow-lg flex flex-col">
+      <div className="hover:scale-[1.01] h-[15rem] w-full m-1 p-2 pb-2 rounded-xl overflow-hidden shadow-lg flex flex-col">
         <img className="w-full p-1" src={Image} alt="" />
         <h3>{truncateTitle(title, maxLength)}</h3>
         
