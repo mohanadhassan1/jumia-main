@@ -54,7 +54,7 @@ const cartSlice = createSlice({
         const selctitema={...newItem}
         console.log(selctitema._id)
         alert(selctitema)
-        instance.post('cart/add',{customer_id:"660d63d123e02e0fd2b1ab22",product_id:selctitema._id});
+        instance.post('cart/add',{customer_id:"660d653c700d7ebe44aba4aa",product_id:selctitema._id});
       }
     },
     removeItemFromCart(state, action) {
