@@ -5,8 +5,15 @@ import { useState } from "react";
 import { Button, Modal } from "flowbite-react";
 import Installment from "./installment ";
 import CkeckoutNavbar from "./ckeckoutNavbar";
+import PaypalCheckoutButton from "../PaypalCheckoutButton";
+// import Payment from "../PaypalCheckoutButton";
 
 export default function Checkout() {
+  const cart = {
+    description: "Checkout cart description test",
+    price: 100,
+  };
+
   const [selectedMethods, setSelectedMethods] = useState({
     cashOnDelivery: false,
     payByCard: false,
@@ -91,6 +98,11 @@ export default function Checkout() {
                 <h2>3.PAYMENT METHOD</h2>
               </header>
               <hr />
+
+              {/* Paypal checkout */}
+              <div className="paypal-button-container">
+                <PaypalCheckoutButton cart={cart} />
+              </div>
 
               <form onSubmit={handleSubmit}>
                 {/* pay on cash delivery */}

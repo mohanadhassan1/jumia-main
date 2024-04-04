@@ -5,11 +5,16 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { BsPerson } from "react-icons/bs";
 import { FiInbox } from "react-icons/fi";
 import { CiHeart } from "react-icons/ci";
+
 import { AiOutlineMessage } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchProducts } from "../../store/slices/products";
+
+import { selectIsLoggedIn, selectSelectedUser } from "../../store/slices/authSlice";
+import { login, logout } from '../../store/slices/authSlice';
+
 
 const Navbar = () => {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
@@ -32,18 +37,17 @@ const Navbar = () => {
       query === ""
         ? products
         : products.filter((product) =>
-          product.name
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
-        );
+            product.name
+              .toLowerCase()
+              .replace(/\s+/g, "")
+              .includes(query.toLowerCase().replace(/\s+/g, ""))
+          );
     setFilteredProducts(filtered);
   }, [products, query]);
 
   const handleInputChange = (e) => {
     setQuery("");
     setQuery(e.target.value); // Update query state with input value
-    searchInputRef.current.value = ""; // Clear the input field
   };
 
   const toggleAccountMenu = () => {
@@ -56,10 +60,20 @@ const Navbar = () => {
     setIsAccountMenuOpen(false);
   };
 
-  const logout = () => {
+  const logoutBtn = () => {
     localStorage.removeItem('token');
+
     // navigate('/');
   };
+
+  dispatch(login(/* user data */));
+
+  dispatch(logout());
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const user = useSelector(selectSelectedUser);
+
+
 
   return (
     <nav className="flex flex-col lg:flex-row lg:justify-between px-4 lg:px-20 py-5 rounded items-center bg-white sticky top-0 z-50">
@@ -97,6 +111,7 @@ const Navbar = () => {
                   onClick={() => {
                     navigate(`/product/${product._id}`);
                     setQuery(""); // Clear the input field
+                    searchInputRef.current.value = ""; // Clear the input field
                   }}
                 >
                   {product.name}
@@ -141,9 +156,14 @@ const Navbar = () => {
                   onClick={toggleAccountMenu}
                 >
                   <BsPerson size={20} className="mr-2" />
-                  Account
+                  {/* {isLoggedIn ? "user.name" : "Account"} */}
+                  {isLoggedIn && user ? user.name : "Account"}
                   <IoIosArrowDown className="absolute right-0 " />
                 </button>
+                {/* <button onClick={handleAccountClick}>
+                  {isLoggedIn ? user.name : "Account"}
+                  <IoIosArrowDown />
+                </button> */}
 
                 {/* Account Dropdown menu */}
                 {isAccountMenuOpen && (
@@ -206,7 +226,7 @@ const Navbar = () => {
                     <div className="py-2" role="none">
                       <a
                         href="/"
-                        onClick={logout}
+                        onClick={logoutBtn}
                         className="flex justify-center hover:bg-orange-100 text-orange-700 font-bold rounded focus:outline-none focus:shadow-outline"
                         role="menuitem"
                         tabIndex="-1"
