@@ -22,16 +22,7 @@ const Cart = () => {
 
   useEffect(() => {
     // Retrieve cart data from local storage
-       const isLoggedIn=true;
-       if(isLoggedIn){
-       const  data= instance.get("/cart/:660dad118f3e85a77119e836")
-       setCartItems(data.items)
-       console.log(cartItems)
-
-       }
-       
-       
-
+    
     const cartData = localStorage.getItem("cart");
     if (cartData) {
       const parsedCartData = JSON.parse(cartData);

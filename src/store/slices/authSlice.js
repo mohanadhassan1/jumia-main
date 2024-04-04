@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-const hasToken = () => {
-  return !!localStorage.getItem('token'); 
-};
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    isLoggedIn: hasToken(), 
+   
+    isLoggedIn: !!(localStorage.getItem('token')), // Set isLoggedIn to false if token is not present
   },
   
   reducers: {
@@ -22,7 +20,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout,isLoggedIn } = authSlice.actions;
 
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 
