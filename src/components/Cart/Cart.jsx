@@ -5,6 +5,9 @@ import "react-multi-carousel/lib/styles.css";
 import { IoIosArrowForward } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { recommendedForYou, responsive } from "./dataStatic";
+import instance from "../../axois/instance";
+import { selectIsLoggedIn } from '../../store/slices/authSlice'; // Adjust the path as needed
+
 import {
   updateItemQuantity,
   removeItemFromCart,
@@ -19,6 +22,16 @@ const Cart = () => {
 
   useEffect(() => {
     // Retrieve cart data from local storage
+       const isLoggedIn=true;
+       if(isLoggedIn){
+       const  data= instance.get("/cart/:660dad118f3e85a77119e836")
+       setCartItems(data.items)
+       console.log(cartItems)
+
+       }
+       
+       
+
     const cartData = localStorage.getItem("cart");
     if (cartData) {
       const parsedCartData = JSON.parse(cartData);
@@ -26,6 +39,34 @@ const Cart = () => {
       console.log(parsedCartData.items);
     }
   }, []);
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
+  // const isLoggedIn=true;
+  // const [cartItems, setCartItems] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     if (isLoggedIn) {
+  //       // Fetch cart items from the database
+  //       try {
+  //         // const response = await instance.get("/660dad118f3e85a77119e836"); // Implement this functison to fetch data from the server
+  //         // const data = await response.json();
+  //         const data =instance.get("/cart/660dad118f3e85a77119e836")
+  //         setCartItems(data.items);
+  //       } catch (error) {
+  //         console.error('Error fetching cart items:', error);
+  //       }
+  //     } else {
+  //       // Retrieve cart data from local storage
+  //       const cartData = localStorage.getItem("cart");
+  //       if (cartData) {
+  //         const parsedCartData = JSON.parse(cartData);
+  //         setCartItems(parsedCartData.items);
+  //       }
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [isLoggedIn]);
 
   useEffect(() => {
     calculateSubtotal();
