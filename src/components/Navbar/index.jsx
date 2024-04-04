@@ -12,8 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchProducts } from "../../store/slices/products";
 
-import { selectIsLoggedIn, selectSelectedUser } from "../../store/slices/authSlice";
-import { login, logout } from '../../store/slices/authSlice';
+// import { selectIsLoggedIn, selectSelectedUser } from "../../store/slices/authSlice";
+// import { login, logout } from '../../store/slices/authSlice';
 
 
 const Navbar = () => {
@@ -66,12 +66,12 @@ const Navbar = () => {
     // navigate('/');
   };
 
-  dispatch(login(/* user data */));
+  // dispatch(login(/* user data */));
 
-  dispatch(logout());
+  // dispatch(logout());
 
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const user = useSelector(selectSelectedUser);
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
+  // const user = useSelector(selectSelectedUser);
 
 
 
@@ -157,7 +157,8 @@ const Navbar = () => {
                 >
                   <BsPerson size={20} className="mr-2" />
                   {/* {isLoggedIn ? "user.name" : "Account"} */}
-                  {isLoggedIn && user ? user.name : "Account"}
+                  {/*isLoggedIn && user ? user.name : "Account"*/}
+                  Account
                   <IoIosArrowDown className="absolute right-0 " />
                 </button>
                 {/* <button onClick={handleAccountClick}>
