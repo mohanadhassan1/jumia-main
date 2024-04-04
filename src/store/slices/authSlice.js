@@ -1,9 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
+const hasToken = () => {
+  // Implement your logic here to check if the token exists
+  // For example, you can check if the token is stored in localStorage
+  return !!localStorage.getItem('token'); // Return true if token exists, false otherwise
+};
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    isLoggedIn: true, // assuming initially user is not logged in
+    isLoggedIn: hasToken(), // assuming initially user is not logged in
     selectedUser: null,
     // other auth related state...
   },

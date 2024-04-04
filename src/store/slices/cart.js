@@ -1,8 +1,10 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import { selectIsLoggedIn } from "./authSlice";
+import {login,logout} from "./authSlice"
 import instance from "../../axois/instance";
 import { isExpired, decodeToken } from "react-jwt";
+import { useSelector } from "react-redux";
 
 const initialState = {
   items: [],
@@ -16,7 +18,8 @@ const cartSlice = createSlice({
   reducers: {
     addItemToCart(state, action) {
       const { payload} = action;
-      const isLoggedIn =selectIsLoggedIn
+      const isLoggedIn =selectIsLoggedIn()
+      console.log(isLoggedIn)
       const newItem = payload;
 
       const existingItem = state.items.find(
@@ -55,8 +58,6 @@ const cartSlice = createSlice({
         console.log(selctitema._id)
         alert(selctitema)
         const token = localStorage.getItem('token');
-        // const decoded=jwt_decode(token)
-        // console.log(decoded)
         if (token) {
           const myDecodedToken = decodeToken(token);
           console.log(myDecodedToken);
