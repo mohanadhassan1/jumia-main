@@ -71,16 +71,12 @@ console.log("in category: ",idCategory);
   return (
     <>
       <div className="md:container h-full mx-auto items-center justify-center">
-        <h2 className="text-xl font-medium uppercase text-center py-4 px-6 bg-teal-200">
+        <h2 className="text-xl font-medium uppercase text-center mb-3 py-4 px-6 bg-teal-200">
           SUPERMARKET TOP DEALS
         </h2>
         {/* BigCart components */}
         <CarouselProducts products={filteredProducts} />
-        <h2 className="text-xl font-medium uppercase text-center py-4 px-6 bg-teal-200">
-          Check More Deals
-        </h2>
-        {/* BigCart components */}
-        {/* BigCart components */}
+      
         <div className="md:flex p-3 mb-3">
           <div className="md:me-1 w-1/3 bg-white h-full">
           <BRAND
@@ -151,12 +147,12 @@ console.log("in category: ",idCategory);
               )
               .map((product) => (
                 <div
-                  className="md:w-1/2  lg:w-[30%]  xl:w-[15%] mb-4  "
+                  className="md:w-1/2  lg:w-[40%]  xl:w-[20%] mb-4  "
                   onClick={() => {
                     navigate(`/product/${product._id}`);
                   }}
                 >
-                <SmallCart Image={product.images} title={product.name} />
+                <SmallCart Image={product.images} title={product.name} price={product.price} />
               </div>
             ))}
           </div>
