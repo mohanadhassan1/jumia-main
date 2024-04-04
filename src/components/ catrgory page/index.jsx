@@ -33,7 +33,7 @@ export default function SupermarketCategory() {
       setArrBrand(filter);
     };
 
-  const [newNameValue, setNewNameValue] = useState("Fashion");
+  const [newNameValue, setNewNameValue] = useState("");
   const [selectSort, setselectSort] = useState("Popularity");
   const [isOpen, setIsOpen] = useState(false);
 

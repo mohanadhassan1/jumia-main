@@ -17,7 +17,7 @@ export default function SmallCart({ Image, title, price }) {
         <IoIosAddCircle className="text-[#F57C00] text-3xl mt-1 cursor-pointer absolute top-0 end-0" />
       </div> */}
 
-      <div class="max-w-2xl mx-auto ">
+      <div class="max-w-2xl mx-auto  ">
         <div class="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
           <a href="#">
             <img class="rounded-t-lg p-8" src={Image} alt="product image" />
