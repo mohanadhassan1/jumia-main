@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchProducts } from "../../store/slices/products";
 
+import { selectIsLoggedIn, login, logout } from "../../store/slices/authSlice";
 // import { selectIsLoggedIn, selectSelectedUser } from "../../store/slices/authSlice";
 // import { login, logout } from '../../store/slices/authSlice';
 
@@ -27,6 +28,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { products } = useSelector((state) => state.products);
 
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
@@ -37,17 +41,20 @@ const Navbar = () => {
       query === ""
         ? products
         : products.filter((product) =>
-            product.name
-              .toLowerCase()
-              .replace(/\s+/g, "")
-              .includes(query.toLowerCase().replace(/\s+/g, ""))
-          );
+          product.name
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .includes(query.toLowerCase().replace(/\s+/g, ""))
+        );
     setFilteredProducts(filtered);
   }, [products, query]);
 
+  useEffect(() => {
+  }, [isLoggedIn]);
+
   const handleInputChange = (e) => {
     setQuery("");
-    setQuery(e.target.value); // Update query state with input value
+    setQuery(e.target.value); 
   };
 
   const toggleAccountMenu = () => {
@@ -61,16 +68,14 @@ const Navbar = () => {
   };
 
   const logoutBtn = () => {
+    dispatch(logout());
     localStorage.removeItem('token');
-
-    // navigate('/');
   };
 
-  // dispatch(login(/* user data */));
+  const loginBtn = () => {
+    dispatch(login());
+  };
 
-  // dispatch(logout());
-
-  // const isLoggedIn = useSelector(selectIsLoggedIn);
   // const user = useSelector(selectSelectedUser);
 
 
@@ -156,15 +161,9 @@ const Navbar = () => {
                   onClick={toggleAccountMenu}
                 >
                   <BsPerson size={20} className="mr-2" />
-                  {/* {isLoggedIn ? "user.name" : "Account"} */}
-                  {/*isLoggedIn && user ? user.name : "Account"*/}
-                  Account
+                  {!isLoggedIn ? "Account"  : "Hey" } 
                   <IoIosArrowDown className="absolute right-0 " />
                 </button>
-                {/* <button onClick={handleAccountClick}>
-                  {isLoggedIn ? user.name : "Account"}
-                  <IoIosArrowDown />
-                </button> */}
 
                 {/* Account Dropdown menu */}
                 {isAccountMenuOpen && (
@@ -175,17 +174,24 @@ const Navbar = () => {
                     aria-labelledby="account-menu-button"
                     tabIndex="-1"
                   >
-                    <div className="py-2" role="none">
-                      <a
-                        href="/login"
-                        className="flex justify-center bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-16 m-2 rounded focus:outline-none focus:shadow-outline"
-                        role="menuitem"
-                        tabIndex="-1"
-                        id="menu-item-0"
-                      >
-                        SIGN IN
-                      </a>
-                    </div>
+                    {!isLoggedIn ? (
+                      <div className="py-2" role="none">
+                        <a
+                          href="/login"
+                          className="flex justify-center bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-16 m-2 rounded focus:outline-none focus:shadow-outline"
+                          role="menuitem"
+                          tabIndex="-1"
+                          id="menu-item-0"
+                          onClick={loginBtn}
+                        >
+                          SIGN IN
+                        </a>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+
+
                     <div className="py-2" role="none">
                       <a
                         href="/myaccount"

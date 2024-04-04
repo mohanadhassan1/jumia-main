@@ -52,10 +52,10 @@ export default function ProductDetails() {
   }, [id]);
 
   const handleAddToCart = () => {
-    if (!selectedSize) {
-      toast.error("Please select a size");
-      return;
-    }
+    // if (!selectedSize) {
+    //   toast.error("Please select a size");
+    //   return;
+    // }
 
     dispatch(addItemToCart({ ...product, isLoggedIn }));
 
@@ -105,7 +105,7 @@ export default function ProductDetails() {
                   <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800"><TiSocialTwitter /></button>
                   <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800"><TiSocialLinkedin /></button>
 
-                  
+
                 </div>
               </div>
 
@@ -118,20 +118,20 @@ export default function ProductDetails() {
                   EGY {product.price}
                 </p>
                 <p className="mt-2">{product.description}</p>
-
-                <div className="mt-3 flex">
-                  {sizes.map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => handleSizeSelect(size)}
-                      className={`mr-2 px-4 py-2 border border-gray-300 rounded ${selectedSize === size ? "bg-gray-200" : "bg-white"
-                        }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-
+                {product.brand === "Fashion" && (
+                  <div className="mt-3 flex">
+                    {sizes.map((size) => (
+                      <button
+                        key={size}
+                        onClick={() => handleSizeSelect(size)}
+                        className={`mr-2 px-4 py-2 border border-gray-300 rounded ${selectedSize === size ? "bg-gray-200" : "bg-white"
+                          }`}
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                )}
                 <button
                   onClick={handleAddToCart}
                   className="button bg-orange-600 w-full hover:bg-orange-700 text-white mt-5 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"

@@ -5,6 +5,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import instance from '../../axois/instance';
 
+
 export default function Login() {
 
   const navigate = useNavigate();
@@ -55,9 +56,6 @@ export default function Login() {
       if (response.data.exists == true) {
         console.log("Email exists, navigating to login page");
         setContent("login");
-        // const token = response.data.token;
-        // localStorage.setItem('token', token);
-        // navigate('/home');
 
       } else {
         console.log("Email doesn't exist, navigating to signup page");
@@ -83,7 +81,6 @@ export default function Login() {
         navigate('/home');
       } else {
         console.log("Error in email or password");
-
       }
     } catch (error) {
       console.error('Error logging in:', error);
@@ -106,7 +103,6 @@ export default function Login() {
         } else {
           console.log("Error in signup:", response.statusText);
         }
-
       }
     } catch (error) {
       console.error('Error signing up:', error);
@@ -239,7 +235,8 @@ export default function Login() {
                         type={showPassword ? 'password' : 'text'}
                         required
                         className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
-                        {...register("password")}
+                        // {...register("password")}
+                        {...register("password", { required: true })}
                       // {...register("password", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ })}
                       />
 
@@ -334,7 +331,8 @@ export default function Login() {
                         type={showPassword ? 'password' : 'text'}
                         required
                         className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
-                        {...register("password", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ })}
+                        {...register("password", { required: true })}
+                        // {...register("password", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ })}
                       />
 
                       <button type='button' className="absolute inset-y-0 right-0 pr-5" onClick={handleTogglePasswordVisibility}>
