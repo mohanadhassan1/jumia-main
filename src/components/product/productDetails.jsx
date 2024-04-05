@@ -8,10 +8,16 @@ import toast from "react-hot-toast";
 import { FaFacebookF } from "react-icons/fa";
 import { TiSocialTwitter } from "react-icons/ti";
 import { TiSocialLinkedin } from "react-icons/ti";
+import { IoIosStar, IoIosStarHalf } from "react-icons/io";
+import { isExpired, decodeToken } from "react-jwt";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [reviews, setReviews] = useState([]);
+  const [customers, setCustomers] = useState([]);
+  const [comment, setComment] = useState("");
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
@@ -47,6 +53,41 @@ export default function ProductDetails() {
       }
     }
 
+    const getReviews = async () => {
+      try {
+        const res = await instance.get(`/reviews/product/${id}`);
+        // console.log(res.data.data);
+        setReviews(res.data.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const getCustomer = async () => {
+      try {
+        if (reviews.length > 0) {
+          const customerPromises = reviews.map(async (review) => {
+            const res = await instance.get(`/customers/${review.customer_id}`);
+            console.log(res.data);
+            return res.data;
+          });
+
+          const customerData = await Promise.all(customerPromises);
+          setCustomers(customerData);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    customers.map((customer) => {
+      console.log(customer.email);
+    });
+
+    getCustomer();
+    getReviews();
     getData();
   }, [id]);
 
@@ -71,6 +112,36 @@ export default function ProductDetails() {
     return <div>Error: {error}</div>;
   }
 
+  const token = localStorage.getItem("token");
+  const user = decodeToken(token);
+  // console.log(user);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Make the API call to submit the review
+      const res = await instance.post(`/reviews`, {
+        comment,
+        product_id: id,
+        customer_id: user.id,
+      });
+
+      // Update the reviews state with the new review
+      setReviews([...reviews, res.data]);
+
+      // Clear the form fields
+      setRating("");
+      setComment("");
+
+      // Show success message
+      toast.success("Review submitted successfully");
+    } catch (err) {
+      console.error("Error submitting review:", err.message);
+      // Show error message
+      toast.error("Failed to submit review");
+    }
+  };
+
   return (
     <>
       <div className="container mx-auto mt-3">
@@ -86,15 +157,16 @@ export default function ProductDetails() {
                   alt={product.name}
                 />
                 <div className="flex w-16 h-16 mb-5 z-20">
-                  {product.images.map((image, index) => (
-                    <img
-                      key={index}
-                      className="rounded m-1 border shadow-lg drop-shadow border-gray-200 hover:border-orange-700 focus:border-orange-700 cursor-pointer"
-                      src={image}
-                      alt={product.name}
-                      onClick={() => handleThumbnailClick(image)}
-                    />
-                  ))}
+                  {product &&
+                    product.images.map((image, index) => (
+                      <img
+                        key={index}
+                        className="rounded m-1 border shadow-lg drop-shadow border-gray-200 hover:border-orange-700 focus:border-orange-700 cursor-pointer"
+                        src={image}
+                        alt={product.name}
+                        onClick={() => handleThumbnailClick(image)}
+                      />
+                    ))}
                 </div>
 
                 <hr />
@@ -215,6 +287,67 @@ export default function ProductDetails() {
           <div className="bg-white md:w-1/4 md:mt-0 sm:mt-3">
             <p>fourth 2</p>
           </div>
+        </div>
+
+        <div className="md:flex flex-col gap-4 mt-3 h-full pb-5">
+          {reviews &&
+            reviews.map((review) => (
+              <div key={review._id} className="flex flex-col gap-3 w-full">
+                <div className="flex flex-col gap-4 bg-white p-4 w-full rounded">
+                  <div className="flex justify justify-between">
+                    {customers &&
+                      customers.length > 0 &&
+                      customers.map((customer) => (
+                        <div key={customer._id} className="flex gap-2">
+                          <div className="flex justify-center items-center w-7 h-7 text-center rounded-full bg-orange-500">
+                            {customer.email ? customer.email[0] : ""}
+                          </div>
+                          <span>{customer.email}</span>
+                        </div>
+                      ))}
+                    <div className="flex p-1 gap-1 text-orange-300">
+                      <IoIosStar />
+                      <IoIosStar />
+                      <IoIosStar />
+                      <IoIosStar />
+                      <IoIosStarHalf />
+                    </div>
+                  </div>
+                  <div>{review.comment}</div>
+                  <div className="flex justify-between">
+                    <span>
+                      {new Date(review.createdAt).toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </div>
+                  <hr />
+                </div>
+                {/* Form for submitting comments */}
+              </div>
+            ))}
+          <form className="border rounded-md p-5" onSubmit={handleSubmit}>
+            <div className="grid gap-2">
+              <label className="text-sm" htmlFor="comment">
+                Comment
+              </label>
+              <textarea
+                id="comment"
+                className="border rounded-md px-3 py-2 w-full h-24 resize-none focus:outline-none focus:border-orange-500"
+                placeholder="Enter your comment"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 mt-4 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            >
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     </>
