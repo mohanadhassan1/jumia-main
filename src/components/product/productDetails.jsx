@@ -9,7 +9,6 @@ import { FaFacebookF } from "react-icons/fa";
 import { TiSocialTwitter } from "react-icons/ti";
 import { TiSocialLinkedin } from "react-icons/ti";
 
-
 export default function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState({});
@@ -101,11 +100,15 @@ export default function ProductDetails() {
                 <hr />
                 <h2 className="">SHARE THIS PRODUCT</h2>
                 <div className="flex">
-                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800"><FaFacebookF /></button>
-                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800"><TiSocialTwitter /></button>
-                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800"><TiSocialLinkedin /></button>
-
-
+                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800">
+                    <FaFacebookF />
+                  </button>
+                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800">
+                    <TiSocialTwitter />
+                  </button>
+                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800">
+                    <TiSocialLinkedin />
+                  </button>
                 </div>
               </div>
 
@@ -134,6 +137,7 @@ export default function ProductDetails() {
                       ))}
                     </div>
                   )}
+
                 <button
                   onClick={handleAddToCart}
                   className="button bg-orange-600 w-full hover:bg-orange-700 text-white mt-5 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
@@ -148,7 +152,6 @@ export default function ProductDetails() {
           <div className="bg-white md:w-1/4 md:mt-0 sm:mt-3 p-3">
             <h4>DELIVERY & RETURNS</h4>
             <hr />
-
           </div>
         </div>
 

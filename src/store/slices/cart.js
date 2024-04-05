@@ -1,10 +1,10 @@
 
 import { createSlice } from "@reduxjs/toolkit";
-import { selectIsLoggedIn } from "./authSlice";
-import {login,logout} from "./authSlice"
+import {  selectIsLoggedIn } from "./authSlice";
+import {login,logout,isLoggedIn} from "./authSlice"
 import instance from "../../axois/instance";
 import { isExpired, decodeToken } from "react-jwt";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const initialState = {
   items: [],
@@ -17,9 +17,10 @@ const cartSlice = createSlice({
 
   reducers: {
     addItemToCart(state, action) {
+      const { product, isLoggedIn } = action.payload;
       const { payload} = action;
-       const isLoggedIn =selectIsLoggedIn()
-    //  const isLoggedIn=useSelector(selectIsLoggedIn())
+      // const isLoggedIn = useSelector(selectIsLoggedIn);
+      
       console.log(isLoggedIn)
       const newItem = payload;
 
