@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const idCategorySlice =createSlice ({
     name: 'idCategory',
-    initialState : {idCategory: '0'},
+    initialState : {idCategory: '0', nameCategory: 'i'},
     reducers:{
         chanageId:(state,action)=>{
             state.idCategory = action.payload;
