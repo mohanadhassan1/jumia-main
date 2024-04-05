@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import instance from "../../axois/instance";
 import { IoPersonOutline } from "react-icons/io5";
 import { LuWarehouse } from "react-icons/lu";
 import { MdOutlineMail } from "react-icons/md";
@@ -8,10 +9,64 @@ import { FaRegHeart } from "react-icons/fa";
 import { FiInbox } from "react-icons/fi";
 import { FaClockRotateLeft } from "react-icons/fa6";
 import { HiOutlineTrash } from "react-icons/hi2";
+import { useParams } from "react-router-dom";
 
-export default function index() {
+
+export default function MyAccount() {
+
+  // const { id } = useParams();
 
   const [content, setContent] = useState("My Jumia Account");
+
+  // const [customer, setCustomer] = useState({});
+  // const [product, setProduct] = useState({});
+
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
+
+
+  // useEffect(() => {
+  //   async function getCustomer() {
+  //     try {
+  //       const res = await instance.get(`/customers/${id}`);
+  //       console.log(res.data);
+  //       setCustomer(res.data.deta);
+
+  //     } catch (err) {
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+
+  //   getCustomer();
+  // }, [id]);
+
+  // useEffect(() => {
+  //   async function getData() {
+  //     try {
+  //       const res = await instance.get(`/product/${id}`);
+  //       setProduct(res.data);
+  //       if (res.data.images && res.data.images.length > 0) {
+  //         setMainImage(res.data.images[0]);
+  //       }
+  //     } catch (err) {
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+
+  //   getData();
+  // }, [id]);
+
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // }
 
   const handleButtonClick = (btnContent) => {
     setContent(btnContent);
@@ -117,6 +172,7 @@ export default function index() {
           <div className="h-full">
 
             {content === "My Jumia Account" && (
+            // {content === "My Jumia Account" && customer && (
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">Account Overview</h1>
 
@@ -129,9 +185,10 @@ export default function index() {
                     </div>
 
                     <div className="p-3">
-                      <h3>Name</h3>
-                      <p>email</p>
+                      {/* <h3>Name: {customer.name}</h3>
+                      <p>Email: {customer.email}</p> */}
                     </div>
+
 
                   </div>
 
@@ -322,7 +379,7 @@ export default function index() {
           </div>
 
         </div>
-        
+
       </div>
     </>
   );
