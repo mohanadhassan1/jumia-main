@@ -121,21 +121,23 @@ export default function ProductDetails() {
                   EGY {product.price}
                 </p>
                 <p className="mt-2">{product.description}</p>
-                {product.brand === "Fashion" && (
-                  <div className="mt-3 flex">
-                    {sizes.map((size) => (
-                      <button
-                        key={size}
-                        onClick={() => handleSizeSelect(size)}
-                        className={`mr-2 px-4 py-2 border border-gray-300 rounded ${
-                          selectedSize === size ? "bg-gray-200" : "bg-white"
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                )}
+                {(product.subcategory_id === "65df930658f52e44982591a1" ||
+                  product.subcategory_id === "65e040938f80ee098f35967f" ||
+                  product.subcategory_id === "65e0801ca95474f5197e6536") && (
+                    <div className="mt-3 flex">
+                      {sizes.map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => handleSizeSelect(size)}
+                          className={`mr-2 px-4 py-2 border border-gray-300 rounded ${selectedSize === size ? "bg-gray-200" : "bg-white"
+                            }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
                 <button
                   onClick={handleAddToCart}
                   className="button bg-orange-600 w-full hover:bg-orange-700 text-white mt-5 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
