@@ -55,7 +55,7 @@ export default function RightSideBar() {
           <img
             src="https://eg.jumia.is/cms/Week7-8-2024/Installments/INSTALLMENTSEN.png"
             alt=""
-            srcset=""
+            srcSet=""
             className="w-full"
           />
         </a>
