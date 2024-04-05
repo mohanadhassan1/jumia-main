@@ -21,12 +21,12 @@ const cartSlice = createSlice({
       const { payload} = action;
       // const isLoggedIn = useSelector(selectIsLoggedIn);
       
-      console.log(isLoggedIn)
       const newItem = payload;
 
       const existingItem = state.items.find(
         (item) => item?._id === newItem?._id
       );
+      console.log(state.items)
 
       if (existingItem) {
         existingItem.quantity++;
