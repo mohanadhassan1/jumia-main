@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { recommendedForYou, responsive } from "./dataStatic";
 import instance from "../../axois/instance";
 import { selectIsLoggedIn } from '../../store/slices/authSlice'; // Adjust the path as needed
-
+import { isExpired, decodeToken } from "react-jwt";
 import {
   updateItemQuantity,
   removeItemFromCart,
@@ -19,45 +19,74 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(true);
   const [subtotal, setSubtotal] = useState(0);
+  const isLogedIn= selectIsLoggedIn
 
   useEffect(() => {
     // Retrieve cart data from local storage
-    
-    const cartData = localStorage.getItem("cart");
+  //   if(isLogedIn){
+  //     const token = localStorage.getItem('token');
+  //     if (token) {
+  //       const myDecodedToken = decodeToken(token);
+  //       console.log(myDecodedToken);
+  //   const  data=  instance.get(`cart/${myDecodedToken.id}`)
+  //   .then(response => {
+  //     console.log(response.data); 
+  //     setCartItems(response.data.cartItems)// Assuming the cart data is returned in the response's data property
+  //   })
+  //   .catch(error => {
+  //     console.error('Error fetching cart data:', error);
+  //   });
+
+  //   }
+  // // }
+  if (isLogedIn) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const myDecodedToken = decodeToken(token);
+      console.log(myDecodedToken);
+  
+      instance.get(`cart/${myDecodedToken.id}`)
+        .then(response => {
+          console.log(response.data); 
+          const cartItems = response.data.cartItems; // Assuming array of objects with product_id
+  
+          // Extract product IDs from cartItems
+          const productIds = cartItems.map(item => item.product_id);
+  
+          // Fetch data for each product ID using Promise.all
+          Promise.all(productIds.map(productId => {
+            return instance.get(`product/${productId}`);
+          }))
+          .then(responses => {
+            // Extract product data from each response
+            const products = responses.map(response => response.data);
+  
+            // Update cartItems state with the fetched product data
+            setCartItems(products);
+          })
+          .catch(error => {
+            console.error('Error fetching product data:', error);
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching cart data:', error);
+        });
+    }
+  }
+  
+  
+    if(!isLogedIn){
+      const cartData = localStorage.getItem("cart");
     if (cartData) {
       const parsedCartData = JSON.parse(cartData);
       setCartItems(parsedCartData.items);
       console.log(parsedCartData.items);
     }
+
+    }
+    
   }, []);
-  // const isLoggedIn = useSelector(selectIsLoggedIn);
-  // const isLoggedIn=true;
-  // const [cartItems, setCartItems] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     if (isLoggedIn) {
-  //       // Fetch cart items from the database
-  //       try {
-  //         // const response = await instance.get("/660dad118f3e85a77119e836"); // Implement this functison to fetch data from the server
-  //         // const data = await response.json();
-  //         const data =instance.get("/cart/660dad118f3e85a77119e836")
-  //         setCartItems(data.items);
-  //       } catch (error) {
-  //         console.error('Error fetching cart items:', error);
-  //       }
-  //     } else {
-  //       // Retrieve cart data from local storage
-  //       const cartData = localStorage.getItem("cart");
-  //       if (cartData) {
-  //         const parsedCartData = JSON.parse(cartData);
-  //         setCartItems(parsedCartData.items);
-  //       }
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [isLoggedIn]);
+  
 
   useEffect(() => {
     calculateSubtotal();
