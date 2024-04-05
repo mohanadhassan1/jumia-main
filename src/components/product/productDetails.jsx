@@ -25,6 +25,26 @@ export default function ProductDetails() {
   const sizes = ["S", "M", "L", "XL"];
   const [selectedSize, setSelectedSize] = useState("");
 
+  async function fetchReviews() {
+    try {
+      const res = await instance.get(`/reviews/product/${id}`);
+      setReviews(res.data.data);
+
+      const customerPromises = res.data.data.map(async (review) => {
+        const customerRes = await instance.get(
+          `/customers/${review.customer_id}`
+        );
+        return customerRes.data;
+      });
+
+      const customerData = await Promise.all(customerPromises);
+      setCustomers(customerData);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
   useEffect(() => {
     async function getData() {
       try {
@@ -33,27 +53,6 @@ export default function ProductDetails() {
         if (res.data.images && res.data.images.length > 0) {
           setMainImage(res.data.images[0]);
         }
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    async function fetchReviews() {
-      try {
-        const res = await instance.get(`/reviews/product/${id}`);
-        setReviews(res.data.data);
-
-        const customerPromises = res.data.data.map(async (review) => {
-          const customerRes = await instance.get(
-            `/customers/${review.customer_id}`
-          );
-          return customerRes.data;
-        });
-
-        const customerData = await Promise.all(customerPromises);
-        setCustomers(customerData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -78,6 +77,9 @@ export default function ProductDetails() {
     toast.success(`Product added successfully`);
   };
 
+  const token = localStorage.getItem("token");
+  const user = decodeToken(token);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -87,11 +89,13 @@ export default function ProductDetails() {
         return;
       }
 
-      const res = await instance.post("/reviews", {
+      const newReview = {
         comment,
         product_id: id,
         customer_id: user.id,
-      });
+      };
+
+      const res = await instance.post("/reviews", newReview);
 
       setReviews([...reviews, res.data]);
       setComment("");
@@ -100,6 +104,7 @@ export default function ProductDetails() {
       console.error("Error submitting review:", err.message);
       toast.error("Failed to submit review");
     }
+    fetchReviews();
   };
 
   if (loading) {
@@ -109,9 +114,6 @@ export default function ProductDetails() {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
-  const token = localStorage.getItem("token");
-  const user = decodeToken(token);
 
   return (
     <div className="container mx-auto mt-3">
@@ -196,19 +198,17 @@ export default function ProductDetails() {
 
       {/* Reviews */}
       <div className="md:flex flex-col gap-4 mt-3 h-full pb-5">
-        {reviews.map((review, index) => (
-          <div key={index} className="flex flex-col gap-3 w-full">
-            {customers.map((customer, index) => (
-              <div
-                key={index}
-                className="flex flex-col gap-4 bg-white p-4 w-full rounded"
-              >
+        {reviews.map((review, index) => {
+          const customer = customers[index]; // Get corresponding customer information
+          return (
+            <div key={index} className="flex flex-col gap-4 w-full">
+              <div className="flex flex-col gap-4 bg-white p-4 rounded">
                 <div className="flex justify justify-between">
                   <div className="flex gap-2">
                     <div className="flex justify-center items-center w-7 h-7 text-center rounded-full bg-orange-500">
-                      {customer.email ? customer.email[0] : ""}
+                      {customer && customer.email ? customer.email[0] : ""}
                     </div>
-                    <span>{customer.email}</span>
+                    <span>{customer && customer.email}</span>
                   </div>
                   <div className="flex p-1 gap-1 text-orange-300">
                     <IoIosStar />
@@ -230,30 +230,33 @@ export default function ProductDetails() {
                 </div>
                 <hr />
               </div>
-            ))}
-          </div>
-        ))}
+            </div>
+          );
+        })}
+
         {/* Review Submission Form */}
-        <form className="border rounded-md p-5" onSubmit={handleSubmit}>
-          <div className="grid gap-2">
-            <label className="text-sm" htmlFor="comment">
-              Comment
-            </label>
-            <textarea
-              id="comment"
-              className="border rounded-md px-3 py-2 w-full h-24 resize-none focus:outline-none focus:border-orange-500"
-              placeholder="Enter your comment"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-          </div>
-          <button
-            type="submit"
-            className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 mt-4 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-          >
-            Submit
-          </button>
-        </form>
+        <div className="flex flex-col gap-4 bg-white p-4 rounded">
+          <form className="border rounded-md p-5" onSubmit={handleSubmit}>
+            <div className="grid gap-2">
+              <label className="text-sm" htmlFor="comment">
+                Comment
+              </label>
+              <textarea
+                id="comment"
+                className="border rounded-md px-3 py-2 w-full h-24 resize-none focus:outline-none focus:border-orange-500"
+                placeholder="Enter your comment"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 mt-4 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
