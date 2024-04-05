@@ -9,7 +9,6 @@ import { FaFacebookF } from "react-icons/fa";
 import { TiSocialTwitter } from "react-icons/ti";
 import { TiSocialLinkedin } from "react-icons/ti";
 
-
 export default function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState({});
@@ -52,10 +51,10 @@ export default function ProductDetails() {
   }, [id]);
 
   const handleAddToCart = () => {
-    if (!selectedSize) {
-      toast.error("Please select a size");
-      return;
-    }
+    // if (!selectedSize) {
+    //   toast.error("Please select a size");
+    //   return;
+    // }
 
     dispatch(addItemToCart({ ...product, isLoggedIn }));
 
@@ -101,11 +100,15 @@ export default function ProductDetails() {
                 <hr />
                 <h2 className="">SHARE THIS PRODUCT</h2>
                 <div className="flex">
-                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800"><FaFacebookF /></button>
-                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800"><TiSocialTwitter /></button>
-                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800"><TiSocialLinkedin /></button>
-
-                  
+                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800">
+                    <FaFacebookF />
+                  </button>
+                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800">
+                    <TiSocialTwitter />
+                  </button>
+                  <button className="p-1 m-1 border border-blue-900 rounded-full hover:text-orange-800 hover:border-orange-800">
+                    <TiSocialLinkedin />
+                  </button>
                 </div>
               </div>
 
@@ -118,19 +121,22 @@ export default function ProductDetails() {
                   EGY {product.price}
                 </p>
                 <p className="mt-2">{product.description}</p>
-
-                <div className="mt-3 flex">
-                  {sizes.map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => handleSizeSelect(size)}
-                      className={`mr-2 px-4 py-2 border border-gray-300 rounded ${selectedSize === size ? "bg-gray-200" : "bg-white"
-                        }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
+                {(product.subcategory_id === "65df930658f52e44982591a1" ||
+                  product.subcategory_id === "65e040938f80ee098f35967f" ||
+                  product.subcategory_id === "65e0801ca95474f5197e6536") && (
+                    <div className="mt-3 flex">
+                      {sizes.map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => handleSizeSelect(size)}
+                          className={`mr-2 px-4 py-2 border border-gray-300 rounded ${selectedSize === size ? "bg-gray-200" : "bg-white"
+                            }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  )}
 
                 <button
                   onClick={handleAddToCart}
@@ -146,7 +152,6 @@ export default function ProductDetails() {
           <div className="bg-white md:w-1/4 md:mt-0 sm:mt-3 p-3">
             <h4>DELIVERY & RETURNS</h4>
             <hr />
-
           </div>
         </div>
 
