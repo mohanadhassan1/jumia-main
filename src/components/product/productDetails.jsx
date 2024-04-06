@@ -123,13 +123,13 @@ export default function ProductDetails() {
         <div className="bg-white md:w-3/4">
           {/* Product Image */}
           <div className="flex">
-            <div className="w-2/5 h-1/4 p-5 relative">
+            <div className="w-full md:w-2/5 h-1/4 p-5 relative">
               <img
                 className="w-full rounded"
                 src={mainImage}
                 alt={product.name}
               />
-              <div className="flex w-16 h-16 mb-5 z-20">
+              <div className="flex w-full h-16 mb-5 z-20 overflow-x-auto">
                 {product &&
                   product.images.map((image, index) => (
                     <img
