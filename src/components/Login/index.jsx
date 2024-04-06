@@ -312,7 +312,7 @@ export default function Login() {
 
                   </div>
 
-                  {/* First Name */}
+                  {/* First Name
                   <div>
 
                     <label htmlFor="fName" className="flex text-sm font-medium leading-6 text-gray-900">
@@ -331,10 +331,10 @@ export default function Login() {
                         {...register("first_name", { required: true })}
                       />
                     </div>
-                  </div>
+                  </div>  */}
 
                   {/* Last Name */}
-                  <div>
+                  {/* <div>
 
                     <label htmlFor="lName" className="flex text-sm font-medium leading-6 text-gray-900">
                       Last Name
@@ -352,7 +352,7 @@ export default function Login() {
                         {...register("last_name", { required: true })}
                       />
                     </div>
-                  </div>
+                  </div>  */}
 
                   {/* Password */}
                   <div>
@@ -416,7 +416,7 @@ export default function Login() {
                   </div>
 
                   {/* Phone Number */}
-                  <div>
+                  {/* <div>
 
                     <label htmlFor="phoneNumber" className="flex text-sm font-medium leading-6 text-gray-900">
                     Phone Number
@@ -434,10 +434,10 @@ export default function Login() {
                         {...register("phone_number", { required: true })}
                       />
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* Address */}
-                  <div>
+                  {/* <div>
 
                     <label htmlFor="address" className="flex text-sm font-medium leading-6 text-gray-900">
                     Address
@@ -455,7 +455,7 @@ export default function Login() {
                         {...register("address_of_Id", { required: true })}
                       />
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* Continue Button */}
                   <div>
