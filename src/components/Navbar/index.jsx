@@ -15,6 +15,8 @@ import { fetchProducts } from "../../store/slices/products";
 import { selectIsLoggedIn, login, logout } from "../../store/slices/authSlice";
 // import { selectIsLoggedIn, selectSelectedUser } from "../../store/slices/authSlice";
 // import { login, logout } from '../../store/slices/authSlice';
+import { toast } from 'react-hot-toast';
+import { jwtDecode } from "jwt-decode";
 
 
 const Navbar = () => {
@@ -28,8 +30,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { products } = useSelector((state) => state.products);
 
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
 
+  const [decodedToken, setDecodedToken] = useState(null);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -49,12 +52,21 @@ const Navbar = () => {
     setFilteredProducts(filtered);
   }, [products, query]);
 
+  // useEffect(() => {
+  // }, [isLoggedIn]);
+
   useEffect(() => {
-  }, [isLoggedIn]);
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decoded = jwtDecode(token);
+      console.log(decoded);
+      setDecodedToken(decoded);
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     setQuery("");
-    setQuery(e.target.value); 
+    setQuery(e.target.value);
   };
 
   const toggleAccountMenu = () => {
@@ -67,14 +79,26 @@ const Navbar = () => {
     setIsAccountMenuOpen(false);
   };
 
+  // const logoutBtn = () => {
+  //   dispatch(logout());
+  //   localStorage.removeItem('token');
+  // };
+
   const logoutBtn = () => {
     dispatch(logout());
-    localStorage.removeItem('token');
+    localStorage.clear('token');
+    toast.success("Successfully logged out!", {
+      position: "top",
+    });
+    setTimeout(() => {
+      navigate("login");
+    }, 2000);
   };
 
-  const loginBtn = () => {
-    dispatch(login());
-  };
+
+  // const loginBtn = () => {
+  // dispatch(login());
+  // };
 
   // const user = useSelector(selectSelectedUser);
 
@@ -161,7 +185,7 @@ const Navbar = () => {
                   onClick={toggleAccountMenu}
                 >
                   <BsPerson size={20} className="mr-2" />
-                  {!isLoggedIn ? "Account"  : "Hey" } 
+                  {!decodedToken ? "Account" : `Hey, ${decodedToken.first_name}`}
                   <IoIosArrowDown className="absolute right-0 " />
                 </button>
 
@@ -174,7 +198,7 @@ const Navbar = () => {
                     aria-labelledby="account-menu-button"
                     tabIndex="-1"
                   >
-                    {!isLoggedIn ? (
+                    {!decodedToken ? (
                       <div className="py-2" role="none">
                         <a
                           href="/login"
@@ -182,7 +206,7 @@ const Navbar = () => {
                           role="menuitem"
                           tabIndex="-1"
                           id="menu-item-0"
-                          onClick={loginBtn}
+                        // onClick={loginBtn}
                         >
                           SIGN IN
                         </a>
@@ -232,9 +256,9 @@ const Navbar = () => {
                     </div>
                     <div className="py-2" role="none">
                       <a
-                        href="/"
+                        // href="/"
                         onClick={logoutBtn}
-                        className="flex justify-center hover:bg-orange-100 text-orange-700 font-bold rounded focus:outline-none focus:shadow-outline"
+                        className="flex justify-center cursor-pointer hover:bg-orange-100 text-orange-700 font-bold rounded focus:outline-none focus:shadow-outline"
                         role="menuitem"
                         tabIndex="-1"
                         id="menu-item-0"
