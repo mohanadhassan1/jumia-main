@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import instance from '../../axois/instance';
+import { toast } from 'react-hot-toast';
 
 
 export default function Login() {
@@ -81,20 +82,25 @@ export default function Login() {
         navigate('/home');
       } else {
         console.log("Error in email or password");
+        toast.error("Email or password is wrong")
       }
     } catch (error) {
       console.error('Error logging in:', error);
+      toast.error("Email or password is wrong", {
+        // position: "top",
+      });
     }
   };
 
   const onSignup = async (data) => {
     console.log(data);
     try {
-      const response = await instance.post('/customers/newcustomer', { email: data.email, password: data.password, first_name: data.first_name, last_name: data.last_name, phone_number: data.phone_number, address_of_Id: data.address_of_Id });
+      const response = await instance.post('/customers/newcustomer', { email: data.email, password: data.password, first_name: data.first_name });
       console.log(response.status);
       if (response.status == 200) {
         console.log('Signup success');
         const token = response.data.token;
+        console.log(response.data);
         localStorage.setItem('token', token);
         navigate('/home');
       } else {
@@ -102,10 +108,12 @@ export default function Login() {
           console.log("Email already exists");
         } else {
           console.log("Error in signup:", response.statusText);
+          toast.error("Please Enter your data")
         }
       }
     } catch (error) {
       console.error('Error signing up:', error);
+      toast.error("Please Enter your data")
     }
   };
 
@@ -312,9 +320,7 @@ export default function Login() {
 
                   </div>
 
-                  {/* First Name
                   <div>
-
                     <label htmlFor="fName" className="flex text-sm font-medium leading-6 text-gray-900">
                       First Name
                     </label>
@@ -331,7 +337,7 @@ export default function Login() {
                         {...register("first_name", { required: true })}
                       />
                     </div>
-                  </div>  */}
+                  </div> 
 
                   {/* Last Name */}
                   {/* <div>
