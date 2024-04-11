@@ -15,9 +15,8 @@ import { fetchProducts } from "../../store/slices/products";
 import { selectIsLoggedIn, login, logout } from "../../store/slices/authSlice";
 // import { selectIsLoggedIn, selectSelectedUser } from "../../store/slices/authSlice";
 // import { login, logout } from '../../store/slices/authSlice';
-import { toast } from 'react-hot-toast';
+import { toast } from "react-hot-toast";
 import { jwtDecode } from "jwt-decode";
-
 
 const Navbar = () => {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
@@ -44,11 +43,11 @@ const Navbar = () => {
       query === ""
         ? products
         : products.filter((product) =>
-          product.name
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
-        );
+            product.name
+              .toLowerCase()
+              .replace(/\s+/g, "")
+              .includes(query.toLowerCase().replace(/\s+/g, ""))
+          );
     setFilteredProducts(filtered);
   }, [products, query]);
 
@@ -56,7 +55,7 @@ const Navbar = () => {
   // }, [isLoggedIn]);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       const decoded = jwtDecode(token);
       console.log(decoded);
@@ -86,7 +85,7 @@ const Navbar = () => {
 
   const logoutBtn = () => {
     dispatch(logout());
-    localStorage.clear('token');
+    localStorage.clear("token");
     toast.success("Successfully logged out!", {
       position: "top",
     });
@@ -95,14 +94,11 @@ const Navbar = () => {
     }, 2000);
   };
 
-
   // const loginBtn = () => {
   // dispatch(login());
   // };
 
   // const user = useSelector(selectSelectedUser);
-
-
 
   return (
     <nav className="flex flex-col lg:flex-row lg:justify-between px-4 lg:px-20 py-5 rounded items-center bg-white sticky top-0 z-50">
@@ -121,14 +117,14 @@ const Navbar = () => {
           <FaSearch className="absolute top-3 left-3 ml-4 hidden lg:block text-gray-400" />
           <input
             ref={searchInputRef}
-            className="ml-0 lg:ml-4 lg:pl-10 pr-2 pl-5 outline-none shadow-xl rounded w-5/7 lg:w-full lg:max-w-xl h-11"
+            className="ml-0 lg:ml-4 lg:pl-10 pr-2 pl-5 outline-none shadow-xl rounded w-5/7 lg:w-full lg:max-w-xl h-11 w-3/4"
             type="search"
             name="search"
             id="search"
             placeholder="Search product, brands, and categories"
             onChange={handleInputChange}
           />
-          <button className="button bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 lg:mt-0">
+          <button className="button bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-6 w-1/4 md:w-1/5  rounded focus:outline-none focus:shadow-outline mt-2 lg:mt-0">
             SEARCH
           </button>
           {query && (
@@ -185,7 +181,9 @@ const Navbar = () => {
                   onClick={toggleAccountMenu}
                 >
                   <BsPerson size={20} className="mr-2" />
-                  {!decodedToken ? "Account" : `Hey, ${decodedToken.first_name}`}
+                  {!decodedToken
+                    ? "Account"
+                    : `Hey, ${decodedToken.first_name}`}
                   <IoIosArrowDown className="absolute right-0 " />
                 </button>
 
@@ -206,7 +204,7 @@ const Navbar = () => {
                           role="menuitem"
                           tabIndex="-1"
                           id="menu-item-0"
-                        // onClick={loginBtn}
+                          // onClick={loginBtn}
                         >
                           SIGN IN
                         </a>
@@ -214,7 +212,6 @@ const Navbar = () => {
                     ) : (
                       ""
                     )}
-
 
                     <div className="py-2" role="none">
                       <a
