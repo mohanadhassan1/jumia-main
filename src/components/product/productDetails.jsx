@@ -107,8 +107,12 @@ export default function ProductDetails() {
     fetchReviews();
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if (loading || !product) {
+    return (
+      <div className="flex justify-center items-center m-10">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+      </div>
+    );
   }
 
   if (error) {
@@ -131,7 +135,7 @@ export default function ProductDetails() {
               />
               <div className="flex w-full h-16 mb-5 z-20 overflow-x-auto">
                 {product &&
-                  product.images.map((image, index) => (
+                  product.images?.map((image, index) => (
                     <img
                       key={index}
                       className="rounded m-1 border shadow-lg drop-shadow border-gray-200 hover:border-orange-700 focus:border-orange-700 cursor-pointer"
