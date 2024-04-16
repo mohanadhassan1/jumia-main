@@ -4,7 +4,8 @@ import {  selectIsLoggedIn } from "./authSlice";
 import {login,logout,isLoggedIn} from "./authSlice"
 import instance from "../../axois/instance";
 import { isExpired, decodeToken } from "react-jwt";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const initialState = {
   items: [],
@@ -17,9 +18,8 @@ const cartSlice = createSlice({
 
   reducers: {
     addItemToCart(state, action) {
-      const { product, isLoggedIn } = action.payload;
       const { payload} = action;
-      // const isLoggedIn = useSelector(selectIsLoggedIn);
+      const isLoggedIn = selectIsLoggedIn;
       
       const newItem = payload;
 
@@ -53,28 +53,63 @@ const cartSlice = createSlice({
         localStorage.setItem("cart", JSON.stringify(existingCartData));
       }
 
-      // Save cart items to database if user is logged in
       if (isLoggedIn) {
-        alert("loged in")
-        const selctitema={...newItem}
-        console.log(selctitema._id)
-        alert(selctitema)
+        alert("Logged in");
+        const selctitema = { ...newItem };
+        console.log(selctitema._id);
+        alert(selctitema);
         const token = localStorage.getItem('token');
         if (token) {
           const myDecodedToken = decodeToken(token);
-          console.log(myDecodedToken);
-          instance.post('cart/add',{customer_id:myDecodedToken.id,product_id:selctitema._id});
-
+          instance.get(`cart/${myDecodedToken.id}`)
+            .then(response => {
+              console.log(response.data); 
+              const cartItems = response.data.cartItems;
+              console.log(cartItems);
+              const productIds = cartItems.map(item => item.product_id);
+              console.log(productIds);
+      
+              const existingproduct = productIds.find(id => id == selctitema._id);
+              console.log(existingproduct);
+      
+              if (!existingproduct) {
+                // If the product does not exist in the cart, add it
+                instance.post('cart/add', { customer_id: myDecodedToken.id, product_id: selctitema._id, quantity: 1 });
+              } else {
+                // If the product already exists in the cart, you may want to handle this case
+                console.log('Product already exists in the cart.');
+              }
+            })
+            .catch(error => {
+              console.error('Error fetching cart:', error);
+            });
         } else {
           console.log('No token found in local storage');
         }
       }
+      
     },
     removeItemFromCart(state, action) {
-      const itemId = action.payload;
+      console.log(action.payload)
+
+      const {customer_id ,product_id }= action.payload;
+      console.log(customer_id)
+      console.log(product_id)
       const removedItemIndex = state.items.findIndex(
-        (item) => item?._id === itemId
+        (item) => item?._id == product_id
       );
+      if (customer_id) {
+        instance.delete(`/cart/${customer_id}/${product_id}`)
+        .then(response => {
+          dispatch({ type: 'REMOVE_ITEM_SUCCESS', payload: { product_id } });
+
+          // Handle success if needed
+        })
+        .catch(error => {
+          // Handle error if needed
+        });
+      }
+
 
       if (removedItemIndex !== -1) {
         const removedItem = state.items[removedItemIndex];
@@ -99,41 +134,24 @@ const cartSlice = createSlice({
         }
 
         // Remove item from database if the user is logged in
-        if (selectIsLoggedIn(store.getState())) {
-          axios.delete(`/api/cart/remove/${itemId}`);
-        }
+       
       }
     },
     updateItemQuantity(state, action) {
-      const { itemId, quantity } = action.payload;
-      const existingItem = state.items.find((item) => item?._id === itemId);
+      const {customer_id,product_id,quantity}=action.payload
+      alert("up")
+      console.log(customer_id,product_id,quantity)
+      instance.patch(`/cart/update`,{customer_id,product_id,quantity})
+      .then(response => {
+        alert("updated")
 
-      if (existingItem) {
-        const newQuantity = Math.min(quantity, existingItem.quantity);
-        state.total +=
-          (newQuantity - existingItem.quantity) * existingItem?.price;
-        existingItem.quantity = newQuantity;
-
-        if (!selectIsLoggedIn(store.getState())) {
-          const existingCartData = JSON.parse(localStorage.getItem("cart")) || { items: [], total: 0 };
-        
-          const existingCartItem = existingCartData.items.find(item => item?._id === itemId);
-          if (existingCartItem) {
-            existingCartItem.quantity = Math.min(quantity, existingCartItem.quantity);
-          }
-        
-          existingCartData.total = existingCartData.items.reduce((total, item) => {
-            return total + (item.price * item.quantity);
-          }, 0);
-        
-          localStorage.setItem("cart", JSON.stringify(existingCartData));
-        }
-
-        // Update item quantity in database if the user is logged in
-        if (selectIsLoggedIn(store.getState())) {
-          axios.put(`/api/cart/update/${itemId}`, { quantity });
-        }
-      }
+        // Handle success if needed
+      })
+      .catch(error => {
+        // Handle error if needed
+      });
+      
+      
     },
   },
 });
