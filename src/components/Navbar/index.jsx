@@ -135,8 +135,7 @@ const Navbar = () => {
                   className="block px-4 py-2 hover:bg-gray-200"
                   onClick={() => {
                     navigate(`/product/${product._id}`);
-                    setQuery(""); // Clear the input field
-                    searchInputRef.current.value = ""; // Clear the input field
+                    setQuery(""); // Clear the input fiel
                   }}
                 >
                   {product.name}
