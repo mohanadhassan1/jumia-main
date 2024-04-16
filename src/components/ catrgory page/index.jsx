@@ -164,21 +164,17 @@ export default function SupermarketCategory() {
               .map((product) => (
                 <div
                   className="md:w-1/2  lg:w-[40%]  xl:w-[20%] mb-4  "
-                  // onClick={() => {
-                  //   navigate(`/product/${product._id}`);
-                  // }}
+                  onClick={() => {
+                    navigate(`/product/${product._id}`);
+                  }}
                 >
                   <SmallCart
                     Image={product.images}
                     title={product.name}
                     price={product.price}
+                    product={product}
                   />
-                   <button
-              onClick={() => handleAddToCart(product)} // Pass product as an argument
-              className="button bg-orange-600 w-full hover:bg-orange-700 text-white mt-5 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
-            >
-              ADD TO CART
-            </button>
+                  
                 </div>
               ))}
           </div>
