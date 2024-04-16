@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    isLoggedIn: true, // Set isLoggedIn to false if token is not present
+    isLoggedIn: !! localStorage.getItem("token"), // Set isLoggedIn to false if token is not present
   },
   
   reducers: {

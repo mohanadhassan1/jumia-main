@@ -19,37 +19,28 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(true);
   const [subtotal, setSubtotal] = useState(0);
-  const isLogedIn= selectIsLoggedIn
+  const isLoggedIn= selectIsLoggedIn
+  const dispatch = useDispatch();
+
+  let token = localStorage.getItem('token');
+  let myDecodedToken = decodeToken(token);
+
+
 
   useEffect(() => {
-    // Retrieve cart data from local storage
-  //   if(isLogedIn){
-  //     const token = localStorage.getItem('token');
-  //     if (token) {
-  //       const myDecodedToken = decodeToken(token);
-  //       console.log(myDecodedToken);
-  //   const  data=  instance.get(`cart/${myDecodedToken.id}`)
-  //   .then(response => {
-  //     console.log(response.data); 
-  //     setCartItems(response.data.cartItems)// Assuming the cart data is returned in the response's data property
-  //   })
-  //   .catch(error => {
-  //     console.error('Error fetching cart data:', error);
-  //   });
-
-  //   }
-  // // }
-  if (isLogedIn) {
-    const token = localStorage.getItem('token');
+    
+  if (isLoggedIn) {
+     token = localStorage.getItem('token');
     if (token) {
-      const myDecodedToken = decodeToken(token);
+       myDecodedToken = decodeToken(token);
       console.log(myDecodedToken);
   
       instance.get(`cart/${myDecodedToken.id}`)
         .then(response => {
           console.log(response.data); 
           const cartItems = response.data.cartItems; // Assuming array of objects with product_id
-  
+          console.log(cartItems)
+
           // Extract product IDs from cartItems
           const productIds = cartItems.map(item => item.product_id);
   
@@ -59,10 +50,15 @@ const Cart = () => {
           }))
           .then(responses => {
             // Extract product data from each response
-            const products = responses.map(response => response.data);
-  
+            let products = responses.map(response => response.data);
+            
+            products = products.map(product => ({ ...product, quantity: 1 }));
+
             // Update cartItems state with the fetched product data
             setCartItems(products);
+            const total = products.reduce((acc, product) => acc + (product.price ), 0);
+            console.log(total)
+            // setSubtotal(total);
           })
           .catch(error => {
             console.error('Error fetching product data:', error);
@@ -75,7 +71,7 @@ const Cart = () => {
   }
   
   
-    if(!isLogedIn){
+    if(!isLoggedIn){
       const cartData = localStorage.getItem("cart");
     if (cartData) {
       const parsedCartData = JSON.parse(cartData);
@@ -93,17 +89,28 @@ const Cart = () => {
     setCartEmpty(cartItems.length === 0);
   }, [cartItems]);
 
-  const dispatch = useDispatch();
 
   const calculateSubtotal = () => {
     let total = 0;
     cartItems.forEach((item) => {
-      total += item.price * item.quantity;
+
+     
+        total += item.price * item.quantity;
+
+      // }
     });
     setSubtotal(total);
   };
   const handleIncreaseQuantity = (itemId) => {
     const cartItem = cartItems.find((item) => item._id === itemId);
+    if(isLoggedIn){
+      dispatch(updateItemQuantity({customer_id:myDecodedToken.id,product_id:itemId,quantity:cartItem.quantity
+      +1}))
+
+    }
+    
+
+    
     if (!cartItem) return;
 
     const { quantity_in_stock } = cartItem;
@@ -140,7 +147,14 @@ const Cart = () => {
 
   const handleDecreaseQuantity = (itemId) => {
     // Find the cart item by itemId
+    const cartProduct = cartItems.find((item) => item._id === itemId);
+
     const cartItemIndex = cartItems.findIndex((item) => item._id === itemId);
+    if(isLoggedIn){
+      dispatch(updateItemQuantity({customer_id:myDecodedToken.id,product_id:itemId,quantity:cartProduct.quantity
+      -1}))
+
+    }
     if (cartItemIndex === -1) return; // Item not found
 
     // Get the cart item and its quantity_in_stock
@@ -176,10 +190,16 @@ const Cart = () => {
     }
   };
 
-  const handleRemoveItem = (itemId) => {
+  const handleRemoveItem = (customer_id,itemId) => {
+    if(isLoggedIn){
+      console.log(customer_id , itemId)
+     dispatch(removeItemFromCart({customer_id,product_id:itemId})) 
+    }
+    if(!isLoggedIn){
     const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
     setCartItems(updatedCartItems);
     localStorage.setItem("cart", JSON.stringify({ items: updatedCartItems }));
+    }
   };
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -273,7 +293,7 @@ const Cart = () => {
                           <div className="  justify-between flex text-white">
                             <button
                               className=" text-orange-600 flex justify-center text-xl items-center	"
-                              onClick={() => handleRemoveItem(product._id)}
+                              onClick={() => handleRemoveItem(myDecodedToken.id,product._id)}
                             >
                               {" "}
                               <MdOutlineDelete /> Remove
