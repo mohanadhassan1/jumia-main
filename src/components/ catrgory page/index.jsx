@@ -1,39 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
+import { addItemToCart } from "../../store/slices/cart";
+import { selectIsLoggedIn } from "../../store/slices/authSlice";
+
 import { useNavigate } from "react-router-dom";
 import SmallCart from "../Small Cart/SmallCart";
 import CarouselProducts from "../Carousel/Carousel for category/CarouselProduct";
 import BRAND from "../Brand/index";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function SupermarketCategory() {
-
-
-  
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   useEffect(() => {
     console.log("Dispatching fetchProducts...");
     dispatch(fetchProducts());
   }, [dispatch]);
 
-    // Array filter by brand name
+  // Array filter by brand name
 
-    const [arrBrand, setArrBrand] = useState([]);
+  const [arrBrand, setArrBrand] = useState([]);
 
-    // Define the callback function to receive the arrBrandFilter value
-    const handleBrandFilterChange = (filter) => {
-      event.preventDefault();
-  
-      console.log("Brand Filter:", filter);
-      console.log("Brand Filter:", arrBrand);
-      // Update the parent state with the new filter value
-      setArrBrand(filter);
-    };
+  // Define the callback function to receive the arrBrandFilter value
+  const handleBrandFilterChange = (filter) => {
+    event.preventDefault();
 
-  const [newNameValue, setNewNameValue] = useState("");
+    console.log("Brand Filter:", filter);
+    console.log("Brand Filter:", arrBrand);
+    // Update the parent state with the new filter value
+    setArrBrand(filter);
+  };
+
+  const [newNameValue, setNewNameValue] = useState();
   const [selectSort, setselectSort] = useState("Popularity");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -46,18 +48,25 @@ export default function SupermarketCategory() {
     setselectSort(newSelect);
     setIsOpen(!isOpen);
   };
-
-  const idCategory = useSelector ((state)=>state.idCategory.idCategory.id)
-console.log("in category: ",idCategory);
+  const idCategory = useSelector((state) => state.idCategory.idCategory.id);
+  console.log("in category: ", idCategory);
+  const nameCategory = useSelector((state) => state.idCategory.idCategory.name);
+  console.log("in category: ", nameCategory);
+  useEffect(() => {
+    setNewNameValue(nameCategory);
+  }, [nameCategory]);
   const filteredProducts = products.filter(
-    (product) =>
-      product.subcategory_id.category_id === idCategory
+    (product) => product.subcategory_id.category_id === idCategory
   );
 
   console.log("Filtered Products:", filteredProducts);
 
-  const uniqueBrands = Array.from(new Set(filteredProducts.map((product) => product.brand)));
-  const uniqueCategories = Array.from(new Set(filteredProducts.map((product) => product.subcategory_id.name)));
+  const uniqueBrands = Array.from(
+    new Set(filteredProducts.map((product) => product.brand))
+  );
+  const uniqueCategories = Array.from(
+    new Set(filteredProducts.map((product) => product.subcategory_id.name))
+  );
 
   const handleNewName = (newName) => {
     event.preventDefault();
@@ -66,20 +75,27 @@ console.log("in category: ",idCategory);
     setNewNameValue(newName);
   };
 
-  
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+ 
+  const handleAddToCart = (product) => {
+    dispatch(addItemToCart({ ...product, isLoggedIn }));
+    // alert(`${product.name} product added successfully`);
+    toast.success(` product added successfully`);
+    // navigate(`/cart`);
+  };
 
   return (
     <>
       <div className="md:container h-full mx-auto items-center justify-center">
         <h2 className="text-xl font-medium uppercase text-center mb-3 py-4 px-6 bg-teal-200">
-          SUPERMARKET TOP DEALS
+          {nameCategory} TOP DEALS
         </h2>
         {/* BigCart components */}
         <CarouselProducts products={filteredProducts} />
-      
+
         <div className="md:flex p-3 mb-3">
           <div className="md:me-1 w-1/3 bg-white h-full">
-          <BRAND
+            <BRAND
               className="w-full"
               brands={uniqueBrands}
               categories={uniqueCategories}
@@ -152,9 +168,15 @@ console.log("in category: ",idCategory);
                     navigate(`/product/${product._id}`);
                   }}
                 >
-                <SmallCart Image={product.images} title={product.name} price={product.price} />
-              </div>
-            ))}
+                  <SmallCart
+                    Image={product.images}
+                    title={product.name}
+                    price={product.price}
+                    product={product}
+                  />
+                  
+                </div>
+              ))}
           </div>
         </div>
       </div>
