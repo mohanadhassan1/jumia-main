@@ -12,7 +12,7 @@ import { HiOutlineTrash } from "react-icons/hi2";
 import { useParams } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { userAction } from "../../store/slices/customer";
+import { customerAction } from "../../store/slices/customer";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-hot-toast';
@@ -74,8 +74,8 @@ export default function MyAccount() {
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token);
-      const userId = decodedToken.id;
-      dispatch(userAction(userId));
+      const customerId = decodedToken.id;
+      dispatch(customerAction(customerId));
     }
   }, [dispatch]);
 
@@ -252,7 +252,7 @@ export default function MyAccount() {
 
                     <div className="p-3">
                       <h3>Your Default Shipping Address</h3>
-                      <p>address</p>
+                      <p>Address: {customer.address_of_Id}</p>
                     </div>
 
                   </div>
