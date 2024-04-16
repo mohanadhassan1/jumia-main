@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../store/slices/products";
+import { addItemToCart } from "../../store/slices/cart";
+import { selectIsLoggedIn } from "../../store/slices/authSlice";
+
 import { useNavigate } from "react-router-dom";
 import SmallCart from "../Small Cart/SmallCart";
 import CarouselProducts from "../Carousel/Carousel for category/CarouselProduct";
 import BRAND from "../Brand/index";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function SupermarketCategory() {
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   useEffect(() => {
     console.log("Dispatching fetchProducts...");
@@ -68,6 +73,15 @@ export default function SupermarketCategory() {
 
     console.log(`New Name: ${newName}`);
     setNewNameValue(newName);
+  };
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+ 
+  const handleAddToCart = (product) => {
+    dispatch(addItemToCart({ ...product, isLoggedIn }));
+    // alert(`${product.name} product added successfully`);
+    toast.success(` product added successfully`);
+    // navigate(`/cart`);
   };
 
   return (
@@ -150,15 +164,21 @@ export default function SupermarketCategory() {
               .map((product) => (
                 <div
                   className="md:w-1/2  lg:w-[40%]  xl:w-[20%] mb-4  "
-                  onClick={() => {
-                    navigate(`/product/${product._id}`);
-                  }}
+                  // onClick={() => {
+                  //   navigate(`/product/${product._id}`);
+                  // }}
                 >
                   <SmallCart
                     Image={product.images}
                     title={product.name}
                     price={product.price}
                   />
+                   <button
+              onClick={() => handleAddToCart(product)} // Pass product as an argument
+              className="button bg-orange-600 w-full hover:bg-orange-700 text-white mt-5 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+            >
+              ADD TO CART
+            </button>
                 </div>
               ))}
           </div>
