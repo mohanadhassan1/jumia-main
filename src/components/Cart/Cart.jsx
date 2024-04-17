@@ -9,12 +9,11 @@ import Recommended from "./recommended";
 import Recently from "./recently viewed";
 // import {Recommended} from "./recommended";
 import instance from "../../axois/instance";
-import { selectIsLoggedIn } from '../../store/slices/authSlice'; // Adjust the path as needed
+import { selectIsLoggedIn } from "../../store/slices/authSlice"; // Adjust the path as needed
 import { isExpired, decodeToken } from "react-jwt";
 
 // In Cart.jsx
 
-import { generateMayLike } from "./mayALsoLike";// Adjust the path if necessary
 import { generateCustomers } from "./customers";
 
 import {
@@ -28,85 +27,87 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(true);
   const [subtotal, setSubtotal] = useState(0);
-  const isLoggedIn= selectIsLoggedIn
+  const isLoggedIn = selectIsLoggedIn;
   const dispatch = useDispatch();
-
-  let token = localStorage.getItem('token');
-  let myDecodedToken = decodeToken(token);
   const { products } = useSelector((state) => state.products);
 
-  const MayLike=generateMayLike(products)
   const customers=generateCustomers(products)
- 
+
+  let token = localStorage.getItem("token");
+  let myDecodedToken = decodeToken(token);
+
+
+
   useEffect(() => {
-    
-  if (isLoggedIn) {
-     token = localStorage.getItem('token');
-    if (token) {
-       myDecodedToken = decodeToken(token);
-      console.log(myDecodedToken);
-  
-      instance.get(`cart/${myDecodedToken.id}`)
-        .then(response => {
-          console.log(response.data); 
-          const cartItems = response.data.cartItems; // Assuming array of objects with product_id
-          console.log(cartItems)
+    if (isLoggedIn) {
+      token = localStorage.getItem("token");
+      if (token) {
+        myDecodedToken = decodeToken(token);
+        console.log(myDecodedToken);
 
-          // Extract product IDs from cartItems
-          const productIds = cartItems.map(item => item.product_id);
-  
-          // Fetch data for each product ID using Promise.all
-          Promise.all(productIds.map(productId => {
-            return instance.get(`product/${productId}`);
-          }))
-          .then(responses => {
-            // Extract product data from each response
-            let products = responses.map(response => response.data);
-            
-            products = products.map(product => ({ ...product, quantity: 1 }));
+        instance
+          .get(`cart/${myDecodedToken.id}`)
+          .then((response) => {
+            console.log(response.data);
+            const cartItems = response.data.cartItems; // Assuming array of objects with product_id
+            console.log(cartItems);
 
-            // Update cartItems state with the fetched product data
-            setCartItems(products);
-            const total = products.reduce((acc, product) => acc + (product.price ), 0);
-            console.log(total)
-            // setSubtotal(total);
+            // Extract product IDs from cartItems
+            const productIds = cartItems.map((item) => item.product_id);
+
+            // Fetch data for each product ID using Promise.all
+            Promise.all(
+              productIds.map((productId) => {
+                return instance.get(`product/${productId}`);
+              })
+            )
+              .then((responses) => {
+                // Extract product data from each response
+                let products = responses.map((response) => response.data);
+
+                products = products.map((product) => ({
+                  ...product,
+                  quantity: 1,
+                }));
+
+                // Update cartItems state with the fetched product data
+                setCartItems(products);
+                const total = products.reduce(
+                  (acc, product) => acc + product.price,
+                  0
+                );
+                console.log(total);
+                // setSubtotal(total);
+              })
+              .catch((error) => {
+                console.error("Error fetching product data:", error);
+              });
           })
-          .catch(error => {
-            console.error('Error fetching product data:', error);
+          .catch((error) => {
+            console.error("Error fetching cart data:", error);
           });
-        })
-        .catch(error => {
-          console.error('Error fetching cart data:', error);
-        });
-    }
-  }
-  
-  
-    if(!isLoggedIn){
-      const cartData = localStorage.getItem("cart");
-    if (cartData) {
-      const parsedCartData = JSON.parse(cartData);
-      setCartItems(parsedCartData.items);
-      console.log(parsedCartData.items);
+      }
     }
 
+    if (!isLoggedIn) {
+      const cartData = localStorage.getItem("cart");
+      if (cartData) {
+        const parsedCartData = JSON.parse(cartData);
+        setCartItems(parsedCartData.items);
+        console.log(parsedCartData.items);
+      }
     }
-    
   }, []);
-  
 
   useEffect(() => {
     calculateSubtotal();
     setCartEmpty(cartItems.length === 0);
   }, [cartItems]);
 
-
   const calculateSubtotal = () => {
     let total = 0;
     cartItems.forEach((item) => {
-
-     
-        total += item.price * item.quantity;
+      total += item.price * item.quantity;
 
       // }
     });
@@ -114,14 +115,16 @@ const Cart = () => {
   };
   const handleIncreaseQuantity = (itemId) => {
     const cartItem = cartItems.find((item) => item._id === itemId);
-    if(isLoggedIn){
-      dispatch(updateItemQuantity({customer_id:myDecodedToken.id,product_id:itemId,quantity:cartItem.quantity
-      +1}))
-
+    if (isLoggedIn) {
+      dispatch(
+        updateItemQuantity({
+          customer_id: myDecodedToken.id,
+          product_id: itemId,
+          quantity: cartItem.quantity + 1,
+        })
+      );
     }
-    
 
-    
     if (!cartItem) return;
 
     const { quantity_in_stock } = cartItem;
@@ -161,10 +164,14 @@ const Cart = () => {
     const cartProduct = cartItems.find((item) => item._id === itemId);
 
     const cartItemIndex = cartItems.findIndex((item) => item._id === itemId);
-    if(isLoggedIn){
-      dispatch(updateItemQuantity({customer_id:myDecodedToken.id,product_id:itemId,quantity:cartProduct.quantity
-      -1}))
-
+    if (isLoggedIn) {
+      dispatch(
+        updateItemQuantity({
+          customer_id: myDecodedToken.id,
+          product_id: itemId,
+          quantity: cartProduct.quantity - 1,
+        })
+      );
     }
     if (cartItemIndex === -1) return; // Item not found
 
@@ -205,14 +212,11 @@ const Cart = () => {
     if(isLoggedIn){
       console.log(customer_id , itemId)
      dispatch(removeItemFromCart({customer_id,product_id:itemId})) 
-    const newCartItems = cartItems.filter((item) => item._id !== itemId);
-    setCartItems(newCartItems);
-
     }
-    if(!isLoggedIn){
-    const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
-    setCartItems(updatedCartItems);
-    localStorage.setItem("cart", JSON.stringify({ items: updatedCartItems }));
+    if (!isLoggedIn) {
+      const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
+      setCartItems(updatedCartItems);
+      localStorage.setItem("cart", JSON.stringify({ items: updatedCartItems }));
     }
   };
 
@@ -256,7 +260,9 @@ const Cart = () => {
             src="https://www.jumia.com.eg/assets_he/images/cart.668e6453.svg"
           ></img>
           <h3>Your cart is emptey!</h3>
-          <p className="text-gray-800 text-md m-2 font-normal">Browse our categories and discover our best deals!</p>
+          <p className="text-gray-800 text-md m-2 font-normal">
+            Browse our categories and discover our best deals!
+          </p>
           <button className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white m-6 font-bold p-3 rounded focus:outline-none focus:shadow-outline">
             <a href="/home">START SHOPPING</a>
           </button>
@@ -307,7 +313,9 @@ const Cart = () => {
                           <div className="  justify-between flex text-white">
                             <button
                               className=" text-orange-600 flex justify-center text-xl items-center	"
-                              onClick={() => handleRemoveItem(myDecodedToken.id,product._id)}
+                              onClick={() =>
+                                handleRemoveItem(myDecodedToken.id, product._id)
+                              }
                             >
                               {" "}
                               <MdOutlineDelete /> Remove

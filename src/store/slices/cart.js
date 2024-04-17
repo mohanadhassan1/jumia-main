@@ -54,10 +54,10 @@ const cartSlice = createSlice({
       }
 
       if (isLoggedIn) {
-        alert("Logged in");
+        // alert("Logged in");
         const selctitema = { ...newItem };
         console.log(selctitema._id);
-        alert(selctitema);
+        // alert(selctitema);
         const token = localStorage.getItem('token');
         if (token) {
           const myDecodedToken = decodeToken(token);
@@ -140,11 +140,11 @@ const cartSlice = createSlice({
     },
     updateItemQuantity(state, action) {
       const {customer_id,product_id,quantity}=action.payload
-      alert("up")
+      // alert("up")
       console.log(customer_id,product_id,quantity)
       instance.patch(`/cart/update`,{customer_id,product_id,quantity})
       .then(response => {
-        alert("updated")
+        // alert("updated")
 
         // Handle success if needed
       })

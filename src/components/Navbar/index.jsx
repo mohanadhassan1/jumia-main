@@ -135,7 +135,7 @@ const Navbar = () => {
                   className="block px-4 py-2 hover:bg-gray-200"
                   onClick={() => {
                     navigate(`/product/${product._id}`);
-                    setQuery(""); // Clear the input field
+                    setQuery(""); // Clear the input fiel
                     searchInputRef.current.value = ""; // Clear the input field
                   }}
                 >
@@ -239,7 +239,7 @@ const Navbar = () => {
                         </div>
                       </a>
                       <a
-                        href="/myaccount"
+                        href="#"
                         className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-300 hover:font-bold"
                         role="menuitem"
                         tabIndex="-1"

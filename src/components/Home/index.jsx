@@ -48,7 +48,7 @@ const Home = () => {
   return (
     <div className="h-full flex items-center justify-center">
       <div className="container">
-        <div className="md:flex mb-7 mt-5 ">
+        <div className="md:flex mb-2 mt-5 ">
           <div className=" w-1/5 h-full me-3">
             {" "}
             <LeftSideBar />
@@ -138,44 +138,51 @@ const Home = () => {
         {/* Ramadan Careem */}
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-            <img
+
+            <a href="/category"><img
               className="w-full"
               src="https://eg.jumia.is/cms/Ramadan-24/Teasing/HP/1200x200EN.gif"
               alt=""
-            />
+            /></a>
           </div>
         </div>
 
         {/* Fashoin Clearance */}
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-            <img
-              className="w-full"
-              src="https://eg.jumia.is/cms/Week7-8-2024/ENDE.gif"
-              alt=""
-            />
+            <a href="/">
+              <img
+                className="w-full"
+                src="https://eg.jumia.is/cms/Week7-8-2024/ENDE.gif"
+                alt=""
+              />
+            </a>
           </div>
         </div>
 
         {/* Monday Super */}
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-            <img
-              className="w-full"
-              src="https://eg.jumia.is/cms/Week7-8-2024/SuperFlashSale/19-02/EN1.png"
-              alt=""
-            />
+            <a href="/">
+              <img
+                className="w-full"
+                src="https://eg.jumia.is/cms/Week7-8-2024/SuperFlashSale/19-02/EN1.png"
+                alt=""
+              />
+            </a>
           </div>
         </div>
 
         {/* Deals of the Day */}
         <div className=" flex gap-4 p-3 mb-3 rounded bg-white">
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-            <img
-              className="w-full"
-              src="https://eg.jumia.is/cms/Week7-8-2024/Daily-Deals/FEB-19/GeneralENDESKTOP.jpg"
-              alt=""
-            />
+            <a href="/">
+              <img
+                className="w-full"
+                src="https://eg.jumia.is/cms/Week7-8-2024/Daily-Deals/FEB-19/GeneralENDESKTOP.jpg"
+                alt=""
+              />
+            </a>
           </div>
         </div>
 
@@ -187,49 +194,59 @@ const Home = () => {
         {/*Shop All Your Needs 1 */}
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-            <img
-              className="w-full"
-              src="https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Phones/572x250EN.png"
-              alt=""
-            />
+            <a href="/">
+              <img
+                className="w-full"
+                src="https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Phones/572x250EN.png"
+                alt=""
+              />
+            </a>
           </div>
 
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-            <img
-              className="w-full"
-              src="https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Fashion/WomenBoots/572x250EN.png"
-              alt=""
-            />
+            <a href="/">
+              <img
+                className="w-full"
+                src="https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Fashion/WomenBoots/572x250EN.png"
+                alt=""
+              />
+            </a>
           </div>
         </div>
 
         {/*Shop All Your Needs 2 */}
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-            <img
-              className="w-full"
-              src="https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Supermarket/572x250EN.png"
-              alt=""
-            />
+            <a href="/">
+              <img
+                className="w-full"
+                src="https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Supermarket/572x250EN.png"
+                alt=""
+              />
+            </a>
           </div>
 
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-            <img
-              className="w-full"
-              src="https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Beauty/572x250EN.png"
-              alt=""
-            />
+            <a href="/">
+              <img
+                className="w-full"
+                src="https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Beauty/572x250EN.png"
+                alt=""
+              />
+            </a>
           </div>
         </div>
 
         {/* New On Jumia */}
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-            <img
-              className=""
-              src="https://eg.jumia.is/cms/Week7-8-2024/New-On-Jumia/GIF/EN-copy-5.gif"
-              alt=""
-            />
+            <a href="/">
+              <img
+                className=""
+                src="https://eg.jumia.is/cms/Week7-8-2024/New-On-Jumia/GIF/EN-copy-5.gif"
+                alt=""
+              />
+            </a>
           </div>
         </div>
 
@@ -364,7 +381,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
