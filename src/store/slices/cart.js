@@ -125,16 +125,13 @@ const cartSlice = createSlice({
           const updatedItems = existingCartData.items.filter(item => item?._id !== itemId);
           existingCartData.items = updatedItems;
           
-          // Update the total price
           existingCartData.total = existingCartData.items.reduce((total, item) => {
             return total + (item.price * item.quantity);
           }, 0);
           
-          // Store the updated cart data back into local storage
           localStorage.setItem("cart", JSON.stringify(existingCartData));
         }
 
-        // Remove item from database if the user is logged in
        
       }
     },
@@ -144,9 +141,7 @@ const cartSlice = createSlice({
       console.log(customer_id,product_id,quantity)
       instance.patch(`/cart/update`,{customer_id,product_id,quantity})
       .then(response => {
-        // alert("updated")
 
-        // Handle success if needed
       })
       .catch(error => {
         // Handle error if needed

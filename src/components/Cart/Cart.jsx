@@ -3,11 +3,10 @@ import { MdOutlineDelete } from "react-icons/md";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useSelector, useDispatch } from "react-redux";
-import { recommendedForYou, responsive } from "./dataStatic";
+import {  responsive } from "./dataStatic";
 import Like from "./mayALsoLike";
 import Recommended from "./recommended";
 import Recently from "./recently viewed";
-// import {Recommended} from "./recommended";
 import instance from "../../axois/instance";
 import { selectIsLoggedIn } from "../../store/slices/authSlice"; // Adjust the path as needed
 import { isExpired, decodeToken } from "react-jwt";
@@ -36,68 +35,45 @@ const Cart = () => {
   let token = localStorage.getItem("token");
   let myDecodedToken = decodeToken(token);
 
-
-
   useEffect(() => {
     if (isLoggedIn) {
-      token = localStorage.getItem("token");
-      if (token) {
-        myDecodedToken = decodeToken(token);
-        console.log(myDecodedToken);
+        const token = localStorage.getItem("token");
+        if (token) {
+            const myDecodedToken = decodeToken(token);
 
-        instance
-          .get(`cart/${myDecodedToken.id}`)
-          .then((response) => {
-            console.log(response.data);
-            const cartItems = response.data.cartItems; // Assuming array of objects with product_id
-            console.log(cartItems);
+            instance
+                .get(`cart/${myDecodedToken.id}`)
+                .then((response) => {
+                    const cartItems = response.data.cartItems; // Assuming array of objects with product_id and quantity
+                    const productPromises = cartItems.map((item) => {
+                        return instance.get(`product/${item.product_id}`);
+                    });
 
-            // Extract product IDs from cartItems
-            const productIds = cartItems.map((item) => item.product_id);
+                    Promise.all(productPromises)
+                        .then((responses) => {
+                            const products = responses.map((response, index) => {
+                                const productData = response.data;
+                                return {
+                                    ...productData,
+                                    quantity: cartItems[index].quantity
+                                };
+                            });
 
-            // Fetch data for each product ID using Promise.all
-            Promise.all(
-              productIds.map((productId) => {
-                return instance.get(`product/${productId}`);
-              })
-            )
-              .then((responses) => {
-                // Extract product data from each response
-                let products = responses.map((response) => response.data);
-
-                products = products.map((product) => ({
-                  ...product,
-                  quantity: 1,
-                }));
-
-                // Update cartItems state with the fetched product data
-                setCartItems(products);
-                const total = products.reduce(
-                  (acc, product) => acc + product.price,
-                  0
-                );
-                console.log(total);
-                // setSubtotal(total);
-              })
-              .catch((error) => {
-                console.error("Error fetching product data:", error);
-              });
-          })
-          .catch((error) => {
-            console.error("Error fetching cart data:", error);
-          });
-      }
+                            setCartItems(products);
+                        })
+                        .catch((error) => {
+                            console.error("Error fetching product data:", error);
+                        });
+                })
+                .catch((error) => {
+                    console.error("Error fetching cart data:", error);
+                });
+        }
     }
+}, [isLoggedIn]);
 
-    if (!isLoggedIn) {
-      const cartData = localStorage.getItem("cart");
-      if (cartData) {
-        const parsedCartData = JSON.parse(cartData);
-        setCartItems(parsedCartData.items);
-        console.log(parsedCartData.items);
-      }
-    }
-  }, []);
+
+ 
 
   useEffect(() => {
     calculateSubtotal();
@@ -129,7 +105,6 @@ const Cart = () => {
 
     const { quantity_in_stock } = cartItem;
 
-    // Check if there's enough quantity in stock and quantity is less than quantity in stock
     if (quantity_in_stock > 0) {
       const updatedCartItems = cartItems.map((item) => {
         if (item._id === itemId) {
@@ -149,7 +124,7 @@ const Cart = () => {
 
       // Update the state with the updated cart items and total price
       setCartItems(updatedCartItems);
-      setTotal(updatedTotal);
+     setSubtotal(updatedTotal);
 
       // Update local storage with the updated cart items
       localStorage.setItem(
@@ -198,7 +173,7 @@ const Cart = () => {
 
       // Update the state with the updated cart items and total price
       setCartItems(updatedCartItems);
-      setTotal(updatedTotal);
+     setSubtotal(updatedTotal);
 
       // Update local storage with the updated cart items
       localStorage.setItem(
@@ -212,8 +187,8 @@ const Cart = () => {
     if(isLoggedIn){
       console.log(customer_id , itemId)
      dispatch(removeItemFromCart({customer_id,product_id:itemId})) 
-     const updatedProducts = cartItems.filter((item) => item._id !== itemId);
-     setCartItems(updatedProducts);    }
+     const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
+     setCartItems(updatedCartItems);    }
     if (!isLoggedIn) {
       const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
       setCartItems(updatedCartItems);
@@ -272,8 +247,8 @@ const Cart = () => {
           id="cartContainer"
           style={{ display: cartEmpty ? "none" : "block" }}
         >
-          <div className="flex  mx-20 my-3  parent-container justify-center ">
-            <div className="w-3/4 p-2 bg-white relative">
+          <div className="flex flex-col md:flex-row md:mx-20 my-3  mx-5 parent-container justify-center ">
+            <div className="md:w-3/4 p-2 bg-white relative w-full text-center md:text-left">
               {/* header */}
               <h2 className="text-lg font-bold mb-4">
                 Products ({cartItems.length})
@@ -284,17 +259,17 @@ const Cart = () => {
                 {cartItems.length > 0 &&
                   cartItems.map((product, index) => (
                     <div key={index}>
-                      <div className="bg-white flex my-2">
+                      <div className="bg-white flex my-2 flex-col md:flex-row items-center">
                         {product.images && product.images.length > 0 ? (
                           <img
                             src={product.images[0]}
-                            className="w-20 m-2"
+                            className="w-40 m-2 md:w-20"
                             alt="Product Image"
                           />
                         ) : (
                           <div>No image available</div>
                         )}
-                        <div className="m-2  w-3/4 ">
+                        <div className="m-2 md:w-3/4  w-full">
                           <h6 className="text-lg font-semibold">
                             {product.name}
                           </h6>
@@ -311,7 +286,7 @@ const Cart = () => {
                               : "Available in stock"}
                           </p>
 
-                          <div className="  justify-between flex text-white">
+                          <div className="  md:justify-between  justify-center flex text-white">
                             <button
                               className=" text-orange-600 flex justify-center text-xl items-center	"
                               onClick={() =>
@@ -323,7 +298,7 @@ const Cart = () => {
                             </button>
                           </div>
                         </div>
-                        <div className="m-2 w-1/4 text-right ">
+                        <div className="m-2 md:w-1/4 md:text-right w-full text-center">
                           <p
                             className="text-sm text-black-600  "
                             style={{ fontSize: "20px" }}
@@ -368,7 +343,7 @@ const Cart = () => {
             </div>
             {/* cart summary */}
             <div
-              className="w-1/4 p-2 m-2 bg-white  font-bold  sticky top-20    shadow-lg rounded-lg"
+              className="md:w-1/4 w-full p-2 md:m-2 my-2 bg-white  font-bold  sticky top-20    shadow-lg rounded-lg"
               style={{ height: "fit-content" }}
             >
               <h2 className="text-lg font-bold ">CART SUMMARY</h2>
@@ -379,7 +354,7 @@ const Cart = () => {
               </div>
               <hr></hr>
               <button
-                className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white m-4 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+                className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
                 type="button"
                 onClick={() => {
                   window.location.href = "/checkout";
