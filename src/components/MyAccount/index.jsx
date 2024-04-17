@@ -10,6 +10,12 @@ import { FiInbox } from "react-icons/fi";
 import { FaClockRotateLeft } from "react-icons/fa6";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { useParams } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { customerAction } from "../../store/slices/customer";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-hot-toast';
 
 
 export default function MyAccount() {
@@ -17,6 +23,32 @@ export default function MyAccount() {
   // const { id } = useParams();
 
   const [content, setContent] = useState("My Jumia Account");
+
+  const customer = useSelector((state) => state.customer.customer)
+
+  const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+
+  const handleButtonClick = (btnContent) => {
+    setContent(btnContent);
+  }
+
+  const logoutBtn = () => {
+    dispatch(logout());
+    localStorage.clear('token');
+
+    toast.success("Successfully logged out!", {
+      // position: "top",
+    });
+    setTimeout(() => {
+      navigate("login");
+    }, 2000);
+  };
+
+  
 
   // const [customer, setCustomer] = useState({});
   // const [product, setProduct] = useState({});
@@ -38,6 +70,14 @@ export default function MyAccount() {
   //       setLoading(false);
   //     }
   //   }
+
+  useEffect(() => {
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const customerId = decodedToken.id;
+      dispatch(customerAction(customerId));
+    }
+  }, [dispatch]);
 
   //   getCustomer();
   // }, [id]);
@@ -68,10 +108,7 @@ export default function MyAccount() {
   //   return <div>Error: {error}</div>;
   // }
 
-  const handleButtonClick = (btnContent) => {
-    setContent(btnContent);
-  }
-
+  
   return (
     <>
       <div className="md:flex container mx-auto mt-3 mb-3">
@@ -159,9 +196,24 @@ export default function MyAccount() {
           </div>
 
           <div className="h-10 my-2 text-center rounded overflow-hidden">
-            <button className="h-full hover:bg-orange-100 text-orange-700 focus:font-medium ">
+            <button className="h-full hover:bg-orange-100 text-orange-700 focus:font-medium "
+              onClick={logoutBtn}
+              // className="flex justify-center cursor-pointer hover:bg-orange-100 text-orange-700 font-bold rounded focus:outline-none focus:shadow-outline"
+              role="menuitem"
+              tabIndex="-1"
+              id="menu-item-0">
               LOGOUT
             </button>
+            {/* <a
+              // href="/"
+              onClick={logoutBtn}
+              className="flex justify-center cursor-pointer hover:bg-orange-100 text-orange-700 font-bold rounded focus:outline-none focus:shadow-outline"
+              role="menuitem"
+              tabIndex="-1"
+              id="menu-item-0"
+            >
+              LOG OUT
+            </a> */}
           </div>
 
         </div>
@@ -172,7 +224,7 @@ export default function MyAccount() {
           <div className="h-full">
 
             {content === "My Jumia Account" && (
-            // {content === "My Jumia Account" && customer && (
+              // {content === "My Jumia Account" && customer && (
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">Account Overview</h1>
 
@@ -185,8 +237,8 @@ export default function MyAccount() {
                     </div>
 
                     <div className="p-3">
-                      {/* <h3>Name: {customer.name}</h3>
-                      <p>Email: {customer.email}</p> */}
+                      <h3>Name: {customer.first_name}</h3>
+                      <p>Email: {customer.email}</p>
                     </div>
 
 
@@ -200,7 +252,7 @@ export default function MyAccount() {
 
                     <div className="p-3">
                       <h3>Your Default Shipping Address</h3>
-                      <p>address</p>
+                      <p>Address: {customer.address_of_Id}</p>
                     </div>
 
                   </div>

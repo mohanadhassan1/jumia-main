@@ -118,9 +118,9 @@ export default function LeftSideBar() {
 
 //   const idCategory = useSelector ((state)=>state.idCategory.idCategory)
 // console.log("in category: ",idCategory);
-const handleChangeId = ( id, href) => {
+const handleChangeId = ( id, href ,name) => {
   // e.preventDefault(); // Prevent default button behavior
-  dispatch(chanageId({ id })); // Dispatch the action with the id
+  dispatch(chanageId({ id , name})); // Dispatch the action with the id
   navigate(href); // Navigate programmatically to the category path
 };
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -153,7 +153,7 @@ const handleChangeId = ( id, href) => {
                       <a
                       className="flex items-center text-black ps-[2rem] pe-full hover:text-gray-400"
                       onClick={() => {
-                        handleChangeId(category.id,category.href); // Pass the category id to handleChangeId
+                        handleChangeId(category.id,category.href,category.name); // Pass the category id to handleChangeId
                       }}
                     >
                       {category.icon && <category.icon className="me-1" />}

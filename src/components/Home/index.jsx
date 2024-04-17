@@ -116,7 +116,9 @@ const Home = () => {
                         src={product.images}
                         alt={product.name}
                         onClick={() => {
+                          // setTimeout(() => {
                           navigate(`/product/${product._id}`);
+                          // }, [2000]);
                         }}
                         className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                       />

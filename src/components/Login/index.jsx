@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import instance from '../../axois/instance';
+import { toast } from 'react-hot-toast';
 
 
 export default function Login() {
@@ -81,20 +82,25 @@ export default function Login() {
         navigate('/home');
       } else {
         console.log("Error in email or password");
+        toast.error("Email or password is wrong")
       }
     } catch (error) {
       console.error('Error logging in:', error);
+      toast.error("Email or password is wrong", {
+        // position: "top",
+      });
     }
   };
 
   const onSignup = async (data) => {
     console.log(data);
     try {
-      const response = await instance.post('/customers/newcustomer', { email: data.email, password: data.password });
+      const response = await instance.post('/customers/newcustomer', { email: data.email, password: data.password, first_name: data.first_name });
       console.log(response.status);
       if (response.status == 200) {
         console.log('Signup success');
         const token = response.data.token;
+        console.log(response.data);
         localStorage.setItem('token', token);
         navigate('/home');
       } else {
@@ -102,10 +108,12 @@ export default function Login() {
           console.log("Email already exists");
         } else {
           console.log("Error in signup:", response.statusText);
+          toast.error("Please Enter your data")
         }
       }
     } catch (error) {
       console.error('Error signing up:', error);
+      toast.error("Please Enter your data")
     }
   };
 
@@ -312,6 +320,46 @@ export default function Login() {
 
                   </div>
 
+                  <div>
+                    <label htmlFor="fName" className="flex text-sm font-medium leading-6 text-gray-900">
+                      First Name
+                    </label>
+
+                    <div className="mt-2 relative rounded-md border-black p-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                      <input
+                        id="fName"
+                        name="fName"
+                        placeholder='First Name'
+                        autoComplete="text"
+                        type='text'
+                        required
+                        className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
+                        {...register("first_name", { required: true })}
+                      />
+                    </div>
+                  </div> 
+
+                  {/* Last Name */}
+                  {/* <div>
+
+                    <label htmlFor="lName" className="flex text-sm font-medium leading-6 text-gray-900">
+                      Last Name
+                    </label>
+
+                    <div className="mt-2 relative rounded-md border-black p-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                      <input
+                        id="lName"
+                        name="lName"
+                        placeholder='Last Name'
+                        autoComplete="text"
+                        type='text'
+                        required
+                        className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
+                        {...register("last_name", { required: true })}
+                      />
+                    </div>
+                  </div>  */}
+
                   {/* Password */}
                   <div>
                     <div className="flex items-center justify-between">
@@ -332,7 +380,7 @@ export default function Login() {
                         required
                         className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
                         {...register("password", { required: true })}
-                        // {...register("password", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ })}
+                      // {...register("password", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ })}
                       />
 
                       <button type='button' className="absolute inset-y-0 right-0 pr-5" onClick={handleTogglePasswordVisibility}>
@@ -373,6 +421,48 @@ export default function Login() {
 
                   </div>
 
+                  {/* Phone Number */}
+                  {/* <div>
+
+                    <label htmlFor="phoneNumber" className="flex text-sm font-medium leading-6 text-gray-900">
+                    Phone Number
+                    </label>
+
+                    <div className="mt-2 relative rounded-md border-black p-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                      <input
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        placeholder='Phone Number'
+                        autoComplete="text"
+                        type='number'
+                        required
+                        className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
+                        {...register("phone_number", { required: true })}
+                      />
+                    </div>
+                  </div> */}
+
+                  {/* Address */}
+                  {/* <div>
+
+                    <label htmlFor="address" className="flex text-sm font-medium leading-6 text-gray-900">
+                    Address
+                    </label>
+
+                    <div className="mt-2 relative rounded-md border-black p-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                      <input
+                        id="address"
+                        name="address"
+                        placeholder='Address'
+                        autoComplete="text"
+                        type='text'
+                        required
+                        className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
+                        {...register("address_of_Id", { required: true })}
+                      />
+                    </div>
+                  </div> */}
+
                   {/* Continue Button */}
                   <div>
                     <button
@@ -400,18 +490,3 @@ export default function Login() {
   )
 }
 
-
-
-
-
-
-{/* <div className="text-sm flex justify-center">
-                        <a href="#" className="font-semibold text-orange-500 hover:text-orange-600">
-                          Forgot your password?
-                        </a>
-                      </div>
-                      <div className="text-sm flex justify-center">
-                        <a href="#" className="font-semibold text-orange-500 hover:text-orange-600">
-                          Create New Account
-                        </a>
-                      </div> */}
