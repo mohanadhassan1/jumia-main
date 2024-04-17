@@ -212,7 +212,8 @@ const Cart = () => {
     if(isLoggedIn){
       console.log(customer_id , itemId)
      dispatch(removeItemFromCart({customer_id,product_id:itemId})) 
-    }
+     const updatedProducts = cartItems.filter((item) => item._id !== itemId);
+     setCartItems(updatedProducts);    }
     if (!isLoggedIn) {
       const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
       setCartItems(updatedCartItems);
