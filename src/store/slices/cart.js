@@ -75,6 +75,7 @@ const cartSlice = createSlice({
               if (!existingproduct) {
                 // If the product does not exist in the cart, add it
                 instance.post('cart/add', { customer_id: myDecodedToken.id, product_id: selctitema._id, quantity: 1 });
+
               } else {
                 // If the product already exists in the cart, you may want to handle this case
                 console.log('Product already exists in the cart.');
