@@ -139,7 +139,7 @@ const Home = () => {
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
 
-            <a href="/category"><img
+            <a href="/product/65df97e358f52e44982591a9"><img
               className="w-full"
               src="https://eg.jumia.is/cms/Ramadan-24/Teasing/HP/1200x200EN.gif"
               alt=""
@@ -150,7 +150,7 @@ const Home = () => {
         {/* Fashoin Clearance */}
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-            <a href="/">
+            <a href="/product/65df97e358f52e44982591a8">
               <img
                 className="w-full"
                 src="https://eg.jumia.is/cms/Week7-8-2024/ENDE.gif"
@@ -217,7 +217,7 @@ const Home = () => {
         {/*Shop All Your Needs 2 */}
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-            <a href="/">
+            <a href="/product/65df135bb5ab372ec0848b41">
               <img
                 className="w-full"
                 src="https://eg.jumia.is/cms/Week7-8-2024/CAT-UN/Supermarket/572x250EN.png"
@@ -240,7 +240,7 @@ const Home = () => {
         {/* New On Jumia */}
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-            <a href="/">
+            <a href="/product/65e206abb594c5b9c9c36b46">
               <img
                 className=""
                 src="https://eg.jumia.is/cms/Week7-8-2024/New-On-Jumia/GIF/EN-copy-5.gif"
