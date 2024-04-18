@@ -3,7 +3,7 @@ import { MdOutlineDelete } from "react-icons/md";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useSelector, useDispatch } from "react-redux";
-import {  responsive } from "./dataStatic";
+import { responsive } from "./dataStatic";
 import Like from "./mayALsoLike";
 import Recommended from "./recommended";
 import Recently from "./recently viewed";
@@ -21,6 +21,7 @@ import {
   addItemToCart,
 } from "../../store/slices/cart";
 import { useState, useEffect } from "react";
+import PaypalCheckoutButton from "../PaypalCheckoutButton";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -30,50 +31,47 @@ const Cart = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
 
-  const customers=generateCustomers(products)
+  const customers = generateCustomers(products);
 
   let token = localStorage.getItem("token");
   let myDecodedToken = decodeToken(token);
 
   useEffect(() => {
     if (isLoggedIn) {
-        const token = localStorage.getItem("token");
-        if (token) {
-            const myDecodedToken = decodeToken(token);
+      const token = localStorage.getItem("token");
+      if (token) {
+        const myDecodedToken = decodeToken(token);
 
-            instance
-                .get(`cart/${myDecodedToken.id}`)
-                .then((response) => {
-                    const cartItems = response.data.cartItems; // Assuming array of objects with product_id and quantity
-                    const productPromises = cartItems.map((item) => {
-                        return instance.get(`product/${item.product_id}`);
-                    });
+        instance
+          .get(`cart/${myDecodedToken.id}`)
+          .then((response) => {
+            const cartItems = response.data.cartItems; // Assuming array of objects with product_id and quantity
+            const productPromises = cartItems.map((item) => {
+              return instance.get(`product/${item.product_id}`);
+            });
 
-                    Promise.all(productPromises)
-                        .then((responses) => {
-                            const products = responses.map((response, index) => {
-                                const productData = response.data;
-                                return {
-                                    ...productData,
-                                    quantity: cartItems[index].quantity
-                                };
-                            });
-
-                            setCartItems(products);
-                        })
-                        .catch((error) => {
-                            console.error("Error fetching product data:", error);
-                        });
-                })
-                .catch((error) => {
-                    console.error("Error fetching cart data:", error);
+            Promise.all(productPromises)
+              .then((responses) => {
+                const products = responses.map((response, index) => {
+                  const productData = response.data;
+                  return {
+                    ...productData,
+                    quantity: cartItems[index].quantity,
+                  };
                 });
-        }
+
+                setCartItems(products);
+              })
+              .catch((error) => {
+                console.error("Error fetching product data:", error);
+              });
+          })
+          .catch((error) => {
+            console.error("Error fetching cart data:", error);
+          });
+      }
     }
-}, [isLoggedIn]);
-
-
- 
+  }, [isLoggedIn]);
 
   useEffect(() => {
     calculateSubtotal();
@@ -124,7 +122,7 @@ const Cart = () => {
 
       // Update the state with the updated cart items and total price
       setCartItems(updatedCartItems);
-     setSubtotal(updatedTotal);
+      setSubtotal(updatedTotal);
 
       // Update local storage with the updated cart items
       localStorage.setItem(
@@ -173,7 +171,7 @@ const Cart = () => {
 
       // Update the state with the updated cart items and total price
       setCartItems(updatedCartItems);
-     setSubtotal(updatedTotal);
+      setSubtotal(updatedTotal);
 
       // Update local storage with the updated cart items
       localStorage.setItem(
@@ -183,12 +181,13 @@ const Cart = () => {
     }
   };
 
-  const handleRemoveItem = (customer_id,itemId) => {
-    if(isLoggedIn){
-      console.log(customer_id , itemId)
-     dispatch(removeItemFromCart({customer_id,product_id:itemId})) 
-     const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
-     setCartItems(updatedCartItems);    }
+  const handleRemoveItem = (customer_id, itemId) => {
+    if (isLoggedIn) {
+      console.log(customer_id, itemId);
+      dispatch(removeItemFromCart({ customer_id, product_id: itemId }));
+      const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
+      setCartItems(updatedCartItems);
+    }
     if (!isLoggedIn) {
       const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
       setCartItems(updatedCartItems);
@@ -220,6 +219,11 @@ const Cart = () => {
 
     checkCart();
   });
+
+  const cart = {
+    description: "Checkout cart description test",
+    price: subtotal, // Update price to use subtotal
+  };
 
   return (
     <div className="container mx-auto h-full flex items-center justify-center">
@@ -352,6 +356,12 @@ const Cart = () => {
                 <h5>Subtotal</h5>
                 <h3> EGY {subtotal.toFixed(4)}</h3>
               </div>
+              {/* Paypal checkout */}
+              {subtotal > 0 && ( // Check if subtotal is greater than 0
+                <div className="paypal-button-container">
+                  <PaypalCheckoutButton cart={cart} />
+                </div>
+              )}
               <hr></hr>
               <button
                 className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
@@ -366,15 +376,14 @@ const Cart = () => {
           </div>
         </div>
         {/* cart products */}
-      
+
         {/* recently viewed */}
-        
-      <Recently></Recently>
-       <Recommended></Recommended>
-      
+
+        <Recently></Recently>
+        <Recommended></Recommended>
+
         <Like></Like>
 
-      
         {/* customers  */}
         <div
           className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white"
