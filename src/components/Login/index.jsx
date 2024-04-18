@@ -2,9 +2,14 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+import instance from '../../axois/instance';
+import { toast } from 'react-hot-toast';
+
 
 export default function Login() {
 
+  const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors }, watch } = useForm({ mode: 'onChange' })
 
@@ -15,8 +20,6 @@ export default function Login() {
 
   const [editEmail, setEditEmail] = useState(true);
 
-  // const [emailExists, setEmailExists] = useState(false);
-
   const [formVisible, setFormVisible] = useState(true);
 
   const password = watch('password', '');
@@ -24,10 +27,16 @@ export default function Login() {
 
 
 
-
   const handleButtonClick = (btnContent) => {
-    setContent(btnContent);
-    setFormVisible(!formVisible);
+
+    if (btnContent === "login" || btnContent === "signup") {
+      setContent(btnContent);
+      setFormVisible(false);
+    }
+    else {
+      setContent("");
+      setFormVisible(true);
+    }
   }
 
   const handleTogglePasswordVisibility = () => {
@@ -39,66 +48,84 @@ export default function Login() {
   };
 
 
-  // const handleToggleEditEmail = () => {
-  //   setEditEmail(!editEmail);
-  // };
 
 
-  // const checkEmailExists = (email) => {
-  //   return true;
-  // };
-
-
-
-  // const handleContinueButton = (data) => {
-  //   const { email } = data;
-  //   const exists = checkEmailExists(email);
-  //   setEmailExists(exists);
-  //   // Redirect the user based on whether the email exists or not
-  //   if (exists) {
-  //     // Navigate to login page
-  //     console.log("Navigate to login page");
-  //     history.push('/login');
-  //   } else {
-  //     // Navigate to signup page
-  //     console.log("Navigate to signup page");
-  //     history.push('/signup');
-  //   }
-
-  //   setContent("signup");
-  // };
-
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    // if (content === "login") {
-    //   // Navigate to login page
-    //   console.log("Navigate to login page");
-    //   history.push('/login');
-    // } else {
-    //   // Navigate to signup page
-    //   console.log("Navigate to signup page");
-    //   history.push('/signup');
-    // }
+    try {
+      const response = await instance.post('/customers/check', { email: data.email });
+      if (response.data.exists == true) {
+        console.log("Email exists, navigating to login page");
+        setContent("login");
+
+      } else {
+        console.log("Email doesn't exist, navigating to signup page");
+        setContent("signup");
+
+      }
+    } catch (error) {
+      console.error('Error checking email:', error);
+    }
+
+
   }
 
-  // const switchToSignUp = () => {
-  //   setContent("signup");
-  // };
+  const onLogin = async (data) => {
+    console.log(data);
+    try {
+      const response = await instance.post('/customers/login', { email: data.email, password: data.password });
+      console.log(response.status);
+      if (response.status == 200) {
+        console.log('login success');
+        const token = response.data.token;
+        localStorage.setItem('token', token);
+        navigate('/home');
+      } else {
+        console.log("Error in email or password");
+        toast.error("Email or password is wrong")
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      toast.error("Email or password is wrong", {
+        // position: "top",
+      });
+    }
+  };
 
-  // const switchToLogin = () => {
-  //   setContent("login");
-  // };
-
+  const onSignup = async (data) => {
+    console.log(data);
+    try {
+      const response = await instance.post('/customers/newcustomer', { email: data.email, password: data.password, first_name: data.first_name });
+      console.log(response.status);
+      if (response.status == 200) {
+        console.log('Signup success');
+        const token = response.data.token;
+        console.log(response.data);
+        localStorage.setItem('token', token);
+        navigate('/home');
+      } else {
+        if (response.status === 409) {
+          console.log("Email already exists");
+        } else {
+          console.log("Error in signup:", response.statusText);
+          toast.error("Please Enter your data")
+        }
+      }
+    } catch (error) {
+      console.error('Error signing up:', error);
+      toast.error("Please Enter your data")
+    }
+  };
 
 
   return (
     <>
       <div className='mx-auto pt-10'>
-        <a href="/"><img className="mx-auto h-16 w-auto" src="./tab.png" alt="Jumia Logo"/></a>
+        <a href="/"><img className="mx-auto h-16 w-auto" src="./tab.png" alt="Jumia Logo" /></a>
       </div>
 
       {/* ============================================= Add your email to check if it exists or not in Database ============================================= */}
-      {formVisible && (
+      {formVisible && content === "" && (
         <div className="mx-auto pt-10">
           {/* ============================================= Only logo and h1 ============================================= */}
           <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
@@ -134,9 +161,7 @@ export default function Login() {
               <div>
                 <button
                   type="submit"
-                  // onClick={handleSubmit((data) => handleContinueButton(data))}
-                  onClick={() => handleButtonClick("login")}
-                  // onClick={() => handleContinueButton()}
+                  onClick={() => handleButtonClick(content)}
                   className="flex w-full justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >Continue</button>
               </div>
@@ -168,7 +193,7 @@ export default function Login() {
 
               {/* ======================================================= Form ======================================================= */}
               <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
+                <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit(onLogin)}>
 
                   {/* Email */}
                   <div>
@@ -218,7 +243,9 @@ export default function Login() {
                         type={showPassword ? 'password' : 'text'}
                         required
                         className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
-                        {...register("password", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ })}
+                        // {...register("password")}
+                        {...register("password", { required: true })}
+                      // {...register("password", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ })}
                       />
 
                       <button type='button' className="absolute inset-y-0 right-0 pr-5" onClick={handleTogglePasswordVisibility}>
@@ -261,8 +288,8 @@ export default function Login() {
               </div>
 
               {/* ======================================================= Form ======================================================= */}
-              <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
+              <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
+                <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit(onSignup)}>
 
                   {/* Email */}
                   <div>
@@ -293,6 +320,46 @@ export default function Login() {
 
                   </div>
 
+                  <div>
+                    <label htmlFor="fName" className="flex text-sm font-medium leading-6 text-gray-900">
+                      First Name
+                    </label>
+
+                    <div className="mt-2 relative rounded-md border-black p-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                      <input
+                        id="fName"
+                        name="fName"
+                        placeholder='First Name'
+                        autoComplete="text"
+                        type='text'
+                        required
+                        className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
+                        {...register("first_name", { required: true })}
+                      />
+                    </div>
+                  </div> 
+
+                  {/* Last Name */}
+                  {/* <div>
+
+                    <label htmlFor="lName" className="flex text-sm font-medium leading-6 text-gray-900">
+                      Last Name
+                    </label>
+
+                    <div className="mt-2 relative rounded-md border-black p-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                      <input
+                        id="lName"
+                        name="lName"
+                        placeholder='Last Name'
+                        autoComplete="text"
+                        type='text'
+                        required
+                        className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
+                        {...register("last_name", { required: true })}
+                      />
+                    </div>
+                  </div>  */}
+
                   {/* Password */}
                   <div>
                     <div className="flex items-center justify-between">
@@ -312,7 +379,8 @@ export default function Login() {
                         type={showPassword ? 'password' : 'text'}
                         required
                         className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
-                        {...register("password", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ })}
+                        {...register("password", { required: true })}
+                      // {...register("password", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ })}
                       />
 
                       <button type='button' className="absolute inset-y-0 right-0 pr-5" onClick={handleTogglePasswordVisibility}>
@@ -353,6 +421,48 @@ export default function Login() {
 
                   </div>
 
+                  {/* Phone Number */}
+                  {/* <div>
+
+                    <label htmlFor="phoneNumber" className="flex text-sm font-medium leading-6 text-gray-900">
+                    Phone Number
+                    </label>
+
+                    <div className="mt-2 relative rounded-md border-black p-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                      <input
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        placeholder='Phone Number'
+                        autoComplete="text"
+                        type='number'
+                        required
+                        className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
+                        {...register("phone_number", { required: true })}
+                      />
+                    </div>
+                  </div> */}
+
+                  {/* Address */}
+                  {/* <div>
+
+                    <label htmlFor="address" className="flex text-sm font-medium leading-6 text-gray-900">
+                    Address
+                    </label>
+
+                    <div className="mt-2 relative rounded-md border-black p-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                      <input
+                        id="address"
+                        name="address"
+                        placeholder='Address'
+                        autoComplete="text"
+                        type='text'
+                        required
+                        className="block w-full rounded-md border-black p-2 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6 focus:outline-none"
+                        {...register("address_of_Id", { required: true })}
+                      />
+                    </div>
+                  </div> */}
+
                   {/* Continue Button */}
                   <div>
                     <button
@@ -380,18 +490,3 @@ export default function Login() {
   )
 }
 
-
-
-
-
-
-{/* <div className="text-sm flex justify-center">
-                        <a href="#" className="font-semibold text-orange-500 hover:text-orange-600">
-                          Forgot your password?
-                        </a>
-                      </div>
-                      <div className="text-sm flex justify-center">
-                        <a href="#" className="font-semibold text-orange-500 hover:text-orange-600">
-                          Create New Account
-                        </a>
-                      </div> */}

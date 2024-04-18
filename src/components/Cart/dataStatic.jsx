@@ -1,3 +1,18 @@
+import { useSelector } from "react-redux";
+
+export const data = () => {
+  const { products } = useSelector((state) => state.products);
+  console.log(products)
+
+  
+  useEffect(() => {
+    dispatch(fetchProducts()).then(() => setLoading(false));
+  }, []);
+
+}
+
+
+
 export const recommendedForYou = [
     {
       name: "Starter Men Walking Lightwight",

@@ -1,5 +1,11 @@
+
 import { createSlice } from "@reduxjs/toolkit";
-import { selectIsLoggedIn } from "./authSlice";
+import {  selectIsLoggedIn } from "./authSlice";
+import {login,logout,isLoggedIn} from "./authSlice"
+import instance from "../../axois/instance";
+import { isExpired, decodeToken } from "react-jwt";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const initialState = {
   items: [],
@@ -12,15 +18,15 @@ const cartSlice = createSlice({
 
   reducers: {
     addItemToCart(state, action) {
-      const { payload, isLoggedIn } = action;
+      const { payload} = action;
+      const isLoggedIn = selectIsLoggedIn;
+      
       const newItem = payload;
-      console.log(newItem)
-      console.log(state.items)
 
-      // Check if the item already exists in the cart
       const existingItem = state.items.find(
         (item) => item?._id === newItem?._id
       );
+      console.log(state.items)
 
       if (existingItem) {
         existingItem.quantity++;
@@ -30,92 +36,124 @@ const cartSlice = createSlice({
 
       state.total += newItem?.price;
 
+      // Save cart to local storage if user is not logged in
+      if (!isLoggedIn) {
+        const existingCartData = JSON.parse(localStorage.getItem("cart")) || { items: [], total: 0 };
+
+        const existingCartItem = existingCartData.items.find(item => item?._id === newItem?._id);
+
+        if (existingCartItem) {
+          existingCartItem.quantity++;
+        } else {
+          existingCartData.items.push({ ...newItem, quantity: 1 });
+        }
+
+        existingCartData.total += newItem?.price;
+
+        localStorage.setItem("cart", JSON.stringify(existingCartData));
+      }
+
+      if (isLoggedIn) {
+        // alert("Logged in");
+        const selctitema = { ...newItem };
+        console.log(selctitema._id);
+        // alert(selctitema);
+        const token = localStorage.getItem('token');
+        if (token) {
+          const myDecodedToken = decodeToken(token);
+          instance.get(`cart/${myDecodedToken.id}`)
+            .then(response => {
+              console.log(response.data); 
+              const cartItems = response.data.cartItems;
+              console.log(cartItems);
+              const productIds = cartItems.map(item => item.product_id);
+              console.log(productIds);
       
-if (!isLoggedIn) {
-  // Retrieve existing cart data from local storage
-  const existingCartData = JSON.parse(localStorage.getItem("cart")) || { items: [], total: 0 };
+              const existingproduct = productIds.find(id => id == selctitema._id);
+              console.log(existingproduct);
+      
+              if (!existingproduct) {
+                // If the product does not exist in the cart, add it
+                instance.post('cart/add', { customer_id: myDecodedToken.id, product_id: selctitema._id, quantity: 1 });
 
-  // Check if the item already exists in the existing cart data
-  const existingCartItem = existingCartData.items.find(item => item?._id === newItem?._id);
-
-  if (existingCartItem) {
-    // If the item exists, update its quantity
-    existingCartItem.quantity++;
-  } else {
-    // If the item doesn't exist, add it to the cart
-    existingCartData.items.push({ ...newItem, quantity: 1 });
-  }
-
-  // Update the total price
-  existingCartData.total += newItem?.price;
-
-  // Store the updated cart data back into local storage
-  localStorage.setItem("cart", JSON.stringify(existingCartData));
-}
-
-    }
-    ,
+              } else {
+                // If the product already exists in the cart, you may want to handle this case
+                console.log('Product already exists in the cart.');
+              }
+            })
+            .catch(error => {
+              console.error('Error fetching cart:', error);
+            });
+        } else {
+          console.log('No token found in local storage');
+        }
+      }
+      
+    },
     removeItemFromCart(state, action) {
-      const itemId = action.payload;
+      console.log(action.payload)
+
+      const {customer_id ,product_id }= action.payload;
+      console.log(customer_id)
+      console.log(product_id)
       const removedItemIndex = state.items.findIndex(
-        (item) => item?._id === itemId
+        (item) => item?._id == product_id
       );
+      if (customer_id) {
+        instance.delete(`/cart/${customer_id}/${product_id}`)
+        .then(response => {
+          dispatch({ type: 'REMOVE_ITEM_SUCCESS', payload: { product_id } });
+
+          // Handle success if needed
+        })
+        .catch(error => {
+          // Handle error if needed
+        });
+      }
+
 
       if (removedItemIndex !== -1) {
         const removedItem = state.items[removedItemIndex];
-        // Update the total price by subtracting the removed item's price
         state.total -= removedItem.price * removedItem.quantity;
-        // Remove the item from the cart
         state.items.splice(removedItemIndex, 1);
 
         // Update local storage if the user is not logged in
         if (!selectIsLoggedIn(store.getState())) {
-          localStorage.setItem("cart", JSON.stringify(state));
-        }
-      }
-    },
-    updateItemQuantity(state, action) {
-      const { itemId, quantity } = action.payload;
-      const existingItem = state.items.find((item) => item?._id === itemId);
-
-      if (existingItem) {
-        // Ensure the quantity doesn't exceed the available stock
-        const newQuantity = Math.min(quantity, existingItem.quantity);
-        // Update the total price based on the change in quantity
-        state.total +=
-          (newQuantity - existingItem.quantity) * existingItem?.price;
-        existingItem.quantity = newQuantity;
-
-        // Update local storage if the user is not logged in
-        // if (!selectIsLoggedIn(store.getState())) {
-        //   localStorage.setItem("cart", JSON.stringify(state));
-        // }
-        if (!selectIsLoggedIn(store.getState())) {
-          // Retrieve existing cart data from local storage
           const existingCartData = JSON.parse(localStorage.getItem("cart")) || { items: [], total: 0 };
-        
-          // Update the quantity of the item in the cart
-          const existingCartItem = existingCartData.items.find(item => item?._id === itemId);
-          if (existingCartItem) {
-            // Ensure the quantity doesn't exceed the available stock
-            existingCartItem.quantity = Math.min(quantity, existingCartItem.quantity);
-          }
-        
-          // Update the total price
+          
+          // Find and remove the item from local storage
+          const updatedItems = existingCartData.items.filter(item => item?._id !== itemId);
+          existingCartData.items = updatedItems;
+          
           existingCartData.total = existingCartData.items.reduce((total, item) => {
             return total + (item.price * item.quantity);
           }, 0);
-        
-          // Store the updated cart data back into local storage
+          
           localStorage.setItem("cart", JSON.stringify(existingCartData));
+        }
+
+       
       }
-    }
-    
+    },
+    updateItemQuantity(state, action) {
+      const {customer_id,product_id,quantity}=action.payload
+      // alert("up")
+      console.log(customer_id,product_id,quantity)
+      instance.patch(`/cart/update`,{customer_id,product_id,quantity})
+      .then(response => {
+
+      })
+      .catch(error => {
+        // Handle error if needed
+      });
+      
+      
+    },
   },
-}
 });
 
 export const { addItemToCart, removeItemFromCart, updateItemQuantity } =
   cartSlice.actions;
 
 export default cartSlice.reducer;
+

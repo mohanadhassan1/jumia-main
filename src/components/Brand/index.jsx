@@ -165,7 +165,7 @@ export default function BRAND({ brands, categories, changeCategories ,filterBran
       {/* <!-- DISCOUNT PERCENTAGE --> */}
       <p className="ps-2 py-2">DISCOUNT PERCENTAGE</p>
       {DISCOUNT_PERCENTAGE.map((discount) => (
-        <div className="flex items-center mb-4">
+        <div className="flex items-center mb-4 ml-4">
           <input
             id="default-radio-1"
             type="radio"
@@ -185,7 +185,7 @@ export default function BRAND({ brands, categories, changeCategories ,filterBran
       {/* <!-- PRODUCT RATING --> */}
       <p className="ps-2 py-2">PRODUCT RATING</p>
       {PRODUCT_RATING.map((discount) => (
-        <div className="flex items-center mb-4">
+        <div className="flex items-center mb-4 ml-4">
           <input
             id="default-radio-1"
             type="radio"
@@ -234,7 +234,7 @@ export default function BRAND({ brands, categories, changeCategories ,filterBran
       {/* <!-- CAMPAIGNS --> */}
       <p className="ps-2 py-2">CAMPAIGNS</p>
       <div>
-        <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
+        <ul className="h-42 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
           {CAMPAIGNS.map((campaign) => (
             <DropdownSearchUser
               key={campaign}
