@@ -98,8 +98,8 @@ const Home = () => {
         {/* Products */}
         {loading ? (
           // Display loader while products are being fetched
-          <div className="flex justify-center items-center m-10">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+          <div class="flex justify-center items-center my-20">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-orange-500"></div>
           </div>
         ) : (
           // Display Carousel once products are fetched
@@ -138,12 +138,13 @@ const Home = () => {
         {/* Ramadan Careem */}
         <div className="flex gap-4 p-3 mb-3 rounded bg-white">
           <div className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg">
-
-            <a href="/product/65df97e358f52e44982591a9"><img
-              className="w-full"
-              src="https://eg.jumia.is/cms/Ramadan-24/Teasing/HP/1200x200EN.gif"
-              alt=""
-            /></a>
+            <a href="/product/65df97e358f52e44982591a9">
+              <img
+                className="w-full"
+                src="https://eg.jumia.is/cms/Ramadan-24/Teasing/HP/1200x200EN.gif"
+                alt=""
+              />
+            </a>
           </div>
         </div>
 
@@ -381,7 +382,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

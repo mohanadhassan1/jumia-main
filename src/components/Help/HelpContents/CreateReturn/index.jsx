@@ -58,8 +58,8 @@ const CreateReturn = () => {
 
       <div className="my-5">
         {!videoLoaded && (
-          <div class=" flex justify-center items-center">
-            <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+          <div class="flex justify-center items-center my-20">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-orange-500"></div>
           </div>
         )}
         <iframe
