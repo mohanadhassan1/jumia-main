@@ -10,6 +10,7 @@ import Recently from "./recently viewed";
 import instance from "../../axois/instance";
 import { selectIsLoggedIn } from "../../store/slices/authSlice"; // Adjust the path as needed
 import { isExpired, decodeToken } from "react-jwt";
+import Customers from "./customers";
 
 // In Cart.jsx
 
@@ -383,30 +384,11 @@ const Cart = () => {
        <Recommended></Recommended>
       
         <Like></Like>
+          <Customers></Customers>
 
       
         {/* customers  */}
-        <div
-          className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white"
-          style={{ display: cartEmpty ? "none" : "block" }}
-        >
-          <h2 className="font-medium text-xl">
-            Customers who viewed this also viewed
-          </h2>
-        </div>
-        <Carousel
-          responsive={responsive}
-          className="flex gap-4 p-3 mb-3 rounded bg-white"
-        >
-          {customers.map((product, index) => (
-            <div
-              key={index}
-              className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg"
-            >
-              <img src={product.images} className="w-full"></img>
-            </div>
-          ))}
-        </Carousel>
+       
       </div>
     </div>
   );

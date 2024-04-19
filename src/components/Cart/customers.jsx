@@ -1,32 +1,67 @@
+import React, { useEffect, useState } from "react";
+import Carousel from "react-multi-carousel";
+import { useSelector } from "react-redux";
+import { responsive } from "./dataStatic";
 
 export const generateCustomers = (products) => {
-    if (products.length === 0) return [];
-  
-    const getRandomProducts = (products, count) => {
-      const shuffled = [...products];
-      shuffled.sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, count);
-    };
-  
-    return getRandomProducts(products, 10);
+  if (products.length === 0) return [];
+
+  const getRandomProducts = (products, count) => {
+    const shuffled = [...products];
+    shuffled.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
   };
-  
-  // Recommended component
-  const Customers = () => {
-    const { products } = useSelector((state) => state.products);
-  
-    // Render recommended products
-    return (
-      <div>
-        <h2>Recommended Products</h2>
-        <ul>
-          {generateCustomers(products).map((product) => (
-            <li key={product.id}>{product.name}</li>
-          ))}
-        </ul>
+
+  return getRandomProducts(products, 10);
+};
+
+const Customers = () => {
+  const { products } = useSelector((state) => state.products);
+  const [customersProducts, setCustomersProducts] = useState(() => {
+    const storedCustomersProducts = localStorage.getItem("customersProducts");
+    if (storedCustomersProducts) {
+      return JSON.parse(storedCustomersProducts);
+    } else {
+      const newCustomersProducts = generateCustomers(products);
+      const currentDate = new Date().toISOString().slice(0, 10);
+      localStorage.setItem("customersProducts", JSON.stringify(newCustomersProducts));
+      localStorage.setItem("lastGeneratedDate", currentDate);
+      return newCustomersProducts;
+    }
+  });
+
+  useEffect(() => {
+    const currentDate = new Date().toISOString().slice(0, 10);
+    const lastGeneratedDate = localStorage.getItem("lastGeneratedDate");
+
+    if (lastGeneratedDate !== currentDate) {
+      const newCustomersProducts = generateCustomers(products);
+      setCustomersProducts(newCustomersProducts);
+      localStorage.setItem("customersProducts", JSON.stringify(newCustomersProducts));
+      localStorage.setItem("lastGeneratedDate", currentDate);
+    }
+  }, [products]);
+
+  return (
+    <>
+      <div className="h-16 flex justify-start items-center gap-4 p-3 rounded-t bg-white">
+        <h2 className="font-medium text-xl">Customers also viewed</h2>
       </div>
-    );
-  };
-  
-  export default Customers;
-  
+      <Carousel
+        responsive={responsive}
+        className="flex gap-4 p-3 mb-3 rounded bg-white"
+      >
+        {customersProducts.map((product, index) => (
+          <div
+            key={index}
+            className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg m-x-3"
+          >
+            <img src={product.images[0]} className="w-full mx-2" alt={product.name} />
+          </div>
+        ))}
+      </Carousel>
+    </>
+  );
+};
+
+export default Customers;
