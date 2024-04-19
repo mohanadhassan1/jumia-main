@@ -1,5 +1,6 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const PaypalCheckoutButton = (props) => {
   const { cart } = props;
@@ -19,14 +20,14 @@ const PaypalCheckoutButton = (props) => {
 
   if (paidFor) {
     // Display success message, modal or redirect user to success page
-    alert("Thank you for your purchase!");
+    toast.success("Thank you for your purchase!");
   }
 
   const [error, setError] = useState(null);
 
   if (error) {
     // Display error message, modal or redirect user to error page
-    alert(error);
+    toast.error(error);
   }
   return (
     <PayPalButtons
@@ -54,7 +55,7 @@ const PaypalCheckoutButton = (props) => {
       }}
       onCancel={() => {
         // Display cancel message, modal or redirect user to cancel page or back to cart
-        alert("PayPal Checkout cancelled");
+        toast.error("PayPal Checkout cancelled");
       }}
     />
   );

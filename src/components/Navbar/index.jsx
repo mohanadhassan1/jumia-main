@@ -87,7 +87,7 @@ const Navbar = () => {
     dispatch(logout());
     localStorage.clear("token");
     toast.success("Successfully logged out!", {
-      position: "top",
+      // position: "top",
     });
     setTimeout(() => {
       navigate("login");
