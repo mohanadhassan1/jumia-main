@@ -222,7 +222,7 @@ const Cart = () => {
 
   const cart = {
     description: "Checkout cart description test",
-    price: subtotal, // Update price to use subtotal
+    price: subtotal + 35, // Update price to use subtotal
   };
 
   return (
@@ -354,7 +354,15 @@ const Cart = () => {
               <hr></hr>
               <div className="flex justify-between m-2">
                 <h5>Subtotal</h5>
-                <h3> EGY {subtotal.toFixed(4)}</h3>
+                <h3> EGY {subtotal.toFixed(2)}</h3>
+              </div>
+              <div className="flex justify-between m-2">
+                <h5>Shipment</h5>
+                <h3> EGY 35.00</h3>
+              </div>
+              <div className="flex justify-between m-2">
+                <h5>Total</h5>
+                <h3> EGY {Number(subtotal.toFixed(2)) + 35}.00</h3>
               </div>
               {/* Paypal checkout */}
               {subtotal > 0 && ( // Check if subtotal is greater than 0
