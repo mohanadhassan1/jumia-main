@@ -26,7 +26,7 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(true);
   const [subtotal, setSubtotal] = useState(0);
-  const isLoggedIn = selectIsLoggedIn;
+  const isLoggedIn =useSelector(selectIsLoggedIn) ;
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
 
@@ -69,6 +69,17 @@ const Cart = () => {
                     console.error("Error fetching cart data:", error);
                 });
         }
+    }
+    else{
+
+      const productsData = localStorage.getItem("cart");
+      if(productsData){
+        const data = JSON.parse(productsData);
+      console.log(productsData)
+       setCartItems(data.items)
+
+      }
+      
     }
 }, [isLoggedIn]);
 
@@ -183,13 +194,12 @@ const Cart = () => {
     }
   };
 
-  const handleRemoveItem = (customer_id,itemId) => {
+  const handleRemoveItem = (itemId) => {
     if(isLoggedIn){
-      console.log(customer_id , itemId)
-     dispatch(removeItemFromCart({customer_id,product_id:itemId})) 
+     dispatch(removeItemFromCart({customer_id:myDecodedToken.id,product_id:itemId})) 
      const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
      setCartItems(updatedCartItems);    }
-    if (!isLoggedIn) {
+  else {
       const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
       setCartItems(updatedCartItems);
       localStorage.setItem("cart", JSON.stringify({ items: updatedCartItems }));
@@ -290,7 +300,7 @@ const Cart = () => {
                             <button
                               className=" text-orange-600 flex justify-center text-xl items-center	"
                               onClick={() =>
-                                handleRemoveItem(myDecodedToken.id, product._id)
+                                handleRemoveItem(product._id)
                               }
                             >
                               {" "}

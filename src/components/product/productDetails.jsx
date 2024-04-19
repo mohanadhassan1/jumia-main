@@ -73,6 +73,7 @@ export default function ProductDetails() {
   };
 
   const handleAddToCart = () => {
+    console.log(isLoggedIn)
     dispatch(addItemToCart({ ...product, isLoggedIn }));
     toast.success(`Product added successfully`);
   };
