@@ -85,8 +85,25 @@ export default function ProductDetails() {
     e.preventDefault();
 
     try {
-      if (!user) {
+      if (!isLoggedIn) {
         console.error("User is not logged in");
+        toast.error(`You need to be logged in`);
+        // navigate("/login");
+        const shouldNavigate = await toast.promise(
+          new Promise((resolve) => {
+            // toast.loading("Redirecting...");
+            setTimeout(() => {
+              resolve(true);
+            }, 3000);
+          }),
+          {
+            loading: "Checking...",
+            success: "You can login now ...",
+          }
+        );
+        if (shouldNavigate) {
+          navigate("/login");
+        }
         return;
       }
 
@@ -174,9 +191,8 @@ export default function ProductDetails() {
                     <button
                       key={size}
                       onClick={() => handleSizeSelect(size)}
-                      className={`mr-2 px-4 py-2 border border-gray-300 rounded ${
-                        selectedSize === size ? "bg-gray-200" : "bg-white"
-                      }`}
+                      className={`mr-2 px-4 py-2 border border-gray-300 rounded ${selectedSize === size ? "bg-gray-200" : "bg-white"
+                        }`}
                     >
                       {size}
                     </button>
@@ -213,7 +229,8 @@ export default function ProductDetails() {
                     <div className="flex justify-center items-center w-7 h-7 text-center rounded-full bg-orange-500">
                       {customer && customer.email ? customer.email[0] : ""}
                     </div>
-                    <span>{customer && customer.email}</span>
+                    {/* <span>{customer && customer.email}</span> */}
+                    <span>{customer && customer.first_name}</span>
                   </div>
                   <div className="flex p-1 gap-1 text-orange-300">
                     <IoIosStar />

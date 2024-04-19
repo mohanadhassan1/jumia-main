@@ -4,7 +4,7 @@ import { addItemToCart } from "../../store/slices/cart";
 import { selectIsLoggedIn } from "../../store/slices/authSlice";
 import toast from "react-hot-toast";
 
-export default function SmallCart({ Image, title, price, product }) {
+export default function SmallCart({ Image, title, price, product ,id}) {
   const maxLength = 20; // Define the maximum length for the title
 
   // Function to truncate the title if it exceeds the maximum length
@@ -23,11 +23,11 @@ export default function SmallCart({ Image, title, price, product }) {
   return (
     <div class="max-w-2xl mx-auto  ">
       <div class="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
+      <a href={`/product/${id}`}>
           <img class="rounded-t-lg p-8" src={Image} alt="product image" />
         </a>
         <div class="px-5 pb-5">
-          <a href="#">
+        <a href={`/product/${id}`}>
             <h3 class="text-gray-900 font-semibold text-xl tracking-tight dark:text-white">
               {truncateTitle(title, maxLength)}
             </h3>

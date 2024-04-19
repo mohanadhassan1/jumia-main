@@ -104,7 +104,7 @@ export default function SupermarketCategory() {
             />
           </div>
 
-          <div className="md:flex flex-wrap gap-4 p-4 mb-3 w-full rounded bg-white">
+          <div className="md:flex  justify-between flex-wrap gap-4 p-4 mb-3 w-full rounded bg-white">
             <div className="flex justify-between  w-full">
               <p>{newNameValue}</p>
               <div className="relative">
@@ -163,16 +163,17 @@ export default function SupermarketCategory() {
               )
               .map((product) => (
                 <div
-                  className="md:w-1/2  lg:w-[40%]  xl:w-[20%] mb-4  "
-                  onClick={() => {
-                    navigate(`/product/${product._id}`);
-                  }}
+                  className="flex justify-between	 md:w-1/2  lg:w-[40%]  xl:w-[20%] mb-4  "
+                  // onClick={() => {
+                  //   navigate(`/product/${product._id}`);
+                  // }}
                 >
                   <SmallCart
                     Image={product.images}
                     title={product.name}
                     price={product.price}
                     product={product}
+                    id={product._id}
                   />
                   
                 </div>

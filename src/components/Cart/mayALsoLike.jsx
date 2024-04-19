@@ -39,7 +39,7 @@ export const generateMayLike = (products) => {
           </div>
         ))}
       </Carousel>
-      ;
+      
       </>
     );
   };
