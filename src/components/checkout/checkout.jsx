@@ -19,7 +19,7 @@ export default function Checkout() {
   const location = useLocation();
   const subtotal = new URLSearchParams(location.search).get("subtotal");
   const deliveryfees = 35;
-  const total = subtotal+deliveryfees
+  const total = Number(subtotal )+ Number(deliveryfees)
 
   // Now you have access to the subtotal value here
   console.log("Subtotal:", subtotal);
