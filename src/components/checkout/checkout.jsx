@@ -6,6 +6,9 @@ import { Button, Modal } from "flowbite-react";
 import Installment from "./installment ";
 import CkeckoutNavbar from "./ckeckoutNavbar";
 import PaypalCheckoutButton from "../PaypalCheckoutButton";
+import { useLocation } from "react-router-dom";
+import AddAddressForm from "./address";
+
 // import Payment from "../PaypalCheckoutButton";
 
 export default function Checkout() {
@@ -13,6 +16,13 @@ export default function Checkout() {
     description: "Checkout cart description test",
     price: 100,
   };
+  const location = useLocation();
+  const subtotal = new URLSearchParams(location.search).get("subtotal");
+  const deliveryfees = 35;
+  const total = subtotal+deliveryfees
+
+  // Now you have access to the subtotal value here
+  console.log("Subtotal:", subtotal);
 
   const [selectedMethods, setSelectedMethods] = useState({
     cashOnDelivery: false,
@@ -39,7 +49,7 @@ export default function Checkout() {
         <div className="flex my-3  parent-container justify-center relative ">
           {/* lef side */}
           <div className="w-3/4 p-3 mx-10 relative">
-            {/* customer */}
+            {/* customer address*/}
             <div className="mx-2 p-4 bg-white">
               <div className="flex justify-between ">
                 <article className="flex items-center pb-2">
@@ -54,10 +64,12 @@ export default function Checkout() {
                 </a>
               </div>
               <hr></hr>
-              <div className="p-2">
+              {/* <div className="p-2">
                 <h5>Eman Hamed</h5>
                 <p>qena | Cairo - Al Rehab 1 | +20 1065062126</p>
-              </div>
+              </div> */}
+              <AddAddressForm></AddAddressForm>
+
             </div>
             {/* delivery */}
             <div className="m-2 p-4 bg-white">
@@ -541,15 +553,15 @@ export default function Checkout() {
             <hr></hr>
             <div className="flex justify-between m-2">
               <h5>items total </h5>
-              <h3> EGY</h3>
+              <h3> {subtotal}</h3>
             </div>
             <div className="flex justify-between m-2">
               <h5>delivery fees </h5>
-              <h3> EGY 35.00</h3>
+              <h3> {deliveryfees}</h3>
             </div>
             <div className="flex justify-between m-2">
               <h5> total </h5>
-              <h3> EGY</h3>
+              <h3> {total}</h3>
             </div>
             <hr></hr>
             <button
