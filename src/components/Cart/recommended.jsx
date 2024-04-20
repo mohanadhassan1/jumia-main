@@ -1,47 +1,55 @@
-
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import { useSelector } from "react-redux";
 import { responsive } from "./dataStatic";
 
 export const generateRecommendedProducts = (products) => {
-  if (products.length === 0) return [];
-
-  const getRandomProducts = (products, count) => {
-    const shuffled = [...products];
-    shuffled.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
-  };
-
-  return getRandomProducts(products, 10);
+  try {
+    if (products.length === 0) return [];
+  
+    const getRandomProducts = (products, count) => {
+      const shuffled = [...products];
+      shuffled.sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+    };
+  
+    return getRandomProducts(products, 10);
+  } catch (error) {
+    console.error("Error generating recommended products:", error);
+    return [];
+  }
 };
 
 const Recommended = () => {
   const { products } = useSelector((state) => state.products);
-  const [recommendedProducts, setRecommendedProducts] = useState(() => {
-    const storedRecommendedProducts = localStorage.getItem("recommendedProducts");
-    if (storedRecommendedProducts) {
-      return JSON.parse(storedRecommendedProducts);
-    } else {
-      const newRecommendedProducts = generateRecommendedProducts(products);
-      const currentDate = new Date().toISOString().slice(0, 10);
-      localStorage.setItem("recommendedProducts", JSON.stringify(newRecommendedProducts));
-      localStorage.setItem("lastGeneratedDate", currentDate);
-      return newRecommendedProducts;
-    }
-  });
+  const [recommendedProducts, setRecommendedProducts] = useState([]);
 
   useEffect(() => {
     const currentDate = new Date().toISOString().slice(0, 10);
     const lastGeneratedDate = localStorage.getItem("lastGeneratedDate");
 
     if (lastGeneratedDate !== currentDate) {
-      const newRecommendedProducts = generateRecommendedProducts(products);
-      setRecommendedProducts(newRecommendedProducts);
-      localStorage.setItem("recommendedProducts", JSON.stringify(newRecommendedProducts));
-      localStorage.setItem("lastGeneratedDate", currentDate);
+      try {
+        const newRecommendedProducts = generateRecommendedProducts(products);
+        setRecommendedProducts(newRecommendedProducts);
+        localStorage.setItem("recommendedProducts", JSON.stringify(newRecommendedProducts));
+        localStorage.setItem("lastGeneratedDate", currentDate);
+      } catch (error) {
+        console.error("Error setting recommended products:", error);
+      }
     }
   }, [products]);
+
+  useEffect(() => {
+    const storedRecommendedProducts = localStorage.getItem("recommendedProducts");
+    if (storedRecommendedProducts) {
+      try {
+        setRecommendedProducts(JSON.parse(storedRecommendedProducts));
+      } catch (error) {
+        console.error("Error parsing recommended products from localStorage:", error);
+      }
+    }
+  }, []);
 
   return (
     <>

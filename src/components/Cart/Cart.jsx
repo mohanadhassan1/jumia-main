@@ -230,6 +230,10 @@ const Cart = () => {
 
     checkCart();
   });
+  const handleCheckout = () => {
+    // Redirect to checkout page with subtotal as query parameter
+    window.location.href = `/checkout?subtotal=${subtotal}`;
+  };
 
   const cart = {
     description: "Checkout cart description test",
@@ -383,9 +387,8 @@ const Cart = () => {
               <button
                 className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
                 type="button"
-                onClick={() => {
-                  window.location.href = "/checkout";
-                }}
+                onClick={handleCheckout}
+
               >
                 CHECKOUT (EGY {subtotal})
               </button>{" "}
