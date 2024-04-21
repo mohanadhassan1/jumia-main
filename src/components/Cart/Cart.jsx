@@ -378,17 +378,16 @@ const Cart = () => {
                 <h3> EGY {Number(subtotal.toFixed(2)) + 35}.00</h3>
               </div>
               {/* Paypal checkout */}
-              {subtotal > 0 && ( // Check if subtotal is greater than 0
+              {/* {subtotal > 0 && ( // Check if subtotal is greater than 0
                 <div className="paypal-button-container">
                   <PaypalCheckoutButton cart={cart} />
                 </div>
-              )}
+              )} */}
               <hr></hr>
               <button
                 className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
                 type="button"
                 onClick={handleCheckout}
-
               >
                 CHECKOUT (EGY {subtotal})
               </button>{" "}
