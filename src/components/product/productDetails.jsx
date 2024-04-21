@@ -16,6 +16,7 @@ export default function ProductDetails() {
   const [reviews, setReviews] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [comment, setComment] = useState("");
+  const [rating, setRating] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
@@ -39,6 +40,15 @@ export default function ProductDetails() {
 
       const customerData = await Promise.all(customerPromises);
       setCustomers(customerData);
+
+      // Calculate average rating
+      const totalRating = res.data.data.reduce((acc, curr) => acc + curr.rating, 0);
+      const averageRating = totalRating / res.data.data.length;
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        rating: averageRating.toFixed(1),
+      }));
+
     } catch (err) {
       setError(err.message);
     } finally {
@@ -64,6 +74,7 @@ export default function ProductDetails() {
     getData();
   }, [id]);
 
+
   const handleThumbnailClick = (image) => {
     setMainImage(image);
   };
@@ -76,6 +87,10 @@ export default function ProductDetails() {
     console.log(isLoggedIn)
     dispatch(addItemToCart({ ...product, isLoggedIn }));
     toast.success(`Product added successfully`);
+  };
+
+  const handleRatingChange = (event) => {
+    setRating(parseInt(event.target.value));
   };
 
   const token = localStorage.getItem("token");
@@ -109,6 +124,7 @@ export default function ProductDetails() {
 
       const newReview = {
         comment,
+        rating,
         product_id: id,
         customer_id: user.id,
       };
@@ -117,6 +133,7 @@ export default function ProductDetails() {
 
       setReviews([...reviews, res.data]);
       setComment("");
+      setRating(0);
       toast.success("Review submitted successfully");
     } catch (err) {
       console.error("Error submitting review:", err.message);
@@ -205,6 +222,38 @@ export default function ProductDetails() {
               >
                 ADD TO CART
               </button>
+              <p className="text-gray-500 mt-2">Rating: {product.rating} ({reviews.length}) </p>
+              
+              <p className="text-gray-500 mt-2 flex items-center">
+                Rating: 
+                {[...Array(5)].map((_, index) => {
+                  const starValue = index + 1;
+                  if (starValue <= product.rating) {
+                    return (
+                      <IoIosStar
+                        key={index}
+                        style={{ color: "orange" }}
+                      />
+                    );
+                  } else if (starValue - 0.5 <= product.rating) {
+                    return (
+                      <div key={index} style={{ display: "flex" }}>
+                        <IoIosStarHalf style={{ color: "orange" }} />
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <IoIosStar
+                        key={index}
+                        style={{ color: "gray" }}
+                      />
+                    );
+                  }
+                })}
+                ({reviews.length})
+              </p>
+
+
             </div>
           </div>
         </div>
@@ -220,7 +269,7 @@ export default function ProductDetails() {
       {/* Reviews */}
       <div className="md:flex flex-col gap-4 mt-3 h-full pb-5">
         {reviews.map((review, index) => {
-          const customer = customers[index]; // Get corresponding customer information
+          const customer = customers[index];
           return (
             <div key={index} className="flex flex-col gap-4 w-full">
               <div className="flex flex-col gap-4 bg-white p-4 rounded">
@@ -233,11 +282,15 @@ export default function ProductDetails() {
                     <span>{customer && customer.first_name}</span>
                   </div>
                   <div className="flex p-1 gap-1 text-orange-300">
-                    <IoIosStar />
-                    <IoIosStar />
-                    <IoIosStar />
-                    <IoIosStar />
-                    <IoIosStarHalf />
+                    {Array.from({ length: 5 }, (_, index) => {
+                      if (index < Math.floor(review.rating)) {
+                        return <IoIosStar key={index} />;
+                      } else if (index === Math.floor(review.rating) && review.rating % 1 !== 0) {
+                        return <IoIosStarHalf key={index} />;
+                      } else {
+                        return <IoIosStar key={index} style={{ opacity: 0.3 }} />;
+                      }
+                    })}
                   </div>
                 </div>
                 <div>{review.comment}</div>
@@ -271,6 +324,23 @@ export default function ProductDetails() {
                 onChange={(e) => setComment(e.target.value)}
               />
             </div>
+
+            <div className="grid gap-2 mt-5">
+              <label className="text-sm">Rating</label>
+              <div className="flex p-1 gap-1 text-orange-300" style={{ cursor: "pointer" }}>
+                {[...Array(5)].map((_, index) => {
+                  const starValue = index + 1;
+                  return (
+                    <IoIosStar
+                      key={index}
+                      onClick={() => setRating(starValue)}
+                      style={{ color: starValue <= rating ? "orange" : "gray" }}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+
             <button
               type="submit"
               className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 mt-4 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
