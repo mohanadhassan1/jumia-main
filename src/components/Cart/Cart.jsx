@@ -254,7 +254,7 @@ const Cart = () => {
             className="mx-auto m-6 size-28"
             src="https://www.jumia.com.eg/assets_he/images/cart.668e6453.svg"
           ></img>
-          <h3>Your cart is emptey!</h3>
+          <h3>Your cart is empty!</h3>
           <p className="text-gray-800 text-md m-2 font-normal">
             Browse our categories and discover our best deals!
           </p>
@@ -367,7 +367,7 @@ const Cart = () => {
               <hr></hr>
               <div className="flex justify-between m-2">
                 <h5>Subtotal</h5>
-                <h3> EGY {subtotal.toFixed(4)}</h3>
+                <h3> EGY {subtotal.toFixed(2)}</h3>
               </div>
               <div className="flex justify-between m-2">
                 <h5>Shipment</h5>
