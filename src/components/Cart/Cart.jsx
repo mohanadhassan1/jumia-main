@@ -254,7 +254,7 @@ const Cart = () => {
             className="mx-auto m-6 size-28"
             src="https://www.jumia.com.eg/assets_he/images/cart.668e6453.svg"
           ></img>
-          <h3>Your cart is emptey!</h3>
+          <h3>Your cart is empty!</h3>
           <p className="text-gray-800 text-md m-2 font-normal">
             Browse our categories and discover our best deals!
           </p>
@@ -367,7 +367,7 @@ const Cart = () => {
               <hr></hr>
               <div className="flex justify-between m-2">
                 <h5>Subtotal</h5>
-                <h3> EGY {subtotal.toFixed(4)}</h3>
+                <h3> EGY {subtotal.toFixed(2)}</h3>
               </div>
               <div className="flex justify-between m-2">
                 <h5>Shipment</h5>
@@ -378,17 +378,16 @@ const Cart = () => {
                 <h3> EGY {Number(subtotal.toFixed(2)) + 35}.00</h3>
               </div>
               {/* Paypal checkout */}
-              {subtotal > 0 && ( // Check if subtotal is greater than 0
+              {/* {subtotal > 0 && ( // Check if subtotal is greater than 0
                 <div className="paypal-button-container">
                   <PaypalCheckoutButton cart={cart} />
                 </div>
-              )}
+              )} */}
               <hr></hr>
               <button
                 className="button bg-orange-600 w-4/4 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
                 type="button"
                 onClick={handleCheckout}
-
               >
                 CHECKOUT (EGY {subtotal})
               </button>{" "}
