@@ -16,6 +16,7 @@ import { customerAction } from "../../store/slices/customer";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-hot-toast';
+import AddAddressForm from "../checkout/address";
 
 
 export default function MyAccount() {
@@ -48,29 +49,6 @@ export default function MyAccount() {
     }, 2000);
   };
 
-  
-
-  // const [customer, setCustomer] = useState({});
-  // const [product, setProduct] = useState({});
-
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
-
-
-  // useEffect(() => {
-  //   async function getCustomer() {
-  //     try {
-  //       const res = await instance.get(`/customers/${id}`);
-  //       console.log(res.data);
-  //       setCustomer(res.data.deta);
-
-  //     } catch (err) {
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token);
@@ -78,37 +56,6 @@ export default function MyAccount() {
       dispatch(customerAction(customerId));
     }
   }, [dispatch]);
-
-  //   getCustomer();
-  // }, [id]);
-
-  // useEffect(() => {
-  //   async function getData() {
-  //     try {
-  //       const res = await instance.get(`/product/${id}`);
-  //       setProduct(res.data);
-  //       if (res.data.images && res.data.images.length > 0) {
-  //         setMainImage(res.data.images[0]);
-  //       }
-  //     } catch (err) {
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-
-  //   getData();
-  // }, [id]);
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (error) {
-  //   return <div>Error: {error}</div>;
-  // }
-
-  
   return (
     <>
       <div className="md:flex container mx-auto mt-3 mb-3">
@@ -410,6 +357,7 @@ export default function MyAccount() {
                     <h2>SET AS DEFAULT</h2>
                   </div>
 
+                  <AddAddressForm></AddAddressForm>
                 </div>
               </div>
             )}
