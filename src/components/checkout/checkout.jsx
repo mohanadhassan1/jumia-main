@@ -12,14 +12,10 @@ import AddAddressForm from "./address";
 // import Payment from "../PaypalCheckoutButton";
 
 export default function Checkout() {
-  const cart = {
-    description: "Checkout cart description test",
-    price: 100,
-  };
   const location = useLocation();
   const subtotal = new URLSearchParams(location.search).get("subtotal");
   const deliveryfees = 35;
-  const total = Number(subtotal )+ Number(deliveryfees)
+  const total = Number(subtotal) + Number(deliveryfees);
 
   // Now you have access to the subtotal value here
   console.log("Subtotal:", subtotal);
@@ -42,6 +38,11 @@ export default function Checkout() {
     console.log("Selected Payment Methods:", selectedMethods);
   };
   const [openModal, setOpenModal] = useState(false);
+
+  const cart = {
+    description: "Checkout cart description test",
+    price: total,
+  };
   return (
     <>
       <CkeckoutNavbar />
@@ -50,9 +51,8 @@ export default function Checkout() {
           {/* lef side */}
           <div className="w-3/4 p-3 mx-10 relative">
             {/* customer address*/}
-            
-             
-              <AddAddressForm></AddAddressForm>
+
+            <AddAddressForm></AddAddressForm>
 
             {/* delivery */}
             <div className="m-2 p-4 bg-white">
@@ -95,7 +95,7 @@ export default function Checkout() {
               <hr />
 
               {/* Paypal checkout */}
-              <div className="paypal-button-container">
+              <div className="paypal-button-container  ml-10">
                 <PaypalCheckoutButton cart={cart} />
               </div>
 
@@ -381,8 +381,7 @@ export default function Checkout() {
                 <br />
                 {/* isatalment */}
                 <hr />
-                <div>
-                </div>
+                <div></div>
                 {/* mobile wallet */}
                 <div className=" mx-3 font-normal text-gray">
                   <div>
