@@ -17,11 +17,17 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-hot-toast';
 import AddAddressForm from "../checkout/address";
-
+import { useOrderDetails } from "../checkout/orderConfirmation";
+import { selectOrderDetails } from "../../store/slices/orderSlice";
 
 export default function MyAccount() {
+  // const orderDetails = useSelector((state) => state.order.orderDetails);
+  const orderDetails = useSelector(selectOrderDetails);
+
+  console.log(orderDetails)
 
   // const { id } = useParams();
+
 
   const [content, setContent] = useState("My Jumia Account");
 
@@ -243,7 +249,7 @@ export default function MyAccount() {
             {content === "Orders" && (
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">Orders</h1>
-
+              {/* <h2>{orderDetails.total}</h2> */}
                 <div className="flex border-b">
                   <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">OPEN ORDERS (0)</button>
                   <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">CLOSED ORDERS</button>

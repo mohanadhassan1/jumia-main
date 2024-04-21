@@ -5,6 +5,7 @@ import authSliceReducer from "./slices/authSlice";
 import idCategoryReducer from "./slices/idCategory";
 import idCategoryPageReducer from "./slices/productsCategory";
 import customerReducer from "./slices/customer";
+import orderSlice from "./slices/orderSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     idCategory:idCategoryReducer,
     paginationProduct:idCategoryPageReducer,
     customer:customerReducer,
+    order:orderSlice
   },
 });
 

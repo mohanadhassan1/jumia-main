@@ -8,6 +8,13 @@ import PaypalCheckoutButton from "../PaypalCheckoutButton";
 import { useLocation } from "react-router-dom";
 import AddAddressForm from "./address";
 import DeliveryEstimate from "./delivery";
+import { decodeToken } from "react-jwt";
+import instance from '../../axois/instance';
+import { useDispatch } from 'react-redux';
+import { setOrderDetails } from '../../store/slices/orderSlice';
+
+
+
 
 
 // import Payment from "../PaypalCheckoutButton";
@@ -18,15 +25,22 @@ export default function Checkout() {
   const deliveryfees = 35;
   const total = Number(subtotal) + Number(deliveryfees);
 
+ const token = localStorage.getItem("token");
+    const myDecodedToken = decodeToken(token);
+    const customer_id = myDecodedToken.id;
+    const dispatch = useDispatch();
+
+    
   // Now you have access to the subtotal value here
   console.log("Subtotal:", subtotal);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false); // State to track form submission
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
+
+  
 
   const [selectedMethods, setSelectedMethods] = useState({
     cashOnDelivery: false,
-    payByCard: false,
-    installments: false,
-    jumiaPayBalance: false,
-    mobileMoney: false,
+  paypal:false,
   });
 
   const handleRadioChange = (event) => {
@@ -36,7 +50,16 @@ export default function Checkout() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Selected Payment Methods:", selectedMethods);
+  // Check if any payment method is selected
+  const isPaymentMethodSelected = Object.values(selectedMethods).some(method => method);
+  if (!isPaymentMethodSelected) {
+    alert("Please select a payment method.");
+    return;
+  }
+  console.log("Selected Payment Methods:", selectedMethods);
+  if(isPaymentMethodSelected){
+    setIsFormSubmitted(true); // Set the form submission state to true
+  }
   };
   const [openModal, setOpenModal] = useState(false);
 
@@ -44,6 +67,57 @@ export default function Checkout() {
     description: "Checkout cart description test",
     price: total,
   };
+  const handleConfirmOrder = async () => {
+    // Check if any payment method is selected
+    const isPaymentMethodSelected = Object.values(selectedMethods).some(method => method);
+    if (!isPaymentMethodSelected) {
+      alert("Please select a payment method.");
+      return;
+    }
+    
+    console.log("Selected Payment Method:", selectedMethods);
+    
+    try {
+      // Retrieve cart items
+      const response = await instance.get(`/cart/${customer_id}`);
+      const products = response.data.cartItems;
+  
+      // Array to store details of products with names and prices
+      const productsWithDetails = [];
+  
+      // Iterate over each product
+      for (const product of products) {
+        // Fetch details of the product (e.g., name and price)
+        const productDetailsResponse = await instance.get(`/product/${product.product_id}`);
+        const productDetails = productDetailsResponse.data;
+  
+        // Construct new object with name, price, and quantity
+        const productWithDetail = {
+          name: productDetails.name,
+          price: productDetails.price,
+          image:productDetails.images[0],
+          quantity: product.quantity
+        };
+  
+        // Push the new object to the array
+        productsWithDetails.push(productWithDetail);
+      }
+     
+      const orderDetails = {products: productsWithDetails,
+        total: total,};
+    dispatch(setOrderDetails(orderDetails));
+      // Log the array of products with details
+      console.log("Products with Details:", productsWithDetails);
+
+  await instance.patch(`/cart/clear/${customer_id}`)
+  console.log("cleared")
+      // Proceed with further logic for confirming the order
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+      // Handle error accordingly
+    }
+  };
+  
   return (
     <>
       <CkeckoutNavbar />
@@ -94,13 +168,49 @@ export default function Checkout() {
               <hr />
 
               {/* Paypal checkout */}
-              <div className="paypal-button-container  ml-10">
-                <PaypalCheckoutButton cart={cart} />
-              </div>
+             
 
               <form onSubmit={handleSubmit}>
                 {/* pay on cash delivery */}
                 <div className=" mx-3 font-normal text-gray">
+                  {/* #########3paypal */}
+                  <div>
+                    <h2 className="my-5">Payment on paypal</h2>
+                  </div>
+                  <label className=" flex items-center mr-2">
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="paypal"
+                      checked={selectedMethods === "paypal"}
+                      onChange={handleRadioChange}
+                      style={{
+                        border: "0.2rem solid #fff",
+                        ...(selectedMethods === "paypal"
+                          ? {
+                              outline: "3px solid orange",
+                              accentColor: "orange",
+                            }
+                          : { outline: "3px solid #aaa" }),
+                      }}
+                      className="mx-3 appearance-none rounded-full border-2 border-gray-300 w-4 h-4 checked:bg-orange-500 checked:border-orange-500 font-bold"
+                    />
+                    <span>paypalmethod</span>
+                  </label>
+                  <div className="flex justify-between">
+                    <p className="font-light mx-8 text-sm p-2 details">
+                     buy by paypal 
+                    </p>
+                    
+                  </div>
+                  {selectedMethods === "paypal" && (
+                     <div className="paypal-button-container  ml-10">
+                     <PaypalCheckoutButton cart={cart} />
+                   </div>
+                   
+                      )}
+
+                  {/* paypal end*/}
                   <div>
                     <h2 className="my-5">Payment on delivery</h2>
                   </div>
@@ -261,7 +371,9 @@ export default function Checkout() {
             </div>
             <hr></hr>
             <button
-              className="button bg-gray-400 w-full text-white my-2 font-bold py-4 px-6 rounded focus:outline-none focus:shadow-outline mx-auto"
+            onClick={handleConfirmOrder}
+            disabled={!isFormSubmitted}
+              className="button bg-orange-400 w-full text-white my-2 font-bold py-4 px-6 rounded focus:outline-none focus:shadow-outline mx-auto"
               type="button"
             >
               CONFIRM ORDER{" "}
