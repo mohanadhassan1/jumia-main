@@ -42,13 +42,15 @@ export default function ProductDetails() {
       setCustomers(customerData);
 
       // Calculate average rating
-      const totalRating = res.data.data.reduce((acc, curr) => acc + curr.rating, 0);
+      const totalRating = res.data.data.reduce(
+        (acc, curr) => acc + curr.rating,
+        0
+      );
       const averageRating = totalRating / res.data.data.length;
       setProduct((prevProduct) => ({
         ...prevProduct,
         rating: averageRating.toFixed(1),
       }));
-
     } catch (err) {
       setError(err.message);
     } finally {
@@ -74,7 +76,6 @@ export default function ProductDetails() {
     getData();
   }, [id]);
 
-
   const handleThumbnailClick = (image) => {
     setMainImage(image);
   };
@@ -84,7 +85,7 @@ export default function ProductDetails() {
   };
 
   const handleAddToCart = () => {
-    console.log(isLoggedIn)
+    console.log(isLoggedIn);
     dispatch(addItemToCart({ ...product, isLoggedIn }));
     toast.success(`Product added successfully`);
   };
@@ -208,8 +209,9 @@ export default function ProductDetails() {
                     <button
                       key={size}
                       onClick={() => handleSizeSelect(size)}
-                      className={`mr-2 px-4 py-2 border border-gray-300 rounded ${selectedSize === size ? "bg-gray-200" : "bg-white"
-                        }`}
+                      className={`mr-2 px-4 py-2 border border-gray-300 rounded ${
+                        selectedSize === size ? "bg-gray-200" : "bg-white"
+                      }`}
                     >
                       {size}
                     </button>
@@ -222,18 +224,17 @@ export default function ProductDetails() {
               >
                 ADD TO CART
               </button>
-              <p className="text-gray-500 mt-2">Rating: {product.rating} ({reviews.length}) </p>
-              
+              <p className="text-gray-500 mt-2">
+                Rating: {product.rating} ({reviews.length}){" "}
+              </p>
+
               <p className="text-gray-500 mt-2 flex items-center">
-                Rating: 
+                Rating:
                 {[...Array(5)].map((_, index) => {
                   const starValue = index + 1;
                   if (starValue <= product.rating) {
                     return (
-                      <IoIosStar
-                        key={index}
-                        style={{ color: "orange" }}
-                      />
+                      <IoIosStar key={index} style={{ color: "orange" }} />
                     );
                   } else if (starValue - 0.5 <= product.rating) {
                     return (
@@ -242,18 +243,11 @@ export default function ProductDetails() {
                       </div>
                     );
                   } else {
-                    return (
-                      <IoIosStar
-                        key={index}
-                        style={{ color: "gray" }}
-                      />
-                    );
+                    return <IoIosStar key={index} style={{ color: "gray" }} />;
                   }
                 })}
                 ({reviews.length})
               </p>
-
-
             </div>
           </div>
         </div>
@@ -276,7 +270,9 @@ export default function ProductDetails() {
                 <div className="flex justify justify-between">
                   <div className="flex gap-2">
                     <div className="flex justify-center items-center w-7 h-7 text-center rounded-full bg-orange-500">
-                      {customer && customer.email ? customer.email[0] : ""}
+                      {customer && customer.first_name
+                        ? customer.first_name[0]
+                        : ""}
                     </div>
                     {/* <span>{customer && customer.email}</span> */}
                     <span>{customer && customer.first_name}</span>
@@ -285,10 +281,15 @@ export default function ProductDetails() {
                     {Array.from({ length: 5 }, (_, index) => {
                       if (index < Math.floor(review.rating)) {
                         return <IoIosStar key={index} />;
-                      } else if (index === Math.floor(review.rating) && review.rating % 1 !== 0) {
+                      } else if (
+                        index === Math.floor(review.rating) &&
+                        review.rating % 1 !== 0
+                      ) {
                         return <IoIosStarHalf key={index} />;
                       } else {
-                        return <IoIosStar key={index} style={{ opacity: 0.3 }} />;
+                        return (
+                          <IoIosStar key={index} style={{ opacity: 0.3 }} />
+                        );
                       }
                     })}
                   </div>
@@ -327,7 +328,10 @@ export default function ProductDetails() {
 
             <div className="grid gap-2 mt-5">
               <label className="text-sm">Rating</label>
-              <div className="flex p-1 gap-1 text-orange-300" style={{ cursor: "pointer" }}>
+              <div
+                className="flex p-1 gap-1 text-orange-300"
+                style={{ cursor: "pointer" }}
+              >
                 {[...Array(5)].map((_, index) => {
                   const starValue = index + 1;
                   return (
