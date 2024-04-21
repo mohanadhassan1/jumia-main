@@ -50,27 +50,10 @@ export default function Checkout() {
           {/* lef side */}
           <div className="w-3/4 p-3 mx-10 relative">
             {/* customer address*/}
-            <div className="mx-2 p-4 bg-white">
-              <div className="flex justify-between ">
-                <article className="flex items-center pb-2">
-                  <img
-                    className="w-6 h-6 mr-2"
-                    src="https://icons.veryicon.com/png/o/miscellaneous/logo-design-of-lingzhuyun/icon-correct-24.png"
-                  ></img>
-                  <h2>1.CUSTOMER ADDRESS</h2>
-                </article>
-                <a className="flex items-center">
-                  change <IoIosArrowForward />
-                </a>
-              </div>
-              <hr></hr>
-              {/* <div className="p-2">
-                <h5>Eman Hamed</h5>
-                <p>qena | Cairo - Al Rehab 1 | +20 1065062126</p>
-              </div> */}
+            
+             
               <AddAddressForm></AddAddressForm>
 
-            </div>
             {/* delivery */}
             <div className="m-2 p-4 bg-white">
               <div className="flex justify-between ">
@@ -399,7 +382,6 @@ export default function Checkout() {
                 {/* isatalment */}
                 <hr />
                 <div>
-                  <Installment />
                 </div>
                 {/* mobile wallet */}
                 <div className=" mx-3 font-normal text-gray">

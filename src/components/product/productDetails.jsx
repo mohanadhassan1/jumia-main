@@ -44,7 +44,7 @@ export default function ProductDetails() {
     } finally {
       setLoading(false);
     }
-  }
+   }
   useEffect(() => {
     async function getData() {
       try {
