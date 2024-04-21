@@ -56,7 +56,7 @@ export default function MyAccount() {
       dispatch(customerAction(customerId));
     }
   }, [dispatch]);
-  
+
   return (
     <>
       <div className="md:flex container mx-auto mt-3 mb-3">
@@ -200,7 +200,8 @@ export default function MyAccount() {
 
                     <div className="p-3">
                       <h3>Your Default Shipping Address</h3>
-                      <p>Address: {customer.address_of_Id}</p>
+                      {/* <p>Address: {customer.address_of_Id}</p> */}
+                      <AddAddressForm></AddAddressForm>
                     </div>
 
                   </div>
@@ -345,7 +346,7 @@ export default function MyAccount() {
             {content === "Address Book" && (
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">Address Book</h1>
-                  <AddAddressForm></AddAddressForm>
+                <AddAddressForm></AddAddressForm>
               </div>
             )}
 

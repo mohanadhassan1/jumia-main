@@ -14,6 +14,7 @@ import HelpMain from "./components/Help";
 import Checkout from "./components/checkout/checkout";
 import Category from "./components/ catrgory page/index";
 import Payment from "./components/PaypalCheckoutButton";
+import NotFoundPage from './components/NotFound/index';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 const routes = createBrowserRouter([
@@ -35,6 +36,7 @@ const routes = createBrowserRouter([
   },
   { path: "/checkout", element: <Checkout /> },
   { path: "/login", element: <Login /> },
+  { path: "*", element: <NotFoundPage /> },
 ]);
 
 const initialOptions = {
