@@ -9,6 +9,9 @@ import { FaRegHeart } from "react-icons/fa";
 import { FiInbox } from "react-icons/fi";
 import { FaClockRotateLeft } from "react-icons/fa6";
 import { HiOutlineTrash } from "react-icons/hi2";
+import { FaLinkedin } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+
 import { useParams } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -137,9 +140,9 @@ export default function MyAccount() {
             </button>
           </div>
 
-          <div onClick={() => handleButtonClick("Newsletter Preferences")} className="hover:bg-gray-200 hover:font-medium h-10 my-2 overflow-hidden">
+          <div onClick={() => handleButtonClick("Founders Team")} className="hover:bg-gray-200 hover:font-medium h-10 my-2 overflow-hidden">
             <button className="flex items-center w-full h-full focus:bg-gray-300 focus:font-medium pl-6">
-              Newsletter Preferences
+              Founders Team
             </button>
           </div>
 
@@ -356,10 +359,69 @@ export default function MyAccount() {
               </div>
             )}
 
-            {content === "Newsletter Preferences" && (
+            {content === "Founders Team" && (
               <div>
-                <h1 className="font-medium text-xl border-b-2 pb-3">Newsletter Preferences</h1>
+                <h1 className="font-medium text-xl border-b-2 pb-3 mb-3">Founders Team</h1>
+                
+                <h1 className="font-medium text-xl pb-1">Mentor</h1>
+                <div className="flex support-team justify-between">
+                  
+                  <div className="flex flex-col items-center border rounded-lg shadow-lg p-3">
+                    <img src="/eslam_shaheer.jfif" width={200} height={200} className="rounded-full" alt="Eslam Shaheer" />
+                    <h1 className="font-bold text-2xl mt-4">Eslam Shaheer</h1>
+                    <p>Senior Software Engineer</p>
+                    <div className="social-links flex mt-2">
+                      <a href="https://github.com/Eslam-Shaheer" target="_blank" rel="noopener noreferrer" className="m-1 hover:text-orange-700"><FaGithub /></a>
+                      <a href="https://www.linkedin.com/in/eslam-shaheer-33329619b/" target="_blank" rel="noopener noreferrer" className="m-1 hover:text-orange-700"><FaLinkedin /></a>
+                    </div>
+                  </div>
+                  
+                </div>
 
+                <h1 className="font-medium text-xl mt-5 pb-1">Developers</h1>
+                <div className="flex support-team justify-between">
+
+                  <div className="flex flex-col items-center border rounded-lg shadow-lg p-3">
+                  <img src="/mahmoud_elzaw.jfif" width={200} height={200} className="rounded-full" alt="Mahmoud Elzaw" />
+                    <h1 className="font-bold text-2xl mt-4">Mahmoud Elzaw</h1>
+                    <p>MEARN developer</p>
+                    <div className="social-links flex mt-2">
+                      <a href="https://github.com/elzaw" target="_blank" rel="noopener noreferrer" className="m-1 hover:text-orange-700"><FaGithub /></a>
+                      <a href="https://www.linkedin.com/in/mahmoud-elzaw/" target="_blank" rel="noopener noreferrer" className="m-1 hover:text-orange-700"><FaLinkedin /></a>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center border rounded-lg shadow-lg p-3">
+                    <img src="/mohanad_hassan.png" width={200} height={200} className="rounded-full" alt="Mohanad Hassan" />
+                    <h1 className="font-bold text-2xl mt-4">Mohanad Hassan</h1>
+                    <p>MEARN developer</p>
+                    <div className="social-links flex mt-2">
+                      <a href="https://github.com/mohanadhassan1" target="_blank" rel="noopener noreferrer" className="m-1 hover:text-orange-700"><FaGithub /></a>
+                      <a href="https://www.linkedin.com/in/mohanadhassan1/" target="_blank" rel="noopener noreferrer" className="m-1 hover:text-orange-700"><FaLinkedin /></a>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center border rounded-lg shadow-lg p-3">
+                  <img src="/eman_hamed.jfif" width={200} height={200} className="rounded-full" alt="Eman Hamed" />
+                    <h1 className="font-bold text-2xl mt-4">Eman Hamed</h1>
+                    <p>MEARN developer</p>
+                    <div className="social-links flex mt-2">
+                      <a href="https://github.com/EmanHamed20" target="_blank" rel="noopener noreferrer" className="m-1 hover:text-orange-700"><FaGithub /></a>
+                      <a href="https://www.linkedin.com/in/emanhamed/" target="_blank" rel="noopener noreferrer" className="m-1 hover:text-orange-700"><FaLinkedin /></a>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center border rounded-lg shadow-lg p-3">
+                  <img src="/usab_emad.jfif" width={200} height={200} className="rounded-full" alt="Usab Emad" />
+                    <h1 className="font-bold text-2xl mt-4">Usab Emad</h1>
+                    <p>MEARN developer</p>
+                    <div className="social-links flex mt-2">
+                      <a href="https://github.com/yousabemad" target="_blank" rel="noopener noreferrer" className="m-1 hover:text-orange-700"><FaGithub /></a>
+                      <a href="https://www.linkedin.com/in/yousab-emad-61235b15a/" target="_blank" rel="noopener noreferrer" className="m-1 hover:text-orange-700"><FaLinkedin /></a>
+                    </div>
+                  </div>
+
+                </div>
               </div>
             )}
 

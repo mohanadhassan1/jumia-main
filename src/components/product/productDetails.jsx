@@ -9,6 +9,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { TiSocialTwitter, TiSocialLinkedin } from "react-icons/ti";
 import { IoIosStar, IoIosStarHalf } from "react-icons/io";
 import { isExpired, decodeToken } from "react-jwt";
+import AddAddressForm from "../checkout/address";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -56,7 +57,7 @@ export default function ProductDetails() {
     } finally {
       setLoading(false);
     }
-   }
+  }
   useEffect(() => {
     async function getData() {
       try {
@@ -209,9 +210,8 @@ export default function ProductDetails() {
                     <button
                       key={size}
                       onClick={() => handleSizeSelect(size)}
-                      className={`mr-2 px-4 py-2 border border-gray-300 rounded ${
-                        selectedSize === size ? "bg-gray-200" : "bg-white"
-                      }`}
+                      className={`mr-2 px-4 py-2 border border-gray-300 rounded ${selectedSize === size ? "bg-gray-200" : "bg-white"
+                        }`}
                     >
                       {size}
                     </button>
@@ -255,6 +255,7 @@ export default function ProductDetails() {
         <div className="bg-white md:w-1/4 md:mt-0 sm:mt-3 p-3">
           <h4>DELIVERY & RETURNS</h4>
           <hr />
+          <AddAddressForm></AddAddressForm>
         </div>
       </div>
 
