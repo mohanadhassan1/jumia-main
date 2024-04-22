@@ -39,6 +39,8 @@ export default function MyAccount() {
   const [loading, setLoading] = useState(true);
 
   const [content, setContent] = useState("My Jumia Account");
+  const [showOpenOrders, setShowOpenOrders] = useState(false);
+  const [showClosedOrders, setShowClosedOrders] = useState(false);
 
   const customer = useSelector((state) => state.customer.customer);
 
@@ -253,7 +255,6 @@ export default function MyAccount() {
         <div className="gap-4 p-4  md:ml-2 sm:mr-2 lg:w-3/4 md:w-2/4 rounded bg-white">
           <div className="h-full">
             {content === "My Jumia Account" && (
-              // {content === "My Jumia Account" && customer && (
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">
                   Account Overview
@@ -314,14 +315,23 @@ export default function MyAccount() {
             {content === "Orders" && (
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">Orders</h1>
+                {/* <h2>{orderDetails.total}</h2> */}
                 <div className="flex border-b">
-                  <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">
-                    OPEN ORDERS (0)
-                  </button>
-       <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">
-                    CLOSED ORDERS
-                  </button>
+                  <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700" onClick={() => { setShowOpenOrders(true); setShowClosedOrders(false); }}>OPEN ORDERS</button>
+                  <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700" onClick={() => { setShowClosedOrders(true); setShowOpenOrders(false); }}>CLOSED ORDERS</button>
+
+
                 </div>
+                {showOpenOrders && (
+                  <p>Paragraph for Open Orders goes here</p>
+                )}
+                {showClosedOrders && (
+                  <div>
+                    <p>Paragraph for Closed Orders goes here</p>
+                    <p>Paragraph for Closed Orders goes here</p>
+                  </div>
+                  
+                )}
               </div>
             )}
 
@@ -443,6 +453,7 @@ export default function MyAccount() {
 
             {content === "Founders Team" && (
               <div>
+
                 <h1 className="font-medium text-xl border-b-2 pb-3 mb-3">
                   Founders Team
                 </h1>
@@ -478,11 +489,13 @@ export default function MyAccount() {
                       </a>
                     </div>
                   </div>
+
                 </div>
 
                 <h1 className="font-medium text-xl mt-5 pb-1">Developers</h1>
                 <div className="flex support-team justify-between">
                   <div className="flex flex-col items-center border rounded-lg shadow-lg p-3">
+
                     <img
                       src="/mahmoud_elzaw.jfif"
                       width={200}
@@ -543,6 +556,7 @@ export default function MyAccount() {
                   </div>
 
                   <div className="flex flex-col items-center border rounded-lg shadow-lg p-3">
+
                     <img
                       src="/eman_hamed.jfif"
                       width={200}
@@ -573,6 +587,7 @@ export default function MyAccount() {
                   </div>
 
                   <div className="flex flex-col items-center border rounded-lg shadow-lg p-3">
+
                     <img
                       src="/usab_emad.jfif"
                       width={200}
