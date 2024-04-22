@@ -9,13 +9,9 @@ import { useLocation } from "react-router-dom";
 import AddAddressForm from "./address";
 import DeliveryEstimate from "./delivery";
 import { decodeToken } from "react-jwt";
-import instance from '../../axois/instance';
-import { useDispatch } from 'react-redux';
-import { setOrderDetails } from '../../store/slices/orderSlice';
-
-
-
-
+import instance from "../../axois/instance";
+import { useDispatch } from "react-redux";
+import { setOrderDetails } from "../../store/slices/orderSlice";
 
 // import Payment from "../PaypalCheckoutButton";
 
@@ -25,22 +21,19 @@ export default function Checkout() {
   const deliveryfees = 35;
   const total = Number(subtotal) + Number(deliveryfees);
 
- const token = localStorage.getItem("token");
-    const myDecodedToken = decodeToken(token);
-    const customer_id = myDecodedToken.id;
-    const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
+  const myDecodedToken = decodeToken(token);
+  const customer_id = myDecodedToken.id;
+  const dispatch = useDispatch();
 
-    
   // Now you have access to the subtotal value here
   console.log("Subtotal:", subtotal);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false); // State to track form submission
   const [orderConfirmed, setOrderConfirmed] = useState(false);
 
-  
-
   const [selectedMethods, setSelectedMethods] = useState({
     cashOnDelivery: false,
-  paypal:false,
+    paypal: false,
   });
 
   const handleRadioChange = (event) => {
@@ -50,20 +43,21 @@ export default function Checkout() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  // Check if any payment method is selected
-  const isPaymentMethodSelected = Object.values(selectedMethods).some(method => method);
-  if (!isPaymentMethodSelected) {
-    alert("Please select a payment method.");
-    return;
-  }
-  console.log("Selected Payment Methods:", selectedMethods);
-  if(isPaymentMethodSelected){
-    setIsFormSubmitted(true); // Set the form submission state to true
-  }
+    // Check if any payment method is selected
+    const isPaymentMethodSelected = Object.values(selectedMethods).some(
+      (method) => method
+    );
+    if (!isPaymentMethodSelected) {
+      alert("Please select a payment method.");
+      return;
+    }
+    console.log("Selected Payment Methods:", selectedMethods);
+    if (isPaymentMethodSelected) {
+      setIsFormSubmitted(true); // Set the form submission state to true
+    }
   };
   const [openModal, setOpenModal] = useState(false);
   const [orderConfirmedModalOpen, setOrderConfirmedModalOpen] = useState(false);
-
 
   const cart = {
     description: "Checkout cart description test",
@@ -71,57 +65,63 @@ export default function Checkout() {
   };
   const handleConfirmOrder = async () => {
     // Check if any payment method is selected
-    const isPaymentMethodSelected = Object.values(selectedMethods).some(method => method);
+    const isPaymentMethodSelected = Object.values(selectedMethods).some(
+      (method) => method
+    );
     if (!isPaymentMethodSelected) {
       alert("Please select a payment method.");
       return;
     }
-    
+
     console.log("Selected Payment Method:", selectedMethods);
-    
+
     try {
       // Retrieve cart items
       const response = await instance.get(`/cart/${customer_id}`);
       const products = response.data.cartItems;
-  
+
       // Array to store details of products with names and prices
       const productsWithDetails = [];
-  
+
       // Iterate over each product
       for (const product of products) {
         // Fetch details of the product (e.g., name and price)
-        const productDetailsResponse = await instance.get(`/product/${product.product_id}`);
+        const productDetailsResponse = await instance.get(
+          `/product/${product.product_id}`
+        );
         const productDetails = productDetailsResponse.data;
-  
+
+        console.log(productDetails);
         // Construct new object with name, price, and quantity
         const productWithDetail = {
-          name: productDetails.name,
+          product_id: productDetails._id,
           price: productDetails.price,
-          image:productDetails.images[0],
-          quantity: product.quantity
+          image: productDetails.images[0],
+          quantity: product.quantity,
         };
-  
+
         // Push the new object to the array
         productsWithDetails.push(productWithDetail);
       }
-     
-      const orderDetails = {products: productsWithDetails,
-        total: total,};
-    dispatch(setOrderDetails(orderDetails));
-      // Log the array of products with details
-      console.log("Products with Details:", productsWithDetails);
 
-  await instance.patch(`/cart/clear/${customer_id}`)
-  console.log("cleared")
-          setOrderConfirmedModalOpen(true);
+      console.log(productsWithDetails);
+      // Create the order
+      await instance.post("/order", {
+        customer_id: customer_id,
+        total_amount: total,
+        products: productsWithDetails,
+      });
 
-      // Proceed with further logic for confirming the order
+      // Order created successfully, you can perform further actions if needed
+      console.log("Order created successfully");
     } catch (error) {
-      console.error("Error fetching cart items:", error);
-      // Handle error accordingly
+      // Handle error
+      console.error("Error while creating order:", error);
+      // Optionally, you can display an error message to the user
+      alert("Error occurred while creating order. Please try again later.");
     }
   };
-  
+
   return (
     <>
       <CkeckoutNavbar />
@@ -150,7 +150,6 @@ export default function Checkout() {
               </div>
               <hr></hr>
               <div className="p-2 flex items-center justify-between">
-               
                 <DeliveryEstimate></DeliveryEstimate>
                 <img
                   className="w-6 m-3"
@@ -172,7 +171,6 @@ export default function Checkout() {
               <hr />
 
               {/* Paypal checkout */}
-             
 
               <form onSubmit={handleSubmit}>
                 {/* pay on cash delivery */}
@@ -203,16 +201,14 @@ export default function Checkout() {
                   </label>
                   <div className="flex justify-between">
                     <p className="font-light mx-8 text-sm p-2 details">
-                     buy by paypal 
+                      buy by paypal
                     </p>
-                    
                   </div>
                   {selectedMethods === "paypal" && (
-                     <div className="paypal-button-container  ml-10">
-                     <PaypalCheckoutButton cart={cart} />
-                   </div>
-                   
-                      )}
+                    <div className="paypal-button-container  ml-10">
+                      <PaypalCheckoutButton cart={cart} />
+                    </div>
+                  )}
 
                   {/* paypal end*/}
                   <div>
@@ -340,7 +336,7 @@ export default function Checkout() {
                 </div>
                 <br />
                 <hr></hr>
-                
+
                 <br />
 
                 <footer className="flex justify-end">
@@ -375,39 +371,46 @@ export default function Checkout() {
             </div>
             <hr></hr>
             <button
-            onClick={handleConfirmOrder}
-            disabled={!isFormSubmitted}
+              onClick={handleConfirmOrder}
+              disabled={!isFormSubmitted}
               className="button bg-orange-400 w-full text-white my-2 font-bold py-4 px-6 rounded focus:outline-none focus:shadow-outline mx-auto"
               type="button"
             >
               CONFIRM ORDER{" "}
             </button>{" "}
-           <Modal show={orderConfirmedModalOpen} onClose={() => setOrderConfirmedModalOpen(false)}>
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 text-center">
-        <div className="bg-white w-full max-w-lg p-4 rounded-lg shadow-lg">
-            {/* <h2 className="text-lg font-bold mb-4">Order Confirmed</h2> */}
-           
-                  <p class="w-[230px] text-center font-normal text-lg text-gray-600 mx-auto">Thank you for using Jumia <span
-        class="text-orange-400 animate-bounce flex items-center justify-center text-2xl">
-        JUMIA 
-        <img
-        class="h-5 w-5 inline mx-1"
-        src="https://companieslogo.com/img/orig/JMIA-356fb835.png?t=1659936321" alt=""/>
-     </span>  </p> 
-                 <p>Your order has been confirmed successfully! .</p>
-        
-
-            <button
-                className="button bg-orange-600 text-white font-bold py-2 px-4 rounded mt-4"
-                onClick={() => {setOrderConfirmedModalOpen(false)
-                  window.location.href = `/home`;
-                }}
+            <Modal
+              show={orderConfirmedModalOpen}
+              onClose={() => setOrderConfirmedModalOpen(false)}
             >
-                continue Shopping
-            </button>
-        </div>
-    </div>
-</Modal>
+              <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 text-center">
+                <div className="bg-white w-full max-w-lg p-4 rounded-lg shadow-lg">
+                  {/* <h2 className="text-lg font-bold mb-4">Order Confirmed</h2> */}
+
+                  <p class="w-[230px] text-center font-normal text-lg text-gray-600 mx-auto">
+                    Thank you for using Jumia{" "}
+                    <span class="text-orange-400 animate-bounce flex items-center justify-center text-2xl">
+                      JUMIA
+                      <img
+                        class="h-5 w-5 inline mx-1"
+                        src="https://companieslogo.com/img/orig/JMIA-356fb835.png?t=1659936321"
+                        alt=""
+                      />
+                    </span>{" "}
+                  </p>
+                  <p>Your order has been confirmed successfully! .</p>
+
+                  <button
+                    className="button bg-orange-600 text-white font-bold py-2 px-4 rounded mt-4"
+                    onClick={() => {
+                      setOrderConfirmedModalOpen(false);
+                      window.location.href = `/home`;
+                    }}
+                  >
+                    continue Shopping
+                  </button>
+                </div>
+              </div>
+            </Modal>
           </div>
         </div>
       </div>
