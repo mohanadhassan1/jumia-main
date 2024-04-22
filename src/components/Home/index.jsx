@@ -98,8 +98,8 @@ const Home = () => {
         {/* Products */}
         {loading ? (
           // Display loader while products are being fetched
-          <div class="flex justify-center items-center my-20">
-            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-orange-500"></div>
+          <div className="flex justify-center items-center my-20">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-orange-500"></div>
           </div>
         ) : (
           // Display Carousel once products are fetched
