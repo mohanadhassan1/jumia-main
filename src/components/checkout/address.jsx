@@ -237,11 +237,11 @@ const AddAddressForm = () => {
             Add Address
         </button>
     )}
-    {!isUpdating && (
+    {/* {!isUpdating && (
         <button onClick={handleAddAddress} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-4">
             Add New Address
         </button>
-    )}
+    )} */}
 </div>
 
                     </form>
@@ -250,10 +250,10 @@ const AddAddressForm = () => {
                     <h3>Please select an address:</h3>
                     <div className="mx-auto py-4">
                         <div>
-                            <h3>{myDecodedToken.first_name}</h3>
+                            <h3 className='text-black'>{myDecodedToken.first_name}</h3>
                             {addresses.map(address => (
                                 <div key={address._id} style={{ marginBottom: "10px" }}>
-                                    <label className='flex justify-between'>
+                                    <label className='flex justify-between my-2 py-2' style={{borderBottom:"2px solid #aaa"}}>
                                         <div>
                                         <input
                                             type="radio"
@@ -263,12 +263,14 @@ const AddAddressForm = () => {
                                             className={`mx-3 appearance-none rounded-full border-2 border-gray-300 w-4 h-4 font-bold`}
                                         />
                                         
-                                        <span style={{ marginLeft: "5px" }}>{`${address.region}|${address.city}|${address.street} |${address.building}`}</span>
+                                        <span 
+                                         style={{ marginLeft: "5px" }}>{`${address.region}|${address.city}|${address.street} |${address.building}`}</span>
+                                        
                                         </div>
                                         <div  className='text-orange-600 mx-5 flex justify-between '>
-                                            <button onClick={() => handleUpdatetrue(address)} className='mx-2'>
+                                            {/* <button onClick={() => handleUpdatetrue(address)} className='mx-2'>
                                                 <IoMdCreate />
-                                            </button>
+                                            </button> */}
                                             <button onClick={() => handleDeleteAddress(address)}>
                                                 <IoMdTrash />
                                             </button>
@@ -277,13 +279,13 @@ const AddAddressForm = () => {
                                 </div>
                             ))}
                         </div>
-                        {confirmEnabled && (
+                        {/* {confirmEnabled && (
                             <button onClick={handleConfirm} className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">
                                 Confirm
                             </button>
-                        )}
+                        )} */}
                     </div>
-                    <button onClick={handleAddAddress}>Add New Address</button>
+                    <button onClick={handleAddAddress} className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-4">Add New Address</button>
                 </div>
             )}
         </div>
