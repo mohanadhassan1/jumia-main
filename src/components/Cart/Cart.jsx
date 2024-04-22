@@ -14,7 +14,6 @@ import Customers from "./customers";
 
 // In Cart.jsx
 
-import { generateCustomers } from "./customers";
 
 import {
   updateItemQuantity,
@@ -32,7 +31,6 @@ const Cart = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
 
-  const customers = generateCustomers(products);
 
   let token = localStorage.getItem("token");
   let myDecodedToken = decodeToken(token);
