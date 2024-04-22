@@ -33,6 +33,8 @@ export default function MyAccount() {
 
 
   const [content, setContent] = useState("My Jumia Account");
+  const [showOpenOrders, setShowOpenOrders] = useState(false);
+  const [showClosedOrders, setShowClosedOrders] = useState(false);
 
   const customer = useSelector((state) => state.customer.customer)
 
@@ -181,7 +183,6 @@ export default function MyAccount() {
           <div className="h-full">
 
             {content === "My Jumia Account" && (
-              // {content === "My Jumia Account" && customer && (
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">Account Overview</h1>
 
@@ -252,11 +253,22 @@ export default function MyAccount() {
             {content === "Orders" && (
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">Orders</h1>
-              {/* <h2>{orderDetails.total}</h2> */}
+                {/* <h2>{orderDetails.total}</h2> */}
                 <div className="flex border-b">
-                  <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">OPEN ORDERS (0)</button>
-                  <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">CLOSED ORDERS</button>
+                  <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700" onClick={() => { setShowOpenOrders(true); setShowClosedOrders(false); }}>OPEN ORDERS</button>
+                  <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700" onClick={() => { setShowClosedOrders(true); setShowOpenOrders(false); }}>CLOSED ORDERS</button>
+
                 </div>
+                {showOpenOrders && (
+                  <p>Paragraph for Open Orders goes here</p>
+                )}
+                {showClosedOrders && (
+                  <div>
+                    <p>Paragraph for Closed Orders goes here</p>
+                    <p>Paragraph for Closed Orders goes here</p>
+                  </div>
+                  
+                )}
               </div>
             )}
 
@@ -362,10 +374,10 @@ export default function MyAccount() {
             {content === "Founders Team" && (
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3 mb-3">Founders Team</h1>
-                
+
                 <h1 className="font-medium text-xl pb-1">Mentor</h1>
                 <div className="flex support-team justify-between">
-                  
+
                   <div className="flex flex-col items-center border rounded-lg shadow-lg p-3">
                     <img src="/eslam_shaheer.jfif" width={200} height={200} className="rounded-full" alt="Eslam Shaheer" />
                     <h1 className="font-bold text-2xl mt-4">Eslam Shaheer</h1>
@@ -375,14 +387,14 @@ export default function MyAccount() {
                       <a href="https://www.linkedin.com/in/eslam-shaheer-33329619b/" target="_blank" rel="noopener noreferrer" className="m-1 hover:text-orange-700"><FaLinkedin /></a>
                     </div>
                   </div>
-                  
+
                 </div>
 
                 <h1 className="font-medium text-xl mt-5 pb-1">Developers</h1>
                 <div className="flex support-team justify-between">
 
                   <div className="flex flex-col items-center border rounded-lg shadow-lg p-3">
-                  <img src="/mahmoud_elzaw.jfif" width={200} height={200} className="rounded-full" alt="Mahmoud Elzaw" />
+                    <img src="/mahmoud_elzaw.jfif" width={200} height={200} className="rounded-full" alt="Mahmoud Elzaw" />
                     <h1 className="font-bold text-2xl mt-4">Mahmoud Elzaw</h1>
                     <p>MEARN developer</p>
                     <div className="social-links flex mt-2">
@@ -402,7 +414,7 @@ export default function MyAccount() {
                   </div>
 
                   <div className="flex flex-col items-center border rounded-lg shadow-lg p-3">
-                  <img src="/eman_hamed.jfif" width={200} height={200} className="rounded-full" alt="Eman Hamed" />
+                    <img src="/eman_hamed.jfif" width={200} height={200} className="rounded-full" alt="Eman Hamed" />
                     <h1 className="font-bold text-2xl mt-4">Eman Hamed</h1>
                     <p>MEARN developer</p>
                     <div className="social-links flex mt-2">
@@ -412,7 +424,7 @@ export default function MyAccount() {
                   </div>
 
                   <div className="flex flex-col items-center border rounded-lg shadow-lg p-3">
-                  <img src="/usab_emad.jfif" width={200} height={200} className="rounded-full" alt="Usab Emad" />
+                    <img src="/usab_emad.jfif" width={200} height={200} className="rounded-full" alt="Usab Emad" />
                     <h1 className="font-bold text-2xl mt-4">Usab Emad</h1>
                     <p>MEARN developer</p>
                     <div className="social-links flex mt-2">
