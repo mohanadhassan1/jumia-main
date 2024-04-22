@@ -4,44 +4,20 @@ import Carousel from "react-multi-carousel";
 import { useSelector } from "react-redux";
 import { responsive } from "./dataStatic";
 
-export const generateRecently = (products) => {
-  if (products.length === 0) return [];
 
-  const getRandomProducts = (products, count) => {
-    const shuffled = [...products];
-    shuffled.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
-  };
-
-  return getRandomProducts(products, 10);
-};
 
 const Recently = () => {
   const { products } = useSelector((state) => state.products);
-  const [recentlyProducts, setRecentleyProducts] = useState(() => {
-    const storedReccentlyProducts = localStorage.getItem("recentlyProducts");
-    if (storedReccentlyProducts) {
-      return JSON.parse(storedReccentlyProducts);
-    } else {
-      const newRecentlyProducts = generateRecently(products);
-      const currentDate = new Date().toISOString().slice(0, 10);
-      localStorage.setItem("recentlyProducts", JSON.stringify(newRecentlyProducts));
-      localStorage.setItem("lastGeneratedDate", currentDate);
-      return newRecentlyProducts;
-    }
-  });
+  const numberOfProductsToTake = 10;
+
+  // State to store the filtered products
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    const currentDate = new Date().toISOString().slice(0, 10);
-    const lastGeneratedDate = localStorage.getItem("lastGeneratedDate");
-
-    if (lastGeneratedDate !== currentDate) {
-      const newRecentlyProducts = (generateRecently);
-      setRecentleyProducts(newRecentlyProducts);
-      localStorage.setItem("recommendedProducts", JSON.stringify(newRecentlyProducts));
-      localStorage.setItem("lastGeneratedDate", currentDate);
-    }
-  }, [products]);
+    // Skip the first 20 products and take the next numberOfProductsToTake products
+    const finalProducts = products.slice(70, 70 + numberOfProductsToTake);
+    setFilteredProducts(finalProducts);
+  }, [products, numberOfProductsToTake]);
 
   return (
     <>
@@ -52,7 +28,7 @@ const Recently = () => {
         responsive={responsive}
         className="flex gap-4 p-3 mb-3 rounded bg-white"
       >
-        {recentlyProducts.map((product, index) => (
+        {filteredProducts.map((product, index) => (
           <div
             key={index}
             className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg m-x-3"

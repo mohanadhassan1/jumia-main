@@ -3,44 +3,20 @@ import Carousel from "react-multi-carousel";
 import { useSelector } from "react-redux";
 import { responsive } from "./dataStatic";
 
-export const generateMayAlsoLike = (products) => {
-  if (products.length === 0) return [];
 
-  const getRandomProducts = (products, count) => {
-    const shuffled = [...products];
-    shuffled.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
-  };
-
-  return getRandomProducts(products, 10);
-};
 
 const MayAlsoLike = () => {
   const { products } = useSelector((state) => state.products);
-  const [mayAlsoLikeProducts, setMayAlsoLikeProducts] = useState(() => {
-    const storedMayAlsoLikeProducts = localStorage.getItem("mayAlsoLikeProducts");
-    if (storedMayAlsoLikeProducts) {
-      return JSON.parse(storedMayAlsoLikeProducts);
-    } else {
-      const newMayAlsoLikeProducts = generateMayAlsoLike(products);
-      const currentDate = new Date().toISOString().slice(0, 10);
-      localStorage.setItem("mayAlsoLikeProducts", JSON.stringify(newMayAlsoLikeProducts));
-      localStorage.setItem("lastGeneratedDate", currentDate);
-      return newMayAlsoLikeProducts;
-    }
-  });
+  const numberOfProductsToTake = 10;
+
+  // State to store the filtered products
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    const currentDate = new Date().toISOString().slice(0, 10);
-    const lastGeneratedDate = localStorage.getItem("lastGeneratedDate");
-
-    if (lastGeneratedDate !== currentDate) {
-      const newMayAlsoLikeProducts = generateMayAlsoLike(products);
-      setMayAlsoLikeProducts(newMayAlsoLikeProducts);
-      localStorage.setItem("mayAlsoLikeProducts", JSON.stringify(newMayAlsoLikeProducts));
-      localStorage.setItem("lastGeneratedDate", currentDate);
-    }
-  }, [products]);
+    // Skip the first 20 products and take the next numberOfProductsToTake products
+    const finalProducts = products.slice(100, 100 + numberOfProductsToTake);
+    setFilteredProducts(finalProducts);
+  }, [products, numberOfProductsToTake]);
 
   return (
     <>
@@ -51,7 +27,7 @@ const MayAlsoLike = () => {
         responsive={responsive}
         className="flex gap-4 p-3 mb-3 rounded bg-white"
       >
-        {mayAlsoLikeProducts.map((product, index) => (
+        {filteredProducts.map((product, index) => (
           <div
             key={index}
             className="hover:scale-[1.01] h-full w-full rounded overflow-hidden shadow-lg m-x-3"
