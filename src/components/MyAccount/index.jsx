@@ -42,6 +42,9 @@ export default function MyAccount() {
   const [showOpenOrders, setShowOpenOrders] = useState(false);
   const [showClosedOrders, setShowClosedOrders] = useState(false);
 
+  const [openOrders, setOpenOrders] = useState(false);
+  const [closeOrders, setClosedOrders] = useState(false);
+
   const customer = useSelector((state) => state.customer.customer);
 
   const dispatch = useDispatch();
@@ -49,8 +52,9 @@ export default function MyAccount() {
   const navigate = useNavigate();
   const threeDaysInMillis = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
 
-  const openOrders = [];
-  const closedOrders = [];
+  // const openOrders = [];
+  // const closedOrders = [];
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -59,7 +63,6 @@ export default function MyAccount() {
         setOrders(response.data.data);
         console.log(response.data.data);
 
-        // setLoading(false);
         orders.forEach((order) => {
 
           const currentDate = new Date();
@@ -83,6 +86,34 @@ export default function MyAccount() {
 
     fetchOrders();
   }, []);
+
+  useEffect(() => {
+    const determineOrderStatus = () => {
+      const currentOrders = [];
+      const pastOrders = [];
+
+      orders.forEach(order => {
+        const currentDate = new Date();
+        const orderDate = new Date(order.order_date);
+        const differenceInMillis = currentDate - orderDate;
+
+        if (differenceInMillis <= threeDaysInMillis) {
+          currentOrders.push(order);
+        } else {
+          pastOrders.push(order);
+        }
+      });
+
+      return { currentOrders, pastOrders };
+    };
+
+    const { currentOrders, pastOrders } = determineOrderStatus();
+    setOpenOrders(currentOrders);
+    setClosedOrders(pastOrders);
+  }, [orders, threeDaysInMillis]);
+
+
+
 
   const handleButtonClick = (btnContent) => {
     setContent(btnContent);
@@ -319,18 +350,60 @@ export default function MyAccount() {
                 <div className="flex border-b">
                   <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700" onClick={() => { setShowOpenOrders(true); setShowClosedOrders(false); }}>OPEN ORDERS</button>
                   <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700" onClick={() => { setShowClosedOrders(true); setShowOpenOrders(false); }}>CLOSED ORDERS</button>
-
-
                 </div>
+
+
                 {showOpenOrders && (
-                  <p>Paragraph for Open Orders goes here</p>
+
+                  <div>
+                    {openOrders.map(order => (
+                      <div key={order._id} className="mb-4">
+                        {/* <h3>Order ID: {order._id}</h3> */}
+                        <ul>
+                          {order.products.map(product => (
+                            <div key={product._id} className="border border-gray-200 rounded-lg p-4 mb-2">
+                              <li className="flex items-start space-x-4">
+                                <img src={product.product_id.images[0]} className="w-16 h-16 rounded-lg" alt="" />
+                                <div>
+                                  <h4 className="text-lg font-semibold">{product.product_id.name}</h4>
+                                  <p className="text-gray-600">Price: ${product.product_id.price}</p>
+                                  <p className="text-gray-600">Quantity: {product.quantity}</p>
+                                </div>
+                              </li>
+                            </div>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+
+
+
                 )}
+
                 {showClosedOrders && (
                   <div>
-                    <p>Paragraph for Closed Orders goes here</p>
-                    <p>Paragraph for Closed Orders goes here</p>
-                  </div>
-                  
+                  {closeOrders.map(order => (
+                    <div key={order._id} className="mb-4">
+                      {/* <h3>Order ID: {order._id}</h3> */}
+                      <ul>
+                        {order.products.map(product => (
+                          <div key={product._id} className="border border-gray-200 rounded-lg p-4 mb-2">
+                            <li className="flex items-start space-x-4">
+                              <img src={product.product_id.images[0]} className="w-16 h-16 rounded-lg" alt="" />
+                              <div>
+                                <h4 className="text-lg font-semibold">{product.product_id.name}</h4>
+                                <p className="text-gray-600">Price: ${product.product_id.price}</p>
+                                <p className="text-gray-600">Quantity: {product.quantity}</p>
+                              </div>
+                            </li>
+                          </div>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+
                 )}
               </div>
             )}
