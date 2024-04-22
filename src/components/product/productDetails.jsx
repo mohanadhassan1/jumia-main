@@ -255,7 +255,7 @@ export default function ProductDetails() {
         <div className="bg-white md:w-1/4 md:mt-0 sm:mt-3 p-3">
           <h4>DELIVERY & RETURNS</h4>
           <hr />
-          <AddAddressForm></AddAddressForm>
+          {/* <AddAddressForm></AddAddressForm> */}
         </div>
       </div>
 
