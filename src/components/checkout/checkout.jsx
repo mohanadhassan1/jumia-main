@@ -9,13 +9,10 @@ import { useLocation } from "react-router-dom";
 import AddAddressForm from "./address";
 import DeliveryEstimate from "./delivery";
 import { decodeToken } from "react-jwt";
-import instance from '../../axois/instance';
-import { useDispatch } from 'react-redux';
-import { setOrderDetails } from '../../store/slices/orderSlice';
-
-
-
-
+import instance from "../../axois/instance";
+import { useDispatch } from "react-redux";
+import { setOrderDetails } from "../../store/slices/orderSlice";
+import toast from "react-hot-toast";
 
 // import Payment from "../PaypalCheckoutButton";
 
@@ -50,16 +47,20 @@ export default function Checkout() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  // Check if any payment method is selected
-  const isPaymentMethodSelected = Object.values(selectedMethods).some(method => method);
-  if (!isPaymentMethodSelected) {
-    alert("Please select a payment method.");
-    return;
-  }
-  console.log("Selected Payment Methods:", selectedMethods);
-  if(isPaymentMethodSelected){
-    setIsFormSubmitted(true); // Set the form submission state to true
-  }
+    // Check if any payment method is selected
+    const isPaymentMethodSelected = Object.values(selectedMethods).some(
+      (method) => method
+    );
+    if (!isPaymentMethodSelected) {
+      toast.error("Please select a payment method.");
+      return;
+    }
+
+    console.log("Selected Payment Methods:", selectedMethods);
+    if (isPaymentMethodSelected) {
+      setIsFormSubmitted(true);
+      toast.success("payment method selected successfully ."); // Set the form submission state to true
+    }
   };
   const [openModal, setOpenModal] = useState(false);
   const [orderConfirmedModalOpen, setOrderConfirmedModalOpen] = useState(false);
@@ -70,16 +71,18 @@ export default function Checkout() {
     price: total,
   };
   const handleConfirmOrder = async () => {
-    // Check if any payment method is selected
-    const isPaymentMethodSelected = Object.values(selectedMethods).some(method => method);
-    if (!isPaymentMethodSelected) {
-      alert("Please select a payment method.");
-      return;
-    }
-    
-    console.log("Selected Payment Method:", selectedMethods);
-    
     try {
+      // Check if any payment method is selected
+      const isPaymentMethodSelected = Object.values(selectedMethods).some(
+        (method) => method
+      );
+      if (!isPaymentMethodSelected) {
+        alert("Please select a payment method.");
+        return;
+      }
+
+      console.log("Selected Payment Method:", selectedMethods);
+
       // Retrieve cart items
       const response = await instance.get(`/cart/${customer_id}`);
       const products = response.data.cartItems;
@@ -92,9 +95,10 @@ export default function Checkout() {
         // Fetch details of the product (e.g., name and price)
         const productDetailsResponse = await instance.get(`/product/${product.product_id}`);
         const productDetails = productDetailsResponse.data;
-  
+
         // Construct new object with name, price, and quantity
         const productWithDetail = {
+          product_id: productDetails._id,
           name: productDetails.name,
           price: productDetails.price,
           image:productDetails.images[0],
@@ -115,10 +119,19 @@ export default function Checkout() {
   console.log("cleared")
           setOrderConfirmedModalOpen(true);
 
-      // Proceed with further logic for confirming the order
+      // Order created successfully, you can perform further actions if needed
+      console.log("Order created successfully");
+
+      // Clear the cart
+      await instance.patch(`/cart/clear/${customer_id}`);
+      console.log("Cart cleared");
+
+      // Set order confirmation modal open
+      setOrderConfirmedModalOpen(true);
     } catch (error) {
-      console.error("Error fetching cart items:", error);
+      console.error("Error confirming order:", error);
       // Handle error accordingly
+      alert("Error occurred while confirming order. Please try again later.");
     }
   };
   
