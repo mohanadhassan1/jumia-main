@@ -59,8 +59,7 @@ export default function MyAccount() {
 
         // setLoading(false);
         orders.forEach((order) => {
-          console.log(order);
-        
+
           const currentDate = new Date();
           const orderDate = order.order_date;
           console.log(orderDate);
@@ -319,8 +318,7 @@ export default function MyAccount() {
                   <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">
                     OPEN ORDERS (0)
                   </button>
-                  <P></P>
-                  <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">
+       <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">
                     CLOSED ORDERS
                   </button>
                 </div>
