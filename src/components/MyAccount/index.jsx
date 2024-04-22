@@ -20,27 +20,46 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-hot-toast';
 import AddAddressForm from "../checkout/address";
+import { decodeToken } from "react-jwt";
 import { useOrderDetails } from "../checkout/orderConfirmation";
 import { selectOrderDetails } from "../../store/slices/orderSlice";
 
+
 export default function MyAccount() {
   // const orderDetails = useSelector((state) => state.order.orderDetails);
-  const orderDetails = useSelector(selectOrderDetails);
 
-  console.log(orderDetails)
-
+  const token = localStorage.getItem("token");
+  const myDecodedToken = decodeToken(token);
+  const customer_id = myDecodedToken.id;
   // const { id } = useParams();
+
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
 
   const [content, setContent] = useState("My Jumia Account");
 
   const customer = useSelector((state) => state.customer.customer)
 
-  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        console.log("fetch")
+        const response = await instance.get(`/order/customer/${customer_id}`); // Replace "/api/orders" with your actual endpoint
+        setOrders(response.data);
+        console.log(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
 
+    fetchOrders();
+  }, []);
 
   const handleButtonClick = (btnContent) => {
     setContent(btnContent);
