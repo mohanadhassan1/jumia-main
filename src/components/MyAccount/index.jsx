@@ -20,27 +20,77 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-hot-toast';
 import AddAddressForm from "../checkout/address";
+import { decodeToken } from "react-jwt";
 import { useOrderDetails } from "../checkout/orderConfirmation";
 import { selectOrderDetails } from "../../store/slices/orderSlice";
 
+
 export default function MyAccount() {
   // const orderDetails = useSelector((state) => state.order.orderDetails);
-  const orderDetails = useSelector(selectOrderDetails);
 
-  console.log(orderDetails)
-
+  const token = localStorage.getItem("token");
+  const myDecodedToken = decodeToken(token);
+  const customer_id = myDecodedToken.id;
   // const { id } = useParams();
+
+  const [orders, setOrders] = useState([]);
+  // const [orderproducts, setOrderproducts] = useState([]);
+ const orderproducts=[]
+
+  const [loading, setLoading] = useState(true);
 
 
   const [content, setContent] = useState("My Jumia Account");
 
   const customer = useSelector((state) => state.customer.customer)
 
-  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  const threeDaysInMillis = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
 
+const openOrders = [];
+const closedOrders = [];
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        console.log("fetch")
+        const response = await instance.get(`/order/customer/${customer_id}`); // Replace "/api/orders" with your actual endpoint
+        setOrders(response.data.data);
+        console.log(response.data.data);
+
+        // setLoading(false);
+        orders.forEach((order) => {
+          // console.log(order)
+          // const products = order.products; // Assuming 'products' is the property containing the products
+          // // Now you can work with the 'products' array for each order
+          // console.log(products);
+          // // setOrderproducts(products) 
+          // orderproducts.push(products[0])
+          // console.log(orderproducts)
+          const currentDate = new Date();
+          const orderDate = order.orderDate;
+          const differenceInMillis = currentDate - orderDate;
+      
+          if (differenceInMillis <= threeDaysInMillis) {
+              closedOrders.push(order.products[0]);
+          } else {
+              openOrders.push(order.products[0]);
+          }
+          console.log("Open Orders:", openOrders);
+console.log("Closed Orders:", closedOrders);
+        });
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+  
+
+    fetchOrders();
+  }, []);
+  
+  
 
   const handleButtonClick = (btnContent) => {
     setContent(btnContent);
@@ -252,7 +302,6 @@ export default function MyAccount() {
             {content === "Orders" && (
               <div>
                 <h1 className="font-medium text-xl border-b-2 pb-3">Orders</h1>
-              {/* <h2>{orderDetails.total}</h2> */}
                 <div className="flex border-b">
                   <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">OPEN ORDERS (0)</button>
                   <button className="p-4 focus:border-b-2 hover:text-orange-700 focus:text-orange-700 focus:border-orange-700">CLOSED ORDERS</button>
