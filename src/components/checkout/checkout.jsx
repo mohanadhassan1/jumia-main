@@ -62,6 +62,8 @@ export default function Checkout() {
   }
   };
   const [openModal, setOpenModal] = useState(false);
+  const [orderConfirmedModalOpen, setOrderConfirmedModalOpen] = useState(false);
+
 
   const cart = {
     description: "Checkout cart description test",
@@ -111,6 +113,8 @@ export default function Checkout() {
 
   await instance.patch(`/cart/clear/${customer_id}`)
   console.log("cleared")
+          setOrderConfirmedModalOpen(true);
+
       // Proceed with further logic for confirming the order
     } catch (error) {
       console.error("Error fetching cart items:", error);
@@ -378,6 +382,32 @@ export default function Checkout() {
             >
               CONFIRM ORDER{" "}
             </button>{" "}
+           <Modal show={orderConfirmedModalOpen} onClose={() => setOrderConfirmedModalOpen(false)}>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 text-center">
+        <div className="bg-white w-full max-w-lg p-4 rounded-lg shadow-lg">
+            {/* <h2 className="text-lg font-bold mb-4">Order Confirmed</h2> */}
+           
+                  <p class="w-[230px] text-center font-normal text-lg text-gray-600 mx-auto">Thank you for using Jumia <span
+        class="text-orange-400 animate-bounce flex items-center justify-center text-2xl">
+        JUMIA 
+        <img
+        class="h-5 w-5 inline mx-1"
+        src="https://companieslogo.com/img/orig/JMIA-356fb835.png?t=1659936321" alt=""/>
+     </span>  </p> 
+                 <p>Your order has been confirmed successfully! .</p>
+        
+
+            <button
+                className="button bg-orange-600 text-white font-bold py-2 px-4 rounded mt-4"
+                onClick={() => {setOrderConfirmedModalOpen(false)
+                  window.location.href = `/home`;
+                }}
+            >
+                continue Shopping
+            </button>
+        </div>
+    </div>
+</Modal>
           </div>
         </div>
       </div>
