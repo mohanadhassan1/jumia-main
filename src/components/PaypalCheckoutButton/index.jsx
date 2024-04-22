@@ -76,7 +76,7 @@ const PaypalCheckoutButton = (props) => {
             console.log("hey");
           }}
         >
-          CONFIRM ORDER
+          Paymet Successfull
         </button>
       )}
     </>
