@@ -186,7 +186,7 @@ export default function Checkout() {
                 <div className=" mx-3 font-normal text-gray">
                   {/* #########3paypal */}
                   <div>
-                    <h2 className="my-5">Payment on paypal</h2>
+                    <h2 className="my-5">Payment by paypal</h2>
                   </div>
                   <label className=" flex items-center mr-2">
                     <input
@@ -206,11 +206,11 @@ export default function Checkout() {
                       }}
                       className="mx-3 appearance-none rounded-full border-2 border-gray-300 w-4 h-4 checked:bg-orange-500 checked:border-orange-500 font-bold"
                     />
-                    <span>paypalmethod</span>
+                    <span>paypal and debit card</span>
                   </label>
                   <div className="flex justify-between">
                     <p className="font-light mx-8 text-sm p-2 details">
-                      buy by paypal
+                      buy by paypal for easy buy products 
                     </p>
                   </div>
                   {selectedMethods === "paypal" && (
