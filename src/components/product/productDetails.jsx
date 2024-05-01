@@ -210,8 +210,9 @@ export default function ProductDetails() {
                     <button
                       key={size}
                       onClick={() => handleSizeSelect(size)}
-                      className={`mr-2 px-4 py-2 border border-gray-300 rounded ${selectedSize === size ? "bg-gray-200" : "bg-white"
-                        }`}
+                      className={`mr-2 px-4 py-2 border border-gray-300 rounded ${
+                        selectedSize === size ? "bg-gray-200" : "bg-white"
+                      }`}
                     >
                       {size}
                     </button>
